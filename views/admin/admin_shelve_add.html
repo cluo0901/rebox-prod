@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+
+<script type="text/javascript" src="{SITE_THEME}js/jquery.form.js" ></script>
+
+<title>admin</title>
+
+	{template admin/top}
+
+</head>
+
+<script type="text/javascript">
+
+    var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+
+    var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+
+</script>
+
+<!--图片上传-->
+
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+
+
+<body style="font-weight: normal;">
+
+<div class="subnav">
+
+	<div class="content-menu ib-a line-x">
+
+		<div class="layui-btn-group">
+
+			<a class="layui-btn" href="javascript:history.go(-1);"><em>Previous page</em></a>
+
+		</div>
+
+	</div>
+
+	<div class="bk10"></div>
+
+	<div class="table-responsive mytable">
+
+		<form action="" method="post">
+
+			<table width="100%" class="table table-striped">
+
+				<tr>
+
+					<td align="right">The main figure</td>
+
+					<td>
+
+					<input type="text" class="input-text" size="50" value="{$data['recovery_img']}" id="thumb" />
+
+					<input type="hidden" class="input-text" size="50" value="{$data['order_id']}" name="data[order_id]" />
+
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('thumb')" value="{lang('a-mod-118')}" />
+
+				</tr>
+
+				<tr>
+
+					<td width="200" align="right">Source</td>
+
+					<td><input class="input-text" type="text"  value="{$data['member_phone']}" disabled size="50" />
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td width="200" align="right">Name</td>
+
+					<td><input class="input-text" type="text" value="{$data['title']}" size="50"  disabled/>
+
+					</td>
+
+				</tr>
+
+				<tr>
+
+					<td align="right">Lowest bid price</td>
+
+					<td><input class="input-text" type="text" name="data[order_final_price]" value="{$data['order_final_price']}" size="50" />
+
+					</td>
+
+				</tr>
+
+                {loop $list $t}
+
+                <tr>
+
+                    <td width="200" align="right">{$t['recovery_parameter_parent_title']}</td>
+
+                    <td>
+
+                    <input class="input-text" type="text" name="data[recovery_parameter_title][]"  value="{$t['recovery_parameter_title']}" size="50" />
+
+                    <input class="input-text" type="hidden" name="data[order_parameter_id][]"  value="{$t['order_parameter_id']}" size="50" />
+
+                    </td>
+
+                </tr>
+
+                {/loop}
+
+				<tr>
+
+					<td align="right">Description</td>
+
+					<td><input class="input-text" type="text" name="data[description]" value="{$data['description']}" size="50" />
+
+					</td>
+                </tr>
+
+                <tr>
+                    <!-- add grade starts-->
+                    <td align="right">Grade</td>
+
+                    <td>
+                        <select name="data[grade]">
+                          <option value="">Not Set</option>
+                          <option value="A1">A1</option>
+                          <option value="A2">A2</option>
+                          <option value="A3">A3</option>
+                          <option value="B">B</option>
+                          <option value="C">C</option>
+
+                        </select>
+
+                    </td>
+
+                    <!-- add grade ends-->
+
+				</tr>
+
+				<tr>
+
+					<td align="right">Product picture</td>
+
+					<td class="inpbox">
+
+						<div class="inp textarea">
+
+							<div class="up">
+
+								<span id="img-box">
+
+                                    {loop $data['img_arr'] $item}
+
+                                    <div class="btn pic flowerhua-img">
+
+                                        <img src="{$item['img_url']}" class="banner_img">
+
+                                        <img style="width:20px;height:20px" src="{ADMIN_THEME}chacha.png" class="cha" onclick="remove(this)">
+
+                                        <input type="hidden" name="data[img][]" value="{$item['img_url']}">
+
+                                    </div>
+
+                                    {/loop}
+
+                                </span>
+
+								<div class="btn">
+
+									<img src="{ADMIN_THEME}icon8.png">
+
+									<input type="file" class="addfile" onchange="file_img(this);" name="addfile" multiple="true" id="addfile">
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</td>
+
+				</tr>
+
+                <style>
+
+                    .inpbox .inp:last-child{border: 0px;}
+
+                    .inpbox .inp.textarea label{width: 100%; margin-bottom: 0.8rem; display: block;}
+
+                    .inpbox .inp.textarea textarea{width: calc(100% - 2px - 1.2rem);font-size: 14px; border-radius: 6px; height: 6rem; padding: 0.6rem; resize: none; border: 1px solid #d6d6d6;}
+
+                    .inpbox .inp.textarea .txt{width: calc(100% - 2px - 1.2rem); clear: both; overflow: hidden; font-size: 14px; border-radius: 6px; height: 6rem; padding: 0.6rem; resize: none; border: 1px solid #d6d6d6;}
+
+                    .inpbox .inp.textarea .up .pic img{width: 9rem; height: 9rem;}
+
+                    .inpbox .inp.textarea .up .btn img{width: 9rem; height: 9rem; }
+
+                    .inpbox .inp.textarea .up .btn{position: relative; float: left;}
+
+                    .inpbox .inp.textarea .up .btn input{position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; opacity: 0;}
+
+                    .inpbox .inp.textarea .txtedit{height: 8rem;overflow: auto; overflow-wrap: break-word;  position: relative; border: 1px solid #dcdcdc; padding:0.6rem 0.8rem; font-size: 1.3rem; color: #666; border-radius: 0.4rem;}
+
+                    .inpbox .inp.textarea .txtedit .Eleditor-area{position: absolute; opacity: 0; left: 0px; top: 0px; width: 100%; height: 100%; }
+
+                    .cha{position: absolute; right: 12%; top: 0.8rem;}
+
+                    .cha img{height: 1.4rem;}
+
+                </style>
+
+				<tr>
+
+					<td align="right">&nbsp;</td>
+
+					<td><input class="btn btn-success btn-sm" type="submit" name="submit" value="{lang('a-submit')}" /></td>
+
+				</tr>
+
+			</table>
+
+		</form>
+
+	</div>
+
+</div>
+
+</body>
+
+<script>
+
+    function remove(a){
+
+        $(a).parents('.flowerhua-img').remove();
+
+    }
+
+   function file_img(obj) {
+
+        var formData = null;
+
+        var fileList = obj.files;
+
+        for(var i = 0; i < fileList.length; i++){
+
+            formData = new FormData();
+
+            formData.append('addfile', fileList[i]);
+
+            $.ajax({
+
+                url: "index.php?s=admin&c=whizmoshelve&a=ajax_set_img",
+
+                type: "post",
+
+                data: formData,
+
+                async: false,
+
+                cache: false,
+
+                contentType: false,
+
+                processData: false,
+
+                success: function (data) {
+
+                    data = JSON.parse(data);
+
+                    if (data.result) {
+
+                        alert(data.result);
+
+                        return false;
+
+                    }
+
+                    if (data.size == null) {
+
+                        return false;
+
+                    }
+
+                    var str = '<div class="btn pic flowerhua-img">\n' +
+
+                        '    <img src="' + data.path_thumb + '" class="banner_img">\n' +
+
+                        '    <img style="width:20px;height:20px" src="{ADMIN_THEME}chacha.png" class="cha" onclick="remove(this)">\n' +
+
+                        '    <input type="hidden" name="data[img][]" value="' + data.path_thumb + '">\n' +
+
+                        '</div>';
+
+                    $('#img-box').append(str);
+
+                },
+
+                error: function (xhr) {
+
+
+
+                    $('#addfile').val('');
+
+                }
+
+            });
+
+        }
+
+    }
+
+</script>
+
+</html>

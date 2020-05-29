@@ -1,0 +1,498 @@
+{php
+
+$CI = & get_instance();
+
+$follow = $CI->flowerhua->get_one('category',"catid = 205");
+
+$follow['child'] = $CI->flowerhua->get_all_where('content_1_follow',"catid = 205");
+
+foreach($follow['child'] as $key=>$value)
+
+$follow['child'][$key]['title'] = $CI->flowerhua->get_field('content_1',"id = $value[id]",'title');
+
+$list = $CI->flowerhua->get_all_where('category',"child = 1 and parentid = 0 order by listorder asc");
+
+foreach($list as $key=>$value)
+
+$list[$key]['child'] = $CI->flowerhua->get_all_where('category',"parentid = ".$value[catid]." order by listorder asc",'catid,catname,url,typeid');
+
+$member_id = get_cookie('member_id');
+
+if($member_id)
+
+$member = $CI->flowerhua->get_one('member',"id = $member_id",'phone,logo');
+
+}
+
+<html>
+
+<head>
+
+    {template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+
+<body>
+
+{template header}
+
+<div class="recircle_detail">
+
+    <div class="container">
+
+        <div class="help_left">
+
+            <ul>
+
+                {loop $list $item}
+
+                <li>
+
+                    <div class="lit">
+
+                        <img src="{SITE_THEME}img/icon70.png"><span>{$item['catname']}</span><em><img src="{SITE_THEME}img/icon73.png"></em>
+
+                    </div>
+
+                    <div class="aa">
+
+                        {loop $item['child'] $t}
+
+                        {if $t['typeid']==2}
+
+                        <a {if $category_id == $t['catid']}class="on"{/if} href="{url('flowerhua/detail_and_help',array('category_id'=>$t['catid']))}">{$t['catname']}</a>
+
+                        {else if $t['typeid']==3}
+
+                        <a href="{$t['url']}" {if $t['catid']==209}class="on"{/if}>{$t['catname']}</a>
+
+                        {/if}
+
+                        {/loop}
+
+                    </div>
+
+                </li>
+
+                {/loop}
+
+            </ul>
+
+        </div>
+
+        <div class="apply">
+
+            <div class="banner">
+
+                <img src="{SITE_THEME}img/banner3.png">
+
+            </div>
+
+            <div class="title">
+
+                <h3><span>Platform Aim</span></h3>
+
+                <h4>
+
+                    <span>QUICK</span>
+
+                    <span>SIMPLE</span>
+
+                    <span>SAFE</span>
+
+                </h4>
+
+                <p>We aim to build an efficient and stable resource channel</p>
+
+            </div>
+
+            <div class="apply_in">
+
+                <h3>Become Our Partner<span></span></h3>
+
+                <input type="text" placeholder="Company Name" class="company_name">
+
+                <input type="text" placeholder="Primary Contact Person" class="person">
+
+                <input type="text" placeholder="Primary Mobile Number" class="phone">
+
+                <div class="inp">
+
+                    <input type="text" placeholder="Enter One-Time Passcode" id="back-code" style="
+
+							float: left; width: 200px;">
+
+                    <a href="javascript:;" onclick="sendMessage()" id="back-getcode">Send OTP</a>
+
+                </div>
+
+                <div class="clear">
+
+
+
+                    <input type="submit" value="Join" onclick="register()">
+
+                    <span>*We will contact you to complete the regstration shortly.</span>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=install_email
+  page_id="201403270461097"
+  theme_color="#ffcc00">
+</div>
+
+</body>
+
+<script>
+
+    var mySwiper = new Swiper('.swiper-container-2', {
+
+        //autoplay: 2000,//可选选项，自动滑动
+
+        prevButton: '.apprise-btn-pre',
+
+        nextButton: '.apprise-btn-next',
+
+        width: 300,
+
+        slidesPerView: 4
+
+    });
+
+
+
+    $('.appraise .swiper-button-prev').click(function() {
+
+        mySwiper.swipePrev();
+
+    })
+
+
+
+    $('.appraise .swiper-button-next').click(function() {
+
+        mySwiper.swipeNext();
+
+    })
+
+    var mySwiper1 = new Swiper('.swiper-container-3', {
+
+        autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+        width: 200,
+
+        slidesPerView: 2
+
+    });
+
+
+
+    $('.ahs-media-content .swiper-button-prev').click(function() {
+
+        mySwiper1.swipePrev();
+
+    })
+
+
+
+    $('.ahs-media-content .swiper-button-next').click(function() {
+
+        mySwiper1.swipeNext();
+
+    })
+
+</script>
+
+<script type="text/javascript">
+
+    var lay;
+
+    function register(){
+
+        lay = layer.open({type:3,icon:1});
+
+        var company_name = $('.company_name').val();
+
+        var person = $('.person').val();
+
+        var phone = $('.phone').val();
+
+        var code = $('#back-code').val()
+
+        if(company_name==''){
+
+            layer.close(lay);
+
+            layer.msg('Please fill in the name of the company',{icon:0});
+
+            return false;
+
+        }
+
+        if(person==''){
+
+            layer.close(lay);
+
+            layer.msg('Please fill in the main liaison',{icon:0});
+
+            return false;
+
+        }
+
+        if(phone.length<8){
+
+            layer.close(lay);
+
+            layer.msg('Please fill in the correct phone number',{icon:0});
+
+            return false;
+
+        }
+
+        $.ajax({
+
+            url: "index.php?c=recycler_login&a=ajaxbackcode",
+
+            type: "post",
+
+            async: false,
+
+            data: {"code":code,"phone":phone},
+
+            success: function (data){
+
+                if(data==0){
+
+                    layer.close(lay);
+
+                    layer.msg('Verification code error',{icon:0});return false;
+
+                }else{
+
+                    $.ajax({
+
+                        type:'post',
+
+                        dataType:'json',
+
+                        url:"./index.php?c=recycler_login&a=register",
+
+                        data:{company_name:company_name,person:person,phone:phone},
+
+                        success:function(data){
+
+                            if(data.code==2){
+
+                                layer.close(lay);
+
+                                layer.msg(data.info,{icon:0})
+
+                            }
+
+                            if(data.code==1){
+
+                                //send email notification for joining request
+
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/dealer_join.php?phone="+phone, true); 
+                                xmlhttp.send();
+                                //send email ends
+
+                                layer.msg('<h3>Application received!</h3><br/><p>We will get in touch with you shortly.</p>',{icon:1,end:function(){
+
+                                    location.reload();
+
+                                }})
+
+                            }
+
+                        }
+
+                    })
+
+                }
+
+            }
+
+        })
+
+    }
+
+
+
+    var InterValObj; //timer变量，控制时间
+
+    var count = 60; //间隔函数，1秒执行
+
+    var curCount;//当前剩余秒数
+
+    function sendMessage() {
+
+        curCount = count;
+
+        var phone = $('.phone').val();
+
+        if (!phone) {
+
+            layer.msg('Please enter the phone number',{icon:0});return false;
+
+        } else if (phone.length<8) {
+
+            layer.msg('Mobile phone number format error',{icon:0});return false;
+
+        }
+
+        $.ajax({
+
+            type: 'post',
+
+            url:"index.php?c=recycler_login&a=ajax_sendcode",
+
+            data: {phone:phone},
+
+            dataType: "json",
+
+            async:false,
+
+            success: function(data){
+
+                if (data) {
+
+                    if (data.code == 1) {
+
+                        $("#back-getcode").attr("href", "javascript:;");
+
+                        $('#back-getcode').css('background','#e9ebed');
+
+                        $("#back-getcode").html('Send success');
+
+                        $("#back-phone").attr('readonly', 'readonly');
+
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                    } else if (data.code == 2) {
+
+                        layer.open({'title': 'Prompt', 'content': 'This user has not been found for the time being!',});
+
+                        return false;
+
+                    } else if (data.code == 3) {
+
+                        layer.open({'title': 'Prompt', 'content': 'Fail in send'+data.sms_err,});
+
+                        return false;
+
+                    }
+
+                } else {
+
+                    $("#back-getcode").attr("href", "javascript:");
+
+                    $("#back-getcode").html(curCount + "Resend OTP");
+
+                    $("#back-phone").attr('readonly', 'readonly');
+
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                }
+
+            }
+
+        });
+
+    }
+
+    //timer处理函数
+
+    function SetRemainTime() {
+
+        if (curCount == 0) {
+
+            window.clearInterval(InterValObj);//停止计时器
+
+            $("#back-getcode").attr("href", "javascript:sendMessage();");
+
+            $("#back-getcode").html("Resend OTP");
+
+            $('#back-getcode').css('background','#ffcc00');
+
+        }
+
+        else {
+
+            curCount--;
+
+            $("#back-getcode").html("Resend in "+curCount+'s');
+
+        }
+
+    }
+
+
+
+
+
+</script>
+
+
+
+</html>
+
+{template footer}
+

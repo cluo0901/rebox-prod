@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<meta charset="utf-8" />
+
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+		<title>Whizmo info pack</title>
+
+		<script type="text/javascript" src="js/rem.js"></script>
+
+		<link rel="stylesheet" href="css/swiper.min.css" />
+
+        <link rel="stylesheet" href="css/style.css"/>
+
+        <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+
+        <script type="text/javascript" src="js/swiper.min.js" ></script>
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+</head>
+
+	<body>
+
+		<div class="company_info">
+
+			<div class="head">
+
+				<div class="label_search">
+
+					<div class="more" onclick="showside()">
+
+						<span></span>
+
+						<span></span>
+
+						<span></span>
+
+					</div>
+
+					<label><input type="text" placeholder="Search for your device"/></label>
+
+				</div>
+
+			</div>
+
+			<div class="com_pic">
+
+				<img src="img/com_pic.jpg"/>
+
+			</div>
+
+			<div class="infoform">
+
+				<div class="tit">company information</div>
+
+				<div class="inp">
+
+					<ul>
+
+						<li>
+
+							<div class="txt">Company Name</div>
+
+							<input type="text" placeholder="Company Name"/>
+
+						</li>
+
+						<li>
+
+							<div class="txt">UEN / Entity ID</div>
+
+							<input type="text" placeholder="UEN / Entity ID"/>
+
+						</li>
+
+						<li>
+
+							<div class="txt">Address</div>
+
+							<input type="text" placeholder="Address"/>
+
+						</li>
+
+						<li>
+
+							<div class="txt">Primary Contact Person</div>
+
+							<input type="text" placeholder="Primary Contact Person"/>
+
+						</li>
+
+						<li>
+
+							<div class="txt">Mobile Number</div>
+
+							<input type="text" placeholder="Mobile Number"/>
+
+						</li>
+
+					</ul>
+
+					<div class="document">
+
+						<div class="txt">Supporting Documents</div>
+
+						<div class="add"><input type="file"/><span>Add</span></div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<button class="update" onclick="confirmInfo()">Update</button>
+
+			
+
+			<!--sidebar-->
+
+			<div class="sidebar" onclick="hdieside()">
+
+				<div class="sidebar_left">
+
+					<div class="side_login">
+
+						<a href="partner_login.html">
+
+							<img src="img/header.png"/>
+
+							<p>Login</p>
+
+						</a>
+
+					</div>
+
+					<div class="sidelist">
+
+						<a href="list_living.html" class="side_order">Living Listings</a>
+
+						<a href="order_bids.html" class="bids">Successful Bids</a>
+
+						<a href="javascript:;" class="com_info">Company Information</a>
+
+						<div class="settings">
+
+							<p>Settings</p>
+
+							<ol>
+
+								<li><a href="changepwd.html">Change Password</a></li>
+
+								<li><a href="manage.html">Manage Secondary Numbers</a></li>
+
+							</ol>
+
+						</div>
+
+					</div>
+
+					
+
+				</div>
+
+			</div>
+
+			<!--sidebar end-->
+
+			
+
+			<!--confirm-->
+
+			<div class="confirm_pop">
+
+				<div class="content">
+
+					<div class="content_info">
+
+						<div class="tit">Confirm Company Information</div>
+
+						<div class="tit_in">OTP has been sent to Primary Mobile No.</div>
+
+						<div class="code"><input type="text" placeholder="One-Time Passcode"/><button class="getcode">Resend (60s)</button></div>
+
+					</div>
+
+					<img src="img/close.png" class="close" onclick="hideconfirm()"/>
+
+					<button class="confirm" onclick="hideconfirm()">Confirm</button>
+
+				</div>
+
+			</div>
+
+			<!--confirm-->
+
+		</div>
+
+	</body>
+
+</html>
+
+<script>
+
+	//显示侧边栏
+
+	function showside(){
+
+		$('.sidebar').show();
+
+	}
+
+	//隐藏侧边栏
+
+	function hdieside(){
+
+		$('.sidebar').hide();
+
+	}
+
+	//显示弹窗
+
+	function confirmInfo(){
+
+		$('.confirm_pop').show();
+
+	}
+
+	//隐藏弹窗
+
+	function hideconfirm(){
+
+		$('.confirm_pop').hide();
+
+	}
+
+</script>
+

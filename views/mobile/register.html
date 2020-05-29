@@ -1,0 +1,281 @@
+{php
+$CI = & get_instance();
+$follow = $CI->flowerhua->get_one('category',"catid = 205");
+$follow['child'] = $CI->flowerhua->get_all_where('content_1_follow',"catid = 205");
+foreach($follow['child'] as $key=>$value)
+$follow['child'][$key]['title'] = $CI->flowerhua->get_field('content_1',"id = $value[id]",'title');
+$list = $CI->flowerhua->get_all_where('category',"child = 1 and parentid = 0 order by listorder asc");
+foreach($list as $key=>$value)
+$list[$key]['child'] = $CI->flowerhua->get_all_where('category',"parentid = ".$value[catid]." order by listorder asc",'catid,catname,url,typeid');
+$member_id = get_cookie('member_id');
+if($member_id)
+$member = $CI->flowerhua->get_one('member',"id = $member_id",'phone,logo');
+}
+
+<!DOCTYPE html>
+<html>
+	{template head}
+	<body class="parentship">
+		{template header}
+		<div class="parentships">
+			<div class="com_pic">
+				<img src="{SITE_THEME}img/banner3.png"/>
+			</div>
+			<div class="introd">
+				<div class="tit">Platform Aim</div>
+				<div class="intlist">
+				  <ul>
+					<li>QUICK</li>
+					<li>SIMPLE</li>
+					<li>SAFE</li>
+				  </ul>
+				</div>
+				<div class="tips">We aim to build an efficient and stable resource channel</div>
+			</div>
+			<div class="infoform">
+				<div class="tit">Become Our Partner</div>
+				<div class="inp">
+					<ul>
+						<li>
+							<div class="txt">Company Name</div>
+							<input type="text" placeholder="Company Name" class="company_name"/>
+						</li>
+						<li>
+							<div class="txt">Primary Contact Person</div>
+							<input type="text" placeholder="Primary Contact Person" class="person"/>
+						</li>
+						<li>
+							<div class="txt">Primary Mobile Number</div>
+							<input type="text" placeholder="Primary Mobile Number" class="phone"/>
+						</li>
+						<li class="short">
+							<div class="txt">OTP Verification</div>
+							<div class="otp">
+								<input type="text" placeholder="Enter One-Time Passcode" id="back-code"/>
+								<button onclick="sendMessage()" id="back-getcode">Send OTP</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- <button class="update" onclick="show('.pwd_pop')">Join</button> -->
+				<button class="update" onclick="register()">Join</button>
+				<div class="tips">*We will contact you to complete the regstration shortly.</div>
+			</div>
+		</div>
+				
+		<!-- <div class="pwd_pop">
+			<div class="content">
+				<div class="content_info">
+					<div class="txt">Create Account Now</div>
+					<div class="label">
+						<label>
+							<input type="password" placeholder="Username"/>
+							<img src="{SITE_THEME}img/icon-phone2.png">
+						</label>
+					</div>
+					<div class="label">
+						 <label>
+							<input type="password" placeholder="Password"/>
+							<img src="{SITE_THEME}img/lock3.png">
+						 </label>
+					</div>
+					<div class="label">
+						<label>
+							<input type="password" placeholder="Repeat Password"/>
+							<img src="{SITE_THEME}img/lock3.png">
+						</label>
+					</div>
+				</div>
+				<img src="{SITE_THEME}img/close.png" class="close" onclick="hide('.pwd_pop')"/>
+				<button class="confirm" onclick="hide('.pwd_pop')">Submit</button>
+			</div>
+		</div> -->
+	</body>
+</html>
+	  <script>
+        function sign_out(){
+        	$('.sidebar_left').hide();
+            layer.open({title:false,
+                btn:['LOG OUT','CANCEL'],closeBtn:0,content:'Are you sure you want to log out?',icon:0,yes:function(){
+                $.ajax({
+                    url: "index.php?c=recycler&a=login_out",
+                    type: "post",
+                    async:false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code==1){
+                            // layer.open({content:'Have been safely logout!',icon:1,end:function(){
+                                location.href="index.php?c=recycler_login&a=partner_login";
+                            // }});
+                        }
+                    }
+                });
+            }})
+        }
+    </script>
+
+<script>
+	function show(classname){
+		$(classname).show();
+//		$('.sidebar,.sidebar_left').hide();
+	}
+	function hide(classname){
+		$(classname).hide();
+	}
+	
+	$('.barclick').on('click',function(){
+		$(this).find('p').toggleClass('on');
+		$(this).find('ol').toggleClass('on');
+	});
+</script>
+<script>
+    var mySwiper = new Swiper('.swiper-container-2', {
+        //autoplay: 2000,//可选选项，自动滑动
+        prevButton: '.apprise-btn-pre',
+        nextButton: '.apprise-btn-next',
+        width: 300,
+        slidesPerView: 4
+    });
+
+    $('.appraise .swiper-button-prev').click(function() {
+        mySwiper.swipePrev();
+    })
+
+    $('.appraise .swiper-button-next').click(function() {
+        mySwiper.swipeNext();
+    })
+    var mySwiper1 = new Swiper('.swiper-container-3', {
+        autoplay: 2000,//可选选项，自动滑动
+//			prevButton: '.apprise-btn-pre',
+//			nextButton: '.apprise-btn-next',
+        width: 200,
+        slidesPerView: 2
+    });
+
+    $('.ahs-media-content .swiper-button-prev').click(function() {
+        mySwiper1.swipePrev();
+    })
+
+    $('.ahs-media-content .swiper-button-next').click(function() {
+        mySwiper1.swipeNext();
+    })
+</script>
+<script type="text/javascript">
+    var lay;
+    function register(){
+        lay = layer.open({type:3,icon:1});
+        var company_name = $('.company_name').val();
+        var person = $('.person').val();
+        var phone = $('.phone').val();
+        var code = $('#back-code').val()
+        if(company_name==''){
+            layer.close(lay);
+            layer.msg('Please fill in the name of the company',{icon:0});
+            return false;
+        }
+        if(person==''){
+            layer.close(lay);
+            layer.msg('Please fill in the main liaison',{icon:0});
+            return false;
+        }
+        if(phone.length<8){
+            layer.close(lay);
+            layer.msg('Please fill in the correct phone number',{icon:0});
+            return false;
+        }
+        $.ajax({
+            url: "index.php?c=recycler_login&a=ajaxbackcode",
+            type: "post",
+            async: false,
+            data: {"code":code,"phone":phone},
+            success: function (data){
+                if(data==0){
+                    layer.close(lay);
+                    layer.msg('Verification code error',{icon:0});return false;
+                }else{
+                    $.ajax({
+                        type:'post',
+                        dataType:'json',
+                        url:"./index.php?c=recycler_login&a=register",
+                        data:{company_name:company_name,person:person,phone:phone},
+                        success:function(data){
+                            if(data.code==2){
+                                layer.close(lay);
+                                layer.msg(data.info,{icon:0})
+                            }
+                            if(data.code==1){
+                                //send email notification for joining request
+
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/dealer_join.php?phone="+phone, true); 
+                                xmlhttp.send();
+                                //send email ends
+                                
+                                layer.msg('<h3>Application received!</h3><br/><p>We will get in touch with you shortly.</p>',{icon:1,end:function(){
+                                    location.reload();
+                                }})
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    var InterValObj; //timer变量，控制时间
+    var count = 60; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+    function sendMessage() {
+        curCount = count;
+        var phone = $('.phone').val();
+        if (!phone) {
+            layer.msg('Please enter the phone number',{icon:0});return false;
+        } else if (phone.length<8) {
+            layer.msg('Mobile phone number format error',{icon:0});return false;
+        }
+        $.ajax({
+            type: 'post',
+            url:"index.php?c=recycler_login&a=ajax_sendcode",
+            data: {phone:phone},
+            dataType: "json",
+            async:false,
+            success: function(data){
+                if (data) {
+                    if (data.code == 1) {
+                        $("#back-getcode").attr("href", "javascript:;");
+                        $('#back-getcode').css('background','#e9ebed');
+                        $("#back-getcode").html('Send success');
+                        $("#back-phone").attr('readonly', 'readonly');
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    } else if (data.code == 2) {
+                        layer.open({'title': 'Prompt', 'content': 'This user has not been found for the time being!',});
+                        return false;
+                    } else if (data.code == 3) {
+                        layer.open({'title': 'Prompt', 'content': 'Fail in send'+data.sms_err,});
+                        return false;
+                    }
+                } else {
+                    $("#back-getcode").attr("href", "javascript:");
+                    $("#back-getcode").html(curCount + "Resend OTP");
+                    $("#back-phone").attr('readonly', 'readonly');
+                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                }
+            }
+        });
+    }
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#back-getcode").attr("href", "javascript:sendMessage();");
+            $("#back-getcode").html("Resend OTP");
+            $('#back-getcode').css('background','#ffcc00');
+        }
+        else {
+            curCount--;
+            $("#back-getcode").html("Resend in "+curCount+'s');
+        }
+    }
+
+
+</script>

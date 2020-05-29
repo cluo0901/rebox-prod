@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+
+<html>
+
+
+
+	<head>
+
+		<meta charset="utf-8" />
+
+		<title></title>
+
+		<link rel="stylesheet" href="{SITE_THEME}css/style.css" />
+
+		<link rel="stylesheet" href="{SITE_THEME}css/swiper.css" />
+
+		<script type="text/javascript" src="{SITE_THEME}js/jquery.js"></script>
+
+		<script type="text/javascript" src="{SITE_THEME}js/jquery.bxslider.min.js"></script>
+
+		<script type="text/javascript" src="{SITE_THEME}js/swiper.js"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+
+
+
+	<body>
+
+		<div class="header">
+
+			<div class="container">
+
+				<a href="index.php" class="logo">
+
+					<img src="{SITE_THEME}img/logo.png">
+
+				</a>
+
+				<div class="process1">
+
+					<div class="col">
+
+						<b>1</b>Device Appraisal
+
+					</div>
+
+					<div class="col">
+
+						<b>2</b>Instant Quote
+
+					</div>
+
+					<div class="col on">
+
+						<b>3</b>Free Pickup
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+		<div class="recircle_detail">
+
+			<div class="container">
+
+				<div class="releft">
+
+					<div class="pro">
+
+						<img src="{SITE_THEME}img/pic1.png">
+
+						<p>IPhone6</p>
+
+						<div class="price">
+
+							
+
+							<h3>$3332</h3>
+
+							<div class="device">
+
+								<span onclick="show_detail(this)">Device Details</span>
+
+								<div class="p">
+
+									Purchase channels: Hong Kong trading (buying in Hong Kong,globalgroup)Memory capacity: 128 g Boot: normal boot Phone: phone is normal History: maintenance teardown without dismantling machine maintenance
+
+									Domestic warranty: the warranty more than a monthUp to whether cancellation: ripped has logged off The fingerprint features: normal function of the fingerprint
+
+									Shooting function: photo camera is normal
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<script>
+
+							function show_detail(a){
+
+								var display = $(a).siblings(".p").css("display");
+
+								if(display == "none"){
+
+									 $(a).siblings(".p").show();
+
+									 $(a).css({"background":"url(img/caret.png) right center no-repeat"})
+
+								}else if(display == "block"){
+
+									$(a).siblings(".p").hide();
+
+									 $(a).css({"background":"url(img/caret5.png) right center no-repeat"})
+
+								}
+
+							}
+
+						</script>
+
+						
+
+					</div>
+
+					<div class="guide">
+
+						<div class="gt">Important Guidelines</div>
+
+						<div class="p">1、Shanzhai, high copy machine not recycling</div>
+
+						<div class="p">2、Screen lock unanswered, up to account cancellation without recycling</div>
+
+					</div>
+
+				</div>
+
+				<form action="javascript:;">
+
+				<div class="reright sec sec1">
+
+					
+
+					<div class="pickup">
+
+						<div class="inp">
+
+							<h3>Contact Information</h3>
+
+							<input type="text" placeholder="Enter mobile number">
+
+							<input type="text" placeholder="Enter one-time password" style="width: 250px; margin-right: 10px;">
+
+							<a href="javascript:;">Send OTP</a>
+
+						</div>
+
+						<div class="inp">
+
+							<h3>Create Password</h3>
+
+							<input type="password" placeholder="Enter mobile number">
+
+							<input type="password" placeholder="Enter one-time password" style="margin: 0;">
+
+							
+
+						</div>
+
+						<div class="aa">
+
+							<input type="button" value="Next" class="btn" disabled="disabled">
+
+						</div>
+
+					</div>
+
+					<script>
+
+						$(".sec1 .pickup .inp input").blur(function(){
+
+							var inplens = 0;
+
+							for(var i = 0; i<$(".sec1 .pickup .inp input").length; i++){
+
+								var text = $(".sec1 .pickup .inp input").eq(i).val();
+
+								console.log(text)
+
+								if(text == null || text == ""){
+
+									
+
+								}else{
+
+									inplens++
+
+								}
+
+								
+
+								if(inplens == $(".sec1 .pickup .inp input").length){
+
+									$(".sec1 .pickup .aa .btn").addClass("on");
+
+									$(".sec1 .pickup .aa .btn").removeAttr("disabled")
+
+								}
+
+							}
+
+							
+
+						});
+
+						$(".sec1 .pickup .aa .btn").click(function(){
+
+							$(".sec2").show()
+
+						})
+
+					</script>
+
+			</div>
+
+			<div class="reright sec sec2">
+
+					<div class="pickup">
+
+						<div class="inp">
+
+							<h3>Delivery Method</h3>
+
+							<div class="clear" style="margin-top: 45px;">
+
+							<div class="fang on" style="margin-right: 64px;" id="doorstep">
+
+								<div class="ftop">
+
+									<label><img src="{SITE_THEME}img/pic18.png"></label>
+
+									
+
+									<div class="txt">
+
+										<h3>Doorstep Pickup</h3>
+
+										<p><label>Pickup slot:</label> <span>12PM-4PM &nbsp; 4PM - 8PM</span></p>
+
+									</div>
+
+								</div>
+
+								<div class="fp">
+
+									Schedule FREE pickup from your doorstep
+
+								</div>
+
+								<input type="radio" name="fang" checked="checked">
+
+							</div>
+
+							<div class="fang" id="postbox">
+
+								<div class="ftop">
+
+									<label><img src="{SITE_THEME}img/pic19.png"></label>
+
+									
+
+									<div class="txt">
+
+										<h3>Postbox Dropoff</h3>
+
+										<p>At your convenience</p>
+
+									</div>
+
+									
+
+								</div>
+
+								<div class="fp">
+
+									A postage-paid envelope will be mailed to you.<br />
+
+									Drop off your parcel at any bulk postbox<br />
+
+									<a href="https://www.singpost.com/locate-us" target="_blank">Find the nearest bulk posting box</a>
+
+									
+
+								</div>
+
+								<input type="radio" name="fang" >
+
+							</div>
+
+							</div>
+
+						</div>
+
+						<div class="doorstep">
+
+							<div class="inp">
+
+								<h3>Pickup Address</h3>
+
+								<input type="text" placeholder="Enter Postal Code" style="width: 244px;">
+
+								<a href="javascript:;">Retrieve Address</a>
+
+								<div class="clear"></div>
+
+								<div class="clear">
+
+									<input type="text" placeholder="Enter Address" />
+
+									<input type="text" placeholder="Enter Unit #" style="margin: 0;">
+
+								</div>
+
+								
+
+							</div>
+
+							<div class="inp">
+
+								<h3>Collection Date & Time</h3>
+
+								<select>
+
+									<option>today</option>
+
+								</select>
+
+								<select style="margin: 0;">
+
+									<option>12PM - 4PM</option>
+
+								</select>
+
+								
+
+							</div>
+
+						</div>
+
+						<div class="postbox" style="display: none;">
+
+							<div class="inp">
+
+								<h3>Envelope Mailing Address</h3>
+
+								<input type="text" placeholder="Enter Postal Code" style="width: 244px;">
+
+								<a href="javascript:;">Retrieve Address</a>
+
+								<div class="clear"></div>
+
+								<div class="clear">
+
+									<input type="text" placeholder="Enter Address" />
+
+									<input type="text" placeholder="Enter Unit #" style="margin: 0;">
+
+								</div>
+
+								
+
+							</div>
+
+							
+
+						</div>
+
+						
+
+						<div class="aa">
+
+							<input type="button" value="Next" class="btn">
+
+						</div>
+
+					</div>
+
+					<script>
+
+						$(".reright  .pickup .inp .fang").click(function(){
+
+							var bool = $(this).find("input").prop("checked");
+
+							if(bool){
+
+								$(this).addClass("on").siblings(".fang").removeClass("on")
+
+							}
+
+						});
+
+						$("#doorstep").click(function(){
+
+							$("input[type='submit']").attr({"onclick":"show_tan_1()"})
+
+							$(".doorstep").show();
+
+							$(".postbox").hide()
+
+						})
+
+						$("#postbox").click(function(){
+
+							$("input[type='submit']").attr({"onclick":"show_tan_2()"})
+
+							$(".doorstep").hide();
+
+							$(".postbox").show()
+
+						});
+
+						
+
+						$(".sec2 .pickup .doorstep  .inp input").blur(function(){
+
+							var inplens = 0;
+
+							for(var i = 0; i<$(".sec2 .pickup .doorstep  .inp input").length; i++){
+
+								var text = $(".sec2 .pickup .doorstep  .inp input").eq(i).val();
+
+								console.log(text)
+
+								if(text == null || text == ""){
+
+									
+
+								}else{
+
+									inplens++
+
+								}
+
+								console.log(inplens)
+
+								if(inplens == $(".sec2 .pickup .doorstep  .inp input").length){
+
+									$(".sec2 .pickup  .btn").addClass("on");
+
+									$(".sec2 .pickup  .btn").removeAttr("disabled")
+
+								}
+
+							}
+
+							
+
+						});
+
+						$(".sec2 .pickup .postbox  .inp input").blur(function(){
+
+							var inplens = 0;
+
+							for(var i = 0; i<$(".sec2 .pickup .postbox  .inp input").length; i++){
+
+								var text = $(".sec2 .pickup .postbox  .inp input").eq(i).val();
+
+								console.log(text)
+
+								if(text == null || text == ""){
+
+									
+
+								}else{
+
+									inplens++
+
+								}
+
+								console.log(inplens)
+
+								if(inplens == $(".sec2 .pickup .postbox  .inp input").length){
+
+									$(".sec2 .pickup  .btn").addClass("on");
+
+									$(".sec2 .pickup  .btn").removeAttr("disabled")
+
+								}
+
+							}
+
+							
+
+						});
+
+						$(".sec2 .pickup  .btn").click(function(){
+
+							$(".sec3").show()
+
+						})
+
+					</script>
+
+			</div>
+
+			<div class="reright sec sec3">
+
+					<div class="pickup">
+
+						<div class="inp">
+
+							<h3>Payment Details</h3>
+
+							<select style="width: 180px; margin-right: 16px;">
+
+								<option>DBS/POSB</option>
+
+							</select>
+
+							<div class="col">
+
+								<input type="text" placeholder="Enter Name" style="width: 255px; margin-right: 16px;">
+
+								<p><font>*</font>As per bank record</p>
+
+							</div>
+
+							
+
+							<input type="text" placeholder="Enter Account Number" style="width: 320px; margin: 0;">
+
+						</div>
+
+						<div class="aa">
+
+							<input type="button" value="Next" class="btn">
+
+						</div>
+
+					</div>
+
+					<script>
+
+						$(".sec3 .pickup   .inp input").blur(function(){
+
+							var inplens = 0;
+
+							for(var i = 0; i<$(".sec3 .pickup   .inp input").length; i++){
+
+								var text = $(".sec3 .pickup   .inp input").eq(i).val();
+
+								console.log(text)
+
+								if(text == null || text == ""){
+
+									
+
+								}else{
+
+									inplens++
+
+								}
+
+								console.log(inplens)
+
+								if(inplens == $(".sec3 .pickup   .inp input").length){
+
+									$(".sec3 .pickup  .btn").addClass("on");
+
+									$(".sec3 .pickup  .btn").removeAttr("disabled")
+
+								}
+
+							}
+
+							
+
+						});
+
+						$(".sec3 .pickup  .btn").click(function(){
+
+							$(".sec4").show()
+
+						})
+
+					</script>
+
+					
+
+			</div>
+
+			
+
+			<div class="reright sec sec4">
+
+				<div class="require">
+
+						<h4>Additional Requirement</h4>
+
+						<span>According to Secondhand Goods Dealer Act. we are required to collect the following information when dealing with secondhand electr-onic devices</span>
+
+						<div class="inp_1" style="clear: none; overflow: visible;">
+
+							<label>(1) IMEI No./Serial No.</label>
+
+							<img src="{SITE_THEME}img/icon54.png" class="wen"/>
+
+							<input type="text" placeholder="Enter IMEI number or product serial number">
+
+							<div class="hover">
+
+								The mouse appeared one to 
+
+								say hello to the introduced how
+
+								 to find the IMEI number
+
+
+
+							</div>
+
+							<div class="clear"></div>
+
+						</div>
+
+						<script>
+
+							$(".require .inp_1 img.wen").hover(function(){
+
+								$(this).siblings(".hover").show()
+
+							},function(){
+
+								$(this).siblings(".hover").hide()
+
+							})
+
+						</script>
+
+						<div class="inp_4">
+
+							<h3>(2) Personal Particulars (choose upload ID card or fill in the details manually)</h3>
+
+							<div class="up">
+
+								<p>Upload ID Card (NRIC/EP/SP/WP/Student Pass/DP)</p>
+
+								<div class="img">
+
+									<img src="{SITE_THEME}img/pic20.png">
+
+									<span>Upload<input type="file"></span>
+
+								</div>
+
+								<div class="img">
+
+									<img src="{SITE_THEME}img/pic21.png">
+
+									<span>Upload<input type="file"></span>
+
+								</div>
+
+							</div>
+
+							<div class="em">OR</div>
+
+							<div class="inpbox">
+
+								<p>Fill in the details manually</p>
+
+								<div class="inp_3">
+
+									<label>ID Type</label>
+
+									<select>
+
+										<option>Pink NRIC</option>
+
+									</select>
+
+									<label>NRIC/FIN No.</label>
+
+									<input type="text" placeholder="">
+
+								</div>
+
+								
+
+								<div class="inp_3">
+
+									<label>Nationality</label>
+
+									<select style="margin-right:20px;">
+
+										<option>China</option>
+
+									</select>
+
+									<label>Gender</label>
+
+									<select>
+
+										<option>Male</option>
+
+									</select>
+
+								</div>
+
+								<div class="inp_3">
+
+									<label>Home Address</label>
+
+									<span class="span">
+
+										<input type="checkbox">Same as address above
+
+									</span>
+
+								</div>
+
+								<div class="inp_3">
+
+									<label>Postal Code</label>
+
+									<input type="text" placeholder="Enter postal code"style="width: 150px;">
+
+									<a href="javascript:;">Retrieve Address</a>
+
+								</div>
+
+								<div class="inp_3">
+
+									<label style="width: 80px;">Address</label>
+
+									<input type="text" placeholder="Enter address"style="width: 290px;">
+
+									
+
+								</div>
+
+								<div class="inp_3">
+
+									<label style="width: 80px;">Unit #</label>
+
+									<input type="text" placeholder="Enter unit number"style="width: 290px;">
+
+									
+
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="aa">
+
+							<input type="button" value="Next" class="btn on"/>
+
+						</div>
+
+						<script>
+
+//							$(".sec4 .pickup   .inp input").blur(function(){
+
+//								var inplens = 0;
+
+//								for(var i = 0; i<$(".sec4 .pickup   .inp input").length; i++){
+
+//									var text = $(".sec4 .pickup   .inp input").eq(i).val();
+
+//									console.log(text)
+
+//									if(text == null || text == ""){
+
+//										
+
+//									}else{
+
+//										inplens++
+
+//									}
+
+//									console.log(inplens)
+
+//									if(inplens == $(".sec4 .pickup   .inp input").length){
+
+//										$(".sec4 .pickup  .btn").addClass("on");
+
+//										$(".sec4 .pickup  .btn").removeAttr("disabled")
+
+//									}
+
+//								}
+
+//								
+
+//							});
+
+							$(".require .aa  .btn").click(function(){
+
+								$(".sec5").show()
+
+							})
+
+						</script>
+
+						
+
+					</div>
+
+			</div>
+
+			<div class="reright sec sec5">
+
+				<div class="require" style="padding-top: 0;">
+
+					<div class="agree">
+
+							<input type="checkbox">
+
+							<span>This text can modify the background, mainly used for personal information protection laws of Singapore</span>
+
+						</div>
+
+						<div class="agree border">
+
+							<input type="checkbox">
+
+							<span>This text can modify the background, mainly used for personal information protection laws of Singapore</span>
+
+						</div>
+
+						<div class="aa">
+
+							
+
+							<input type="submit" value="Submit" onclick="show_tan_1()">
+
+							<span>
+
+								<input type="checkbox" checked="checked"><em>I agree to<a href="javascript:;"> Terms & Conditions</a></em>
+
+							
+
+							</span>
+
+						</div>
+
+				</div>
+
+			</div>
+
+				</form>
+
+			</div>
+
+		</div>
+
+		
+
+		<div class="tan tan_1">
+
+			<div class="sure">
+
+				<div class="rtit">
+
+					<span>Confirm Order</span>
+
+					<img src="{SITE_THEME}img/cha.png" onclick="hide_tan()">
+
+				</div>
+
+				<div class="surep">
+
+					<div class="p">
+
+						<h3>Device</h3>
+
+						<p>iPhone6</p>
+
+					</div>
+
+					<div class="p">
+
+						<h3>Pickup Address</h3>
+
+						<p>Guangzhou zhuhai of guangdong province pazhou saemaul undong 3 B 2201</p>
+
+					</div>
+
+					<div class="p">
+
+						<h3>Pickup Time</h3>
+
+						<p>
+
+							<span>today</span>
+
+							<span>12PM - 4PM</span>
+
+						</p>
+
+					</div>
+
+					<div class="p">
+
+						<h3>Mobile No.</h3>
+
+						<p>13826050593</p>
+
+					</div>
+
+					<a href="order_confirm1.html">Confirm</a>
+
+				</div>
+
+			</div>
+
+			
+
+			
+
+		</div>
+
+		<div class="tan tan_2">
+
+			<div class="sure">
+
+				<div class="rtit">
+
+					<span>Confirm Order</span>
+
+					<img src="{SITE_THEME}img/cha.png" onclick="hide_tan()">
+
+				</div>
+
+				<div class="surep">
+
+					<div class="p">
+
+						<h3>Device</h3>
+
+						<p>iPhone6</p>
+
+					</div>
+
+					<div class="p">
+
+						<h3>Envelope Mailing Address</h3>
+
+						<p>Guangzhou zhuhai of guangdong province pazhou saemaul undong 3 B 2201</p>
+
+					</div>
+
+					
+
+					<div class="p">
+
+						<h3>Mobile No.</h3>
+
+						<p>13826050593</p>
+
+					</div>
+
+					<a href="order_confirm.html">Confirm</a>
+
+				</div>
+
+			</div>
+
+			
+
+			
+
+		</div>
+
+		<script>
+
+			function show_tan_1(){
+
+				$(".tan_1").show();
+
+				$("body").addClass("hidden")
+
+			}
+
+			function show_tan_2(){
+
+				$(".tan_2").show();
+
+				$("body").addClass("hidden")
+
+			}
+
+			function hide_tan(){
+
+				$(".tan").hide();
+
+				$("body").removeClass("hidden")
+
+			}
+
+			
+
+		</script>
+
+	{template footer}
+
+	</body>
+
+	<script>
+
+		$(".seli .selibox span").click(function(){
+
+			$(this).parents(".selibox").siblings(".lit").find("span").show();
+
+			var txt = $(this).find("b").text()
+
+			$(this).parents(".selibox").siblings(".lit").find("font").text(txt);
+
+			$(this).parents(".selibox").hide()
+
+			
+
+		})
+
+		$(".seli .lit  em").click(function(){
+
+			$(this).parents("span").hide();
+
+			$(this).parents(".lit").siblings(".selibox").show()
+
+		})
+
+		$(".islist ul li").click(function(){
+
+			var bool = $(this).find("input").prop("checked");
+
+			console.log(bool)
+
+			if(bool){
+
+				var src1 = $(this).find("img").attr("src1");
+
+				 $(this).find("img").attr({"src":src1});
+
+				 $(this).addClass("on")
+
+			}else{
+
+				var src2 = $(this).find("img").attr("src2");
+
+				 $(this).find("img").attr({"src":src2});
+
+				 $(this).removeClass("on")
+
+			}
+
+		})
+
+	</script>
+
+
+
+</html>

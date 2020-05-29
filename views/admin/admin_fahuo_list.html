@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+    <div class="content-menu ib-a line-x">
+        <div class="layui-btn-group" >
+            <a class="layui-btn" href="" class="on"><em>Shipping list</em></a>
+        </div>
+        <form action="" method="post" style="float:left;">
+            <label>
+                <select class="form-control" name="roadbul_whizmo_type" id="roadbul_whizmo_type">
+                    <option value="">Please select delivery type</option>
+                    <option value="100" {if $roadbul_whizmo_type == 100}selected="selected"{/if}>Pickup</option>
+                    <option value="200" {if $roadbul_whizmo_type == 200}selected="selected"{/if}>Return</option>
+                </select>
+            </label>
+            <div class="cbtn" style="float: left;">
+                <input name="form" type="hidden" value="search" />
+                <input placeholder="Search order number/sender/sender name/sender/sender phone" type="text" class="input-text" value="{$order_sn}" name="order_sn" size="60" />
+                <input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+            </div>
+        </form>
+    </div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="20" align="left">ID</th>
+			<th width="120" align="left">Shipping Label</th>
+			<!--<th width="120" align="center">Logistics type</th>-->
+			<th width="120" align="center">Name</th>
+			<th width="120" align="center">Mobile phone</th>
+			<th width="80" align="center">Postal Code</th>
+			<th width="160" align="center">Address</th>
+			<th width="100" align="center">Pickup Date</th>
+			<th width="160" align="center">Pickup Slot</th>
+			<!--<th width="120" align="center">Logistics recipients</th>-->
+			<!--<th width="120" align="center">Logistics receiver telephone</th>-->
+			<!--<th width="120" align="center">物流下单时间</th>-->
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+			<td align="center">{$t['id']}</td>
+			<td align="center">{if $t['roadbul_OrderNumber']}<a class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="get_roadbul_query('{$t[roadbul_OrderNumber]}');">{$t['roadbul_OrderNumber']}</a>{else}{/if}</td>
+			<!--<td align="center">{if $t['roadbul_whizmo_type']==100}Subscriber order{else if $t['roadbul_whizmo_type']==200}The platform is returned to the user{else if $t['roadbul_whizmo_type']==300}The platform is sent to the auctioneer{/if}</td>-->
+			<td align="center">{$t['roadbul_FromName']}</td>
+			<td align="center">{$t['roadbul_FromMobilePhone']}</td>
+			<td align="center">{$t['roadbul_FromZipCode']}</td>
+			<td align="center">{$t['roadbul_FromAddress']}</td>
+			<td align="center">{$t['roadbul_PickupDate']}</td>
+			<td align="center">{$time[$t['roadbul_PickupTimeSlotId']]}</td>
+			<!--<td align="center">{$t['roadbul_ToName']}</td>-->
+			<!--<td align="center">{$t['roadbul_ToMobilePhone']}</td>-->
+			<!--<td align="center">{$t['']}</td>-->
+		</tr>
+		{/loop}
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+    function get_roadbul_query(sn){
+        var url   = '{url("admin/flowerhua/get_roadbul_query")}&sn='+sn;
+        var winid = 'loadinfo';
+        window.top.art.dialog(
+            {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'Inquiry Logistics', width:'1200', height:'700', lock:true},
+            function(){
+                window.top.art.dialog({id:winid}).close();
+            }
+        );
+        void(0);
+    }
+
+    //触发事件
+    $('.layui-btn').on('click', function(){
+        delbtn = $(this).attr('id');
+        var othis = $(this), method = othis.data('method');
+        active[method] ? active[method].call(this, othis) : '';
+    });
+    var active = {
+        notice: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">Will you delete this information? Make sure?</div>'
+                ,yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+					location.href="{url('admin/flowerhua/del')}"+"&id="+delbtn;
+                }
+            })
+        }
+    };
+
+	//触发多个删除
+    $('#del_').on('click', function(){
+        var othis = $(this), method = othis.data('method');
+        active2[method] ? active2[method].call(this, othis) : '';
+    });
+    var active2 = {
+        notice2: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; font-size:16px;  text-align: center;  font-weight: normal;">Make sure that the information is deleted?</div>'
+            ,yes: function (index, layero) {
+                //按钮【按钮一】的回调
+                document.myform.submit()
+            }
+            });
+        }
+    };
+
+function setC() {
+	if($("#deletec").attr('checked')) {
+		$(".deletec").attr("checked",true);
+	} else {
+		$(".deletec").attr("checked",false);
+	}
+}
+function loadInfo(id) {
+    var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+    var winid = 'loadinfo';
+    window.top.art.dialog(
+        {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+        function(){
+            window.top.art.dialog({id:winid}).close();
+        }
+    );
+    void(0);
+}
+</script>
+</body>
+</html>

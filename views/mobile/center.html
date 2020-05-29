@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+</head>
+
+
+
+	<body class="orderbd settingss">
+
+		{template header}
+
+			<div class="setting">
+
+				<div class="tit">Settings</div>
+
+				<div class="user">
+
+					{if $agent_check !=1}
+
+					{if $data['headerimg']}
+
+					<img src="{$data['headerimg']}" style="border-radius:50%;" onclick="show('.identify_pop')">
+
+					{else}
+
+					<img src="{SITE_THEME}img/head.png" onclick="show('.identify_pop')">
+
+					{/if}
+
+					{else}
+
+					<img src="views/mobile/img/premium.png" style="border-radius:50%;">
+
+					{/if}
+
+					<p>{substr_replace($data['phone'],'****',1,strlen($data['phone'])-4)}</p>
+
+				</div>
+
+				{if $agent_check !=1}
+
+				<div class="identify setli">
+
+					<div class="content">
+
+						<h1>Identity Verification<a href="javascript:;">{if $data['status']==1}<em>Unverified</em>{else}<em>Verified</em>{/if}</a></h1>
+
+						<p>Required by Secondhand Goods Dealers Act</p>
+
+					</div>
+
+					<button onclick="show('.identify_pop')">Verify</button>
+
+				</div>
+
+				<div class="addr setli">
+
+					<div class="content">
+
+						<h1>Address</h1>
+
+						<p>{if $address}{$address['address']}&nbsp;{$address['unit']} (S) {$address['postal']}{/if}</p>
+
+					</div>
+
+					<button onclick="show('.addr_pop')">Change</button>
+
+				</div>
+
+				{/if}
+
+				<div class="lock setli">
+
+					<div class="content">
+
+						<h1>Login Password</h1>
+
+						<p>Use stronger password to make your account more secure</p>
+
+					</div>
+
+					<button onclick="show('.pwd_pop')">Change</button>
+
+				</div>
+
+				<div class="call setli">
+
+						<div class="content">
+	
+							<h1>Contact Us</h1>
+	
+							<p>+65 8836 2145</p>
+	
+						</div>
+	
+					</div>
+
+				<!--改变地址-->
+
+				<div class="addr_pop">
+
+					<div class="content">
+
+						<div class="content_info">
+
+							<div class="txt">Change Address</div>
+
+							<div class="code"><input type="text" placeholder="Enter Postal Code" id="code" value="{$address['postal']}"/><div class="getcode" onclick="retrieve()"><p>Retrieve Address</p></div></div>
+
+							<label><input type="text" placeholder="Enter Address" id="addr" value="{$address['address']}"/></label>
+
+							<label><input type="text" placeholder="Enter Unit #" class="shouhuo_unit" value="{$address['unit']}"/></label>
+
+						</div>
+
+						<img src="{SITE_THEME}img/close.png" class="close" onclick="hide('.addr_pop')"/>
+
+						<button class="confirm" onclick="hide_tan2();">Submit</button>
+
+					</div>
+
+				</div>
+
+				<!--改变地址-->
+
+				<!--改变密码-->
+
+				<div class="pwd_pop">
+
+					<div class="content">
+
+						<div class="content_info">
+
+							<div class="txt">Change Password</div>
+
+							<div class="label">
+
+								<p>Current Password</p>
+
+								<label>
+
+									<input type="password" class="password" placeholder=""/>
+
+									<img src="{SITE_THEME}img/hidepwd.png" src1="{SITE_THEME}img/hidepwd.png" src2="{SITE_THEME}img/seepwd.png" bool="false">
+
+								</label>
+
+							</div>
+
+							<div class="label">
+
+								 <p>New Password</p>
+
+								 <label>
+
+									<input type="password" class="newpassword1" placeholder=""/>
+
+									<img src="{SITE_THEME}img/hidepwd.png" src1="{SITE_THEME}img/hidepwd.png" src2="{SITE_THEME}img/seepwd.png" bool="false">
+
+								 </label>
+
+							</div>
+
+							<div class="label">
+
+								 <p>Repeat New Password</p>
+
+								<label>
+
+									<input type="password" class="newpassword2" placeholder=""/>
+
+									<img src="{SITE_THEME}img/hidepwd.png" src1="{SITE_THEME}img/hidepwd.png" src2="{SITE_THEME}img/seepwd.png" bool="false">
+
+								</label>
+
+							</div>
+
+						</div>
+
+						<img src="{SITE_THEME}img/close.png" class="close" onclick="hide('.pwd_pop')"/>
+
+						<button class="confirm" onclick="hide_tan3();">Change</button>
+
+					</div>
+
+				</div>
+
+				<!--改变密码-->
+
+				<!--认证-->
+
+				<div class="identify_pop">
+
+					<div class="content">
+
+						<div class="content_info">
+
+							<div class="txt">Identity Verification</div>
+
+							<p style="line-height:25px;font-size:0.25rem; margin-top: 25px;">Secondhand Goods Dealers Act, Cap 228A - Requirement by Police Licensing and Regulatory Department, Singapore Police Force</p>
+
+							<div class="astep">
+
+								<p>Upload ID Card (NRIC/EP/SP/WP/Student's Pass/DP)</p><br>
+								<p>(Only JPG and PNG files are allowed.)</p>
+
+								<div class="upload">
+
+									<ul>
+
+										<li>
+
+											<!-- {if $data['zhaopian1']}
+
+											<img src="{$data['zhaopian1']}" id="shenfenimg1">
+
+											{else}
+
+											<img src="{SITE_THEME}img/Front.png" id="shenfenimg1">
+
+											{/if} -->
+
+											<img src="{if $data['zhaopian1']}{$data['zhaopian1']}{else}{SITE_THEME}img/Front.png{/if}" id="shenfenimg1">
+
+											<input type="file" id="ufile1" name="addlogo">
+
+											<input type="hidden" id="zhaopian1" value="{$data['zhaopian1']}">
+
+										</li>
+
+										<li>
+
+											<!-- {if $data['zhaopian2']}
+
+											<img src="{$data['zhaopian2']}" id="shenfenimg2">
+
+											{else}
+
+											<img src="{SITE_THEME}img/Back.png" id="shenfenimg2">
+
+											{/if} -->
+
+											<img src="{if $data['zhaopian2']}{$data['zhaopian2']}{else}{SITE_THEME}img/Back.png{/if}" id="shenfenimg2">
+
+											<input type="file" id="ufile2" name="addlogo">
+
+											<input type="hidden" id="zhaopian2" value="{$data['zhaopian2']}">
+
+										</li>
+
+									</ul>
+
+								</div>
+
+							</div>
+
+							<!-- <img src="{SITE_THEME}img/or.png" class="or"/> -->
+
+							<!-- <div class="bstep">
+
+								<p>B. Fill in the details manually (as perNRIC/EP/SP/WP/Stude</p>
+
+								<div class="inp">
+
+									<ul>
+
+										<li>
+
+											<p>Full Name</p>
+
+											<input type="text" placeholder="Enter full name" class="fullname" value="{$data['fullname']}"/>
+
+										</li>
+
+										<li>
+
+											<p>ID Type</p>
+
+											<select class="sftype">
+
+												<option value="">Choose ID Type</option>
+
+												{loop $type $t}
+
+												<option value="{$t['id']}" {if $data['sftype'] == $t['id']}selected{/if}>{$t['idtype']}</option>
+
+												{/loop}
+
+											</select>
+
+										</li>
+
+										<li>
+
+											<p>NPIC/FIN No.</p>
+
+											<input type="text" placeholder="Enter ID No." class="nric" value="{$data['nric']}"/>
+
+										</li>
+
+										<li>
+
+											<p>Nationality</p>
+
+											<select class="country">
+
+												<option value="">Choose Nationalitv</option>
+
+												{loop $country $t}
+
+												<option value="{$t['id']}" {if $data['country'] == $t['id']}selected{/if}>{$t['country']}</option>
+
+												{/loop}
+
+											</select>
+
+										</li>
+
+										<li>
+
+											<p>Gender</p>
+
+											<select class="sex">
+
+												<option >Choose Gender</option>
+
+												<option {if $data['sex']==1} selected {/if} value="1">Male</option>
+
+												<option  {if $data['sex']==2} selected {/if} value="2">Female</option>
+
+											</select>
+
+										</li>
+
+										<li class="postcode">
+
+											<p>Postal Code</p>
+
+											<input type="text" placeholder="Enter postal code" class="postal" value="{$data['postal']}"/>
+
+											<button onclick="retrieves()"><p>Retrieve Address</p></button>
+
+										</li>
+
+										<li>
+
+											<p>Address</p>
+
+											<input type="text" placeholder="Enter address" class="address" value="{$data['address']}"/>
+
+										</li>
+
+										<li>
+
+											<p>Unit #</p>
+
+											<input type="text" placeholder="Enter unit number" class="unit" value="{$data['unit']}"/>
+
+										</li>
+
+									</ul>
+
+								</div>
+
+							</div> -->
+
+						</div>
+
+						<button class="confirm" onclick="hide_tan1();">Submit</button>
+
+					</div>
+
+					<img src="{SITE_THEME}img/close.png" class="close" onclick="hide('.identify_pop')"/>
+
+				</div>
+
+				<!--认证-->
+
+				<!--退出-->
+
+				<!--popup-->
+
+					<div class="device_pop">
+
+						<div class="content">
+
+							<img src="{SITE_THEME}img/icon-warn.png"/>
+
+							<div class="tips">Are you sure you want to log out?</div>
+
+							<input type="button" value="LOG OUT" class="ok" onclick="hide('.device_pop')"/>
+
+							<input type="button" value="CANCEL" class="cancel" onclick="hide('.device_pop')"/>
+
+						</div>
+
+					</div>
+
+			    <!--popup-->
+
+				<!--退出-->
+
+			</div>
+
+
+		<script src="{SITE_THEME}js/jquery.form.js"></script>			
+
+	</body>
+
+</html>
+
+<script>
+
+    $(function () {
+
+        $("#ufile1").wrap("<form class='myupload1' action='index.php?c=ajax_formflowerhua&a=ajax_set_img' method='post' enctype='multipart/form-data'></form>");
+
+        $("#ufile1").change(function () {
+
+            var flower=$(this);
+
+            $(".myupload1").ajaxSubmit({
+
+                dataType:'json',
+
+                success:function (data) {
+
+                    console.log(data.access_url)
+
+                    $("#shenfenimg1").attr('src',data.access_url);
+
+                    $("#zhaopian1").val(data.access_url);
+
+                }
+
+            });
+
+
+
+        });
+
+    })
+
+
+
+    $(function () {
+
+        $("#ufile2").wrap("<form class='myupload2' action='index.php?c=ajax_formflowerhua&a=ajax_set_img' method='post' enctype='multipart/form-data'></form>");
+
+        $("#ufile2").change(function () {
+
+            var flower=$(this);
+
+            $(".myupload2").ajaxSubmit({
+
+                dataType:'json',
+
+                success:function (data) {
+
+                    console.log(data.access_url)
+
+                    $("#shenfenimg2").attr('src',data.access_url);
+
+                    $("#zhaopian2").val(data.access_url);
+
+                }
+
+            });
+
+
+
+        });
+
+    })
+
+	$('.barclick').on('click',function(){
+
+		$(this).find('p').toggleClass('on');
+
+		$(this).find('ol').toggleClass('on');
+
+	});
+
+	
+
+	function show(classname){
+
+		$(classname).show();
+
+		$('.sidebar').hide();
+
+	}
+
+	function hide(classname){
+
+		$(classname).hide();
+
+	}
+
+    function retrieve(){
+
+        var code = $('#code').val();
+
+        if(code==''){
+
+            layer.msg('Please enter the zip code',{icon:0});
+
+            return false;
+
+        }
+
+        $.ajax({
+
+            dataType:'json',
+
+            type:'post',
+
+            url:"{url('flowerhua/search_postalcode')}",
+
+            data:{postal_code:code},
+
+            success:function(data){
+
+                if(data.code==1){
+
+                    $('#addr').val(data.arr['street_number']+' '+data.arr['street_name']);
+
+                }else if(data.code==2){
+
+                    layer.msg('The postcode does not exist',{icon:0});
+
+                }
+
+            }
+
+        })
+
+    }
+
+    function retrieves(){
+
+        var postal = $('.postal').val();
+
+        if(postal==''){
+
+            layer.msg('Please enter the zip code',{icon:0});
+
+            return false;
+
+        }
+
+        $.ajax({
+
+            dataType:'json',
+
+            type:'post',
+
+            url:"{url('flowerhua/search_postalcode')}",
+
+            data:{postal_code:postal},
+
+            success:function(data){
+
+                if(data.code==1){
+
+                    $('.address').val(data.arr['street_number']+' '+data.arr['street_name']);
+
+                }else if(data.code==2){
+
+                    layer.msg('The postcode does not exist',{icon:0});
+
+                }
+
+            }
+
+        })
+
+    }
+
+    function hide_tan1(){
+
+        var zhaopian1 = $('#zhaopian1').val();
+
+        var zhaopian2 = $('#zhaopian2').val();
+
+        var fullname = $('.fullname').val();
+
+        var sftype = $('.sftype option:selected').val();
+
+        var nric = $('.nric').val();
+
+        var country = $('.country option:selected').val();
+
+        var sex = $('.sex option:selected').val();
+
+        var postal = $('.postal').val();
+
+        var address = $('.address').val();
+
+        var unit = $('.unit').val();
+
+        if(zhaopian1!=''){
+
+            if(zhaopian1=='' || zhaopian2==''){
+
+                layer.alert('Kindly upload pictures of your ID card or fill in all details in the given fields',{title:'',btn:['Ok']});return false;
+
+            }
+
+        }else if(fullname!=''){
+
+            if(fullname==''){
+
+                layer.alert('Unfilled full name',{title:'',btn:['Ok']});return false;
+
+            }
+
+            if(sftype==''){
+
+                layer.alert('Unselected ID type',{title:'',btn:['Ok']});return false;
+
+            }
+
+            if(nric==''){
+
+                layer.alert('Unfilled document number',{title:'',btn:['Ok']});return false;
+
+            }
+
+            if(country==''){
+
+                layer.alert('Unselected country',{title:'',btn:['Ok']});return false;
+
+            }
+
+            if(sex==''){
+
+                layer.alert('Unselected sex',{title:'',btn:['Ok']});return false;
+
+            }
+
+            if(postal==''){
+
+                layer.alert('Unfilled zip code',{title:'',btn:['Ok']});return false;
+
+            }
+
+            if(address==''){
+
+                layer.alert('Unfilled address',{title:'',btn:['Ok']});return false;
+
+            }
+
+        }else{
+
+            layer.alert('Kindly upload pictures of your ID card or fill in all details in the given fields',{title:'',btn:['Ok']});return false;
+
+        }
+
+        $.ajax({
+
+            type:'post',
+
+            dataType:'json',
+
+            url:"./index.php?c=members&a=memberinfo",
+
+            data:{zhaopian1:zhaopian1,zhaopian2:zhaopian2,fullname:fullname,sftype:sftype,nric:nric,country:country,sex:sex,postal:postal,address:address,unit:unit},
+
+            success:function(data){
+
+                if(data.code==1){
+
+                    layer.alert(data.info,{btn:['Ok'],icon:1,end:function(){
+
+                        $(".tan").hide();
+
+                        $("body").removeClass("hidden");
+
+                        parent.location.reload();
+
+                    }})
+
+                }
+
+            }
+
+        })
+
+
+
+    }
+
+
+
+
+
+    function hide_tan2(){
+
+        var postal = $('#code').val();
+
+        var address = $('#addr').val();
+
+        var unit = $('.shouhuo_unit').val();
+
+        if(postal==''){
+
+            layer.alert('Please enter the zip code');
+
+            return false;
+
+        }
+
+        if(address==''){
+
+            layer.alert('Please enter the address');
+
+            return false;
+
+        }
+
+        $.ajax({
+
+            type:'post',
+
+            dataType:'json',
+
+            url:"./index.php?c=members&a=member_address",
+
+            data:{address:address,postal:postal,unit:unit},
+
+            success:function(data){
+
+                if(data.code==1){
+
+                    layer.msg(data.info,{icon:1,time:3000,end:function(){
+
+                        location.href="./index.php?c=members&a=center";
+
+                    }})
+
+                }
+
+            }
+
+        })
+
+    }
+
+    function hide_tan3(){
+
+        var password = $('.password').val();
+
+        var newpassword1 = $('.newpassword1').val();
+
+        var newpassword2 = $('.newpassword2').val();
+
+        if(password==''){
+
+            layer.alert('Please enter the original password');
+
+            return false;
+
+        }
+
+        if(newpassword1==''){
+
+            layer.alert('Please enter a new password');
+
+            return false;
+
+        }
+
+        if(newpassword2==''){
+
+            layer.alert('Please enter the new password again');
+
+            return false;
+
+        }
+
+        if(newpassword1 != newpassword2){
+
+            layer.alert('Two input password inconsistencies');
+
+            return false;
+
+        }
+
+        $.ajax({
+
+            type:'post',
+
+            dataType:'json',
+
+            url:"index.php?c=members&a=member_password",
+
+            data:{newpassword1:newpassword1,password:password},
+
+            success:function(data){
+
+                if(data.code==1){
+
+                    layer.msg(data.info,{icon:1,time:3000,end:function(){
+
+                        location.href="./index.php?c=members&a=center";
+
+                    }})
+
+                }
+
+                if(data.code==2){
+
+                    layer.alert(data.info);
+
+                }
+
+            }
+
+        })
+
+    }
+
+	//切换密码类型
+
+	$('.pwd_pop .label label img').on('click',function(){
+
+		var bool = $(this).attr('bool');
+
+		var src1 = $(this).attr('src1');
+
+		var src2 = $(this).attr('src2');
+
+		if(bool=="false"){
+
+			bool = true;
+
+			$(this).attr('bool',bool);
+
+			$(this).attr('src',src2);
+
+			$(this).parents('label').find('input').attr('type','text');
+
+		}else if(bool=="true"){
+
+			bool = false;
+
+			$(this).attr('bool',bool);
+
+			$(this).attr('src',src1);
+
+			$(this).parents('label').find('input').attr('type','password');
+
+		}
+
+	})
+
+</script>

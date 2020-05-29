@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		{template admin/top.html}
+		<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet">
+		<link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+		<link href="{SITE_THEME}admin/images/ruku.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+		<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>
+		<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+		<script type="text/javascript" src="{ADMIN_THEME}js/my97/WdatePicker.js"></script>
+		<title>admin</title>
+	</head>
+
+	<body style="font-weight: normal;">
+		<div class="subnav">
+			<div class="content-menu ib-a blue line-x">
+				<a href="{url('admin/tixian/')}" {if !$status}class="on"{/if}><em>{lang('全部列表')}</em></a><span>|</span>
+				<a href="{url('admin/tixian/',array('status' => 2))}" {if $status == 2}class="on"{/if}><em>{lang('已处理')}</em></a><span>|</span>
+				<a href="{url('admin/tixian/',array('status' => 1))}" {if $status == 1}class="on"{/if}><em>{lang('未处理')}</em></a><span>|</span>
+				
+			</div>
+			<div class="bk10"></div>
+			<div class="explain-col">
+				<form method="post" action="">
+				<input type="hidden" value="search" name="form">
+				{if !$user_cityid}
+				<label>
+				<select class="form-control" name="province_id" id="province_id">
+					<option value="">请选择省</option>
+					{loop $province $t}
+						<option value="{$t[id]}" {if $province_id == $t[id]}selected="selected"{/if}>{$t[name]}</option> 
+					{/loop}
+				</select>
+				</label>
+				<label>
+				<select class="form-control" id="city_id" name="city_id">
+					<option value="">请选择市</option>
+					{loop $citylist $t}
+						<option value="{$t[id]}" {if $city_id == $t[id]}selected="selected"{/if}>{$t[name]}</option> 
+					{/loop}
+				</select>
+				</label>
+				<script type="text/javascript">
+					$("#province_id").change(function(){
+						var id = $(this).val();
+						$.ajax({
+						type:"POST",
+						url:"index.php?s=admin&a=city",
+						data:"id="+id,
+						dateType:"html",
+						success:function(date){
+							$("#city_id").html(date);
+						}
+						})
+					})
+				</script>
+				{/if}
+				<label>
+				<input class="Wdate form-control " type="text" name="starttime" size="20" placeholder="时间段开始" value="{$starttime}" onClick="WdatePicker()" >
+				</label>
+				<label>
+				<input class="Wdate form-control " type="text" name="endtime" size="20" placeholder="时间段结束" value="{$endtime}" onClick="WdatePicker()" >
+				</label>
+				<label>
+				<input class="btn btn-success" type="submit" name="search" value="搜索">
+				</label>
+				</form>
+			</div>
+			<div class="bk10"></div>
+			<div class="table-responsive mytable">
+				<form action="" method="post" name="myform" id="myform">
+					<table width="100%" class="table table-striped">
+						<thead>
+							<tr>
+								<th width="5%" align="right"><input name="deletec" id="deletec" type="checkbox" onClick="setC()" /></th>
+								<th width="5%" align="left">瑜伽馆ID</th>
+								<th width="10%" align="left">瑜伽馆名称</th>
+								<th width="10%" align="left">手机号/账号</th>
+								<th width="15%" align="left">申请时间</th>
+								<th width="10%" align="left">提现金额</th>
+								<th width="10%" align="left">会员余额</th>
+								<th width="10%" align="left">状态</th>
+								<th width="25%" align="left">Option</th>
+								
+								
+							</tr>
+						</thead>
+						<tbody>
+							{loop $list $t}
+							<tr>
+								<td align="left"><input name="del_{$t[id]}" type="checkbox" class="deletec" /></td>
+								<td align="left">{$t[y_id]}</td>
+								<td align="left">{$t[y_name]}</td>
+								<td align="left">{$t[y_username]}</td>
+								<td align="left" style="color:#488fcd;">{date('Y-m-d H:i:s',$t[addtime])}</td>
+								<td align="left">{$t[jine]}</td>
+								<td align="left">{$t[y_yue]}</td>
+								<td align="left">{if $t[status] == 1}<span style="color:#FF3333;">未处理</span>{else if $t[status] == 2}<span style="color:#33CCCC;">已处理</span>{/if}</td>
+								<td align="left">
+									{if $t[status] == 1}
+									<a href="javascript:;" onClick="if(confirm('确认该订单后，将自动扣取该瑜伽馆会员余额，扣取金额为此次提现金额：￥{$t[jine]}')){ window.location.href='<?php echo url('admin/tixian/upstatus/',array('id'=>$t['id']));?>'; }">确认处理</a><span>&nbsp;|&nbsp;</span>
+									{/if}
+									<a href="javascript:;" onClick="if(confirm('确认删除？')){ window.location.href='<?php echo url('admin/tixian/del/',array('id'=>$t['id']));?>'; }">删除<i class="layui-icon">&#xe640;</i>
+								</td>
+								
+							</tr>
+							{/loop}
+							
+							<tr>
+						<td colspan="9" align="left">&nbsp;
+							<input type="submit" class="btn btn-success btn-sm" value="删除" name="submit" onClick="return confirm_del()" />&nbsp;</td>
+						</tr> 
+							<tr>
+								<td colspan="99" align="left">
+								</td>
+							</tr>
+						
+						</tbody>
+					</table>
+				{str_replace('<a>共' . $total . '条</a>', '<a>耗时' . runtime() . '秒</a><a>共' . $total . '条</a>', $pagelist)}
+				</form>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+			function confirm_del() {
+				if(confirm('{lang('确定要删除该订单吗？删除前请检查订单状态')}')) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			function setC() {
+				if($("#deletec").attr('checked')) {
+					$(".deletec").attr("checked", true);
+				} else {
+					$(".deletec").attr("checked", false);
+				}
+			}
+		</script>
+	</body>
+
+</html>

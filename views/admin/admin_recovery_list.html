@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+	<link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+	<script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/flowerhua/admin_recovery_list')}" class="on"><em>Product List</em></a>
+			<a class="layui-btn" href="{url('admin/flowerhua/admin_recovery_add')}"><em>Add Product</em></a>
+		</div>
+		<form action="" method="post" style="float:left;">
+		<tr>
+			<td>
+				<label>
+					<select class="form-control" name="recovery_type_id" id="recovery_type_id" onchange="find_parent_list(this);">
+						<option value="">Please select device type</option>
+						{loop $type_list $t}
+						<option value="{$t[id]}" {if $recovery_type_id == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+						{/loop}
+					</select>
+				</label>
+
+				<label>
+					<select class="form-control" id="recovery_parent_id" name="recovery_parent_id">
+						<option value="">Please select brand</option>
+						{loop $parent_list2 $t}
+						<option value="{$t[id]}" {if $recovery_parent_id == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+						{/loop}
+					</select>
+				</label>
+			</td>
+			<div class="cbtn" style="float: left;">
+				<input name="form" type="hidden" value="search" />
+				<input placeholder="Search the name of the recovery product" type="text" class="input-text" value="{$username}" name="username" size="40" />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			</div>
+		</tr>
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" id="submit_del" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		{if count($list)>0}
+		<tr>
+			<th width="20" align="right"><input name="deletec" id="deletec" type="checkbox" onClick="setC()" /></th>
+			<th width="40" align="left">Sort</th>
+			<th width="40" align="left">ID</th>
+			<th width="100" align="center">Model picture</th>
+			<th width="100" align="center">Type</th>
+			<th width="120" align="center">Brand</th>
+			<th width="120" align="center">Model name</th>
+			<th width="120" align="center">Hide</th>
+			<th width="80" align="center">Highest price</th>
+			<th width="80" align="center">Txn no.</th>
+			<th width="120" align="center">Creation time</th>
+			<th width="120" align="left">Action</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+			<td align="right"><input name="del_{$t['id']}" type="checkbox" class="deletec"></td>
+			<td align="center"><input name="order_{$t['id']}" value="{$t['listorder']}" type="text" style="width:35px;text-align:center;"></td>
+			<td align="center">{$t['id']}</td>
+			<td align="center" style="cursor:pointer" onclick="location_href({$t['id']})"><img src="{$t['recovery_img']}" style="height:80px;"></td>
+            <td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{$type_arr[$t['recovery_type_id']]}</td>
+			<td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{$parent_arr[$t['recovery_parent_id']]}</td>
+			<td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{if $t['recovery_hits']==1}<a class="layui-btn layui-btn layui-btn-small" onclick="cancel_hits({$t['id']});" href="javascript:;">Hot</a>{/if}</a>{$t['recovery_title']}</td>
+			<!-- <td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{$t['recovery_title2']}</td> -->
+			<td align="center" style="cursor:pointer">
+				{if $t['show_hide'] == false}<a class="layui-btn layui-btn-danger layui-btn-small" onclick="show_hide({$t['id']}, {$t['show_hide']});" href="JavaScript:;">Unhide</a>{else}<a class="layui-btn layui-btn layui-btn-small" onclick="show_hide({$t['id']}, {$t['show_hide']});" href="JavaScript:;">Hide</a>{/if}
+			</td>
+
+			<td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{$t['recovery_high_price']}</td>
+			<td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{$t['recovery_cold_num']}</td>
+			<td align="center" style="cursor:pointer" onclick="location_href({$t['id']})">{date('Y-m-d H:i:s',$t['addtime'])}</td>
+			<td align="center">
+			<div class="layui-btn-group">
+				{if $t['recovery_hits']==1}<a class="layui-btn layui-btn-danger layui-btn-small" onclick="cancel_recovery_hits({$t['id']});" href="JavaScript:;">Remove from Hot</a>{else}<a class="layui-btn layui-btn layui-btn-small" onclick="add_recovery_hits({$t['id']});" href="JavaScript:;">Add to Hot</a>{/if}
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/admin_recovery_add',array('id'=>$t['id']))}">Edit</a>
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/admin_recovery_copy',array('id'=>$t['id']))}">Copy</a>
+				<a data-method="notice" id="{$t['id']}" class="layui-btn layui-btn-danger layui-btn-small" href="javascript:void(0);">Delete</a>
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		<tr height="25" class="cao">
+			<td colspan="22" align="left">
+				<a data-method="notice2" id="del_" class="layui-btn layui-btn-danger layui-btn-small">Delete selected</a>
+				<a data-method="notice2" id="order_" class="layui-btn layui-btn layui-btn-small">Sort</a>
+			</td>
+		</tr>
+		{else}
+		<p align="center" style="padding:50px;">No data has been found for the time being!</p>
+		{/if}
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	function location_href(id){
+        location.href="index.php?s=admin&c=flowerhua&a=admin_recovery_add&id="+id;
+	}
+
+	// show or hide model
+	function show_hide(id, state){
+        layer.open({content:'Do you want to change SHOW/HIDE state of this model?',yes:function(){
+            $.ajax({
+                url: "index.php?s=admin&c=flowerhua&a=show_hide",
+                type: "post",
+                data: {
+                    id : id,
+                    state : state,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code==1){
+                        layer.msg('Model State Changed!',{end:function(){
+                            location.reload();
+                        }});
+                    }
+                }
+            });
+
+        }})
+	}	
+
+
+	function cancel_recovery_hits(id){
+        layer.open({content:'Do you want to make sure that you want to cancel the recommendation to the front page?',yes:function(){
+            $.ajax({
+                url: "index.php?s=admin&c=flowerhua&a=cancel_recovery_hits",
+                type: "post",
+                data: {
+                    id : id,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code==1){
+                        layer.msg('Cancellation of recommendation success!',{end:function(){
+                            location.reload();
+                        }});
+                    }
+                }
+            });
+
+        }})
+	}
+	function add_recovery_hits(id){
+		layer.open({content:'Are you sure you want to recommend to the front page?',yes:function(){
+		    $.ajax({
+		        url: "index.php?s=admin&c=flowerhua&a=add_recovery_hits",
+		        type: "post",
+		        data: {
+		            id : id,
+		        },
+		        dataType: 'json',
+		        success: function (data) {
+		            if(data.code==1){
+                        layer.msg('Recommendation success!',{end:function(){
+                            location.reload();
+                        }});
+		            }
+		        }
+		    });
+
+		}})
+	}
+    function find_parent_list(a) {
+        $.ajax({
+            url: "index.php?s=admin&c=flowerhua&a=find_parent_list",
+            type: "post",
+            data: {
+                parentid: $(a).val(),
+            },
+            dataType: 'json',
+            success: function(data) {
+                if(data.code == 1) {
+                    $('#recovery_parent_id').html(data.str);
+                } else {
+                    $('#recovery_parent_id').html('<option value="">No options are available for the time being</option>');
+                }
+            }
+        });
+    }
+    $('#order_').on('click',function(){
+        $('#submit_del').val(2);
+        document.myform.submit()
+	});
+    //触发事件
+    $('.layui-btn').on('click', function(){
+        delbtn = $(this).attr('id');
+        var othis = $(this), method = othis.data('method');
+        active[method] ? active[method].call(this, othis) : '';
+    });
+    var active = {
+        notice: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">Will you delete this information? Make sure?</div>'
+                ,yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+					location.href="{url('admin/flowerhua/admin_recovery_del')}"+"&id="+delbtn;
+                }
+            })
+        }
+    };
+
+	//触发多个删除
+    $('#del_').on('click', function(){
+        var othis = $(this), method = othis.data('method');
+        active2[method] ? active2[method].call(this, othis) : '';
+    });
+    var active2 = {
+        notice2: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; font-size:16px;  text-align: center;  font-weight: normal;">Make sure that the information is deleted?</div>'
+            ,yes: function (index, layero) {
+                //按钮【按钮一】的回调
+				$('#submit_del').val(1);
+                document.myform.submit()
+            }
+            });
+        }
+    };
+
+function setC() {
+	if($("#deletec").attr('checked')) {
+		$(".deletec").attr("checked",true);
+	} else {
+		$(".deletec").attr("checked",false);
+	}
+}
+function loadInfo(id) {
+    var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+    var winid = 'loadinfo';
+    window.top.art.dialog(
+        {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+        function(){
+            window.top.art.dialog({id:winid}).close();
+        }
+    );
+    void(0);
+}
+</script>
+</body>
+</html>

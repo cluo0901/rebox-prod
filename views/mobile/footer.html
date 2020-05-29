@@ -1,0 +1,23 @@
+{php
+$CI = & get_instance();
+$follow = $CI->flowerhua->get_one('category',"catid = 205");
+$follow['child'] = $CI->flowerhua->get_all_where('content_1_follow',"catid = 205");
+foreach($follow['child'] as $key=>$value)
+$follow['child'][$key]['title'] = $CI->flowerhua->get_field('content_1',"id = $value[id]",'title');
+$list = $CI->flowerhua->get_all_where('category',"ismenu = 1 and child = 1 and parentid = 0 order by listorder asc");
+foreach($list as $key=>$value)
+$list[$key]['child'] = $CI->flowerhua->get_all_where('category',"ismenu = 1 and parentid = ".$value[catid]." order by listorder asc",'catid,catname,url,typeid');
+$footertitle = $CI->flowerhua->get_all_list('whizmo_footer', 'sort desc', '0,4', 'status=1', $ifcount = false);
+}
+<div class="spec-5"></div>
+<div class="introdlist">
+	<ul>
+		{loop $footertitle $t}
+		<li>
+			<img src="{$t['thumb']}"/>
+			<p>{$t['title']}</p>
+		</li>
+		{/loop}
+	</ul>
+</div>
+<div class="copyright">{$SITE_ICP}</div>

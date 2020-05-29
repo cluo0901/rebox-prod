@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+    <link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+    <link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+    <link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+    <link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>
+    <script type="text/javascript">
+        var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+        var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+    </script>
+    <script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+    <script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+    <script type="text/javascript">
+        function ajaxletter() {
+            var letter = $('#letter').val();
+            if (letter == '') {
+                $.post(sitepath+'?c=api&a=pinyin&id='+Math.random(), { name:$('#name').val() }, function(data){ $('#letter').val(data); });
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            dr_set_type('{$data["type"]}');
+        });
+
+        function dr_set_type(v) {
+            $(".dr_hide").hide();
+            $(".dr_"+v).show();
+        }
+
+        function resources_on(){
+            $('#resources').show();
+            $('#content').hide();
+        }
+        function resources_off(){
+            $('#resources').hide();
+            $('#content').show();
+        }
+        function app_on(){
+
+        }
+        function app_off(){
+
+        }
+    </script>
+    <title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+    <div class="content-menu ib-a line-x">
+        <div class="layui-btn-group">
+            <a class="layui-btn" href="{url('admin/wx/config')}"><em>微信配置</em></a>
+            <a class="layui-btn" href="{url('admin/wx/welcome')}" class="on"><em>关注发送</em></a>
+        </div>
+    </div>
+    <div class="bk10"></div>
+    <div class="table-list">
+        <form action="" method="post">
+
+            <table width="100%" class="table_form">
+
+                <tr >
+                    <th width="300">
+                        *回复类型：
+                    </th>
+                    <td>
+                        <input type="radio" name="data[s]" {if $welcome_rs['type'] == 2} checked {/if} value="2" class="input-text">文本
+                        <input type="radio" name="data[s]" value="1" {if $welcome_rs['type'] == 1} checked {/if} class="input-text">图文
+                    </td>
+                </tr>
+                <input type="hidden" name="data[id]" value="{$welcome_rs['id']}">
+                <tr  id="msgimg" style="display: none;">
+                    <th  width="300">
+                        *图文选择：
+                    </th>
+                    <td>
+                        <select name="data[type]" class="input-text">
+                            {loop $reply_list $key=>$item}
+                            <option {if $welcome_rs['catid'] == $item['id']} selected {/if} value="{$item['id']}" >{$item['keyword']}</option>
+                            {/loop}
+                        </select>
+                    </td>
+                </tr>
+                <tr   id="content" style="display: none;">
+                    <th width="300">
+                        *内容：
+                    </th>
+                    <td>
+                        <textarea name="data[content]" id="" cols="50" rows="10">{$welcome_rs['content']}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input  class="btn btn-success btn-sm" type="submit" name="submit" value="提交" size="80">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+    var showid = "{$welcome_rs['type']}";
+    if (showid == 1) {
+        $('#msgimg').show()
+        $('#content').hide()
+    }else{
+        $('#content').show()
+        $('#msgimg').hide()
+    }
+    $('input:radio[name="data[s]"]').change( function(){
+        if ($(this).val() == 1) {
+            $('#content').hide()
+            $('#msgimg').show()
+            // $('#msgimg').show()
+        }else{
+            $('#content').show()
+            $('#msgimg').hide()
+        }
+    })
+</script>
+</html>

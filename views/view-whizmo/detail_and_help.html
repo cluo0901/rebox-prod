@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+{php
+
+$CI = & get_instance();
+
+$follow = $CI->flowerhua->get_one('category',"catid = 205");
+
+$follow['child'] = $CI->flowerhua->get_all_where('content_1_follow',"catid = 205");
+
+foreach($follow['child'] as $key=>$value)
+
+$follow['child'][$key]['title'] = $CI->flowerhua->get_field('content_1',"id = $value[id]",'title');
+
+$list = $CI->flowerhua->get_all_where('category',"ismenu = 1 and child = 1 and parentid = 0 order by listorder asc");
+
+foreach($list as $key=>$value)
+
+    $list[$key]['child'] = $CI->flowerhua->get_all_where('category',"ismenu = 1 and parentid = ".$value[catid]." order by listorder asc",'catid,catname,url,typeid');
+
+}
+
+<html>
+
+	<head>
+
+		{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+
+	<body>
+
+		{template header}
+
+		<div class="recircle_detail">
+
+			<div class="container">
+
+				<div class="help_left">
+
+					<ul>
+
+                        {loop $list $item}
+
+                        <li>
+
+							<div class="lit">
+
+								<img src="{SITE_THEME}img/icon70.png"><span style="font-weight: bold; font-size:18px;">{$item['catname']}</span><em><img src="{SITE_THEME}img/icon73.png"></em>
+
+							</div>
+
+							<div class="aa">
+
+                                {loop $item['child'] $t}
+
+								{if $t['typeid']==2}
+
+                                <a {if $category_id == $t['catid']}class="on"{/if} href="{url('flowerhua/detail_and_help',array('category_id'=>$t['catid']))}" >{$t['catname']}</a>
+
+								{else if $t['typeid']==3}
+
+								<a href="{$t['url']}">{$t['catname']}</a>
+
+								{/if}
+
+                                {/loop}
+
+							</div>
+
+						</li>
+
+                        {/loop}
+
+                    </ul>
+
+				</div>
+
+				<div class="help_right">
+
+					<h3  style="font-weight: bold; font-size: 24px;" >{$data['catname']}</h3>
+
+					<div class="p">
+
+						{php echo htmlspecialchars_decode($data['content']);}
+
+					</div>
+
+				</div>
+
+				
+
+			</div>
+
+		</div>
+
+	{template footer}
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=install_email
+  page_id="201403270461097"
+  theme_color="#ffcc00">
+</div>
+
+	</body>
+
+	<script>
+
+		var mySwiper = new Swiper('.swiper-container-2', {
+
+			//autoplay: 2000,//可选选项，自动滑动
+
+			prevButton: '.apprise-btn-pre',
+
+			nextButton: '.apprise-btn-next',
+
+			width: 300,
+
+			slidesPerView: 4
+
+		});
+
+
+
+		$('.appraise .swiper-button-prev').click(function() {
+
+			mySwiper.swipePrev();
+
+		})
+
+
+
+		$('.appraise .swiper-button-next').click(function() {
+
+			mySwiper.swipeNext();
+
+		})
+
+		var mySwiper1 = new Swiper('.swiper-container-3', {
+
+			autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+			width: 200,
+
+			slidesPerView: 2
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-prev').click(function() {
+
+			mySwiper1.swipePrev();
+
+		})
+
+
+
+		$('.ahs-media-content .swiper-button-next').click(function() {
+
+			mySwiper1.swipeNext();
+
+		})
+
+	</script>
+
+
+
+</html>

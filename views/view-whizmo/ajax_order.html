@@ -1,0 +1,43 @@
+{loop $order $item}
+<table>
+    <tr>
+        <th colspan="5">Order number:{$item['order_sn_number']}</th>
+    </tr>
+    <tr>
+        <td>
+            <img src="{$item['recovery']['recovery_img']}">
+            <p>{$item['recovery']['recovery_title']}</p>
+        </td>
+        <td>
+            <em>{date('d/m/Y H:i:s',$item['order_addtime'])}</em>
+        </td>
+        <td>
+            {if $item['order_status']==-5}
+            <em>Rejected</em>
+            {else if $item['order_status']>=6}
+            <em>Completed</em>
+            {else if $item['order_status']>=5}
+            <em>Item verified</em>
+            {else if $item['order_status']>=3}
+            <em>Item Received</em>
+            {else if $item['order_status']>=2}
+            <em>Order Confirmed</em>
+            {else if $item['order_delivery_method_type']==2 && $item['order_status']==1}
+            <em class="tag" onclick="show_tan({$item['order_id']});">Notify Dropoff</em>
+            {else if $item['order_delivery_method_type']==1 && $item['order_status']==1}
+            <em class="tag" onclick="location.href='index.php?c=flowerhua&a=recovery_free_pickup&order_id={$item[order_id]}&recovery_id={$item[order_recovery_id]}';">Order Confirmed</em>
+            {else if $item['order_status']==-1}
+            <em class="tag">Order Expired</em>
+            {else}
+            <em>Have order</em>
+            {/if}
+        </td>
+        <td>
+            <h3>${$item['order_totalprice']}</h3>
+        </td>
+        <td>
+            <a href="{url('flowerhua/order_detail',array('order_id'=>$item['order_id']))}">View Details</a>
+        </td>
+    </tr>
+</table>
+{/loop}

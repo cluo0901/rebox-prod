@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript">var sitepath = "{SITE_PATH}{ENTRY_SCRIPT_NAME}";</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+	<style>
+		th{width:13%;}
+	</style>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="table-responsive mytable">
+		<form method="post" action="" id="myform" name="myform">
+		<table width="100%" class="table table-striped">
+		<tbody>
+		<tr>
+			<th>温馨提示</th>
+			<td>若需要使用图标，访问图标库 <a style="color:red;" target="_blank" href="http://fontawesome.io/icons/">我是图标传送门</a>，<font color="grew">若有不清晰处可咨询小花</font>。</td>
+		</tr>
+        <tr>
+            <th></th>
+            <td style="color:orange;">使用时请勿使用ci_demo的数据库，请复制一份另起名字。 无需使用的功能以及模块请全部删除。</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="color:orange;">使用时如果有一些系统不变的参数，请在网站属性里面设置全局属性常量。</td>
+        </tr>
+		<、tr>
+			<th>2017-11-23</th>
+			<td>1.更新 之前提到需要隐藏的一些无作用点，比如说回收站/审核站..</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>2.优化 图片上传功能，现在输入了宽高就可以自动识别上传为设定的宽高缩略图。若无输入宽高默认为上传原图！</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>3.优化 引入文档图标网址，上处可看到传送门，方案针对于菜单图标/解决菜单栏重复无指标问题！<font color="grew">若有不清晰处可咨询小花</font>。</td>
+		</tr>
+		<tr>
+			<th>2017-11-24</th>
+			<td>4.更新 网站管理系统，现增加4个新功能，分别是网站logo/登录页面logo/后台数据分页数量/前台数据分页数量。在项目开发时应使用后台/前台分页数量，以便数据的输出数量管理。两个logo也是增加体验和省掉更换logo的麻烦。</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>5.更新 左侧栏在收缩是左上角显示的Finecms框架，现已修改为ToGy。</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>6.优化 首页数据统计内容。</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>7.更新 系统权限功能可以正常使用，优化了栏目创建出来后栏目无法进行权限设置。<a href="javascript:;" onclick="update_use();" style="color:red;">点我查看权限使用方法</a></td>
+		</tr>
+		<tr>
+			<th>2017-11-25</th>
+			<td>8.增加 腾讯云对象存储COS到项目里面，具体使用方法可查看oss/README.md，基础使用方法已写在FlowerhuaController控制器内。<a href="https://cloud.tencent.com/product/cos#wiki" target="_blank" style="color:red;">点我查看腾讯云COS产品</a></td>
+		</tr>
+		<tr>
+			<th>2017-11-27</th>
+			<td>9.增加 图片上传实例,上传图片现在直接上传到云端的oss存储对象里面.实例在index控制器里面的index方法.</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>10.更新 列表式的加载页面实例demo/现在做的实例非常适合后期项目中的列表系列.实例在flowerhua控制器里面的ajax_index方法.需要的可以去进行查看/参考!</td>
+		</tr>
+		<tr>
+			<th>2017-11-28</th>
+			<td>11.增加 加阿里云oss对象存储功能,现只添加了一个上传到云端的功能.其他后期需要用到的再自己进行深究!如果可以请加入到demo中,需查看使用方法可移步到index控制器的index2方法中. <a
+					href="https://help.aliyun.com/document_detail/32099.html?spm=5176.doc32101.6.756.w62WRD" style="color:red;">点我查看阿里云在线oss文档</a></td>
+		</tr>
+		<tr>
+			<th>2017-11-30</th>
+			<td>12.添加 网站常用功能-广告图,考虑到每个网站90%都会使用到广告图的关系,现已制作了一个广告图板块.</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>13.添加 多级分类管理,在项目当中任务的多级分类都可以直接使用管理中心/分类管理来进行增删改.大尺度的节省开发时间,让你更加专注于其他功能模块!</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>14.增加 地区管理,针对网站带有地区筛选功能的地方使用.带有导入excel表格功能.支持单个增删改,如无需使用,直接删除即可! </td>
+		</tr>
+		<tr>
+			<th></th>
+			<td></td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
+	</div>
+</div>
+</body>
+<script>
+    function update_use(){
+        layer.open({btn:['关闭'],title:'权限功能使用方法',area:['800px','500px'],type:2,closeBtn:false,anim:3,content:'index.php?s=admin&c=update_record&a=auth_use'});
+    }
+</script>
+</html>

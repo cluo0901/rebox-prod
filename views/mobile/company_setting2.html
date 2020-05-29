@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+
+</head>
+
+	<body>
+
+		<div class="changepwd">
+
+			<div class="head">
+
+				<div class="label_search">
+
+					<div class="more" onclick="showside()">
+
+						<span></span>
+
+						<span></span>
+
+						<span></span>
+
+					</div>
+
+					<label style="opacity:0;"><input type="text" placeholder="Search for your device"/></label>
+
+				</div>
+
+			</div>
+
+			<div class="infoform">
+
+				<div class="tit">Change Password</div>
+
+				<div class="inp">
+
+					<ul>
+
+						<li>
+
+							<div class="txt">Current Password</div>
+
+							<input type="password" placeholder="Enter current password" class="currentpwd">
+
+						</li>
+
+						<li>
+
+							<div class="txt">New Password</div>
+
+							<input type="password" placeholder="Enter new password" class="newpwd">
+
+						</li>
+
+						<li>
+
+							<div class="txt">Confirm New Password</div>
+
+							<input type="password" placeholder="Repeat new password" class="renewpwd">
+
+						</li>
+
+						<li>
+
+							<div class="txt">OTP Verification</div>
+
+							<div class="div_btn">
+
+								<input type="text" placeholder="Enter One-Time Password" id="back_code">
+
+								<a href="javascript:;"  onclick="sendMessage({$data['phone']})" id="back-getcode">Send OTP</a>
+
+							</div>
+
+							<p class="tips">* OTP will be sent to Primary Mobile No.</p>
+
+						</li>
+
+					</ul>
+
+				</div>
+
+			</div>
+
+			<button class="update" onclick="confirm_one({$data['phone']})">Update</button>
+
+			
+
+			<!--sidebar-->
+
+			{template recycler_nav}
+
+			<!--sidebar end-->
+
+		</div>
+
+	</body>
+
+</html>
+
+<script>
+
+	//显示侧边栏
+
+	function showside(){
+
+		$('.sidebar').show();
+
+	}
+
+	//隐藏侧边栏
+
+	function hdieside(){
+
+		$('.sidebar').hide();
+
+	}
+
+</script>
+
+
+
+<script type="text/javascript">
+
+		 function confirm_one(phone) {
+
+            var code = $('#back_code').val();
+
+            var currentpwd = $('.currentpwd').val();
+
+            var newpwd = $('.newpwd').val();
+
+            var renewpwd = $('.renewpwd').val();
+
+            if(currentpwd == ''){
+
+                layer.msg('Please enter the current password',{icon:0});return false;
+
+            }
+
+            if(newpwd == ''){
+
+                layer.msg('Please enter a new password',{icon:0});return false;
+
+            }
+
+            if(renewpwd ==''){
+
+                layer.msg('Please enter the new password again',{icon:0});return false;
+
+            }
+
+             if(newpwd != renewpwd){
+
+                layer.msg('The two passwords are not the same',{icon:0});return false;
+
+            }
+
+            if(code == ''){
+
+                layer.msg('Please enter the verification code',{icon:0});return false;
+
+            }
+
+            $.ajax({
+
+                url: "index.php?c=recycler&a=ajaxbackcode",
+
+                type: "post",
+
+                data: {code: code, phone: phone},
+
+                dataType: 'json',
+
+                success: function (data) {
+
+                    if (data == 0) {
+
+                        layer.msg('Verification code error', {icon: 0});
+
+                    }
+
+                    if (data == 1) {
+
+                    	$.ajax({
+
+                    		url: "index.php?c=recycler&a=change_password",
+
+			                type: "post",
+
+			                data: {newpwd: newpwd,currentpwd:currentpwd},
+
+			                dataType: 'json',
+
+			                success:function(data){
+
+			                	if(data.code==2){
+
+			                		layer.msg(data.info,{icon:0});
+
+			                	}
+
+			                	if(data.code==1){
+
+			                		layer.msg(data.info,{icon:1,end:function(){
+
+			                		    location.href="index.php?c=recycler_login&a=partner_login";
+
+									}});
+
+			                	}
+
+			                }
+
+                    	})
+
+                    }
+
+                }
+
+            })
+
+        }
+
+        var InterValObj; //timer变量，控制时间
+
+        var count = 60; //间隔函数，1秒执行
+
+        var curCount;//当前剩余秒数
+
+        function sendMessage(phone) {
+
+            curCount = count;
+
+            $.ajax({
+
+                type: 'post',
+
+                url: "{url('recycler/ajax_backsendcode')}",
+
+                data: {phone: phone},
+
+                dataType: "json",
+
+                async: false,
+
+                success: function (data) {
+
+                    if (data) {
+
+                        if (data.code == 1) {
+
+                            $("#back-getcode").attr("href", "javascript:;");
+
+                            $('#back-getcode').css('background', '#e9ebed');
+
+                            $("#back-getcode").html('Send success');
+
+                            $("#back-phone").attr('readonly', 'readonly');
+
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                        } else if (data.code == 2) {
+
+                            layer.open({'title': 'Prompt', 'content': 'This user has not been found for the time being!',});
+
+                            return false;
+
+                        } else if (data.code == 3) {
+
+                            layer.open({'title': 'Prompt', 'content': 'Fail in send' + data.sms_err,});
+
+                            return false;
+
+                        }
+
+                    } else {
+
+                        $("#back-getcode").attr("href", "javascript:");
+
+                        $("#back-getcode").html(curCount + "Retransmission after second");
+
+                        $("#back-phone").attr('readonly', 'readonly');
+
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+
+        //timer处理函数
+
+        function SetRemainTime() {
+
+            if (curCount == 0) {
+
+                window.clearInterval(InterValObj);//停止计时器
+
+                $("#back-getcode").attr("href", "javascript:sendMessage();");
+
+                $("#back-getcode").html("Retransmission verification code");
+
+                $('#back-getcode').css('background', '#ffcc00');
+
+            }
+
+            else {
+
+                curCount--;
+
+                $("#back-getcode").html("Resend in "+curCount+'s');
+
+            }
+
+        }
+
+
+
+</script>
+
+	<script>
+
+		var mySwiper = new Swiper('.swiper-container-2', {
+
+			//autoplay: 2000,//可选选项，自动滑动
+
+			prevButton: '.apprise-btn-pre',
+
+			nextButton: '.apprise-btn-next',
+
+			width: 300,
+
+			slidesPerView: 4
+
+		});
+
+
+
+		$('.appraise .swiper-button-prev').click(function() {
+
+			mySwiper.swipePrev();
+
+		})
+
+
+
+		$('.appraise .swiper-button-next').click(function() {
+
+			mySwiper.swipeNext();
+
+		})
+
+		var mySwiper1 = new Swiper('.swiper-container-3', {
+
+			autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+			width: 200,
+
+			slidesPerView: 2
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-prev').click(function() {
+
+			mySwiper1.swipePrev();
+
+		})
+
+
+
+		$('.ahs-media-content .swiper-button-next').click(function() {
+
+			mySwiper1.swipeNext();
+
+		})
+
+	</script>
+

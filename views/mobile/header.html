@@ -1,0 +1,212 @@
+{php
+$CI =& get_instance();
+$member_id = get_cookie('member_id');
+if($member_id)
+$member = $CI->flowerhua->get_one('member',"id = $member_id",'id,phone,logo,headerimg');
+
+
+$follow = $CI->flowerhua->get_one('category',"catid = 205");
+$follow['child'] = $CI->flowerhua->get_all_where('content_1_follow',"catid = 205");
+foreach($follow['child'] as $key=>$value)
+$follow['child'][$key]['title'] = $CI->flowerhua->get_field('content_1',"id = $value[id]",'title');
+$list2 = $CI->flowerhua->get_all_where('category',"ismenu = 1 and child = 1 and parentid = 0 order by listorder asc");
+foreach($list2 as $key=>$value)
+$list2[$key]['child'] = $CI->flowerhua->get_all_where('category',"ismenu = 1 and parentid = ".$value[catid]." order by listorder asc",'catid,catname,url,typeid');
+}
+
+<style>
+.bolder{
+    color: #FFCC00;
+}
+</style>
+
+<!--Google search box structured data-->
+<script type="application/ld+json">
+
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "http://rebox.com.sg/",
+  "potentialAction": [{
+    "@type": "SearchAction",
+    "target": "http://rebox.com.sg/index.php?c=flowerhua&a=recovery_detail&recovery_id={id}",
+    "query-input": "required name=id"
+  }]
+}
+</script>
+
+
+<div class="head">
+    <div class="label_search">
+        <div class="more">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- <img src="views/mobile/img/logo_brighter.png" style="position: absolute; left: 0.9rem; width:0.75rem;height:0.75rem;"> -->
+        <a href = "https://rebox.com.sg/"><img src="views/mobile/img/logo_brighter.png" style="position: absolute; left: 0.9rem; width:0.75rem;height:0.75rem;"></a>
+
+        <label>
+            <div class="search_input">
+                <div class="search" >
+                    <input type="text" id="input" placeholder="Search for your device to sell">
+                </div>
+                <div class="search ser" style="display: none;">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </label>
+        <ul id="input-box" style="display: none;">
+
+        </ul>
+    </div>
+</div>
+<!--sidebar-->
+<div class="sidebar">
+    <div class="sidebar_right"></div>
+    <div class="sidebar_left">
+        <div class="side_login">
+            <a href="{if $member['id']}{url('/members/center')}{else}{url('/login/login_system')}{/if}">
+                <img src="{if $member['headerimg']}{$member['headerimg']}{else}{SITE_THEME}img/header.png{/if}"/>
+                <p>{if $member['phone']}{$member['phone']}{else}Sign In | Sign Up{/if}</p>
+            </a>
+        </div>
+
+        <div class="sidelist">
+            <div class="settings">
+                <ol>
+                    <li class="li1"><a href="{url('/index')}">Home</a></li>
+                    <li class="li3"><a href="index.php?c=flowerhua&a=recovery_list">All Phones</a></li>
+                    <li class="li4"><a href="https://blog.rebox.com.sg/" target="_blank">Blog</a></li>
+                </ol>
+            </div>
+                {if $member['id']}
+                <a href="{url('/flowerhua/order')}" class="side_order">My Orders</a>
+                {/if}
+            
+                {if $member['id']}
+                <a href="{url('/members/center')}" class="side_settings">Settings</a>
+                {/if}
+                
+                {if $member['id']}
+                <a href="javascript:;" onclick="login_out();" class="sign_out">Sign Out</a>
+                {/if}
+            
+            
+        </div>
+        <div class="sidelist2">
+            {loop $list2 $k=>$item}
+            <div class="{if $k==0}help{else if $k==1}about{else if $k==2}ship{/if}">
+                <p>{$item['catname']}</p>
+                <ol style="display: none;">
+                    {loop $item['child'] $t}
+                    {if $t['typeid']==2}
+                    <li><a {if $category_id == $t['catid']}class="on"{/if} href="{url('flowerhua/detail_and_help',array('category_id'=>$t['catid']))}" >{$t['catname']}</a></li>
+                    {else if $t['typeid']==3}
+                    <li><a href="{$t['url']}">{$t['catname']}</a></li>
+                    {/if}
+                    {/loop}
+                </ol>
+            </div>
+            {/loop}
+        </div>
+
+        <div class="linkus">
+            <p>WhatsApp Us</p>
+            <a href="tel:{$SITE_TEL}">{$SITE_TEL}</a>
+        </div>
+    </div>
+</div>
+<!--sidebar end-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    //Make sidebar collapse
+
+    $('.help p').on('click', function(){
+        $('.help ol').toggle();
+        $('.help p').toggleClass('bolder')
+    });
+
+    $('.about p').on('click', function(){
+        $('.about ol').toggle();
+        $('.about p').toggleClass('bolder')
+    });
+
+    $('.ship p').on('click', function(){
+        $('.ship ol').toggle();
+        $('.ship p').toggleClass('bolder')
+    });
+
+    //sidebar collapse end
+
+    $('#input').keyup(function(){
+        var str = $(this).val();
+        if (str == '') {
+            $('#input-box').css('display','none');
+            return false;
+        }
+        $.ajax({
+            type:'post',
+            dataType:'json',
+            url: "index.php?c=index&a=search",
+            data:{str:str},
+            success:function(data){
+                var list = data.list;
+                var content='';
+                for (var i = 0; i < list.length; i++){
+                    if (list[i].recovery_type_id == 68) {
+                        content+=' <li><a href="index.php?c=flowerhua&a=recovery_detail&recovery_id='+list[i].id+'">'+list[i].recovery_title+' (New)</a></li>';
+                    } else {
+                        content+=' <li><a href="index.php?c=flowerhua&a=recovery_detail&recovery_id='+list[i].id+'">'+list[i].recovery_title+'</a></li>';
+                    }
+                    
+                }
+                $('#input-box').html(content);
+                if(list.length>0){
+                    $('#input-box').css('display','block');
+                }else{
+                    $('#input-box').css('display','none');
+                }
+            }
+        })
+       
+    });
+
+    $(function(){
+        $('.head .more').on('click',function(){
+            $('.sidebar').show();
+            $('.sidebar_right').show();
+        });
+
+        $('.sidebar_right').on('click',function(){
+            $('.sidebar').hide();
+        }); 
+
+        
+    });
+
+
+    function login_out(){
+        $('.sidebar').hide();
+        layer.open({title:false,
+            btn:['LOG OUT','CANCEL'],closeBtn:0,content:'Are you sure you want to log out?',icon:0,btn1:function(){
+                $.ajax({
+                    url: "index.php?c=login&a=login_out",
+                    type: "post",
+                    async:false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code==1){
+                            // layer.open({content:'Have been safely logout!',icon:1,end:function(){
+                            location.href="index.php";
+                            // }});
+                        }
+                    }
+                });
+            }})
+    }
+</script>

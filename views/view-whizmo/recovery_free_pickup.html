@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Delivery Method</title>
+        {template head}
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ITGtvwTZzt5AdD9oZvTpuPtKLZKV95eP"></script>
+
+        <!-- <link rel="stylesheet" href="css/ppopup.css"> -->
+	
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+        <!-- End Google Tag Manager -->
+
+        <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '637804786589286'); 
+        fbq('track', 'PageView');
+        fbq('track', 'AddToWishlist');
+
+        </script>
+        <noscript>
+         <img height="1" width="1" 
+        src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+        &noscript=1"/>
+        </noscript>
+        <!-- End Facebook Pixel Code -->
+
+        <style type="text/css">
+
+            .pickup .inp select {
+                width: 300px;
+                margin-right: 16px;
+            }
+
+            .pickup .inp input {
+                width: 225px;
+                margin-right: 16px;
+            }
+
+/*            .pickup .inp input {
+                width: 320px;
+                margin: 0;
+            }*/
+
+            .recircle_detail .reright h3 {
+                font-size: 20px;
+                color: #333333;
+                margin-bottom: 12px;
+            }
+
+            #walkin_date {
+                border: 1px solid #e5e5e5;
+                float: left;
+                background: url(views/view-whizmo/img/caret.png) right center no-repeat;
+                background-position: 97%;
+                border-radius: 4px;
+                width: 370px;
+                padding-left: 10px;
+                height: 40px;
+                font-size: 14px;
+                color: #666666;
+                margin-bottom: 34px;
+            }
+
+            @media (orientation: portrait) {
+                body {
+                    -webkit-user-select: none;
+                    background-color: #f0f0f0;
+                }  
+
+                .kiosk_hide {
+                    visibility: hidden;
+                }
+                .header .process1 {
+                    padding: 80px 0px 40px 0px;
+                }
+
+                .header .process1 .col {
+                font-size: 20px;
+                padding-right:0;
+                background: none;
+                }
+
+                .recircle_detail .releft .pro img {
+                    width: 240px;
+                    margin-top: 60px;
+                }
+
+                .recircle_detail .releft .pro p {
+                    font-size: 36px;
+                    font-weight: bold;
+                    margin-top: 40px;
+                }
+
+                .recircle_detail .releft .pro .price h3 {
+                    font-size: 50px;
+                    font-weight: bold;
+                    margin: 40px 0 60px 0;
+                }
+
+                .recircle_detail .releft .pro .device span {
+                    display: none;
+                }
+
+                .recircle_detail .releft .guide {
+                    display: none;
+
+                }
+
+                .recircle_detail .reright {
+                    margin-bottom: 30px;
+                }
+
+                .pickup .inp{
+                    margin: 30px 0;
+                }
+                .pickup .inp h3 {
+                    font-size: 28px;
+                    margin-bottom: 25px;
+                }
+
+                .pickup .inp select {
+                    width: 300px;
+                    margin-right: 40px;
+                    height: 60px;
+                    font-size: 22px;
+                }
+
+                .pickup .inp .col p{
+                    font-size: 18px;
+                    padding-top: 10px;
+                }
+
+                .pickup .inp input {
+                    width: 800px;
+                    height: 60px;
+                    font-size: 22px;
+                    margin-top: 20px;
+                }
+
+
+                .recircle_detail .reright h3 {
+                    font-size: 28px;
+                    margin-bottom: 25px;
+                }
+
+                #id_type {
+                    display: block;
+                    border: 1px solid #e5e5e5;
+                    float: left;
+                    background: url(views/view-whizmo/img/caret.png) right center no-repeat;
+                    background-position: 97%;
+                    border-radius: 4px;
+                    padding-left: 10px;
+                    color: #666666;
+                    width: 311px;
+                    margin-right: 40px;
+                    height: 60px;
+                    font-size: 22px;
+                    margin-bottom: 20px;
+                }
+
+                #id_nationality {
+                    display: block;
+                    border: 1px solid #e5e5e5;
+                    /*float: left;*/
+                    background: url(views/view-whizmo/img/caret.png) right center no-repeat;
+                    background-position: 97%;
+                    border-radius: 4px;
+                    padding-left: 10px;
+                    color: #666666;
+                    width: 311px;
+                    margin-right: 40px;
+                    height: 60px;
+                    font-size: 22px;
+                    margin-bottom: 20px;
+                }
+
+                #id_name, #id_number, #id_postal, #id_address, #id_unit {
+                    border: 1px solid #e5e5e5;
+                    float: left;
+                    border-radius: 4px;
+                    padding-left: 10px;
+                    color: #666666;
+                    width: 300px;
+                    margin-right: 40px;
+                    height: 60px;
+                    font-size: 22px;
+                    margin-bottom: 20px;
+                }
+
+                #id_retrieve {
+                    border: 0px;
+                    width: 250px;
+                    margin-right: 30px;
+                    height: 60px;
+                    background: #ffcc00;
+                    font-size: 22px;
+                    line-height: 60px;
+                    color: #333;
+                    border-radius: 4px;
+                    float: left;
+                    text-align: center;
+                }
+
+                #id_address {
+                    width: 550px;
+                }
+
+                #id_unit {
+                    width: 180px;
+                }
+
+                #id_residential {
+                    font-size: 24px;
+                }
+
+                input[type="date"]::-webkit-inner-spin-button {
+                    display: none;
+                    -webkit-appearance: none;
+                }
+
+                #id_customer_DOB {
+                    
+                    display: block;
+                    border: 1px solid #e5e5e5;
+                    float: left;
+                    background: url(views/view-whizmo/img/caret.png) right center no-repeat;
+                    background-position: 97%;
+                    border-radius: 4px;
+                    padding-left: 10px;
+                    color: #666666;
+                    width: 300px;
+                    margin-right: 40px;
+                    height: 60px;
+                    font-size: 22px;
+                    margin-bottom: 20px; 
+                    ::-webkit-inner-spin-button { display: none; }
+                }
+
+/*                #id_address {
+                    border: 1px solid #e5e5e5;
+                    float: left;
+                    background-position: 97%;
+                    border-radius: 4px;
+                    padding-left: 10px;
+                    color: #666666;
+                    width: 800px;
+                    margin-right: 40px;
+                    height: 60px;
+                    font-size: 22px;
+                    margin-bottom: 20px;
+                }*/
+
+
+                #phone_kiosk, #code {
+                    border: 1px solid #e5e5e5;
+                    color: #333333;
+                    float: left;
+                    border-radius: 4px;
+                    width: 280px;
+                    padding-left: 10px;
+                    height: 60px;
+                    font-size: 22px;
+                    /*margin-right: 48px;*/
+                    margin-right: 20px;
+                }
+                #getcode {
+                    border: 0px;                
+                    width: 180px;
+                    margin-right: 30px;
+                    height: 60px;
+                    background: #ffcc00;
+                    font-size: 22px;
+                    line-height: 60px;
+                    color: #333;
+                    border-radius: 4px;
+                    float: left;
+                    text-align: center;
+                }
+
+                .require .aa span {
+                    line-height: 60px;
+                }
+
+                .require .aa input {
+                    float: none;
+                }
+
+                .require .aa span em {
+                    font-size: 22px;
+                }
+
+                .require .aa input[type="submit"] {
+                    font-weight: bold;
+                    width: 200px;
+                    height: 60px;
+                    font-size: 26px;
+                    margin-top: 8px;
+                }
+
+                
+
+        </style>
+        <link rel="stylesheet" href="/views/view-whizmo/css/faq.css">
+	</head>
+
+	<body>
+
+        <!-- <div class="kiosk_hide"> -->
+
+          {template header}
+
+        <!-- </div> -->
+
+        <a href = "https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target = "_blank"><img class = "license kiosk_hide" src ="views/view-whizmo/img/facebook-reviews.png" style="display: block; position: fixed; right: 60px; top: 35%; max-width: 200px; z-index: 9999;"></a> 
+
+		<div class="recircle_detail">
+            <div class="header">
+                <div class="container">
+                    <div class="process1">
+                        <!-- add kiosk mode back button -->
+                        <div class="col kiosk_show" style="display: none; margin-right: 135px; background: none; margin-top: -3px;">
+                            <!-- <a href = "https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=recovery_list&recovery_type_id=29&recovery_parent_id=hits">
+                                <img src="{SITE_THEME}img/kiosk_back.png" style="width: 70px;">
+                            </a> -->
+                            <img src="{SITE_THEME}img/kiosk_back.png" style="width: 90px;" onclick = "goBack()">
+                            
+                        </div>
+
+                        <div class="col">
+                            <b>1</b>{$recovery_step['recovery_step_title1']}
+                        </div>
+                        <div class="col">
+                            <b>2</b>{$recovery_step['recovery_step_title2']}
+                        </div>
+                        <div class="col on">
+                            <b>3</b>{$recovery_step['recovery_step_title3']}
+                        </div>
+                        <div class="col">
+                            <b>4</b>{$recovery_step['recovery_step_title4']}
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="container">
+				<div class="releft">
+					<div class="pro">
+						<img src="{$recovery['recovery_img']}">
+						<p>{$recovery['recovery_title']}</p>
+						<div class="price">
+							<h3>${$order['order_totalprice']}</h3>
+							<div class="device">
+								<span onclick="show_detail(this)">Device Details</span>
+								<div class="p">
+									{loop $order_parameter $item}
+                                        {if $item['parentid']!=2 && $item['parentid']!=22}
+                                        <br>
+                                        {$item['recovery_parameter_parent_title']}:{$item['recovery_parameter_title']}
+                                        {else}
+                                        <br>
+                                        {$item['recovery_parameter_title']}
+                                        {/if}
+                                    {/loop}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="guide">
+						<div class="gt">{$recovery_tips['recovery_tips_title']}</div>
+						<div class="p">{php echo htmlspecialchars_decode($recovery_tips['recovery_tips_content']);}</div>
+					</div>
+				</div>
+				
+                <!-- if agent, do not show -->
+
+                {if $agent_check != 1}
+                <form action="javascript:;">
+        			<div class="reright sec sec2 kiosk_hide">
+
+                        <!-- add license info starts -->
+
+                        <a href = "https://rebox.com.sg/Licence from police.jpg" target = "_blank"><img src ="views/view-whizmo/img/license_pc.png" style = "width: 100%;"></a>
+                        <!-- add license info ends -->
+
+
+                        <div class="pickup">
+                            <div class="inp">
+
+                                <h3>Delivery Method <font color = "red">(FULL Insurance Coverage)</font></h3>
+                                <!-- <h3>Delivery Method</h3> -->
+                                <div class="clear" style="margin-top: 45px;">
+                                    <!-- doorstep pickup -->
+                                    <div class="fang on" style="margin-right: 10px;" id="doorstep">
+                                        <h3 style = "text-align: center; margin-bottom: 0;">Doorstep Pickup</h3>
+                                        <h5 style = "text-align: center; margin: 3px 0 10px 0; color:#666666;">At your preferred day & time</h5>
+                                        <div class="ftop">
+                                            <label><img src="{SITE_THEME}img/pic188.png" style="width:90%;"></label>
+                                            <div class="txt">
+                                                <!-- <h3 style = "margin-bottom: 0;">Doorstep Pickup</h3>
+                                                <h5 style = "margin: 3px 0;">(Next Working Day Delivery)</h5> -->
+                                                <p><label style="width:100%; text-align: left; font-size: 12px;">Monday - Friday</label><span>09:00 - 12:00<br>12:00 - 15:00<br>15:00 - 18:00</span></p>
+                                                <p><label style="width:100%; text-align: left; font-size: 12px; ">Weekend & PH</label><span style="width:auto;">12:00 - 15:00<br>15:00 - 18:00</span></p>
+                                                <!-- <p><small>&nbsp;&nbsp;&nbsp;(excluding Public Hoilday)</small></p> -->
+                                            </div>
+                                        </div>
+                                        <div class="fp">
+                                            Pickup from your home or office
+                                        </div>
+                                        <input type="radio" name="fang" value="1" checked="checked">
+                                    </div>
+
+                                    <!-- doorstep pickup end -->
+
+                                    <!-- walkin add back-->
+                                    <!-- <div class="fang" id="walkin" style="margin-right:10px;">
+                                        <h3 style="text-align: center; margin-bottom: 0;">Visit Our Outlet</h3>
+                                        <h5 style="text-align: center; margin: 3px 0 10px 0;color:#666666;">to meet us personally</h5>
+                                        <div class="ftop">
+                                            <label style="width:100%;"><img style="width:48%;margin-left:26%;" src="{SITE_THEME}img/walkin_shop.png"></label>
+                                        </div>
+                                        <div class="fp">
+                                            <font style="font-size: 16px; font-weight: bold; color: orange;">Get paid on the spot</font><br>
+                                            Jurong Point 
+                                        </div>
+                                        <input type="radio" value="3" name="fang">
+                                    </div> -->
+
+                                    <!-- walkin end -->
+
+                                    <!-- POPStation start-->
+                                    {if $recovery['recovery_type_id'] != 68}
+                                    <!-- <div class="fang" id="postbox">
+                                        <h3 style="text-align: center;margin-bottom: 0;">Self Drop-off</h3>
+                                        <h5 style="text-align: center;margin: 3px 0 10px 0;color:#666666;">at any POPStation</h5>
+                                        <div class="ftop">
+                                            <label style="width:100%;"><img style="width:60%;margin-left:20%;;" src="{SITE_THEME}img/pic19.jpg"></label> -->
+                                            <!-- <div class="txt" style="width:213px;">
+                                                <h3 style="text-align: center">Self Drop-off</h3>
+                                                <p style="text-align: center">at any POPStation</p>
+                                            </div> -->
+                                        <!-- </div>
+                                        <div class="fp">
+                                            Drop off your phone<br>at any POPStation within 2 days.<br>
+                                            
+                                            <a href="https://www.speedpost.com.sg/locate-us" target="_blank" style= "text-decoration: underline;">Find POPStation near me.</a>
+                                        </div>
+                                        <input type="radio" value="2" name="fang">
+                                    </div> -->
+                                    {/if}
+                                    <!-- POPStation end -->
+
+
+
+
+                                </div>
+                            </div>
+                            
+                            <p id="tip" style="display:none;text-align:center;padding-top:30px;color:#ff5400;font-size:18px;">
+                                Drop off the phone at any <strong>POPStation</strong> & receive <strong>payment</strong> on the <strong>same day</strong> of delivery.<br><br><strong>Free return</strong> if you don't agree to our assessment.<br>
+                                <!-- SingPost delivers within 1-2 working days upon drop-off. </b><br> -->
+                                <!-- add how to drop off at popstation -->
+                                <br><a href = "https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=212" target = "_blank" id = "popguide" style = "font-size: 14px; color: blue; text-decoration: underline; font-weight: normal;">How to drop off at POPStation?</a>
+                            </p>
+
+
+                            <p id="tip2" style="display:none;text-align:center;padding-top:40px;color:#ff5400;font-size:24px; line-height: 35px"> <strong>Next Day Delivery & Payment</strong></p>
+
+                            <!-- tip for walkin -->
+                            <p id="tip3" style="font-weight:bold;display:none;text-align:center;padding-top:30px;color:#ff5400;font-size:18px; line-height: 35px">
+                                Jurong Point (outside Starhub #B1-12) <br>
+                                <font style="color: blue;">12:00PM - 9:00PM</font></b><br>
+                                <font style="color: green;">Promotion: We Pay For Your Commute</font><br>
+                                <a href="https://www.rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=215" target="_blank"><font style="text-decoration: underline; color: blue; font-size: 12px; font-weight: normal;">Click to see details</font></a>
+
+                            </p>
+                            <!-- tip for walkin -->
+
+                            <div class="doorstep">
+                                <div class="inp doorstep_box">
+                                    <h3 class="doorstep_title">Pickup Address</h3>
+                                    <input type="text" placeholder="Enter Postal Code" id="postal_code" style="width: 244px;" value="{$address['postal']}">
+                                    <a href="javascript:;" onclick="get_location();">Retrieve Address</a>
+                                    <div class="clear"></div>
+                                    <div class="clear">
+                                        <input type="text" placeholder="Enter Address" id="postal_address" value="{$address['address']}" />
+                                        <input type="text" placeholder="Enter Unit #" id="postal_unit" style="margin: 0;" value="{$address['unit']}">
+                                    </div>
+                                </div>
+                                <div class="inp doorstep_time">
+                                    <h3>Pickup Time <font style = "color:red;">(Please ensure sufficient time to back up and properly pack your device.)</font></h3>
+        							<select style="margin-right:46px;" id="resultPickup_date" onchange="select_picktime(this);">
+        								<option value=""> Select Pickup Date</option>
+        								{loop $pickup_time_start $item}
+        								<option value="{date('m/d/Y',$item)}" onclick="change()">{date('d/m/Y',$item)}</option>
+        								{/loop}
+        							</select>
+                                    <select id="resultPickup">
+                                        <option value="">Select Pickup Time</option>
+                                    </select>
+                                </div>
+
+                                <style>
+                                    #customerNote {
+                                        resize: none;
+                                        display: block;
+                                        border: 1px solid #e5e5e5;
+                                        float: left;
+                                        background-position: 97%;
+                                        border-radius: 4px;
+                                        color: #666666;
+                                        width: 75%;
+                                        margin-right: 40px;
+                                        height: 50px;
+                                        font-size: 14px;
+                                        margin-bottom: 20px;
+                                        padding: 10px;
+                                    }
+                                </style>
+
+                                <div class="inp doorstep_box" style="margin-top: 20px">
+                                    <textarea id="customerNote" name="customerNote" placeholder="Note to courier" cols="30" rows="5" ></textarea>
+                                </div>
+
+
+                            </div>                       
+
+                            <script type="text/javascript">
+                                var unitsign = document.getElementById('postal_unit');
+                                    unitsign.addEventListener('click', function () {
+                                        if (unitsign.value == "") {
+                                            unitsign.value = "#";
+                                        }
+                                    });
+
+                                function select_picktime(a){
+                                    $.ajax({
+                                        url: "index.php?c=ajax_formflowerhua&a=ajax_select_picktime",
+                                        type: "post",
+                                        data:{time:$(a).val(), recovery_type_id : {$recovery[recovery_type_id]}}, //pass recovery_type_id (new phone)
+                                        dataType: 'json',
+                                        success: function (data) {
+                                            if(data.code==1){
+                                                $('#resultPickup').html(data.str);
+                                            }
+                                        }
+                                    });
+                                }
+                                $('#resultPickup_date').change(function(){
+                                     change1();
+                                });
+                                $('#resultPickup').change(function(){
+                                     change1();
+                                });
+
+                                function change1(){
+                                    var postal_code = $('#postal_code').val();
+                                    var resultPickup_date = $('#resultPickup_date').val();
+                                    var resultPickup = $('#resultPickup').val();
+                                    var postal_address = $('#postal_address').val();
+                                    if(postal_code!='' && resultPickup_date!='' && resultPickup!='' && postal_address!='')
+                                    {
+                                         $('.btn1').css('background','#ffcc00');
+                                         $('.btn1').removeAttr('disabled');
+                                    }else{
+                                         $('.btn1').css('background','#3333');
+                                         $('.btn1').attr('disabled','true');
+                                    }
+                                }
+                            </script>
+
+
+                            <!-- add walk-in date selection -->
+                            <div class="walkin_date_select" style="display: none; margin-top: 15px;">
+                                {if $recovery['recovery_type_id'] != 68}
+                                <h3> Schedule A Visit Date (up to 3 days in advance)</h3>
+                                {else}
+                                <h3> Schedule A Visit Date (up to 1 day in advance)</h3>
+                                {/if}
+                                <select id="walkin_date">
+                                    <option value=""> Select Visit Date</option>
+                                    {loop $walkin_date $item}
+                                    <option value = "{$item}" onclick="change()">{$item}</option>
+                                    {/loop}
+                                </select>
+                            </div>
+
+                            <script type="text/javascript">
+                                $('#walkin_date').change(function(){
+                                    change3();
+
+                                });
+
+                                function change3(){
+                                    var walkin_date = $('#walkin_date').val();
+                                    if(walkin_date !='') {
+                                        $('.btn1').css('background','#ffcc00');
+                                        $('.btn1').removeAttr('disabled');
+                                    }else{
+                                         $('.btn1').css('background','#3333');
+                                         $('.btn1').attr('disabled','true');
+                                    }
+                                }
+                            </script>
+                            <!-- add walk-in date selection -->   
+
+
+                            <div class="aa">
+                                <input type="button" value="Next" class="btn btn1" disabled="disabled"  onclick="submit_form1();">
+                            </div>
+                        </div>
+        			</div>
+
+        			<div class="reright sec sec3">
+                        <div class="pickup">
+                            <div class="inp">
+                                <h3 class="kiosk_hide" >Receiving Account <font style = "color: red;">(Same day payment upon receipt of your device)</font></h3>
+                                <h3 class="kiosk_show" style="display:none;">Receiving Account - payment via bank transfer on the spot</h3>
+                                <select id="payment_id" onchange = "placehold();">
+                                    <option value="">Choose Your Bank</option>
+                                    {loop $payment_list $item}
+                                    <option value="{$item['id']}">{$item['name']}</option>
+                                    {/loop}
+                                </select>
+                                <div class="col">
+                                    <input type="text" placeholder="Enter Account Holder Name" id="payment_name">
+                                    <p><font>*</font>As per bank record</p>
+                                </div>
+                                <input type="text" placeholder='Enter Account Number (Please omit "-")' id="payment_number">
+                            </div>
+                            <!-- change placeholder -->
+                            <script type="text/javascript">
+                                function placehold() {
+                                    if ($('#payment_id').val() == 46) {
+                                        $('#payment_number').attr('placeholder', "Enter Mobile or NRIC No.");
+                                    } else {
+                                        $('#payment_number').attr('placeholder', "Enter Account Number");
+                                        console.log($('#payment_id').val());
+                                    }
+                                }
+                            </script>
+
+                             <script type="text/javascript">
+                                $('#payment_id').change(function(){
+                                     change2();
+                                })
+                                $('#payment_name').keyup(function(){
+                                     change2();
+                                })
+                                $('#payment_number').keyup(function(){
+                                     change2();
+                                })
+                                function change2(){
+                                    var payment_id = $('#payment_id').val();
+                                    var payment_name = $('#payment_name').val();
+                                    var payment_number = $('#payment_number').val();
+                                    if(payment_id!='' && payment_name!='' && payment_number!='')
+                                    {
+                                         $('.btn2').css('background','#ffcc00');
+                                         $('.btn2').removeAttr('disabled');
+                                    }else{
+                                         $('.btn2').css('background','#3333');
+                                         $('.btn2').attr('disabled','true');
+                                    }
+                                }
+                            </script>
+                            <div class="aa kiosk_hide">
+                                <input type="button" value="Next" class="btn btn2" disabled="disabled" onclick="submit_form2();">
+                            </div>
+                        </div>
+        			</div>
+
+                    <!-- add kiosk mode nric input starts-->
+                    <div class="reright sec sec4 kiosk_show" style="display: none;">
+                        <h3>ID Information (NRIC/EP/SP/WP/DP/Student Pass)</h3>
+                        <select id="id_type" onchange = "check_type();">
+                            <option value=""> Select ID Type</option>
+                            {loop $id_type $item}
+                            <option value="{$item['id']}" onclick="change()">{$item['idtype']}</option>
+                            {/loop}
+                        </select>
+                        <script type="text/javascript">
+                            function check_type() {
+                                if ($('#id_type').val() != 22) {
+                                    $('#id_nationality').show();
+                                    $('#id_customer_DOB').show();
+                                } else {
+                                    $('#id_nationality').hide();
+                                    $('#id_customer_DOB').hide();
+                                }
+                            }
+                        </script>
+                        <select id="id_nationality" style ="display:none;">
+                            <option value=""> Select Nationality</option>
+                            {loop $id_nationality $item}
+                            <option value="{$item['id']}" onclick="change()">{$item['country']}</option>
+                            {/loop}
+                        </select>
+                        <div class="clear"></div>
+                        <input id="id_name" type="text" placeholder="Enter Full Name on ID" onblur = "check_name()">
+                        <input id="id_number" type="text" placeholder="Enter ID Number">
+
+                        <input id="id_customer_DOB" style ="display:none;" placeholder="Date of birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+                        <!-- <input id="id_address" type="text" placeholder="Enter Residential Address"> -->
+                        <div class="clear"></div>
+                        <h3 id="id_residential">Residential Address</h3>
+                        <input id="id_postal" type="text" placeholder="Enter Postal Code" value="{$address['postal']}">
+                        <a id="id_retrieve" href="javascript:;" onclick="get_id_location();">Retrieve Address</a>
+                        <div class="clear"></div>
+                        <!-- <div class="clear"> -->
+                            <input id="id_address" type="text" placeholder="Enter Address" value="{$address['address']}" />
+                            <input id="id_unit" type="text" placeholder="Enter Unit #" value="{$address['unit']}">
+                        <!-- </div> -->
+                         <script type="text/javascript">
+                            var id_unitsign = document.getElementById('id_unit');
+                                id_unitsign.addEventListener('click', function () {
+                                    if (id_unitsign.value == "") {
+                                        id_unitsign.value = "#";
+                                    }
+                                });
+                        </script>
+                    </div>
+                    <!-- add kiosk mode nric input ends -->
+
+
+                    <!-- add kiosk mode sms verification starts-->
+                    <div class="reright sec sec4 kiosk_show" style="display: none;">
+                        <h3>SMS Verification - Order No. will be sent via SMS upon submission</h3>
+                        <input id="phone_kiosk" type="text" placeholder="Enter Mobile No.">                       
+                        <a id="getcode" href="javascript:sendMessage();">Send OTP</a>
+                        <input id="code" type="text" placeholder="Enter One-Time Passcode"> 
+
+                        <h3 >
+                          <br><br><br> How did you hear about us? <br>
+                        </h3>
+                        <select id="customerSurveyKiosk" name="customerSurvey" style="font-size: 24px; width: 500px;">
+                            <option value=""> Please select from the list below...</option>
+                            {loop $surveyOptions $item}
+                                <option value="{$item['id']}">{$item['name']}</option>
+                            {/loop}
+                        </select>
+
+                    </div>
+                    <!-- add kiosk mode sms verification ends -->
+
+                    
+                    <style>
+                            #customerSurvey {
+                                border: 1px solid #e5e5e5;
+                                float: none;
+                                background: url(../img/caret.png) right center no-repeat;
+                                background-position: 97%;
+                                border-radius: 4px;
+                                width: 400px;
+                                padding-left: 10px;
+                                height: 40px;
+                                font-size: 14px;
+                                color: #666666;
+                                margin-right: 0;
+                            }   
+
+                            #customerSurveyKiosk {
+                                border: 1px solid #e5e5e5;
+                                float: none;
+                                background: url(../img/caret.png) right center no-repeat;
+                                background-position: 97%;
+                                border-radius: 4px;
+                                width: 400px;
+                                padding-left: 10px;
+                                height: 40px;
+                                font-size: 14px;
+                                color: #666666;
+                                margin-right: 0;
+                            }  
+                            
+                            .customerSurveyDiv {
+                                text-align: center;
+                            }
+                    </style>
+
+                    <div class="reright sec sec5 kiosk_hide">
+        				<div class="require" style="padding-top: 0;">
+                            <div class="agree border customerSurveyDiv">
+                                    <h2 >
+                                        How did you hear about us? <br><br>
+                                    </h2>
+    							<select id="customerSurvey" name="customerSurvey">
+                                    <option value=""> Please select from the list below...</option>
+                                    {loop $surveyOptions $item}
+                                        <option value="{$item['id']}">{$item['name']}</option>
+                                    {/loop}
+                                </select>
+                            </div>
+                            <br><br>
+                            <h3 class = "warning" style="color:red;margin-top:10px;">PLEASE READ CAREFULLY</h3>
+                            <!-- if new phone return cost of $25 applies accross the board -->
+                            {if $recovery['recovery_type_id'] == 68}
+
+                            <div class="agree warning">
+                                <span style="color: #ff7200;">I confirm the original receipt with IMEI No. will be provided. Otherwise, $25 will be charged before returning the device.</span>
+                            </div>
+
+                            {else}
+
+    					    <div class="agree warning">
+    							<span style="cursor: pointer; color: #ff7200;" onclick="get_information('{$clause[personal_information1]}');">{$clause['personal_information_title1']}</span>
+    						</div>
+    						<div class="agree border warning">
+    							<span style="cursor: pointer; color: #ff7200;" onclick="get_information('{$clause[personal_information2]}');">{$clause['personal_information_title2']}</span>
+    						</div>
+
+                            {/if}
+
+                            
+                            
+    						<div class="aa">
+    							<input type="submit" id="submit3" value="Submit" onclick="submit_form3()" disabled="disabled">
+    							<span>
+                                  <script>
+                                    var info = '{$clause[personal_information3]}';
+                                    function checkboxOnclick(checkbox){
+                                         if (checkbox.checked == true){
+                                             $('#submit3').css('background',"#ffcc00");
+                                             document.getElementById("submit3").disabled=false;
+                                         }else{
+                                             $('#submit3').css('background',"#3333");
+                                             $('#submit3').attr('disabled','disabled');
+                                         }
+                                      }
+                                  </script>
+    								<input type="checkbox" name="clause" onclick="checkboxOnclick(this)">
+                                    <em>
+                                    I agree to<a href="javascript:;" onclick="layer.open({title:false, closeBtn:0, area:['800px','500px'],content:info,btn:['I Agree']});"> {$clause['personal_information_title3']}</a>
+                                    </em>
+    							</span>
+    						</div>
+        				</div>
+        			</div>
+
+                    <!-- if kiosk mode starts -->
+                    <div class="reright sec sec5_kiosk kiosk_show" style="display:none;">
+                        <div class="require" style="padding-top: 0;">
+                                <div class="aa">
+                                    <input type="submit" id="submit3_kiosk" value="Submit" onclick="submit_form3_kiosk()" disabled="disabled">
+                                    <span>
+                                      <script>
+                                        var info = '{$clause[personal_information3]}';
+                                        function checkboxOnclick_kiosk(checkbox){
+                                             if (checkbox.checked == true){
+                                                 $('#submit3_kiosk').css('background',"#ffcc00");
+                                                 document.getElementById("submit3_kiosk").disabled=false;
+                                             }else{
+                                                 $('#submit3_kiosk').css('background',"#3333");
+                                                 $('#submit3_kiosk').attr('disabled','disabled');
+                                             }
+                                          }
+                                      </script>
+                                        <input type="checkbox" name="clause_kiosk" onclick="checkboxOnclick_kiosk(this)">
+                                        <em>
+                                        I agree to<a href="javascript:;" onclick="layer.open({title:false, closeBtn:0, area:['800px','500px'],content:info,btn:['I Agree']});"> {$clause['personal_information_title3']}</a>
+                                        </em>
+                                    </span>
+                                </div>
+                        </div>
+                    </div>
+                    <!-- if kiosk mode ends -->
+
+				</form>
+
+                {else}
+                <div class="reright">
+                    <img src="views/view-whizmo/img/thank-you-agent.png" style="width: 199px; margin-left:319px; padding-top: 80px;">
+                    <h2 style="text-align: center; padding-top: 50px; max-width: 70%; margin-left: 15%; color: #ff9b00;">Thank you for your order!<br><br><br>We will come and collect the device on the next working day between 3PM-5PM.</h2>
+
+                    <input type="submit" id="submit3" value="Confirm" onclick="submit_order_info()" style="border: 0px;
+                                                    width: 142px;
+                                                    margin-left: 20px;
+                                                    height: 42px;
+                                                    background: #d2d2d2;
+                                                    font-size: 16px;
+                                                    color: #333;
+                                                    border-radius: 6px;
+                                                    float: right;
+                                                    background: #ffcc00;
+                                                    margin-top: 80px;">
+                </div>
+
+                {/if}
+
+			</div>
+		</div>
+
+		<div class="tan tan_1">
+			<div class="sure">
+				<div class="rtit">
+					<span>Pickup Details</span>
+				</div>
+				<div class="surep">
+					<div class="p">
+						<h3>Device</h3>
+						<p class="device_name">{$recovery['recovery_title']}</p>
+					</div>
+					<div class="p">
+						<h3>Pickup Address</h3>
+						<p class="pickup_address"></p>
+					</div>
+					<div class="p pickup_time_box">
+						<h3>Pickup Time</h3>
+						<p>
+                            <span class="pickup_time"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="pickup_time1"></span>
+						</p>
+					</div>
+					<!-- hide mobile number
+                    <div class="p">
+						<h3>Mobile No.</h3>
+						<p>{$member_phone}</p>
+					</div> -->
+                    <a href="javascript:;" onclick="hide_tan()">Modify</a>
+					<a href="javascript:;" onclick="twoinone();">Confirm Pickup</a>
+				</div>
+			</div>
+        </div>
+        
+        <button data-modal-trigger="trigger-1" class="trigger kiosk_hide" style ="position:fixed; right: 30px; bottom: 20px; max-width: 85px; cursor: pointer;z-index:999;">
+                <img src="views/mobile/img/question5.png" alt="" class="call-id" style="width: 75px;">              
+            </button>
+
+
+            <!-- modal content -->
+            <div data-modal="trigger-1" class="modal">
+                <article class="content-wrapper">
+                    <button class="close"></button>
+                    <header class="modal-header">
+                        <h2>Frequently Asked Questions</h2>
+                    </header>
+                    <div class="content2">
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <a href="#" class="heading">
+                                    <div class="icon"></div>
+                                    <div class="title">How can I get a quote for selling my phone?</div>
+                                </a>
+                        
+                                <div class="content" style="margin-left: 20px;">
+                                    <p>
+                                        &nbsp;&nbsp;&nbsp;On REBOX website, you can get an accurate quote on your own in less than a minute.  <br> <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1)	Click the brand icon on the home page and choose the model of your phone; <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2)	Choose the specifications of your phone such as capacity and colour, and select the condition of the phone; <br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3)	Click “Get Quote” to receive a quote instantly. <br><br>
+                                            &nbsp;&nbsp;&nbsp;* If you can’t find your model on the home page, please click “SELL OTHER PHONES” to see the complete list of models that we are buying back.<br><br>
+
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            <div class="accordion-item">
+                                <a href="#" class="heading">
+                                    <div class="icon"></div>
+                                    <div class="title">Do I get paid on the spot?</div>
+                                </a>
+                        
+                                <div class="content" style="margin-left: 20px;">
+                                    <p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We offer two options to our customers. <br>  <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1) Bring your phone to our outlets at Jurong Point or City Square Mall to sell. We will check the phone and pay on the spot; or <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2) Submit a sell order on our website to lock in the price and schedule a free pickup. We will check the phone upon same-day delivery 
+                                        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and make payment within one hour.
+                                        <br><br>
+
+                                    </p>
+                                </div>
+                            </div>
+                        
+                            
+                        
+                            <div class="accordion-item">
+                                <a href="#" class="heading">
+                                    <div class="icon"></div>
+                                    <div class="title">What’s the process like if I choose free pickup service?</div>
+                                </a>
+                        
+                                <div class="content" style="margin-left: 20px;">
+                                    <p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1)	Submit a sell order online and opt for free pickup service; <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2)	Receive a unique Pickup Number (starting with “RB”) via SMS instantly; <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3)	Show the Pickup Number to the courier during collection. No printing of shipping label is required; <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4)	We will check the phone upon delivery of the phone within 2-4 hours on the same day; <br><br>
+                                        
+                                        <div style="text-align: center;">
+                                            <iframe width="560" height="315" style="text-align:center" src="https://www.youtube.com/embed/GbouzcIF_bk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                        
+
+                                        <br><br>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <a href="#" class="heading">
+                                    <div class="icon"></div>
+                                    <div class="title">Locations</div>
+                                </a>
+                        
+                                <div class="content" style="margin-left: 20px;">
+                                    <p>
+                                    &nbsp;&nbsp;&nbsp;<h3 style="text-decoration: underline; margin-left: 15px;">Jurong Point Outlet</h3> 
+                                    &nbsp;&nbsp;&nbsp;63 Jurong West Central 3, Jurong Point Shopping Centre, Basement 1 (outside Starhub #B1-12), Singapore 648331 <br>
+                                    &nbsp;&nbsp;&nbsp;<h3 style="text-decoration: underline; margin-left: 15px;">City Square Mall Outlet </h3>
+                                    &nbsp;&nbsp;&nbsp;180 Kitchener Road, City Square Mall, #B1-K17 (beside the taxi stand), Singapore 208539 <br><br>
+                                    &nbsp;&nbsp;&nbsp;Mon - Fri: 12:00PM - 21:00PM  <br>
+                                    &nbsp;&nbsp;&nbsp;Sat - Sun: 11:30PM - 21:00PM <br>
+                                    <br>
+
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <a href="#" class="heading">
+                                    <div class="icon"></div>
+                                    <div class="title">Still need more help?</div>
+                                </a>
+                        
+                                <div class="content">
+                                    <div class="panel" style="text-align: center;">
+
+                                        <h3 style="text-align: center;"> You may contact us for more details through these channels </h3>
+                                        <br><br>
+                                        <p style="text-align: center;">
+                                          <div class="item">
+                                              <a href="https://wa.me/6581572646">
+                                                <img src="/views/view-whizmo/img/whatsapp.png"/>
+                                                <span class="caption">Whatsapp</span>
+                                              </a>
+                                          </div>
+                                          
+                                          <div class="item" id="facebook_button">
+                                              <a href="https://fb.me/rebox.com.sg" target="_blank">
+                                                <img src="/views/view-whizmo/img/facebook.png"/>
+                                                <span class="caption">Facebook</span>
+                                              </a>
+                                          </div>
+         
+                                        </p>
+                                        <br>
+                                        <br>
+                                    </div>
+        
+                                </div>
+                            </div>
+
+                        </div>
+                        
+
+                    </div>
+                    <!-- <footer class="modal-footer">
+                    </footer> -->
+                </article>
+            </div>
+            <!-- end of modal -->
+
+		<script>
+            function twoinone(){
+                hide_tan();
+                submit_order_info();
+            }
+
+            function submit_order_info(){
+
+            //add in loggedin status check
+                $.ajax({
+
+                    url: "index.php?c=ajax_formflowerhua&a=ajax_is_login_system",
+
+                    type: "post",
+
+                    dataType: 'json',
+    
+                    success: function (data) {
+
+                        if (data.code == -1) {
+
+                            var ind = layer.open({
+
+                                area: ['500px', '300px'],
+
+                                title: '<span style="font-size:20px;">Sign in / sign up to submit order</span>',
+
+                                content: '<div class="regbox" style="margin-top:0;padding:0;width:auto;">\n' +
+
+                                '\t\t\t<div class="reg" >\n' +
+
+                                '\t\t\t\t<div class="clear">\n' +
+
+                                '\t\t\t\t</div>\n' +
+
+                                '\t\t\t\t<div class="inp oth">\n' +
+
+                                '\t\t\t\t\t<label><img src="{SITE_THEME}img/icon77.png"></label>\n' +
+
+                                '\t\t\t\t\t<input type="text" id="phone" placeholder="Mobile No.">\n' +
+
+                                '\t\t\t\t</div>\n' +
+
+                                '\t\t\t\t<div class="inp oth">\n' +
+
+                                '\t\t\t\t\t<label><img src="{SITE_THEME}img/icon78.png"></label>\n' +
+
+                                '\t\t\t\t\t<input type="password" id="password" placeholder="Password">\n' +
+
+                                '\t\t\t\t</div>\n' +
+
+                                '\t\t\t\t<div class="agree">\n' +
+
+                                 '\t\t\t\t\t<input type="checkbox" checked="checked" class="keep">\n'+
+
+                                 '\t\t\t\t\t<span style="float:left;">Keep me logged in</span>\n'+
+
+                                '\t\t\t\t</div>\n' +
+
+                                '\t\t\t</div>\n' +
+
+                                '\t\t</div>\n',
+
+                                btn: ['Sign in','Sign up'],
+
+                                btn1: function () {
+
+                                    if ($('#phone').val() == '') {
+
+                                        alert('Please enter Mobile No.');
+
+                                    } else if ($('#password').val() == '') {
+
+                                        alert('Please input a Password');
+
+                                    } else {
+
+                                        $.ajax({
+
+                                            url: "index.php?c=login&a=ajax_login_system",
+
+                                            type: "post",
+
+                                            data: {
+
+                                                phone: $('#phone').val(),
+
+                                                password: $('#password').val(),
+
+                                                check: $('.keep').prop('checked'),
+
+                                            },
+
+                                            dataType: 'json',
+
+                                            success: function (data) {
+
+                                                if (data.code == -1) {
+
+                                                    alert('This user has not been found for the time being!');
+
+                                                } else if (data.code == -2) {
+
+                                                    alert('The password is wrong, please try again!');
+
+                                                } else {
+
+                                                   /* layer.close(ind);
+
+                                                    // alert('Log on successfully!');
+
+                                                    location.reload();*/
+
+                                                    submit_order_info();
+
+                                                }
+
+                                            }
+
+                                        });
+
+                                    }
+
+                                }
+
+                                ,btn2: function () {
+                                    var myData = ['{$order[order_id]}', $("input[name='fang']:checked").val(), $('#postal_code').val(),$('#postal_address').val(),$('#postal_unit').val(),$('#resultPickup_date').val(),$('#resultPickup').val(),$('#payment_id').val(),$('#payment_name').val(),$('#payment_number').val(),$('#walkin_date').val(),$('#customerNote').val(),$('#customerSurvey').val()];
+                                   
+                                    localStorage.setItem('objectToPass', JSON.stringify(myData));                                    
+
+                                    location.href = "index.php?c=login&a=register&recovery_parameters=" + escape(window.location.search);
+                                }
+                            });
+                        } else if (data.code == 1) {
+                        
+                            var lay = layer.open({type:3,icon:1});
+                            $.ajax({
+                                url: 'index.php?c=ajax_formflowerhua&a=ajax_submit2orderinfo',
+                                type: "post",
+                                data: {
+                                    order_id : '{$order[order_id]}',
+                                    fang : $("input[name='fang']:checked").val(),
+                                    postal_code : $('#postal_code').val(),
+                                    postal_address : $('#postal_address').val(),
+                                    postal_unit : $('#postal_unit').val(),
+                                    resultPickup_date : $('#resultPickup_date').val(),
+                                    resultPickup : $('#resultPickup').val(),
+                                    payment_id : $('#payment_id').val(),
+                                    payment_name : $('#payment_name').val(),
+                                    payment_number : $('#payment_number').val(),
+                                    walkin_date : $('#walkin_date').val(),
+                                    agent_check: '{$agent_check}',
+                                    customerNote: $('#customerNote').val(),
+                                    customerSurvey: $('#customerSurvey').val()
+                                },
+                                dataType: 'json',
+                                success: function (data) {
+                                    if(data.code==-100){
+                                        layer.open({content:data.result_err,icon:3});
+                                    }if(data.code==-1){
+                                        layer.open({content:data.msg,icon:3});
+                                    }else if(data.code==1){
+                                            //send order email
+                                            // var xmlhttp = new XMLHttpRequest();
+                                            // if (data.agent_check ==1) {
+                                            //     xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail_agent.php?orderno="+data.order_sn, true);    //agent
+                                            // } else if (data.order_delivery_method_type==2) {
+                                            //     xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail.php?orderno="+data.order_sn, true);
+                                            // } else if (data.order_delivery_method_type==3) {
+                                            //     xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail4.php?orderno="+data.order_sn, true);    //walkin                 
+                                            // } else if (data.order_delivery_number == null) {
+                                            //     xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail3.php?orderno="+data.order_sn, true);
+
+                                            // } else {
+                                            //     xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail2.php?orderno="+data.order_sn, true);
+
+                                            // } 
+                                            //  xmlhttp.send();
+                                            //send order email ends
+                                        location.href="index.php?c=flowerhua&a=order_submit_ok&order_id="+data.order_id;
+                                    }
+                                    layer.close(lay);
+                                }
+                            });
+
+
+                            
+
+
+                        }
+
+                    }
+                });
+            }
+
+
+            //kiosk mode submit order info starts
+
+            function submit_order_info_kiosk(){                
+                
+                var lay = layer.open({type:3,icon:1});
+                var fang = 4;
+                var currentTime = new Date();
+                var phone = $.trim($("#phone_kiosk").val());
+
+                $.ajax({
+                    url: 'index.php?c=ajax_formflowerhua&a=ajax_submit2orderinfo_kiosk',
+                    type: "post",
+                    data: {
+                        order_id : '{$order[order_id]}',
+                        fang : fang,
+                        phone : phone,
+                        payment_id : $('#payment_id').val(),
+                        payment_name : $('#payment_name').val(),
+                        payment_number : $('#payment_number').val(),                       
+                        walkin_date : '{date('d/m/Y', currentTime)}',
+
+                        //pass id info
+                        id_type : $('#id_type').val(),
+                        id_name : $('#id_name').val(),
+                        id_number : $('#id_number').val(),
+                        // id_address : $('#id_address').val(),
+                        id_nationality : $('#id_nationality').children("option:selected").val(),
+                        date_of_birth : $('#id_customer_DOB').val(),
+
+                        id_postal : $('#id_postal').val(),
+                        id_address : $('#id_address').val(),
+                        id_unit : $('#id_unit').val(),
+                        customerSurvey: $('#customerSurveyKiosk').val()
+
+
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code==-100){
+                            layer.open({content:data.result_err,icon:3});
+                        }if(data.code==-1){
+                            layer.open({content:data.msg,icon:3});
+                        }else if(data.code==1){
+                            location.href="index.php?c=flowerhua&a=order_submit_ok&order_id="+data.order_id;
+                        }
+                        layer.close(lay);
+                    }
+                });
+            }      
+
+
+            // kiosk mode submit order info ends
+
+			function show_tan_1(){
+				$(".tan_1").show();
+				$("body").addClass("hidden")
+			}
+			function hide_tan(){
+				$(".tan").hide();
+				$("body").removeClass("hidden")
+			}
+
+            //after id name input, check if same as account name
+            function check_name() {
+                var payment_name = $('#payment_name').val();
+                var id_name = $('#id_name').val();
+                if (payment_name.toLowerCase() != id_name.toLowerCase()) {
+                    layer.msg('Account Name does not match ID Name. Please check!',{icon:3});
+                }
+            }
+
+		</script>
+
+    <div class="kiosk_hide">
+
+        {template footer}
+
+    </div>
+
+	</div>
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root" class="kiosk_hide"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat kiosk_hide"
+      attribution=setup_tool
+      page_id="201403270461097"
+      theme_color="#ffcc00">
+    </div>
+    
+
+<!--     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+    <script type="text/javascript" src="js/ppopup.js"></script>
+ -->
+
+    <!-- if kiosk mode - screen height > width, hide the component & show sms verification-->
+
+    <script type="text/javascript">
+        if ($(window).height() > $(window).width()) {
+            $(".kiosk_hide").hide();
+            $(".sec3").show();
+            $(".kiosk_show").show();
+            (function() {
+
+                const idleDurationSecs = 120;    // X number of seconds
+                // const redirectUrl = 'http://127.0.0.1/kiosk/kiosk_home.html';  // Redirect idle users to this URL
+                const redirectUrl = 'https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=recovery_list&recovery_type_id=29&recovery_parent_id=hits'; 
+                
+                let idleTimeout; // variable to hold the timeout, do not modify
+
+                const resetIdleTimeout = function() {
+
+                    // Clears the existing timeout
+                    if(idleTimeout) clearTimeout(idleTimeout);
+
+                    // Set a new idle timeout to load the redirectUrl after idleDurationSecs
+                    idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+                };
+
+                // Init on page load
+                resetIdleTimeout();
+
+                // Reset the idle timeout on any of the events listed below
+                ['click', 'touchstart', 'mousemove'].forEach(evt => 
+                    document.addEventListener(evt, resetIdleTimeout, false)
+                );
+
+            })();
+        } else { //desktop version idle 20 mins go back to home page
+            (function() {
+
+                const idleDurationSecs = 1200;    // X number of seconds
+                // const redirectUrl = 'http://127.0.0.1/kiosk/kiosk_home.html';  // Redirect idle users to this URL
+                const redirectUrl = 'https://www.rebox.com.sg'; 
+                
+                let idleTimeout; // variable to hold the timeout, do not modify
+
+                const resetIdleTimeout = function() {
+
+                    // Clears the existing timeout
+                    if(idleTimeout) clearTimeout(idleTimeout);
+
+                    // Set a new idle timeout to load the redirectUrl after idleDurationSecs
+                    idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+                };
+
+                // Init on page load
+                resetIdleTimeout();
+
+                // Reset the idle timeout on any of the events listed below
+                ['click', 'touchstart', 'mousemove'].forEach(evt => 
+                    document.addEventListener(evt, resetIdleTimeout, false)
+                );
+
+            })();
+
+        }
+
+        function goBack() {
+          window.history.back();
+        }
+
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+
+        function sendMessage() {
+            curCount = count;
+            var phone = $.trim($("#phone_kiosk").val());
+            if (!phone) {
+                layer.msg('Please enter your mobile number',{icon:0});return false;
+            } else if (phone < 80000000 || phone > 99999999) {
+                layer.msg('Please enter a valid Singapore mobile number',{icon:0});return false;
+            }
+            $.ajax({
+                type: 'post',
+                url: "index.php?c=login&a=ajax_sendcode_kiosk",
+                data: {phone: phone},
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    if (data) {
+                        if (data.code == 1 || data.code == 2) {
+                            $("#getcode").attr("href", "javascript:;");
+                            $('#getcode').css('background','#e9ebed');
+                            $("#getcode").html('OTP Sent');
+                            $("#phone_kiosk").attr('readonly', 'readonly');
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        // } else if (data.code == 2) {
+                        //     layer.open({'title': 'Form hints', 'content': 'The phone number has been registered',});
+                        //     return false;
+                        } else if (data.code == 3) {
+                            layer.open({'title': 'Form hints', 'content': 'Fail to send OTP.'+data.sms_err,});
+                            return false;
+                        }
+                    } else {
+                        $("#getcode").attr("href", "javascript:");
+                        $("#getcode").html(curCount + "Resend");
+                        $("#phone_kiosk").attr('readonly', 'readonly');
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }
+                }
+            });
+            
+        }
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#getcode").attr("href", "javascript:sendMessage();");
+                $("#getcode").html("Resend");
+                $('#getcode').css('background','#ffcc00');
+            }
+            else {
+                curCount--;
+                $("#getcode").html("Resend in "+curCount+'s');
+            }
+        }
+    </script>
+    <!-- kiosk mode addition end -->
+
+        <!-- disable right click -->
+    <script language="javascript" type="text/javascript">
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+    </script>
+
+</body>
+<script src="/views/view-whizmo/js/faq.js"></script>
+	<script>
+		$(".seli .selibox span").click(function(){
+			$(this).parents(".selibox").siblings(".lit").find("span").show();
+			var txt = $(this).find("b").text()
+			$(this).parents(".selibox").siblings(".lit").find("font").text(txt);
+			$(this).parents(".selibox").hide()
+		})
+		$(".seli .lit  em").click(function(){
+			$(this).parents("span").hide();
+			$(this).parents(".lit").siblings(".selibox").show()
+		})
+		$(".islist ul li").click(function(){
+			var bool = $(this).find("input").prop("checked");
+			if(bool){
+				var src1 = $(this).find("img").attr("src1");
+				 $(this).find("img").attr({"src":src1});
+				 $(this).addClass("on")
+			}else{
+				var src2 = $(this).find("img").attr("src2");
+				 $(this).find("img").attr({"src":src2});
+				 $(this).removeClass("on")
+			}
+		});
+
+
+
+
+        function submit_form1(){
+            var fang = $("input[name='fang']:checked").val();
+            var postal_code = $('#postal_code').val();
+            var postal_address = $('#postal_address').val();
+            var resultPickup_date = $('#resultPickup_date').val();
+            var resultPickup = $('#resultPickup').val();
+            if(fang == 1 && postal_code == '' || postal_code == null){
+                layer.msg('Please fill in your postal code!',{icon:3});
+            }else if(fang == 1 && postal_address == '' || postal_address == null){
+                layer.msg('Please fill in your postal address!',{icon:3});
+            }else if(fang == 1 && resultPickup_date == '' || resultPickup_date == null){
+                layer.msg('Please select in your resultPickup Time!',{icon:3});
+            }else if(fang == 1 && resultPickup == '' || resultPickup == null){
+                layer.msg('Please select in your resultPickup Date!',{icon:3});
+            }else{
+                $(".sec3").show();
+
+            }
+        }
+
+        function submit_form2(){
+            var payment_id = $('#payment_id').val();
+            var payment_name = $('#payment_name').val();
+            var payment_number = $('#payment_number').val();
+            if(payment_id == '' || payment_id == null){
+                layer.msg('Please select in your payment details!',{icon:3});
+            }else if(payment_name == '' || payment_name == null){
+                layer.msg('Please fill in your payment name!',{icon:3});
+            }else if(payment_number == '' || payment_number == null){
+                layer.msg('Please fill in your payment number!',{icon:3});
+            }else{
+                $(".sec5").show();
+
+                var fang = $("input[name='fang']:checked").val();
+                if (fang ==3) {
+                    $('.warning').hide();
+                }
+
+            }
+        }
+
+
+
+                        
+        function submit_form3(){
+            var fang = $("input[name='fang']:checked").val();
+            var clause = $("input[name='clause']").prop('checked');
+            if(clause==false){
+                layer.msg('Please agree to Terms & Conditions!',{icon:3});
+            }else{
+                if(fang==2 || fang==3){
+                    $('.pickup_time_box').hide();
+                    submit_order_info();
+                }else{
+                    $('.pickup_time_box').show();
+                    $('.pickup_address').text($('#postal_address').val()+', '+$('#postal_unit').val()+' (S) '+$('#postal_code').val());
+                    $('.pickup_time').text($('#resultPickup_date option:selected').text());
+                    $('.pickup_time1').text($('#resultPickup').find("option:selected").text());
+                    setTimeout(function(){
+                        show_tan_1()
+                    },200);
+                }
+            }
+        }
+
+        //kiosk mode order submission starts
+        function submit_form3_kiosk(){
+            // var fang = $("input[name='fang']:checked").val();
+            var clause = $("input[name='clause_kiosk']").prop('checked');
+            var phone = $('#phone_kiosk').val();
+            var code = $('#code').val();
+            var payment_id = $('#payment_id').val();
+            var payment_name = $('#payment_name').val();
+            var payment_number = $('#payment_number').val();
+
+            //pass id info
+            var id_type = $('#id_type').val();
+            var id_name = $('#id_name').val();
+            var id_number = $('#id_number').val();
+            var id_nationality = $('#id_nationality').children("option:selected").val();
+
+            var id_postal = $('#id_postal').val();
+            var id_address = $('#id_address').val();
+            var id_unit = $('#id_unit').val();
+
+            if(clause==false){
+                layer.msg('Please agree to Terms & Conditions!',{icon:3});
+            }else if(phone=="" || payment_id=="" || payment_name=="" || payment_number=="" || id_type=="" || id_name=="" || id_number=="" || id_postal=="" || id_address=="" || code == "" || phone==null || payment_id==null || payment_name==null || payment_number==null || id_type==null || id_name==null || id_number==null || id_postal==null || id_address==null || code == null) {
+                layer.msg('Please do not leave blank of any mandatory fields!',{icon:3});
+            } else {
+                var n;
+                $.ajax({
+                    url: "index.php?c=login&a=ajaxcode",
+                    type: "post",
+                    async: false,
+                    data: {"code":code,"phone":phone},
+                    success: function (data) {
+                        if(data==0){
+                            layer.msg('Please enter correct OTP',{icon:0});return false;
+                        }else{
+                            submit_order_info_kiosk();                            
+                        }
+                    }
+                });        
+
+            }
+        }
+        //kiosk mode order submission ends
+
+
+        function get_information(text){
+            layer.open({title:false, closeBtn:0,btn:['I Agree'],content:text,area:['80%','60%']});
+        }
+	</script>
+    <script>
+        function get_location(){
+           var postal_code = $('#postal_code').val();
+           if(postal_code==''){
+            layer.msg('Please enter the zip code!',{icon:0});
+            return false;
+           }
+           $.ajax({
+                dataType:'json',
+                type:'post',
+                url:"{url('flowerhua/search_postalcode')}",
+                data:{postal_code:postal_code},
+                success:function(data){
+                    if(data.code==1){
+                        $('#postal_address').val(data.arr['street_number']+' '+data.arr['street_name']);
+                        change1();
+                    }else if(data.code==2){
+                        layer.msg('Oops,we are unable to retrieve the postal address information. Please enter address manually!',{icon:0});
+                    }
+                }
+           })
+
+        }
+
+        //get id_address
+        function get_id_location(){
+           var postal_code  = $('#id_postal').val();
+           if(postal_code ==''){
+            layer.msg('Please enter postal code!',{icon:0});
+            return false;
+           }
+           $.ajax({
+                dataType:'json',
+                type:'post',
+                url:"{url('flowerhua/search_postalcode')}",
+                data:{postal_code :postal_code },
+                success:function(data){
+                    if(data.code==1){
+                        $('#id_address').val(data.arr['street_number']+' '+data.arr['street_name']);
+                        change1();
+                    }else if(data.code==2){
+                        layer.msg('Oops,we are unable to retrieve the postal address information. Please enter address manually!',{icon:0});
+                    }
+                }
+           })
+
+        }
+
+
+        function show_detail(a){
+            var display = $(a).siblings(".p").css("display");
+            if(display == "none"){
+                $(a).siblings(".p").show();
+                $(a).css({"background":"url({SITE_THEME}img/caret.png) right center no-repeat"})
+            }else if(display == "block"){
+                $(a).siblings(".p").hide();
+                $(a).css({"background":"url({SITE_THEME}img/caret5.png) right center no-repeat"})
+            }
+        }
+        //switch between different delivery options
+        $(".reright .pickup .inp .fang").click(function(){
+            if($(this).find("input").val()==1){
+                $('#tip').hide();
+                $('#tip2').show();
+                $('#tip3').hide();
+            }else if($(this).find("input").val()==2){
+                $('#tip').show();
+                $('#tip2').hide();
+                $('#tip3').hide();
+            }else{
+                $('#tip').hide();
+                $('#tip2').hide();
+                $('#tip3').show();
+            }
+
+            var bool = $(this).find("input").prop("checked");
+            if(bool){
+                $(this).addClass("on").siblings(".fang").removeClass("on")
+            }
+        });
+        $("#doorstep").click(function(){
+            $(".walkin_date_select").hide();
+            $('.doorstep_title').text('Pickup Address');
+            $(".doorstep_time").show();
+            $('.doorstep_box').show();
+            $(".sec2 .pickup .btn").removeClass("on");
+            $(".sec2 .pickup .btn").attr("disabled",true);
+        });
+        $("#postbox").click(function(){
+            // $('.doorstep_title').text('Envelope Mailing Address');
+            $(".walkin_date_select").hide();
+            $(".doorstep_time").hide();
+            $('.doorstep_box').hide();
+            $(".sec2 .pickup .btn").addClass("on");
+            $(".sec2 .pickup .btn").removeAttr("disabled");
+        });
+        $("#walkin").click(function(){
+            // $('.doorstep_title').text('Envelope Mailing Address');
+            $(".doorstep_time").hide();
+            $('.doorstep_box').hide();
+            // $(".sec2 .pickup .btn").addClass("on");
+            $(".walkin_date_select").show();
+            $(".sec2 .pickup .btn").removeClass("on");
+            $(".sec2 .pickup .btn").attr("disabled",true);
+        });
+    </script>
+    <script>
+        $(".sec2 .pickup .doorstep  .inp input").blur(function(){
+            var inplens = 0;
+            for(var i = 0; i<$(".sec2 .pickup .doorstep  .inp input").length; i++){
+                var text = $(".sec2 .pickup .doorstep  .inp input").eq(i).val();
+                if(text == null || text == ""){
+
+                }else{
+                    inplens++
+                }
+                if(inplens == $(".sec2 .pickup .doorstep  .inp input").length){
+                    $(".sec2 .pickup .btn").addClass("on");
+                    $(".sec2 .pickup .btn").removeAttr("disabled")
+                }
+            }
+        });
+        $(".sec3 .pickup   .inp input").blur(function(){
+            var inplens = 0;
+            for(var i = 0; i<$(".sec3 .pickup   .inp input").length; i++){
+                var text = $(".sec3 .pickup   .inp input").eq(i).val();
+                if(text == null || text == ""){
+
+                }else{
+                    inplens++
+                }
+                if(inplens == $(".sec3 .pickup .inp input").length){
+                    $(".sec3 .pickup .btn").addClass("on");
+                    $(".sec3 .pickup .btn").removeAttr("disabled")
+                }
+            }
+
+        });
+        $(function(){
+            $('.fang').eq(0).trigger('click');
+        })
+    </script>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+
+
+</head>
+
+	<body>
+
+		<div class="order_details">
+
+			<div class="top">
+
+				<div class="fl" style="margin-top:20px;">
+
+					<div class="tit">Order Details</div>
+
+					<div class="ordernum">
+
+						<!--Order number :--> 
+
+						{$order['order_sn_number']}
+
+					</div>
+
+					<div class="order_details_contact_wrapper"><h5>Contact us: <span class="desc">+65 8836 2145</span></h5> </div>
+					
+				</div>
+
+				<a href="javascript:history.back();">Return to Order List</a>
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			<div class="orderstatus">
+
+				<div class="status">Status:&nbsp;
+
+					<!-- -6 cancelled status -->
+					{if $order['order_status']==0}
+
+					<span>Cancelled</span>
+
+					{/if}
+
+
+					{if $order['order_status']==-5}
+
+					<span>Returned</span>
+
+					{/if}
+
+					{if $order['order_status']>=6}
+
+					<span>Payment Processed</span>
+
+					{/if}
+
+					{if $order['order_status']==5}
+
+					<span>Verified</span>
+
+					{/if}
+
+					{if $order['order_status']==3 || $order['order_status']==4}
+
+					<span>Received</span>
+
+					{/if}
+
+					{if $order['order_status']==2}
+
+						{if $order['order_delivery_method_type']==1}
+
+						<span>Order Confirmed<br><br>
+
+							{if $order_delivery_number != NULL}
+
+							Click <a href="https://rebox.com.sg/shipping_label/{$order_delivery_number}.pdf" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> to print shipping label
+
+							{else}
+
+							Refer to WhatsApp message for shipping label
+
+							{/if}
+
+						<br><br>					
+
+						{$order['roadbul']['roadbul_PickupDate']}&nbsp;&nbsp;{$orderType[$order['roadbul']['roadbul_PickupTimeSlotId']]}<br>
+
+						{$order['order_pickup_address']},&nbsp;{$order['order_pickup_unit']}&nbsp;(S)&nbsp;{$order['order_pickup_code']}</span>
+
+						{/if}
+
+						{if $order['order_delivery_method_type']==2}
+
+						<span>Parcel dropped off at POPStation</span>
+
+						{/if}
+
+						{if $agent_check == 1}
+
+						<span>Order Confirmed. We will come and collect as arranged.</span>
+
+						{/if}
+
+					</span>
+
+					{/if}
+
+					{if $order['order_status']==1}
+
+						{if $order['order_delivery_method_type']==2}
+
+						<span>
+
+							{if $time_passed < 3}
+
+							Order confirmed<br><br>
+
+							POPStation Shipping Label: {$order_delivery_number}<br><br>					
+
+							Please drop off your phone at any POPStation within 2 days.
+
+							{else}
+
+							Order has expired, please resubmit.
+
+							{/if}
+						
+						</span>
+
+						{/if}
+
+						{if $order['order_delivery_method_type']==3}
+
+							{if time() > strtotime(str_replace("/", "-", $order['order_delivery_number']))+3600*24}
+
+							<span>Order Lapsed! Please submit a new order.</span>
+
+							{else}
+
+							<span>Walk-in appointment confirmed<br><br>
+
+							{$order['order_wuliu_number']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12:00PM - 9:00PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+							Jurong Point Shopping Centre<br>Outside Starhub #B1-12</span><br><br>
+							<span>City Square Mall<br>#B1-K17(near taxi pickup)</span><br><br>
+
+							<button class="cancel" style="float:right; border-radius: 0.04rem; background-color: #ccc; color: white; font-size: 0.28rem; padding: 0.05rem 0.1rem;" onclick="cancel_walkin();">
+
+								Cancel Order
+
+							</button>
+
+							<br>
+
+							{/if}
+
+						{/if}					
+
+					{/if}
+
+				</div>
+
+				<div class="yuan">
+
+					<ul>
+
+						<li class="{if $order['order_status']>=2} on{/if}"><i></i><div class="line"></div></li>
+
+						<li class="{if $order['order_status']>=3} on{/if}"><i></i><div class="line"></div></li>
+
+						<li class="{if $order['order_status']>=5} on{/if}"><i></i><div class="line"></div></li>
+
+						<li class="{if $order['order_status']>=6} on{/if}"><i></i><div class="line"></div></li>
+
+					</ul>
+
+					<ol>
+
+						<li class="{if $order['order_status']>=2} on{/if}">Order confirmed</li>
+
+						<li class="{if $order['order_status']>=3} on{/if}">Received</li>
+
+						<li class="{if $order['order_status']>=5} on{/if}">Verified</li>
+
+						<li class="{if $order['order_status']>=6} on{/if}">Payment Processed</li>
+
+					</ol>
+
+				</div>
+
+				<div class="import">
+
+					{htmlspecialchars_decode($order_notice)}
+
+				</div>
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			<div class="li">
+
+				<a href="javascript:;" class="fl"><img src="{$order['recovery']['recovery_img']}"/></a>
+
+				<div class="right">
+
+					<div class="name_quote"><div class="name">{$order['recovery']['recovery_title']}</div></div>
+
+					<div class="sku">Price Quote</div>
+
+					<div class="introd">${$order['order_totalprice']-$order['order_coupon_code_money']}</div>
+
+					<div class="details">Details</div>
+
+				</div>
+
+				<div class="detailbg">
+
+					<div class="content">
+
+						<div class="content2">
+
+							{loop $order_parameter $item}
+
+							{if $item['recovery_parameter_type']==1}
+
+							<p>{$item['recovery_parameter_parent_title']} : {$item['recovery_parameter_title']}</p>
+
+							{else if $item['recovery_parameter_type']==2}
+
+							<p>{$item['recovery_parameter_title']}</p>
+
+							{/if}
+
+							{/loop}
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			{if $order['order_delivery_method_type']==1 && $order['order_status']>=2}
+
+			<div class="payment">
+
+				<div class="tit">Payment Details</div>
+
+				<p>Name:{$order['order_payment_name']}</p>
+
+				<p>Mobile:{$order['phone']}</p>
+
+				<p>Bank Details: {$payment_arr[$order['order_payment_type']]} ，{$order['order_payment_number']}</p>
+
+			</div>
+
+			{/if}
+
+			<div class="spec-5"></div>
+
+			<div class="offerprice">
+
+				{if $order['order_coupon_code_id']>0}<h4>Coupon:<span>${$order['order_coupon_code_money']}</span></h4>{/if}
+
+				<!-- <h4>Offer Price:<span>${number_format($order['order_totalprice']+$order['order_coupon_code_money'],2)}</span></h4> -->
+
+				<h4>Offer Price:<span>${number_format($order['order_totalprice'],2)}</span></h4>
+
+				{if $order['order_status']>3 && $order['order_final_price']>0}<h4>Final Price:<span>${number_format($order['order_final_price'],2)}</span></h4>{/if}
+
+			</div>
+			
+		</div>
+
+	</body>
+
+</html>
+
+<!-- add layer function -->
+<script src="views/mobile/js/layer/layer.js"></script> 
+
+<script>
+
+	//商品详细
+
+		$('.details').on('click',function(){
+
+			$(this).toggleClass('on');
+
+			$(this).parents('.li').find('.detailbg').toggleClass('on')
+
+		})
+
+
+		//cancel walkin order
+
+		function cancel_walkin(){
+	        layer.open({content:'Are you sure you want to cancel the order?',yes:function(){
+	            $.ajax({
+	                url: "index.php?s=admin&c=flowerhua&a=ajax_change_status",
+	                type: "post",
+	                data: {
+	                    order_id : {$order['order_id']},
+	                    status : 0,
+	                },
+	                // async:false,
+	                dataType: 'json',
+	                success: function (data) {
+	                    if(data.code==1){
+	                        layer.open({content:'Order Cancelled!',icon:1,end:function(){
+	                            location.reload();
+	                        	}
+	                    	});
+	                    }
+	                }
+	            });
+	        }});
+	    }
+
+</script>
+
+
+

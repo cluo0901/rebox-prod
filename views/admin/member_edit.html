@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript">var sitepath = "{SITE_PATH}{ENTRY_SCRIPT_NAME}";</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>{template admin/top.html}
+<script type="text/javascript">
+function ajaxemail() {
+	$('#email_text').html('');
+	$.post('{url('admin/member/ajaxemail')}&rid='+Math.random(), { email:$('#email').val(), id:{$id} }, function(data){ 
+        $('#email_text').html(data); 
+	});
+}
+</script>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a href="{url('admin/member')}" class="layui-btn">会员列表</a>
+			<button onClick="window.history.go(-1);" href="javascript:void(0);" class="layui-btn ">上一页</button>
+		</div>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form method="post" action="" id="myform" name="myform">
+		<table width="100%" class="table table-striped">
+		<tbody>
+		<tr>
+			<th>性别：</th>
+			<td>
+			<input type="radio" {if !isset($list['sex']) || $list['sex']=='男'}checked{/if} value="男" name="data[sex]"> 男
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" {if isset($list['sex']) && $list['sex']=='女'}checked{/if} value="女" name="data[sex]"> 女
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>所在省：</th>
+			<td>
+				<select class="form-control" id="province_id" name="data[province_id]">
+					<option value="">请选择省</option>
+					{loop $province $t}
+						<option value="{$t[id]}" {if $province_id == $t[id]}selected="selected"{/if}>{$t[name]}</option> 
+					{/loop}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>所在城市：</th>
+			<td>
+				<select class="form-control" id="city_id" name="data[city_id]">
+					<option value="">请选择市</option>
+					{loop $citylist $t}
+						<option value="{$t[id]}" {if $city_id == $t[id]}selected="selected"{/if}>{$t[name]}</option> 
+					{/loop}
+				</select>
+			<td>
+		</tr>
+		<tr>
+			<th>所在区/县：</th>
+			<td>
+				<select class="form-control" id="area_id" name="data[area_id]">
+					<option value="">请选择区</option>
+					{loop $arealist $t}
+						<option value="{$t[id]}" {if $area_id == $t[id]}selected="selected"{/if}>{$t[name]}</option> 
+					{/loop}
+				</select>
+			</th>
+		</tr>
+		
+		<script type="text/javascript">
+			$("#province_id").change(function(){
+				var id = $(this).val();
+				$.ajax({
+				type:"POST",
+				url:"index.php?s=admin&a=city",
+				data:"id="+id,
+				dateType:"html",
+				success:function(date){
+					$("#city_id").html(date);
+					var city_id = $("#city_id option").eq(0).val();
+					$.ajax({
+						type:"POST",
+						url:"index.php?s=admin&a=city",
+						data:"id="+city_id,
+						dateType:"html",
+						success:function(date){
+							$("#area_id").html(date);
+						}
+					})
+				}
+				})
+			})
+			$("#city_id").change(function(){
+				var id = $(this).val();
+				$.ajax({
+					type:"POST",
+					url:"index.php?s=admin&a=city",
+					data:"id="+id,
+					dateType:"html",
+					success:function(date){
+						$("#area_id").html(date);
+					}
+				})
+			})
+			
+			
+		</script>
+		<tr>
+			<th>真实姓名：</th>
+			<td><input type="text" class="input-text" size="30" id="email" value="{$list['name']}" name="data[name]"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th align="left">头像：</th>
+			<td colspan="3"><input type="text" class="input-text" size="50" value="{$list['logo']}" name="data[logo]" id="picture" />
+			<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('picture')" value="{lang('a-mod-118')}" />
+			<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('picture', '{$SITE_THUMB_WIDTH}', '{$SITE_THUMB_HEIGHT}')" value="{lang('a-mod-119')}" />
+			<div class="onShow">{lang('a-pic')}</div></td>
+		</tr>
+		<tr>
+			<th>微信：</th>
+			<td><input type="text" class="input-text" size="30" value="{$list['weixin']}" name="data[weixin]"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th>手机号码：</th>
+			<td><input type="text" class="input-text" size="30" value="{$list['username']}" name="data[username]" disabled="true"></td>
+			<td></td>
+		  </tr>
+		<tr>
+			<th>联系地址：</th>
+			<td><input type="text" class="input-text" size="30" value="{$list['address']}" name="data[address]"></td>
+			<td></td>
+		  </tr>
+		<tr>
+			<th>邮箱：</th>
+			<td><input type="text" class="input-text" size="30" id="email" value="{$list['email']}" name="data[email]"onBlur="ajaxemail()"></td>
+			<td></td>
+		  </tr>
+		<tr>
+			<th>QQ：</th>
+			<td><input type="text" class="input-text" size="30" value="{$list['qq']}" name="data[qq]"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><input type="submit" class="btn btn-success btn-sm" value="提交" name="submit"></td>
+			<td></td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
+	</div>
+</div>
+<script>
+function getCity(){   
+	var id = $("#province").val();
+	$.ajax({
+		type : "POST",
+		url : '{url("admin/member/get_city")}',
+		data : "id="+id,
+		dateType : "html",
+		success : function(date){
+			$("#city").html(date);
+			$("#area").html("<option value=''></option>");
+		}
+	})
+}
+
+function getArea(){   
+	var id = $("#city").val();
+	$.ajax({
+		type : "POST",
+		url : '{url("admin/member/get_city")}',
+		data : "id="+id,
+		dateType : "html",
+		success : function(date){
+			$("#area").html(date);
+		}
+	})
+}
+</script>
+</body>
+</html>

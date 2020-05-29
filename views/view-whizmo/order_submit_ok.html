@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Order Confirmation</title>
+		{template head}
+
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+		<!-- End Google Tag Manager -->
+		<!-- Facebook Pixel Code -->
+		<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window,document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '637804786589286'); 
+		fbq('track', 'PageView');
+		fbq('track', 'AddToCart');
+		</script>
+		<noscript>
+		<img height="1" width="1" 
+		src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+		&noscript=1"/>
+		</noscript>
+		<!-- End Facebook Pixel Code -->
+
+	    <style type="text/css">
+	        @media (orientation: portrait) {
+
+	          body {
+	            -webkit-user-select: none;
+                background-color: #f3f4f7;
+	          }  
+
+/*	          .txt {
+	          	width: 1200px;
+
+	          }*/
+
+	          .confirm .confirm_exp .txt {
+	          	width: 100%;
+	          	margin-top: 300px;
+	          }
+
+	          .confirm .confirm_exp .txt h3 {
+	          	font-size: 40px;
+          	    margin-left: 50px;
+	          }
+
+	          .confirm .confirm_exp .txt h3 em {
+	          	font-size: 36px;
+	          }
+
+	          .confirm .confirm_exp .txt .p span {
+	          	font-size: 50px;
+	          	line-height: 80px;
+	          	color: #444444;
+	          	width: 80%;
+	          	text-align: center;
+	          	position: relative;
+	          	left: 10%;
+	          	margin: 100px 0;
+	          }
+
+	          .confirm .confirm_exp .txt .p label {
+	          	display: none;
+	          }
+
+	          #return_1 {
+	          	float: left;
+	          	margin-left: 80px;
+	          	color: white;
+	          	background-color: #ffcc00;
+			    font-size: 50px;
+			    font-weight: bold;
+			    border: 0;
+			    width: 420px;
+			    height: 170px;
+		        margin-top: 100px;
+		        margin-top: 100px;
+			    margin-bottom: 50px;
+			    border-radius: 20px;
+}
+	          }
+
+	          #return_2 {
+	          	float: right;
+	          	margin-right: 80px;
+	          	background-color: #ffcc00;
+			    font-size: 50px;
+			    font-weight: bold;
+			    border: 0;
+			    width: 420px;
+			    height: 170px;
+		        margin-top: 100px;
+			    margin-top: 100px;
+			    margin-bottom: 50px;
+			    border-radius: 20px;
+	          }
+	        }
+
+	    </style>
+
+</head>
+
+	<body>
+
+		{template header}
+
+		<div class="confirm">
+
+			<div class="container">
+
+				<div class="confirm_exp">
+
+					<div class="txt">
+
+						<h3>
+
+							<img src="{SITE_THEME}img/icon55.png">
+
+							<span>Order Confirmed！</span>
+
+							<em>Order number : {$order_sn}</em>
+
+						</h3>
+
+						<div class="p">
+
+							<label>
+
+								<img src="{SITE_THEME}img/icon56.png">
+
+							</label>
+
+							{if $agent_check != 1}
+
+							{if $order_delivery_method_type == 1}
+
+								{if $order_delivery_number != NULL}
+
+								<span>Please click <a href="https://rebox.com.sg/shipping_label/{$order_delivery_number}.pdf" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> to print the shipping label, and paste it on to your parcel.<br><br> 
+
+									Our courier partner will collect the device from you at the scheduled pickup time slot, and the parcel will be delivered to us the next working day.<br><br> 
+
+									To enjoy FULL INSURANCE COVERAGE, please sign off during pickup or make sure the courier scans the QR code on the label. Kindly note that proper packaging is required by the courier service provider. Refer <a href="https://bit.ly/2nR7S9g" target="_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for packaging tips.<br><br>
+
+									<!-- We are required by Police to collect NRIC information from customers. Refer <a href="https://www.police.gov.sg/e-services/apply/licenses-and-permits/secondhand-goods-and-dealers/rules-and-regulations#content" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br> -->
+
+									We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br>
+
+									To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">upload</a> your NRIC (front and back) now.
+
+								</span>
+
+								{else}
+
+								<span style="font-size:19px; font-weight: normal;"><b>Pickup Time: </b>{$pickupTime} - {$pickupDateRange}</span>
+
+							    <span>
+
+									Please provide Pickup Code <b style="color:RED; font-size: 20px; font-weight: bold;">{$merchantDefinedCode}</b> during collection.<br><br>
+
+									We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br>
+
+									To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">upload</a> your NRIC (front and back) now.
+
+								</span>
+
+
+								{/if}
+
+							{/if}
+
+
+							{if $order_delivery_method_type == 2}
+
+							<span>POPStation shipping lable is <font color="#ffcc00" font-weight="bold">{$order_delivery_number}</font>. You can find it in order details from your Dashboard later.<br><br> 
+
+								<!-- FREE postage details will be provided via SMS.<br> -->
+
+								Drop off your phone at any POPStation within 2 days. Please refer <a href="https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=212" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> to see how to drop off <br><br>
+
+								We are required by Law to collect NRIC information from customers. Please refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br>
+
+								To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">upload</a> your NRIC (front and back) now.
+
+							</span>
+
+							{/if}
+
+							{if $order_delivery_method_type == 3}
+
+							<!-- <span>Our courier partner will collect the device from you at the scheduled pickup time.</span> -->
+
+							<span>
+								<font style="font-size: 20px; font-weight:bold; color: orange;">Visit date: &nbsp;&nbsp;&nbsp;{$order_delivery_number}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12:00PM - 9:00PM<br><br>
+									Jurong Point Shopping Centre (outside Starhub #B1-12)<br> 1 Jurong West Central 2, Singapore 648886
+									<br> <br>
+									City Square Mall <br>
+									#B1-K17 180 Kitchener Rd, Singapore 208539
+								
+								</font><br><br>
+
+
+								<!-- <button onclick="window.location='https://calendars.icloud.com/published/2/9OKOTcfIYD22ycOGtdqWAJrRNiH2-oM3DIcxH5_737QSekFXx7KNkrrKnG6jAUXg';" style = "background-color: #ffcc00; border-radius: 4px; padding: 0 20px; color:white;font-size: 14px; height: 30px; line-height:30px;cursor: pointer;">Add to Calendar</button><br><br> -->
+
+								We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br>
+
+								To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">upload</a> your NRIC (front and back) now.
+
+
+								<br><br><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7271300404195!2d103.70391561525581!3d1.340050661978909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0fecdb0cd66b%3A0x2d89b202b512e598!2sJurong+Point!5e0!3m2!1sen!2ssg!4v1553756966625" width="100%" height="400" frameborder="0" style="border:0;left:10%;" allowfullscreen></iframe>
+
+							</span>		
+
+								
+
+							{/if}
+
+							{if $order_delivery_method_type == 4}
+
+							<span>You should have received an SMS with order number.<br>
+
+							Hand over your phone to our friendly staff & show order No.</span>
+
+							<button onclick="window.location='https://rebox.com.sg/index.php?c=flowerhua&a=recovery_list&recovery_type_id=29&recovery_parent_id=hits';" id="return_1">I want to sell another phone</button>
+
+							<!-- <button onclick="window.location='http://127.0.0.1/kiosk/kiosk_home.html';" id="return_2">I am done</button> -->
+
+							<button onclick="window.location='https://rebox.com.sg/index.php?c=flowerhua&a=recovery_list&recovery_type_id=29&recovery_parent_id=hits';" id="return_2">I am done</button>
+
+							</div>
+
+							{/if}
+
+							{else}
+
+
+							<span>We will come and collect the phone on the next working day between 3pm - 5pm.</span>
+
+							{/if}
+
+
+
+						</div>
+
+					</div>
+					{if $agent_check !=1}
+					<a href="{url('/members/center')}" class="kiosk_hide">ID Verification</a>
+					{/if}
+
+					<a href="{url('flowerhua/order')}" class="kiosk_hide">Go to Dashboard</a>
+
+				</div>
+
+				<!-- <div class="process  confirm_process">
+
+					<ul class="">
+
+						<li>
+
+							<img src="{$data['recovery_step_thumb1']}">
+
+							<p>{$data['recovery_step_title1']}</p>
+
+						</li>
+
+						<li>
+
+							<img src="{$data['recovery_step_thumb2']}">
+
+							<p>{$data['recovery_step_title2']}</p>
+
+						</li>
+
+						<li>
+
+							<img src="{$data['recovery_step_thumb3']}">
+
+							<p>{$data['recovery_step_title3']}</p>
+
+						</li>
+
+						<li>
+
+							<img src="{$data['recovery_step_thumb4']}">
+
+							<p>{$data['recovery_step_title4']}</p>
+
+						</li>
+
+					</ul>
+
+				</div> -->
+
+				<!-- remove tips for agent -->
+
+				{if $agent_check !=1}
+
+					{if $order_delivery_method_type != 3 && $order_delivery_method_type != 4}
+
+					<div class="teach">
+
+						<h3>Get prepared before {if $order_delivery_method_type == 2}dropoff{else}pickup{/if}</h3>
+
+						<ul>
+
+						{loop $list $t}
+
+							<li>
+
+								<a href="javascript:;">
+
+									<img src="{$t['thumb']}">
+
+									<div class="txt">
+
+										<p>{$t['title']}</p>
+
+										<span>
+
+											{if $t['subtitle']}
+
+											（{$t['subtitle']}）
+
+											{/if}
+
+											<em onclick="ttttt('{$t[id]}');">{$t['url_title']}</em>
+
+										</span>
+
+									</div>
+
+								</a>
+
+							</li>
+
+						{/loop}	
+
+						</ul>
+
+						<div class="clear"></div>
+
+					</div>
+
+					<!-- show kiosk user the process after order confirmation starts -->
+
+<!-- 					{elseif $order_delivery_method_type == 4}
+
+					<div class="teach">
+
+						<h3>Professional Diagnostic</h3>
+
+						<ul>
+
+							<li>
+
+									<img src="{SITE_THEME}img/cctv.jpeg">
+
+									<div class="txt">
+
+										<p>Video Recording</p>
+
+										<span>
+
+											The whole testing process is video recorded.
+
+										</span>
+
+									</div>
+
+							</li>
+
+							<li>
+
+									<img src="{SITE_THEME}img/cosmetic_check.jpg">
+
+									<div class="txt">
+
+										<p>Aesthetic Check</p>
+
+										<span>The whole testing process is video recorded.</span>
+
+									</div>
+
+							</li>
+
+							<li>
+
+									<img src="{SITE_THEME}img/functional_test.png">
+
+									<div class="txt">
+
+										<p>Functional Test</p>
+
+										<span>
+
+											The whole testing process is video recorded.
+
+										</span>
+
+									</div>
+
+							</li>
+
+						</ul>
+
+						<div class="clear"></div>
+
+					</div> -->
+
+					<!-- show kiosk user the process after order confirmation ends -->
+
+					{/if}
+
+				{/if}
+
+
+			</div>
+
+		</div>
+
+
+        <div class="kiosk_hide">
+	       {template footer}
+        </div>
+
+		<!-- Load Facebook SDK for JavaScript -->
+		<div id="fb-root" class="kiosk_hide"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<!-- Your customer chat code -->
+		<div class="fb-customerchat kiosk_hide "
+		  attribution=setup_tool
+		  page_id="201403270461097"
+		  theme_color="#ffcc00">
+		</div>
+		
+	    <!-- kiosk mode -->
+	    <script type="text/javascript">
+	        if ($(window).height() > $(window).width()) {
+	            $(".kiosk_hide").css("display", "none");
+	            // $(".kiosk_show").show();
+	            (function() {
+
+	                const idleDurationSecs = 9999;    // X number of seconds
+	                // const redirectUrl = 'http://127.0.0.1/kiosk/kiosk_home.html';  // Redirect idle users to this URL
+	                const redirectUrl = 'https://rebox.com.sg/index.php?c=flowerhua&a=recovery_list&recovery_type_id=29&recovery_parent_id=hits'; 
+	                
+	                let idleTimeout; // variable to hold the timeout, do not modify
+
+	                const resetIdleTimeout = function() {
+
+	                    // Clears the existing timeout
+	                    if(idleTimeout) clearTimeout(idleTimeout);
+
+	                    // Set a new idle timeout to load the redirectUrl after idleDurationSecs
+	                    idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+	                };
+
+	                // Init on page load
+	                resetIdleTimeout();
+
+	                // Reset the idle timeout on any of the events listed below
+	                ['click', 'touchstart', 'mousemove'].forEach(evt => 
+	                    document.addEventListener(evt, resetIdleTimeout, false)
+	                );
+
+	            })();
+	        }
+	    </script>
+
+	    <!-- disable right click -->
+	    <script language="javascript" type="text/javascript">
+	        document.addEventListener('contextmenu', event => event.preventDefault());
+
+	    </script>
+
+	</body>
+
+	<script>
+
+		// window.onload = function() { 
+
+		// 	document.getElementById('qrcode').src = 'https://www.rebox.com.sg/mobile_recircle/qrimg/QR'+ '{$order_sn}' + '.png';
+
+		// }
+
+		function ttttt(id){
+
+		    $.ajax({type:'post',url:"index.php?c=flowerhua&a=getContent",data:{id : id},dataType:'json',
+
+		        success:function (res) {
+
+                    layer.open({title:'',btn:[],area:['80%'],content:res.des});
+
+		        }
+
+		    })
+
+		}
+
+		var mySwiper = new Swiper('.swiper-container-2', {
+
+			//autoplay: 2000,//可选选项，自动滑动
+
+			prevButton: '.apprise-btn-pre',
+
+			nextButton: '.apprise-btn-next',
+
+			width: 300,
+
+			slidesPerView: 4
+
+		});
+
+		$('.appraise .swiper-button-prev').click(function() {
+
+			mySwiper.swipePrev();
+
+		});
+
+		$('.appraise .swiper-button-next').click(function() {
+
+			mySwiper.swipeNext();
+
+		});
+
+		var mySwiper1 = new Swiper('.swiper-container-3', {
+
+			autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+			width: 200,
+
+			slidesPerView: 2
+
+		});
+
+		$('.ahs-media-content .swiper-button-prev').click(function() {
+
+			mySwiper1.swipePrev();
+
+		});
+
+		$('.ahs-media-content .swiper-button-next').click(function() {
+
+			mySwiper1.swipeNext();
+
+		});
+
+	</script>
+
+</html>

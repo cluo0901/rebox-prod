@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+</head>
+
+	<body class="orderbd">
+
+		{template header}
+
+			<div class="my_order">
+
+				{if $agent_check ==1}
+
+				{if $order_counter == 0}
+
+				<h4 style="color: #ffcc00; text-align: center; padding: 0.5rem 0 0.2rem 0;">You haven't sold any phone this month.</h4>
+
+				{/if}
+
+				{if $order_counter == 1}
+
+				<h4 style="color: #ffcc00; text-align: center; padding: 0.5rem 0 0.2rem 0;">You have sold <strong>{$order_counter}</strong> phone this month.</h4>
+
+				{/if}
+
+				{if $order_counter > 1}
+
+				<h4 style="color: #ffcc00; text-align: center; padding: 0.5rem 0 0.2rem 0;">You have sold <strong>{$order_counter}</strong> phones this month.</h4>
+
+				{/if}
+
+				{/if}
+
+				<div class="tit">My Orders</div>
+
+				<div class="orderlist">
+
+					<div class="orderhead">
+
+						<ul>
+
+							<li>Model</li>
+
+							<li>Status</li>
+
+							<li>Offer Price</li>
+
+							<li>Details</li>
+
+						</ul>
+
+					</div>
+
+					<div class="list">
+
+						<ul id="order-box">
+
+							{loop $order $item}
+
+							<!-- Not show not confirmed / expired orders-->
+						{if $item['order_status']!=-1}
+						{if $item['order_delivery_method_type']!=1 || $item['order_status']!=1}
+						
+
+							<li>
+
+								<div class="num_date">
+
+									<div class="num">Order number:{$item['order_sn_number']}</div>
+
+									<div class="date">{date('d/m/Y H:i',$item['order_addtime'])}</div>
+
+								</div>
+
+								<div class="order_msg">
+
+									<div class="fl1">
+
+										<img src="{$item['recovery']['recovery_img']}"/>
+
+										<p>{$item['recovery']['recovery_title']}</p>
+
+									</div>
+
+									{if $item['order_status']==-5}
+
+									<div class="status">Returned</div>
+
+									{/if}
+
+									{if $item['order_status']>=6}
+
+									<div class="status">Completed</div>
+
+									{/if}
+
+									{if $item['order_status']==5}
+
+									<div class="status">Verified</div>
+
+									{/if}
+
+									{if $item['order_status']==3 || $item['order_status']==4}
+
+									<div class="status">Received</div>
+
+									{/if}
+
+									{if $item['order_status']==2}
+
+									<div class="status">Order Confirmed</div>
+
+									{/if}
+
+									{if $item['order_delivery_method_type']==2 && $item['order_status']==1}
+
+									<em class="status on" onclick="show_tan({$item['order_id']});">Notify Dropoff</em>
+
+									{/if}
+
+									{if $item['order_delivery_method_type']==3 && $item['order_status']==1}
+
+									<div class="status">Walk-in Confirmed</div>
+
+									{/if}
+
+									{if $item['order_status']==-1}
+
+									<div class="status">Quote Expired</div>
+
+									{/if}
+
+									{if $item['order_delivery_method_type']==3 && time() > strtotime(str_replace("/", "-", $item['order_delivery_number']))+3600*24}
+
+									<div class="status">Lapsed</div>
+
+									{/if}
+
+									{if $item['order_status']==0}
+
+									<div class="status">Cancelled</div>
+
+									{/if}
+
+									<div class="price">${$item['order_totalprice']}</div>
+
+									<a href="{url('flowerhua/order_detail',array('order_id'=>$item['order_id']))}" class="viewdetail">View Details</a>
+
+								</div>
+
+							</li>
+
+							{/if}
+							{/if}
+							
+							{/loop}
+
+						</ul>
+
+					</div>
+
+				</div>
+
+
+				<!--confirm-->
+
+				<div class="confirm_pop">
+
+					<div class="content">
+
+						<div class="content_info">
+
+							<div class="title">Dropoff Confirmation</div>
+
+							<div class="tit_in">Parcel has been dropped off at POPStation</div>
+
+						</div>
+
+						<img src="{SITE_THEME}img/close.png" class="close" onclick="hideconfirm()"/>
+
+						<button class="confirm" onclick="confirm_order_status()">Confirm</button>
+
+					</div>
+
+				</div>
+
+				<!--confirm-->
+
+			</div>
+
+<!--	<p class="nomore">loading...</p>-->
+
+	</body>
+
+
+
+</html>
+
+<input type="hidden" name="" id="order_id_hidden" value="">
+
+<script>
+
+    function show_tan(order_id){
+
+        $('#order_id_hidden').val(order_id);
+
+        $(".confirm_pop").show();
+
+    }
+
+    function confirm_order_status(){
+
+        var order_id = $('#order_id_hidden').val();
+
+//        layer.open({content:'Confirm the delivery mailbox?',yes:function(){
+
+            $.ajax({
+
+                url: "index.php?c=ajax_formflowerhua&a=ajax_change_orderstatus2",
+
+                type: "post",
+
+                async:false,
+
+                data: {
+
+                    order_id : order_id,
+
+                },
+
+                dataType: 'json',
+
+                success: function (data) {
+
+                    if(data.code==1){
+
+//                        layer.msg('success!',{time:3000,icon:1,end:function(){
+
+                            location.reload();
+
+//                        }});
+
+                    }
+
+                }
+
+            });
+
+//        }})
+
+    }
+
+    function hideconfirm(){
+
+        $(".confirm_pop").hide();
+
+    }
+
+    var page = 1;
+
+    function get_pagelist() {
+
+        $('.nomore').show();
+
+        var order_box = $('#order-box');
+
+        $.ajax({
+
+            url: location.href,
+
+            type: "post",
+
+            data:{page:page},
+
+            dataType: 'html',
+
+            success: function (data) {
+
+                if (data != 1) {
+
+                    $('.nomore').text('loading...');
+
+                    order_box.append(data);
+
+                }else{
+
+                    $('.nomore').text(' ');
+
+                }
+
+            }
+
+        });
+
+    }
+
+    var tur = true;
+
+
+
+    function scrollFn() {
+
+        //真实内容的高度
+
+        var pageHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+
+        //视窗的高度
+
+        var viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+
+        //隐藏的高度
+
+        var scrollHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+        tur = true;
+
+        if (pageHeight - viewportHeight - scrollHeight < 1) {    //如果满足触发条件，执行
+
+            page++;
+
+            get_pagelist();
+
+            return false;
+
+        }
+
+    }
+
+
+
+    $(window).scroll(function () {
+
+        if (tur) {
+
+            setTimeout(scrollFn, 500);
+
+            tur = false;
+
+        } else {
+
+        }
+
+    });//绑定滚动事件
+
+
+
+	$('.barclick').on('click',function(){
+
+		$(this).find('p').toggleClass('on');
+
+		$(this).find('ol').toggleClass('on');
+
+	})
+
+</script>
+

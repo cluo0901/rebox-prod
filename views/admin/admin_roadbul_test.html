@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {template admin/top}
+    <title>Document</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{ADMIN_THEME}js/layer/layer.js"></script>
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layer/skin/default/layer.css">
+</head>
+<body>
+<select id="ProductTypeId" onchange="ProductTypeId2Sizes(this)">
+    <option value="">Please choose ProductType</option>
+    {loop $roadbul_array $t}
+    <option value="{$t['Id']}">{$t['ProductTypeName']}</option>
+    {/loop}
+</select>
+<select id="SizeId" onchange="SizeId2Services(this)">
+    <option value="">Please choose Size</option>
+</select>
+<select id="ServicesId" onchange="ServicesId2Time(this)">
+    <option value="">Please choose Services</option>
+</select>
+<select id="PickupId">
+    <option value="">Please choose Pickup Time</option>
+</select>
+<select id="DeliveryId">
+    <option value="">Please choose Delivery Time</option>
+</select>
+</body>
+<script>
+    function ProductTypeId2Sizes(a){
+        var laytip = layer.open({type:3,icon:2});
+        $.ajax({
+            url: "index.php?s=admin&c=roadbul&a=ajax_ProductTypeId2Sizes",
+            type: "post",
+            data: {ProductTypeId : $(a).val(),},
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#SizeId').html(data.result);
+                    layer.close(laytip);
+                }else{
+//                    layer.msg(data.result_err,{time:2000,anim:3,icon:0});
+                    alert(data.result_err);
+                }
+            }
+        });
+    }
+    function SizeId2Services(a){
+        var laytip = layer.open({type:3,icon:2});
+        $.ajax({
+            url: "index.php?s=admin&c=roadbul&a=ajax_SizeId2Services",
+            type: "post",
+            data: {SizeId : $(a).val(), ProductTypeId : $('#ProductTypeId').val(),},
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#ServicesId').html(data.result);
+                    layer.close(laytip);
+                }else{
+//                    layer.msg(data.result_err,{time:2000,anim:3,icon:0});
+                    alert(data.result_err);
+                }
+            }
+        });
+    }
+    function ServicesId2Time(a){
+        var laytip = layer.open({type:3,icon:2});
+        $.ajax({
+            url: "index.php?s=admin&c=roadbul&a=ajax_ServicesId2Time",
+            type: "post",
+            data: {ServiceId : $(a).val()},
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#PickupId').html(data.resultPickup);
+                    $('#DeliveryId').html(data.resultDelivery);
+                    layer.close(laytip);
+                }else{
+//                    layer.msg(data.result_err,{time:2000,anim:3,icon:0});
+                    alert(data.result_err);
+                }
+            }
+        });
+    }
+</script>
+</html>

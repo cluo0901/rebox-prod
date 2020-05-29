@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Sign Up</title>
+		{template head}
+	
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+	<body class="grey">
+		<div class="regbox">
+			<div class="reg">
+				<a href="index.php">
+					<img src="{$SITE_LOGO}" class="logo" width="100%">
+				</a>
+				<div class="clear">
+					<a href="{url('login/login_system')}" class="fl"><strong>Sign In</strong></a>
+					<a href="{url('login/register')}" class="fr on"><strong>Sign Up</strong></a>	
+									
+				</div>
+				<input id="phone" type="text" placeholder="Enter Mobile">
+				<div class="inp">
+					<input id="code" type="text" placeholder="Enter One-Time Passcode">
+					<a id="getcode" href="javascript:sendMessage();">Send OTP</a>
+				</div>
+				<input id="password" type="password" placeholder="Create Password">
+				<input id="try_password" type="password" placeholder="Repeat Password">
+				<div class="agree">
+                 <script>
+                     var info = '{$info[personal_information3]}';
+                </script>
+					<input id="xieyi" type="checkbox"><span>I agree to<a href="javascript:;" onclick="layer.open({title:false, closeBtn:0,area:['800px','500px'],content:info,btn:['I Agree']});"> {$info['personal_information_title3']}</a></span>
+				</div>
+				<input class="signUpUp" type="submit" value="Sign Up" onclick="register2system();" >
+				
+                <!-- <p style="font-size: 14px; color: grey; line-height: 20px;"><br>$10 promo code will be sent to you via WhatsApp or SMS within 24 hours upon successful signup.</p> -->
+
+			</div>
+		</div>
+		<div class="ban">
+			<a href="index.php">Return To Home</a><br />
+			{$SITE_ICP}
+		</div>
+	</div>
+	</body>
+	<script>
+		function register2system(){
+		    fbq('track', 'CompleteRegistration');
+            var n;
+            var phone = $('#phone').val();
+            var code = $('#code').val();
+            var password = $('#password').val();
+            var try_password = $('#try_password').val();
+            var xieyi = $('#xieyi').prop('checked');
+            if(phone == '' || phone == null){
+                layer.msg('Please fill in your mobile phone number',{icon:0});return false;
+			}else if(phone < 80000000 || phone > 99999999){
+                layer.msg('Please enter the correct phone number',{icon:0});return false;
+			}else if(code == '' || code == null){
+                layer.msg('Please fill in your verification code',{icon:0});return false;
+            }else if(password == '' || password == null){
+                layer.msg('Please fill in your password',{icon:0});return false;
+            }else if(try_password == '' || try_password == null){
+                layer.msg('Please fill in your password again',{icon:0});return false;
+            }else if(try_password != password){
+                layer.msg('The two passwords are not the same',{icon:0});return false;
+            }else if(xieyi == false){
+                layer.msg('Please look at it first Terms of Use',{icon:0});return false;
+            }
+			n = false;
+			$.ajax({
+				url: "index.php?c=login&a=ajaxcode",
+				type: "post",
+				async: false,
+				data: {"code":code,"phone":phone},
+				success: function (data) {
+					if(data==0){
+					    layer.msg('Verification code error',{icon:0});return false;
+					}else{
+					    n = true;
+                        //开始传值保存会员信息
+                        $.ajax({
+                            url: "index.php?c=login&a=ajax_save_memberinfo",
+                            type: "post",
+                            async:false,
+                            data: {
+                                phone : phone,
+                                password : password,
+                                is_jump : '{$recovery_parameters}'
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                if(data.code==1){    
+                                        //send registration notification
+                                        var xmlhttp = new XMLHttpRequest();
+                                        xmlhttp.open("POST", "https://rebox.com.sg/mobile_recircle/sendmail_signup.php", true);
+                                        xmlhttp.send(); 
+
+                                                                              
+                                                                                                     
+                                        if('{$recovery_parameters}'){
+                                            layer.msg('Successfully signed up & Order submitted!',{icon:1,end:function(){
+                                                
+                                                //repeat
+                                                // Get the variable
+                                                var myData1 = JSON.parse(localStorage.getItem("objectToPass"));
+                                                localStorage.removeItem("objectToPass"); // Clear the localStorage
+                                                var lay = layer.open({type:3,icon:1});
+                                                $.ajax({
+                                                    url: 'index.php?c=ajax_formflowerhua&a=ajax_submit2orderinfo',
+                                                    type: "post",
+                                                    data: {
+                                                        order_id : myData1[0],
+                                                        fang : myData1[1],
+                                                        postal_code : myData1[2],
+                                                        postal_address : myData1[3],
+                                                        postal_unit : myData1[4],
+                                                        resultPickup_date : myData1[5],
+                                                        resultPickup : myData1[6],
+                                                        payment_id : myData1[7],
+                                                        payment_name : myData1[8],
+                                                        payment_number : myData1[9],
+                                                        walkin_date : myData1[10], //add in walkin number as wuliu as well
+                                                        customerNote:  myData1[11],
+                                                        customerSurvey: myData1[12]
+                                                    },
+                                                    dataType: 'json',
+                                                    //async: false;
+                                                    success: function (data) {
+                                                        if(data.code==-100){
+                                                            layer.open({content:data.result_err,icon:3});
+                                                        }if(data.code==-1){
+                                                            layer.open({content:data.msg,icon:3});
+                                                        }else if(data.code==1){
+                                                                //send order email
+                                                                var xmlhttp = new XMLHttpRequest();
+                                                                console.log(data.order_delivery_number);
+                                                                if (data.order_delivery_method_type==2) {
+                                                                    xmlhttp.open("GET", "https://rebox.com.sg/sendmail.php?orderno="+data.order_sn, true);   
+                                                                } else if (data.order_delivery_method_type==3) {
+                                                                    xmlhttp.open("GET", "https://rebox.com.sg/sendmail4.php?orderno="+data.order_sn, true);    //walkin               
+                                                                } else if (data.order_delivery_number == null) {
+                                                                    xmlhttp.open("GET", "https://rebox.com.sg/sendmail3.php?orderno="+data.order_sn, true);
+
+                                                                } else {
+                                                                    xmlhttp.open("GET", "https://rebox.com.sg/sendmail2.php?orderno="+data.order_sn, true);
+
+                                                                }
+                                                                xmlhttp.send();
+                                                                //send order email ends
+                                                            location.href="index.php?c=flowerhua&a=order_submit_ok&order_id="+data.order_id;
+                                                        }
+                                                        layer.close(lay);
+                                                    }
+                                                });
+
+                                                //location.href='index.php'+'{htmlspecialchars_decode($recovery_parameters)}';
+                                            }});
+                                        }else{
+                                            // sendCoupon(); 
+                                            layer.msg('Successfully signed in. Start selling now!',{icon:1,end:function(){
+                                                location.href="index.php";
+                                            }});                                            
+                                        }
+                                        
+                                }
+                            }
+                        });
+					}
+				}
+			});
+		}
+
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+        function sendMessage() {
+            curCount = count;
+            var phone = $.trim($("#phone").val());
+            if (!phone) {
+                layer.msg('Please enter the phone number',{icon:0});return false;
+            } else if (phone < 80000000 || phone > 99999999) {
+                layer.msg('Please enter the correct phone number',{icon:0});return false;
+            }
+            $.ajax({
+                type: 'post',
+                url: "index.php?c=login&a=ajax_sendcode",
+                data: {phone: phone},
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    if (data) {
+                        if (data.code == 1) {
+                            $("#getcode").attr("href", "javascript:;");
+                            $('#getcode').css('background','#e9ebed');
+                            $("#getcode").html('Send success');
+                            $("#phone").attr('readonly', 'readonly');
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        } else if (data.code == 2) {
+                            layer.open({'title': 'Form hints', 'content': 'The phone number has been registered',});
+                            return false;
+                        } else if (data.code == 3) {
+                            layer.open({'title': 'Form hints', 'content': 'Fail in send'+data.sms_err,});
+                            return false;
+                        }
+                    } else {
+                        $("#getcode").attr("href", "javascript:");
+                        $("#getcode").html(curCount + "Resend");
+                        $("#phone").attr('readonly', 'readonly');
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }
+                }
+            });
+            
+        }
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#getcode").attr("href", "javascript:sendMessage();");
+                $("#getcode").html("Resend");
+                $('#getcode').css('background','#ffcc00');
+            }
+            else {
+                curCount--;
+                $("#getcode").html("Resend in "+curCount+'s');
+            }
+        }
+
+        //send sms coupon
+                                        function sendCoupon() {
+                                            var phone = $.trim($("#phone").val());
+                                            
+                                            $.ajax({
+                                                type: 'post',
+                                                url: "index.php?c=login&a=ajax_sendcoupon",  // what url should i use?
+                                                data: {phone: phone},
+                                                dataType: "json",
+                                                async:false,
+                                                success: function (data) {
+                                                    if (data.code == 1) {
+                                                        console.log('Send coupon success!');
+                                                    }
+                                                    // if (data) {
+                                                    //     if (data.code == 1) {
+                                                    //         $("#getcode").attr("href", "javascript:;");
+                                                    //         $('#getcode').css('background','#e9ebed');
+                                                    //         $("#getcode").html('Send success');
+                                                    //         $("#phone").attr('readonly', 'readonly');
+                                                    //         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                                    //     } else if (data.code == 2) {
+                                                    //         layer.open({'title': 'Form hints', 'content': 'The phone number has been registered',});
+                                                    //         return false;
+                                                    //     } else if (data.code == 3) {
+                                                    //         layer.open({'title': 'Form hints', 'content': 'Fail in send'+data.sms_err,});
+                                                    //         return false;
+                                                    //     }
+                                                    // } else {
+                                                    //     $("#getcode").attr("href", "javascript:");
+                                                    //     $("#getcode").html(curCount + "Resend");
+                                                    //     $("#phone").attr('readonly', 'readonly');
+                                                    //     InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                                    // }
+                                                }
+                                            });
+                                            
+                                        }
+
+	</script>
+</html>

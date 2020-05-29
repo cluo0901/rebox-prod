@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+	<!-- End Google Tag Manager -->
+
+	<!-- Facebook Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];
+	s.parentNode.insertBefore(t,s)}(window,document,'script',
+	'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '637804786589286'); 
+	fbq('track', 'PageView');
+	</script>
+	<noscript>
+	<img height="1" width="1" 
+	src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+	&noscript=1"/>
+	</noscript>
+	<!-- End Facebook Pixel Code -->
+
+</head>
+
+	<body>
+
+		<div class="user_device">
+
+			{template header}
+
+			<div class="nav_list">
+
+				<ul>
+
+					<li class="on">
+
+						<i>1</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title1']}</p>
+
+					</li>
+
+					<li>
+
+						<i>2</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title2']}</p>
+
+					</li>
+
+					<li>
+
+						<i>3</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title3']}</p>
+
+					</li>
+
+					<li>
+
+						<i>4</i>
+
+						<p>{$recovery_step['recovery_step_title4']}</p>
+
+					</li>
+
+				</ul>
+
+			</div>
+
+			
+
+			<div class="device ">
+
+				<p style="font-size: 0.22rem; color: #fff; line-height: 0.36rem; background-color: #ccc; padding: 0.1rem 0.2rem;">Actual condition of your device will be verified with reference to the selections below upon receipt by Rebox. Express payment will be made within 1 hour for accurate selections upon verification.</p>
+
+				<div class="device_name" style = "background: none;">
+					<p>{$data['recovery_title']} <span style="font-size: 0.26rem;font-weight: 400; color: #333333;">(Local Set Only)</span></p>
+
+					<a href = "https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=recovery_list" style = "float: right; font-size: 12px; color: #ffcc00; margin: 0.2rem 0 0 0;">Reselect Model ></a>
+
+				</div>
+
+				<!-- <div style="clear:both"></div> -->
+
+				<!-- add reminder to accurate selection -->
+				<!-- <h5 style = "background: #f0f0f0; font-size: 0.26rem; text-align: center; line-height: 35px; color: #ff5400; margin-bottom: 4px;">Accurate selection will speed up payment process</h5> -->
+
+				<form action="" method="post">
+
+				<!--sele-->
+
+				{loop $data['parameter'] $k=>$o}
+
+				<div class="sele">
+
+					<div class="tit">{$o['parameter_name']}</div>
+
+					<div class="selli">
+
+						<ul>
+
+							{loop $o['parameter'] $kk=>$item}
+
+							<li class=" op">
+
+							<div class="lit" >
+
+								<p>{$item['parameter_name']}</p>
+
+								<div class="selibox">
+
+									{loop $item['parameter'] $t}
+
+									<!-- 原先代码开始 -->
+									<!-- <span data-id="{$t['id']}" {if in_array($t['id'],array_filter(explode(',',$priceValue)))}class="on"{/if}>{$t['parameter_name']}</span> -->
+									<!-- 原先代码结束 -->
+
+									<!-- 修改代码开始 -->
+									<span data-id="{$t['id']}" {if in_array($t['id'],array_filter(explode(',',$priceValue)))}class="on"{/if}>{$t['parameter_name']}
+
+											{if $t['parameter_description'] || $t['parameter_img']}
+
+		                                    <img src="{SITE_THEME}img/icon34.png"  src1="{SITE_THEME}img/icon35.png" src2="{SITE_THEME}img/icon34.png" class="icon" style = "float: right; margin: 0.1rem 0.25rem 0 0;">       
+	                                		{/if}
+									</span>
+	                                	
+									<div class="explain" style = "display: none; top: 0.6rem; width: 99%; font-size: 0.26rem; color: #000000; line-height: 0.5rem; text-align: left; margin: 2px 0; border: solid; border-width: 0 1px 1px 1px; border-radius: 0.04rem; border-color: #dcdcdc;">        
+
+											{if $t['parameter_img']}
+
+											<img src="{$t['parameter_img']}" style = "display: block; width: 100%;">
+
+                                        	{/if}
+
+											{if $t['parameter_description']}
+											<div class="posp" style = "padding: 5px;">
+
+												{$t['parameter_description']}
+
+											</div>
+											{/if}
+		                                    
+									</div>	
+									<!-- 修改代码结束 -->
+
+									{/loop}
+
+								</div>
+
+							</div>	
+
+							</li>
+
+							{/loop}
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				{/loop}
+
+				<!--sele end-->
+
+				<!-- functional issue only applies to used phone and apple, samsung -->
+
+				{if $data['recovery_type_id'] != 68 && $data['ch_parameter'] != NULL} 
+
+				<div class="sele issues" {if $chpriceValue || $priceValue}style="opacity:1;"{/if}>
+
+					<div class="tit">Functional Issues </div>
+
+					<div class="funlist ch_parameter">
+
+						<ul>
+
+						{loop $data['ch_parameter'] $item}
+
+							<li {if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}class="on"{/if}>
+
+							<img src="{if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}{$item['parameter_img1']}{else}{$item['parameter_img']}{/if}" src1="{$item['parameter_img']}" src2="{$item['parameter_img1']}">
+
+								<input class="parameter_name" name="parameter_name[]" type="checkbox" value="{$item['id']}" {if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}checked{/if}>
+
+								<p style="max-height:40px;">{$item['parameter_name']}</p>
+
+							</li>
+
+						{/loop}	
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				
+
+				<!--issue-->
+				<!-- check if agent, do not display accessroies section -->
+				{if $agent_check != 1}
+				<div class="sele issues issues2" {if $chpriceValue || $priceValue}style="opacity:1;"{/if}>
+
+					<div class="tit">Missing or Damaged Accessories</div>
+
+					<div class="funlist ch_parameter">
+
+						<ul>
+
+							{loop $data['ch_parameter2'] $item}
+
+								<li {if in_array($item['id'],array_filter(explode(',',$chpriceValue2)))}class="on"{/if}>
+
+								<img src="{if in_array($item['id'],array_filter(explode(',',$chpriceValue2)))}{$item['parameter_img1']}{else}{$item['parameter_img']}{/if}" src1="{$item['parameter_img']}" src2="{$item['parameter_img1']}">
+
+								
+
+								<input class="parameter_name2" name="parameter_name[]" type="checkbox" value="{$item['id']}" {if in_array($item['id'],array_filter(explode(',',$chpriceValue2)))}checked{/if}>
+
+								<p style="max-height:40px;">{$item['parameter_name']}</p>
+
+								</li>
+
+							{/loop}
+
+						</ul>
+
+					</div>
+
+				</div>
+
+				{/if}
+
+				{/if}
+
+				<!--issue end-->
+
+				<!-- <p style = "font-size: 0.25rem; color: #FF5400; text-align: center; margin-top:0.3rem; width: 100%; line-height: 0.6rem;">A nominal fee of $3 will be applied for return if the above selection is materially different from the actual condition.</p> -->
+				<input type="button" value="Get Quote" disabled class="btn disable" onclick="submit_recovery_info()">
+
+			</div>
+
+			  </form>
+
+			<!--popup-->
+
+			<div class="device_pop">
+
+				<div class="content">
+
+					<img src="{SITE_THEME}img/icon-warn.png"/>
+
+					<div class="tips">Apologies,we are currently unable to accept any non-functioning</div>
+
+					<input type="button" value="OK" class="ok" onclick="hide_tan()"/>
+
+				</div>
+
+			</div>
+
+			<!--popup-->
+
+		</div>
+
+	</body>
+
+</html>
+
+<script>
+
+	//增加代码开始 - 点击小圆圈打开或隐藏图片文字解释
+	$('.icon').on('click', function(){	
+		
+		$(this).parent('span').next('.explain').toggle();		
+		
+	})
+	//增加代码结束
+
+	$('.issues .funlist ul li').on('click',function(){
+
+	    $(this).toggleClass('on');
+
+		var checked = $(this).find('input').prop('checked');
+
+		var src1 = $(this).find('img').attr('src1');
+
+		var src2 = $(this).find('img').attr('src2');
+
+		if(checked){
+
+			$(this).find('img').attr('src',src2)
+
+		}else{
+
+			$(this).find('img').attr('src',src1)
+
+		}
+
+	})
+
+</script>
+
+<script>
+
+function submit_recovery_info(){
+
+    var data_arr = [];
+
+    var data_arr_value = [];
+
+    var data_ch_arr = [];//多选项
+
+    var data_ch_arr2 = [];//多选附件项
+
+    for(var i = 0 ; i < $('.selibox .on').length ; i++){
+
+        //修改前
+        data_arr.push($('.selibox .on').eq(i).attr('data-id'));
+        data_arr_value.push($('.selibox .on').eq(i).text());
+
+        //修改后
+        // data_arr.push($('.selibox .on').eq(i).children('b').attr('data-id'));
+
+        // data_arr_value.push($('.selibox .on').eq(i).children('b').text());
+
+    }
+
+    for(var i = 0 ; i < $('.ch_parameter li.on .parameter_name').length ; i++){
+
+        data_ch_arr.push($('.ch_parameter li.on .parameter_name').eq(i).val());
+
+    }
+
+    for(var i = 0 ; i < $('.ch_parameter li.on .parameter_name2').length ; i++){
+
+        data_ch_arr2.push($('.ch_parameter li.on .parameter_name2').eq(i).val());
+
+    }
+
+    location.href="index.php?c=flowerhua&a=recovery_instant_quote&recovery_id={$recovery_id}&priceValue="+escape(data_arr)+"&chpriceValue="+escape(data_ch_arr)+"&chpriceValue2="+escape(data_ch_arr2);
+
+}
+
+function show_tan(){
+
+	$(".tan").show();
+
+	$("body").addClass("hidden");
+
+}
+
+function hide_tan(){
+
+	$(".tan").hide();
+
+	$("body").removeClass("hidden");
+
+}
+
+$(".tan").click(function(){
+
+	hide_tan()
+
+})
+
+</script>
+
+
+
+
+
+	<style>.issue{opacity: 0.3;}</style>
+
+	<script>
+
+		var num = 1;
+
+		$(".selli .selibox span").click(function() {
+
+//			var cl = $(this).parents(".seli").hasClass("op");
+
+//			if(cl){
+
+//				$(this).parents(".selibox").siblings(".lit").find("span").show();
+
+//				var txt = $(this).find("b").text();
+
+//				var data_id = $(this).find("b").attr('data-id');
+
+//                $(this).parents(".selibox").siblings(".lit").find("font").text(txt);
+
+//                $(this).parents(".selibox").siblings(".lit").find("font").attr('data-id',data_id);
+
+//				$(this).parents(".selibox").hide();
+
+				check_lens();
+
+//				var tag = $(this).parents(".seli").next("");
+
+//				var height = $(this).parents(".seli").outerHeight(true);
+
+//				var scrollT = $(window).scrollTop();
+
+//
+
+//				if($(tag)[0]){
+
+//					$(this).parents(".seli").next(".seli").addClass("op");
+
+//					$("body,html").stop(true).animate({"scrollTop": scrollT + height +"px"},500)
+
+//				}else{
+
+//
+
+//					var box = $(this).parents(".sele").next(".sele").hasClass("issue");
+
+//						$("body,html").stop(true).animate({"scrollTop": scrollT + height + 58 +"px"},500)
+
+//
+
+//					if(box){
+
+//						$(this).parents(".sele").siblings(".issue").css({"opacity":1})
+
+//					}
+
+//					$(this).parents(".sele").siblings(".sele").find(".seli").eq(0).addClass("op");
+
+//				}
+
+//			}
+
+		})
+
+		$(".seli .lit  em").click(function() {
+
+			$(this).parents("span").hide();
+
+			$(this).parents(".lit").siblings(".selibox").show()
+
+		})
+
+		$(".islist ul li").click(function() {
+
+			var bool = $(this).find("input").prop("checked");
+
+			if(bool) {
+
+				var src2 = $(this).find("img").attr("src2");
+
+				$(this).find("img").attr({
+
+					"src": src2
+
+				});
+
+				$(this).addClass("on")
+
+			} else {
+
+				var src1 = $(this).find("img").attr("src1");
+
+				$(this).find("img").attr({
+
+					"src": src1
+
+				});
+
+				$(this).removeClass("on")
+
+			}
+
+		})
+
+		function check_lens() {
+
+			var lens = 1;
+
+			for(var i = 0; i < $(".selli .op .selibox").length; i++) {
+
+				var txt = $(".selli .op .selibox").eq(i).children('span.on');
+
+				if(txt.length >0) {
+
+                    lens++;
+
+				}
+
+			}
+
+
+			if(lens >= $(".selli .op .selibox").length) {
+
+                $(".device input.btn").removeClass("disable");
+
+                $(".device input.btn").removeAttr("disabled")
+
+			} else {
+
+                $(".device input.btn").addClass("disable");
+
+                $(".device input.btn").attr({
+
+					"disable": "disable"
+
+				})
+
+			}
+
+		}
+
+
+
+		$('.selli ul li .selibox span').on('click',function(){
+
+			$(this).addClass('on').siblings().removeClass('on');
+
+		})
+
+
+	</script>
+
+    {if $priceValue}
+
+    <script>
+
+        $(".device input.btn").removeClass("disable");
+
+        $(".device input.btn").removeAttr("disabled")
+
+    </script>
+
+    {/if}
+

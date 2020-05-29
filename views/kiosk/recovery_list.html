@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+	</head>
+
+	<body>
+
+        <div class="kiosk_hide">
+
+		  {template header}
+
+        </div>
+
+
+
+		<div class="prolist ">
+
+			<div class="container">
+
+				<div class="pronav">
+
+					<ul id="recovery-box">
+
+						<?php $p=0;?>
+
+						{loop $type_list $t}
+
+                        
+
+						<li onclick="add_on(this,{$t['id']});" data-id="<?php echo $p;?>" {if $recovery_type_id == $t['id']}class="on"{/if}>
+
+							<a href="javascript:;">{$t['name']}</a>
+
+						</li>
+
+                        
+
+						<?php $p++;?>
+
+						{/loop}
+
+					</ul>
+
+				</div>
+
+                <script>
+
+                    var lay ;
+
+                    function add_on(a,id){
+
+                        lay = layer.open({type:3,icon:1});
+
+                        $('.add_onn').removeClass('on');
+
+                        $.ajax({
+
+                            url: "index.php?c=ajax_formflowerhua&a=ajax_get_typelist2",
+
+                            type: "post",
+
+                            data: {
+
+                                id : id,
+
+                            },
+
+                            dataType: 'json',
+
+                            success: function (data) {
+
+                                $('#recovery_type_id').val(id);
+
+                                var str ='<li>\n' +
+
+                                    '    <span></span>\n' +
+
+                                    '    <a href="javascript:;" class="selection_brands" onclick="selection_brands(this,\'hits\');">\n' +
+
+                                    '        <img src="{SITE_THEME}img/icon7.png">\n' +
+
+                                    '    </a>\n' +
+
+                                    '</li>';
+
+                                if(data.code==1){
+
+                                    for (var i = 0; i < data.result.length ; i++){
+
+                                        str += '<li>\n' +
+
+                                            '\t\t\t\t\t\t\t<span></span>\n' ;
+
+											if(data.result[i].id == '{$recovery_parent_id}'){
+
+                                                str +='\t\t\t\t\t\t\t<a href="javascript:;" style="border-bottom: 3px solid rgb(255, 204, 0);" class="selection_brands" onclick="selection_brands(this,'+data.result[i].id+');">\n';
+
+											}else{
+
+                                                str +='\t\t\t\t\t\t\t<a href="javascript:;" class="selection_brands" onclick="selection_brands(this,'+data.result[i].id+');">\n';
+
+											}
+
+										str +='\t\t\t\t\t\t\t\t<img  src="' + data.result[i].pic + '">\n' +
+
+                                            '\n' +
+
+                                            '\t\t\t\t\t\t\t</a>\n' +
+
+                                            '\t\t\t\t\t\t</li>';
+
+                                    }
+
+                                    $('#menu-box').html('');
+
+                                    $('#menu-box').append(str);
+
+                                }
+
+                                $(a).siblings('li').removeClass('on');
+
+                                $(a).addClass('on');
+
+                                $('#page').val(0);
+
+                                $('#index-box').html('');
+
+                                ajax_index();
+
+                            }
+
+                        });
+
+                    }
+
+                    function selection_brands(a,id){
+
+                        $('.selection_brands').css('border-bottom','3px solid #e5e5e5');
+
+                        $(a).css('border-bottom','3px solid #ffcc00');
+
+                        lay = layer.open({type:3,icon:1})
+
+                        $('#recovery_parent_id').val(id);
+
+                        $('#page').val(0);
+
+                        $('#index-box').html('');
+
+                        ajax_index();
+
+					}
+
+                    function ajax_index(){
+
+                        var page = $('#page').val();
+
+                        var recovery_type_id = $('#recovery_type_id').val();
+
+                        var recovery_parent_id = $('#recovery_parent_id').val();
+
+                        $.ajax({
+
+                            url: "index.php?c=ajax_formflowerhua&a=ajax_index",
+
+                            type: "post",
+
+                            data: {
+
+                                page:page,
+
+                                recovery_type_id : recovery_type_id,
+
+                                recovery_parent_id : recovery_parent_id,
+
+                            },
+
+                            dataType: 'json',
+
+                            success: function (data) {
+
+                                layer.close(lay);
+
+                                var str = '';
+
+                                if(data.code==1){
+
+                                    for (var i = 0; i < data.result.length ; i++) {
+
+                                        str += '<li>\n' +
+
+                                            '\t\t\t\t\t\t\t<a href="index.php?c=flowerhua&a=recovery_detail&recovery_id='+data.result[i].id+'">\n' +
+
+                                            '\t\t\t\t\t\t\t\t<img src="' + data.result[i].recovery_img + '" class="hover_test">\n' +
+
+                                            '\t\t\t\t\t\t\t\t<h3>'+data.result[i].recovery_title+'</h3>\n' +
+
+                                            '\t\t\t\t\t\t\t\t<p>Buyback Price Upto</p>\n' +
+
+                                            '\t\t\t\t\t\t\t\t<h2>$'+data.result[i].recovery_high_price+'</h2>\n' +
+
+                                            '<span style="border-radius:4px;display:block;padding:5px;width:50%;color:white;background:#ffcc00;margin:0 auto;">SELL NOW</span>' +
+
+                                            '\t\t\t\t\t\t\t</a>\n' +
+
+                                            '\t\t\t\t\t\t</li>';
+
+                                    }
+
+                                    $('#index-box').append(str);
+
+                                    page++;
+
+                                    $('#page').val(page);
+
+//                                    $('.index-box-more').show(200);
+
+                                }else{
+
+                                    $('.index-box-more').hide(200);
+
+//                                    $('#index-box').append('<p align="center" style="padding:20px;font-size:14px;">No data has been found for the time being!</p>');
+
+                                }
+
+                            }
+
+                        });
+
+                    }
+
+                </script>
+
+				<div class="selnav">
+
+					<ul id="menu-box">
+
+
+
+					</ul>
+
+				</div>
+
+				<div class="sellist">
+
+					<ul id="index-box">
+
+					</ul>
+
+				</div>
+
+				<a style="display:none;" href="javascript:;" class="index-box-more">loading...</a>
+
+				<style>
+
+					.index-box-more{
+
+						color: #3782ff;
+
+						display: grid;
+
+						margin: 0 auto;
+
+						margin-top: 25px;
+
+						width: 203px;
+
+						height: 36px;
+
+						font-size: 16px;
+
+						color: #333333;
+
+						text-align: center;
+
+						line-height: 36px;
+
+					}
+
+				</style>
+
+            </div>
+
+		</div>
+
+    <div class="kiosk_hide">
+
+        {template footer}
+
+    </div>
+
+        <input type="hidden" id="recovery_type_id" value="{$recovery_type_id}">
+
+        <input type="hidden" id="recovery_parent_id" value="{$recovery_parent_id}">
+
+        <input type="hidden" id="page" value="">
+
+    <!-- if kiosk mode - screen height > width, hide the component -->
+
+    <script type="text/javascript">
+        if ($(window).height() > $(window).width()) {
+            $(".kiosk_hide").css("display", "none");
+        }
+    </script>
+
+
+
+    </body>
+
+	<script>
+
+		var mySwiper = new Swiper('.swiper-container-2', {
+
+			//autoplay: 2000,//可选选项，自动滑动
+
+			prevButton: '.apprise-btn-pre',
+
+			nextButton: '.apprise-btn-next',
+
+			width: 300,
+
+			slidesPerView: 4
+
+		});
+
+		$('.appraise .swiper-button-prev').click(function() {
+
+			mySwiper.swipePrev();
+
+		});
+
+
+
+		$('.appraise .swiper-button-next').click(function() {
+
+			mySwiper.swipeNext();
+
+		});
+
+		var mySwiper1 = new Swiper('.swiper-container-3', {
+
+			autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+			width: 200,
+
+			slidesPerView: 2
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-prev').click(function() {
+
+			mySwiper1.swipePrev();
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-next').click(function() {
+
+			mySwiper1.swipeNext();
+
+		});
+
+
+
+		var tur = true;
+
+        function scrollFn() {
+
+            //真实内容的高度
+
+            var pageHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+
+            //视窗的高度
+
+            var viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+
+            //隐藏的高度
+
+            var scrollHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+            tur = true;
+
+            if (pageHeight - viewportHeight - scrollHeight < 1) {    //如果满足触发条件，执行
+
+                ajax_index();
+
+                return false;
+
+            }
+
+        }
+
+        $(window).scroll(function () {
+
+            if (tur) {
+
+                setTimeout(scrollFn, 500);
+
+                tur = false;
+
+            } else {
+
+            }
+
+        });//绑定滚动事件
+
+
+
+	</script>
+
+    {if count($type_list)>0}
+
+    <script>
+
+        $(function(){
+
+            var m = $('#recovery-box').find('li.on').attr('data-id');
+
+            if(m>0){
+
+                $('#recovery-box li').eq(m).trigger('click');
+
+			}else{
+
+                $('#recovery-box li').eq(0).trigger('click');
+
+			}
+
+        });
+
+    </script>
+
+    {/if}
+
+</html>

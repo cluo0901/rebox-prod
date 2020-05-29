@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}js/layui/css/layui.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+
+<script type="text/javascript" src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+
+<title>admin</title>
+
+</head>
+
+<body style="font-weight: normal;">
+
+<div class="subnav">
+
+	<div class="content-menu ib-a line-x">
+
+		<div class="layui-btn-group" >
+
+			<a class="layui-btn" href="{url('admin/whizmomember/whizmomember_list')}" class="on"><em>Membership list</em></a>
+
+		</div>
+
+		<!-- add search function -->
+		<form action="" method="post" style="float:left;">
+			<div class="cbtn" style="float: left;">
+					
+				<input placeholder="Search mobile no." type="text" class="input-text" value="{$member_phone}" name="member_phone" size="40" />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			</div>
+		</form>
+		<!-- add search function end -->
+
+	</div>
+
+	<div class="bk10"></div><div class="table-responsive mytable">
+
+		<form action="" method="post" name="myform">
+
+			<input type="hidden" name="submit_del" value="1">
+
+		<table width="100%" class="table table-striped">
+
+		<thead>
+
+		<tr>
+
+			<th width="10%" align="center">Phone number</th>
+
+         	<th width="20%" align="center">Full name</th>
+
+			<!-- <th width="10%" align="center">Country</th> -->
+
+			<th width="10%" align="center">ID No.</th>
+
+        	<!-- <th width="10%" align="center">Gender</th> -->
+
+        	<th width="30%" align="center">Residential Address</th>
+
+        	<th width="10%" align="center">Authentication</th>
+
+		  	<th width="10%" align="center">Add time</th>
+
+			<th width="10%" align="center">Option</th>
+
+		</tr>
+
+		</thead>
+
+		<tbody>
+
+		{loop $list $t}
+
+		<tr height="25">
+
+		 <td align="center">{$t['phone']}</td>
+
+		 <td align="center">{$t['fullname']}</td>
+
+         <!-- <td align="center">{$t['country']}</td> -->
+
+         <td align="center">{$t['nric']}</td>
+
+         <!-- <td align="center">{if $t['sex']==1}Male{else if $t['sex']==2}Female{/if}</td> -->
+
+         {if $t['address']}
+
+         <td align="center">{$t['address']}, {$t['unit']} (S) {$t['postal']}</td>
+
+         {else}
+
+         <td align="center">{$t['address']}</td>
+
+         {/if}
+
+			<td align="center">{if $t['status']==1}Not Verified{else}Verified{/if}</td>
+
+			<td align="center">{date('Y-m-d H:i:s',$t['addtime'])}</td>
+
+			<td align="center">
+
+			<div class="layui-btn-group">
+
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/whizmomember/whizmomember_edit',array('id'=>$t['id']))}">Edit / Verify</a>
+				{if $role_id == 1}
+				<a class="layui-btn layui-btn-danger layui-btn-small" href="javascript:;" onclick="del({$t['id']})">Delete</a>
+				{/if}
+			</div>
+
+			</td>
+
+		</tr>
+
+		{/loop}
+
+		</table>
+
+		{$pagelist}
+
+		</form>
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+    function del(id){
+
+   		layer.open({btn:['Determine','Cancel'],content:'Do you decide to delete it?',btn1:function(){
+
+   				$.ajax({
+
+   					dataType:'json',
+
+   					type:'post',
+
+   					url:"{url('admin/whizmomember/delmember')}",
+
+   					data:{id:id},
+
+   					success:function(data){
+
+   						if(data.code==1){
+
+   							layer.alert(data.info,{end:function(){
+
+   								location.reload();
+
+   							}})
+
+   						}
+
+   					}
+
+   				})
+
+   			}
+
+
+
+   		})
+
+   }
+
+</script>
+
+</body>
+
+</html>

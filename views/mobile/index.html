@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+
+    <link rel="stylesheet" href="views/mobile/css/popup.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '637804786589286'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <!-- Google additional info -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@id": "http://www.rebox.com.sg/#organization",
+        "@type": "Organization",
+        "name": "Rebox",
+        "legalName" : "Whizmo Tech Pte Ltd",
+            "brand" : "Rebox",
+        "url": "http://www.rebox.com.sg/",
+        "logo": "http://rebox.com.sg/mobile_recircle/views/mobile/img/logo_for_google.png",
+        "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3 Ang Mo Kio Street 62, LINK@AMK #06-16",
+        "addressLocality": "Singapore",
+        "postalCode": "569139",
+        "addressCountry": "Singapore"
+        },
+        "sameAs": [ 
+            "https://www.facebook.com/rebox.com.sg/",
+            "https://www.youtube.com/channel/UC5Uh8i74-GUB2P5gnGFPz_w",
+            "http://linkedin.com/company/rebox-com-sg"
+        ]
+    }
+    </script>
+
+    <style type="text/css">
+        
+        .banner_pic img {
+
+            display: none;
+
+        }
+
+        div.item {
+            /* To correctly align image, regardless of content height: */
+            vertical-align: top;
+            display: inline-block;
+            /* To horizontally center images and caption */
+            text-align: center;
+            /* The width of the container also implies margin around the images. */
+            width: 100px;
+            cursor: pointer;
+            margin-right: 30px;
+        }
+        div.item img {
+            width: 75px;
+            height: 75px;
+            background-color: transparent;
+        }
+        div.item .caption {
+            /* Make the caption a block so it occupies its own line. */
+            margin-top: 20px;
+            display: block;
+        }
+        
+        * {
+            box-sizing: unset !important;
+            /* -webkit-box-sizing: border-box; */
+        }
+
+        input {
+            font: initial !important;
+        }
+
+    </style>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!-- popup -->
+<!--     <div id="thover" style="display: none;"></div>
+
+    <div id="tpopup" style="display: none;">    
+
+       <a href="https://www.rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=215" target="_blank"><img src="views/mobile/img/popup.png" alt="popup"></a>    
+      
+      <button id="tclose" style="color: white;">X</button>        
+
+    </div>   --> 
+    <!-- popup end -->
+
+    <div>
+        <!-- <img data-modal-trigger="trigger-1" id="faq" src="views/mobile/img/video_pc.png" style = "position:fixed; left: 0.6rem; bottom: 0.5rem; max-width: 1.4rem; z-index:99;"> -->
+        <iframe id = "youtube" width="100%" height="280" src="https://www.youtube.com/embed/GbouzcIF_bk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display:none;position:fixed; top:20%;z-index:999999999;"></iframe>
+        <img id="youtube_close" src="views/mobile/img/youtube_close.png" style = "display: none; position:fixed; left: 44%; top: 80%; max-width: 12%; z-index:99999;">
+
+    </div>
+
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // $('#video').click(function () {
+            //     $('#youtube').attr('src', 'https://www.youtube.com/embed/GbouzcIF_bk');
+            //     $('#youtube').css('display', 'block');
+            //     $('#youtube_close').css('display', 'block');
+            // });
+            $('#youtube_close').click(function () {
+                $('#youtube').attr('src', '');
+                $('#youtube').css('display', 'none');
+                $('#youtube_close').css('display', 'none');
+            });
+
+
+
+
+
+        });
+
+        const buttons = document.querySelectorAll(`button[data-modal-trigger]`);
+
+        for(let button of buttons) {
+            modalEvent(button);
+        }
+
+        function modalEvent(button) {
+            button.addEventListener('click', () => {
+                const trigger = button.getAttribute('data-modal-trigger');
+                const modal = document.querySelector(`[data-modal=${trigger}]`);
+                const contentWrapper = modal.querySelector('.content-wrapper');
+                const close = modal.querySelector('.close');
+
+                console.log(modal);
+
+                close.addEventListener('click', () => modal.classList.remove('open'));
+                modal.addEventListener('click', () => modal.classList.remove('open'));
+                contentWrapper.addEventListener('click', (e) => e.stopPropagation());
+
+                modal.classList.toggle('open');
+            });
+        }
+
+    </script>
+
+
+
+		<div class="home">
+
+			{template header}
+
+			<!--banner-->
+
+<!-- 			<div class="swiper-container">
+
+				<div class="swiper-wrapper">
+
+					{loop $banner_list $item}
+
+					<div class="swiper-slide">
+
+						<a href="{$item['link']}"><img src="{$item['guanggaotutupian']}"/></a>
+
+					</div>
+
+					{/loop}
+
+				</div>
+
+				<div class="swiper-pagination"></div>
+
+			</div> -->
+
+			<!--banner end-->
+
+            <!-- change to picture banner to explain process -->
+
+            <div class="banner_pic">
+
+               <img id="banner1" class="banner_on" src="views/mobile/img/sellin60.png" style="width:100%;"> 
+
+               <img id="banner2" src="views/mobile/img/new_outlet.png" style="width:100%;"> 
+                
+            </div>
+
+            <!-- change to picture banner to explain process end -->
+
+			<!-- <div class="spec-5"></div> -->
+
+			<div class="process">
+
+                <p style="display: block; font-size: 0.32rem; font-weight: bold; color: rgba(56, 56, 56, 0.8); text-align: center; margin-bottom: 0.45rem;">- Selling online is business as usual -</p>
+
+				<ul>
+				    <li>
+
+                        <a href="http://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=194">
+                        <img src="{$recovery_step['recovery_step_thumb1']}" class="icon"/><a/>
+
+                        <img src="{SITE_THEME}img/loading.png" class="loading"/>
+
+                        <p>{$recovery_step['recovery_step_title1']}</p>
+
+                    </li>
+
+					<li>
+
+						<a href="http://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=194">
+						<img src="{$recovery_step['recovery_step_thumb2']}" class="icon"/><a/>
+
+						<img src="{SITE_THEME}img/loading.png" class="loading"/>
+
+						<p>{$recovery_step['recovery_step_title2']}</p>
+
+					</li>
+
+					<li>
+						<a href="http://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=194">
+						<img src="{$recovery_step['recovery_step_thumb3']}" class="icon"/><a/>
+
+						<img src="{SITE_THEME}img/loading.png" class="loading"/>
+
+						<p>{$recovery_step['recovery_step_title3']}</p>
+
+					</li>
+
+					<li>
+						<a href="http://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=194">
+						<img src="{$recovery_step['recovery_step_thumb4']}" class="icon"/><a/>
+
+						<p>{$recovery_step['recovery_step_title4']}</p>
+
+					</li>
+
+				</ul>
+
+
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			
+            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="position: fixed; bottom: 30px; left: 10px;">FAQ</button> -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Frequently Asked Questions</h4>
+                  </div>
+                  <div class="modal-body">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default" style="display: none">
+                                  <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                      <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        How can I get a quote for selling my phone?
+                                      </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        fsefsef
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            How can I get a quote for selling my phone?
+                                      </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                            <p>
+                                                    &nbsp;&nbsp;&nbsp;On REBOX website, you can get an accurate quote on your own in less than a minute.  <br> <br>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1)	Click the brand icon on the home page and choose the model of your phone; <br><br>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2)	Choose the specifications of your phone such as capacity and colour, and select the condition of the phone; <br><br>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3)	Click “Get Quote” to receive a quote instantly. <br><br>
+                                                        &nbsp;&nbsp;&nbsp;* If you can’t find your model on the home page, please click “SELL OTHER PHONES” to see the complete list of models that we are buying back.<br><br>
+            
+                                                </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo2">
+                                          <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                                  Do I get paid on the spot?
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseTwo2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">
+                                          <div class="panel-body">
+                                                  <p>
+                                                           We offer two options to our customers. <br>  <br>
+                                                           1) Bring your phone to our outlets at Jurong Point or City Square Mall to sell. We will check the phone and pay on the spot; or <br> <br>
+                                                           2) Submit a sell order on our website to lock in the price and schedule a free pickup. We will check the phone upon same-day delivery 
+                                                          <br>  and make payment within one hour.
+                                                          <br><br>
+                  
+                                                      </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="headingThree">
+                                    <h4 class="panel-title">
+                                      <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            What is the process like if I choose free pickup service?
+                                      </a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+                                            <p>
+                                                    1)	Submit a sell order online and opt for free pickup service; <br><br> 
+                                                    2)	Receive a unique Pickup Number (starting with “RB”) via SMS instantly; <br><br>
+                                                    3)	Show the Pickup Number to the courier during collection. No printing of shipping label is required; <br><br>
+                                                    4)	We will check the phone upon delivery of the phone within 2-4 hours on the same day; <br><br>
+                                                    
+                                                    <div style="text-align: center;">
+                                                        <iframe width="275" height="275" style="text-align:center" src="https://www.youtube.com/embed/GbouzcIF_bk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    </div>
+                                                    
+            
+                                                    <br><br>
+                                                </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFour">
+                                          <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                              Locations
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                          <div class="panel-body" style="text-align: center;">
+                                                <p>
+                                                        &nbsp;&nbsp;&nbsp;<h3 style="text-decoration: underline; margin-left: 15px;">Jurong Point Outlet</h3> 
+                                                        &nbsp;&nbsp;&nbsp;63 Jurong West Central 3, Jurong Point Shopping Centre, Basement 1 (outside Starhub #B1-12), Singapore 648331 <br>
+                                                        &nbsp;&nbsp;&nbsp;<h3 style="text-decoration: underline; margin-left: 15px;">City Square Mall Outlet </h3>
+                                                        &nbsp;&nbsp;&nbsp;180 Kitchener Road, City Square Mall, #B1-K17 (beside the taxi stand), Singapore 208539 <br><br>
+                                                        &nbsp;&nbsp;&nbsp;Mon - Fri: 12:00PM - 21:00PM  <br>
+                                                        &nbsp;&nbsp;&nbsp;Sat - Sun: 11:30PM - 21:00PM <br>
+                                                        <br>
+                    
+                                                        </p>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingFive">
+                                              <h4 class="panel-title">
+                                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                  Still need more help?
+                                                </a>
+                                              </h4>
+                                            </div>
+                                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                              <div class="panel-body" style="text-align: center;">
+                                                    <h4 style="text-align: center;"> You may contact us for more details through these channels </h4>
+                                                    <br>
+                                                    <p style="text-align: center;">
+                                                      <div class="item">
+                                                          <a href="https://wa.me/6588362145">
+                                                            <img src="/views/view-whizmo/img/whatsapp.png"/>
+                                                            <span class="caption">Whatsapp</span>
+                                                          </a>
+                                                      </div>
+                                                      
+                                                      <div class="item" id="facebook_button">
+                                                          <a href="https://fb.me/rebox.com.sg" target="_blank">
+                                                            <img src="/views/view-whizmo/img/facebook.png"/>
+                                                            <span class="caption">Facebook</span>
+                                                          </a>
+                                                      </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                              </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+			<!--list-->
+
+			<div class="list">
+
+				<div class="nav_list">
+
+					<ul id="recovery-box">
+
+						{loop $type_list $t}
+
+                        
+
+						<li onclick="add_on(this,{$t['id']});">
+
+							{$t['name']}
+
+						</li>
+
+                        
+
+						{/loop}
+
+					</ul>
+
+				</div>
+
+				<div class="brand_list selnav">
+
+					<ul id="menu-box" style="display:none;">
+
+					
+
+					</ul>
+
+				</div>
+
+				<div class="prodlist sellist">
+
+					<ul id="index-box">
+
+						<!--<li>-->
+
+							<!--<a href="user_device.html">-->
+
+								<!--<img src="{SITE_THEME}img/listpic1.jpg"/>-->
+
+								<!--<div class="prodname">honor</div>-->
+
+								<!--<div class="tips">Highest Price</div>-->
+
+								<!--<div class="price">$ 1500</div>-->
+
+							<!--</a>-->
+
+						<!--</li>-->
+
+					</ul>
+
+					<a href="index.php?c=flowerhua&a=recovery_list" class="more">SELL OTHER PHONES</a>
+
+				</div>
+
+			</div>
+
+<!--             <div class="read_review">
+                
+                <img src="mobile_recircle/views/mobile/img/read_reviews.jpeg" style="width:100%;">
+
+            </div> -->
+
+			{template footer}
+
+			 <input type="hidden" id="recovery_type_id" value="">
+
+			<input type="hidden" id="recovery_parent_id" value="">
+
+			<input type="hidden" id="page" value="">
+
+		</div>
+
+    <!-- add whatsapp icon -->
+    <div class="whatsapp">
+        <a href="#" data-toggle="modal" data-target="#myModal"><img id="video" src="views/mobile/img/whatsapp.png" style = "position:fixed; right: 0.5rem; bottom: 0.5rem; max-width: 1.2rem; z-index:99;">
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+    <script type="text/javascript" src="views/mobile/js/popup.js"></script>
+
+
+
+</body>
+
+</html>
+
+<script>
+
+    $(document).ready(function() {
+        $('.banner_on').show();
+        setTimeout(function() {
+            change_banner(); 
+        },5000);
+
+    })
+
+    function change_banner(){
+        $('.banner_on').hide();
+        $('.banner_on').siblings().show();
+        $('#banner1').toggleClass("banner_on");
+        $('#banner2').toggleClass("banner_on"); 
+        setTimeout(function() {
+            change_banner(); 
+        },5000);
+    }
+
+    var lay ;
+
+    function add_on(a,id){
+
+        $('#recovery_parent_id').val('');
+
+        lay = layer.open({type:3,icon:1});
+
+        $('.add_onn').removeClass('on');
+
+        $.ajax({
+
+            url: "index.php?c=ajax_formflowerhua&a=ajax_get_typelist",
+
+            type: "post",
+
+            data: {
+
+                id : id,
+
+            },
+
+            dataType: 'json',
+
+            success: function (data) {
+
+                $('#recovery_type_id').val(id);
+
+                var str ='<li>\n' +
+
+                    '    <span></span>\n' +
+
+                    '    <a href="javascript:;" class="selection_brands" onclick="selection_brands(this,\'hits\');">\n' +
+
+                    '        <img src="{SITE_THEME}img/icon7.png">\n' +
+
+                    '    </a>\n' +
+
+                    '</li>';
+
+                if(data.code==1){
+
+                    for (var i = 0; i < data.result.length ; i++){
+
+                        str += '<li>\n' +
+
+                            '\t\t\t\t\t\t\t<span></span>\n' +
+
+                            '\t\t\t\t\t\t\t<a href="javascript:;" class="selection_brands" onclick="selection_brands(this,'+data.result[i].id+');">\n' +
+
+                            '\t\t\t\t\t\t\t\t<img  src="' + data.result[i].pic + '">\n' +
+
+                            '\n' +
+
+                            '\t\t\t\t\t\t\t</a>\n' +
+
+                            '\t\t\t\t\t\t</li>';
+
+                    }
+
+                    str +='<li>\n' +
+
+                        '    <span></span>\n' +
+
+                        '    <a href="index.php?c=flowerhua&a=recovery_list" class="selection_brands">\n' +
+
+                        '        MORE>>\n' +
+
+                        '    </a>\n' +
+
+                        '</li>';
+
+                    $('#menu-box').html('');
+
+                    $('#menu-box').append(str);
+
+                }
+
+                $(a).siblings('li').removeClass('on');
+
+                $(a).addClass('on');
+
+                $('#page').val(0);
+
+                $('#index-box').html('');
+
+                $('#menu-box li a').eq(0).trigger('click');
+
+            }
+
+        });
+
+    }
+
+    function selection_brands(a,id){
+
+        $('#menu-box li').removeClass('on');
+
+        $('.selection_brands').css('border-bottom','3px solid #e5e5e5');
+
+        $(a).parents('li').addClass('on');
+
+        $(a).css('border-bottom','3px solid #ffcc00');
+
+        lay = layer.open({type:3,icon:1});
+
+        $('#recovery_parent_id').val(id);
+
+        $('#page').val(0);
+
+        $('#index-box').html('');
+
+        ajax_index();
+
+	}
+
+    function ajax_index(){
+
+        var page = $('#page').val();
+
+        var recovery_type_id = $('#recovery_type_id').val();
+
+        var recovery_parent_id = $('#recovery_parent_id').val();
+
+        $.ajax({
+
+            url: "index.php?c=ajax_formflowerhua&a=ajax_index",
+
+            type: "post",
+
+            data: {
+
+                page:page,
+
+                recovery_type_id : recovery_type_id,
+
+                recovery_parent_id : recovery_parent_id,
+
+            },
+
+            dataType: 'json',
+
+            success: function (data) {
+
+                layer.close(lay);
+
+                var str = '';
+
+                if(data.code==1){
+
+                    if(data.result.length<8){
+
+                        $('.index-box-more').hide();
+
+                    }else{
+
+                        $('.index-box-more').show();
+
+                    }
+
+                    for (var i = 0; i < data.result.length ; i++) {
+
+                        if (data.result[i].show_hide == true) {
+
+                            str += '<li>\n' +
+
+                                '\t\t\t\t\t\t\t<a href="index.php?c=flowerhua&a=recovery_detail&recovery_id='+data.result[i].id+'">\n' +
+
+                                '\t\t\t\t\t\t\t\t<img src="' + data.result[i].recovery_img + '"/>\n' +
+
+                                '\t\t\t\t\t\t\t\t<div class="prodname">'+data.result[i].recovery_title+'</div>\n' +
+
+                                '\t\t\t\t\t\t\t\t<div class="tips">Buyback Price</div>\n' +
+
+                                '\t\t\t\t\t\t\t\t<div class="price"><font size="1", font color="grey"><sup>Up To  </sup></font>$'+data.result[i].recovery_high_price+'</div>\n' +
+
+                                '<span>SELL NOW</span>' +
+
+                                '\t\t\t\t\t\t\t</a>\n' +
+
+                                '\t\t\t\t\t\t</li>';
+
+                        }
+
+                    }
+
+                    $('#index-box').append(str);
+
+                    page++;
+
+                    $('#page').val(page);
+
+                }else{
+
+                    $('.index-box-more').hide();
+
+//                    $('#index-box').append('<p align="center" style="padding:20px;font-size:14px;">No data has been found for the time being!</p>');
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+
+</script>
+
+<script>
+
+	var swiper = new Swiper('.swiper-container',{
+
+		autoplay:{
+
+		   disableOnInteraction: false,
+
+		},
+
+		loop:true,
+
+		disableOnInteraction:false,
+
+		pagination: {
+
+			el: '.swiper-pagination',
+
+			clickable:true
+
+		}
+
+	});
+
+	
+
+
+
+</script>
+<!-- <script src="/views/mobile/js/faq.js"></script> -->
+{if count($type_list)>0}
+
+<script>
+
+    $(function(){
+
+        $('#recovery-box li').eq(0).trigger('click');
+
+    });
+
+</script>
+
+{/if}
+
+<script>
+
+        function location_href(){
+
+            location.href="index.php?c=flowerhua&a=recovery_list&recovery_type_id="+$('#recovery_type_id').val()+'&recovery_parent_id='+$('#recovery_parent_id').val();
+
+        }
+
+		var mySwiper = new Swiper('.swiper-container-2', {
+
+			//autoplay: 2000,//可选选项，自动滑动
+
+			prevButton: '.apprise-btn-pre',
+
+			nextButton: '.apprise-btn-next',
+
+			width: 300,
+
+			slidesPerView: 4
+
+		});
+
+
+
+		$('.appraise .swiper-button-prev').click(function() {
+
+			mySwiper.swipePrev();
+
+		});
+
+
+
+		$('.appraise .swiper-button-next').click(function() {
+
+			mySwiper.swipeNext();
+
+		});
+
+		var mySwiper1 = new Swiper('.swiper-container-3', {
+
+			autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+			width: 200,
+
+			slidesPerView: 2
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-prev').click(function() {
+
+			mySwiper1.swipePrev();
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-next').click(function() {
+
+			mySwiper1.swipeNext();
+
+		});
+
+	</script>
+
+   <script>
+
+   
+
+    $('input').keyup(function(){
+
+        var str = $(this).val();
+
+            $.ajax({
+
+                type:'post',
+
+                dataType:'json',
+
+                url: "index.php?c=index&a=search",
+
+                data:{str:str},
+
+                success:function(data){
+
+                   var list = data.list;
+
+                   if(list.length>0){
+
+                     $('.ser').css('display','block');
+
+                   }
+
+                   var content='';
+
+                   for (var i = 0; i < list.length; i++){
+
+                       content+=' <li>'+list[i].recovery_title+'<input type="hidden" value="'+list[i]['id']+'"></li>';
+
+                    } 
+
+                   $('.ser ul').html(content); 
+
+                }
+
+            })
+
+       
+
+    })
+
+
+
+    $('input').focus(function(){
+
+         // var str = $(this).val();
+
+         //    $.ajax({
+
+         //        type:'post',
+
+         //        dataType:'json',
+
+         //        url: "index.php?c=index&a=search",
+
+         //        data:{str:str},
+
+         //        success:function(data){
+
+         //           var list = data.list;
+
+         //           if(list.length>0){
+
+                     $('.ser').css('display','block');
+
+            //        }
+
+            //        var content='';
+
+            //        for (var i = 0; i < list.length; i++){
+
+            //            content+=' <li>'+list[i].recovery_title+'<input type="hidden" value="'+list[i]['id']+'"></li>';
+
+            //         } 
+
+            //        $('.ser ul').html(content); 
+
+            //     }
+
+            // })
+
+    })
+
+/*
+
+  $('input').blur(function(){
+
+        $('.ser').hide();
+
+    })
+
+*/
+
+    $('.ser').on('click','li',function(){
+
+        var id = $(this).find('input').val();
+
+        var content = $(this).text();
+
+        $('.search input').val(content);
+
+        $('.ser').hide();
+
+         location.href="./index.php?c=flowerhua&a=recovery_detail"+'&recovery_id='+id
+
+       
+
+    })
+
+
+
+    $('body:not(".ser")').click(function(e){
+
+        $('.ser').hide()
+
+    });
+
+        
+
+   
+
+/*
+
+   $('.search img').click(function(){
+
+        var id = $(this).next().val();
+
+        $(this).next().val('');
+
+        location.href="./index.php?c=flowerhua&a=recovery_detail"+'&recovery_id='+id
+
+    })*/
+
+  	window.onload = function(){
+
+  		var ulwidth = 10;
+
+		$('.list .nav_list ul li').each(function(){
+
+			var width = $(this).outerWidth(true);
+
+			ulwidth +=width;
+
+		});
+
+		$('.list .nav_list ul').width(ulwidth);
+
+		
+
+		//
+
+      }
+      
+
+</script> 
+

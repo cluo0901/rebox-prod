@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+	<link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+<script type="text/javascript">
+    var sitepath = "{SITE_PATH}{ENTRY_SCRIPT_NAME}";
+    var finecms_admin_document = "";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	{if $site}
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a class="layui-btn" href="{url('admin/site/')}" class="on"><em>网站管理</em></a>
+			<a class="layui-btn" href="{url('admin/site/config', array('id'=>$param['id']))}" class="on"><em>{lang('a-sit-7')}</em></a>
+		</div>
+	</div>
+	<div class="content-menu ib-a blue line-x">
+
+	</div>
+	{/if}
+	<div class="table-list">
+		<form method="post" action="" id="myform" name="myform">
+		<input name="typeid" id="typeid" type="hidden" value="{$typeid}">
+		<div class="pad-10">
+			<div class="col-tab">
+				<ul class="tabBut cu-li">
+					<li onClick="SwapTab('setting','on','',3,1);" class="{if $typeid==1}on{/if}" id="tab_setting_1">Site properties</li>
+					<!--<li onClick="SwapTab('setting','on','',3,2);" id="tab_setting_2" class="{if $typeid==2}on{/if}">{lang('a-men-13')}</li>-->
+					<!--<li onClick="SwapTab('setting','on','',3,3);" id="tab_setting_3" class="{if $typeid==3}on{/if}">{lang('dr011')}</li>-->
+				</ul>
+				<div class="contentList pad-10" id="div_setting_1" style="display: none;">
+				<table width="100%" class="table_form">
+					<tr>
+						<th>Template style： </th>
+						<td><select name="data[SITE_THEME]">
+						<option value=""> -- </option>
+						{$theme}
+						<!--</select><div class="onShow">{lang('a-sit-2')}</div></td>-->
+					</tr>
+					<tr>
+						<th width="200">{lang('a-sit-3')}： </th>
+						<td><select name="data[SITE_LANGUAGE]">
+							{loop $langs $t}
+							{if is_dir(EXTENSION_DIR . 'language' . DIRECTORY_SEPARATOR . $t)}
+							<option value="{$t}" {if $data['SITE_LANGUAGE']==$t}selected{/if}>{$t}</option>
+							{/if}
+							{/loop}
+						</select>
+							<!--<div class="onShow">{lang('a-cfg-73')}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>Site name： </th>
+						<td><input class="input-text" type="text" name="data[SITE_NAME]" value="{$data['SITE_NAME']}" size="25" />
+							<!--<div class="onShow">{$string['SITE_NAME']}</div> -->
+						</td>
+					</tr>
+					<tr>
+						<th>SEO headlines on the home page： </th>
+						<td><input class="input-text" type="text" name="data[SITE_TITLE]" value="{$data['SITE_TITLE']}" style="width:450px;" />
+							<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_TITLE}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>Web site SEO keyword：</th>
+						<td class="y-bg"><textarea name="data[SITE_KEYWORDS]" style="width:510px;height:40px;" class="text">{$data['SITE_KEYWORDS']}</textarea>
+							<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_KEYWORDS}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>Web site SEO describes information：</th>
+						<td><textarea name="data[SITE_DESCRIPTION]" style="width:510px;height:40px;" class="text">{$data['SITE_DESCRIPTION']}</textarea>
+							<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_DESCRIPTION}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>ICP record serial number： </th>
+						<td><input class="input-text" type="text" name="data[SITE_ICP]" value="{$data['SITE_ICP']}" style="width:300px;" />
+							<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_ICP}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>Contact number： </th>
+						<td><input class="input-text" type="text" name="data[SITE_TEL]" value="{$data['SITE_TEL']}" style="width:300px;" />
+							<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_TEL}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>Website LOGO：</th>
+						<td><input type="text" class="input-text" size="50" value="{$data['SITE_LOGO']}" name="data[SITE_LOGO]" id="SITE_LOGO" />
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('SITE_LOGO')" value="{lang('a-mod-118')}" />
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('SITE_LOGO', '500', '50')" value="{lang('a-mod-119')}" />
+						<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_LOGO}</div></td>-->
+					</tr>
+					<tr>
+						<th>Login page ：</th>
+						<td><input type="text" class="input-text" size="50" value="{$data['SITE_LOGIN']}" name="data[SITE_LOGIN]" id="SITE_LOGIN" />
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('SITE_LOGIN')" value="{lang('a-mod-118')}" />
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('SITE_LOGIN', '{$SITE_THUMB_WIDTH}', '{$SITE_THUMB_HEIGHT}')" value="{lang('a-mod-119')}" />
+						<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}$SITE_LOGIN}</div></td>-->
+					</tr>
+					<tr>
+						<th>Paging number： </th>
+						<td>
+                            <input class="input-text" type="text" name="data[SITE_WEB_PAGESIZE]" value="{$SITE_WEB_PAGESIZE}" style="width:86px" />
+                            &nbsp;&nbsp;&nbsp;<div class="onShow">Front page number</div>
+                            <input class="input-text" type="text" name="data[SITE_ADMIN_PAGESIZE]" value="{$SITE_ADMIN_PAGESIZE}" style="width:86px" />
+							&nbsp;&nbsp;&nbsp;<div class="onShow">Backstage paging number</div>
+                        </td>
+					</tr>
+					<tr>
+						<th>Upload file size(Kb)： </th>
+						<td><input class="input-text" type="text" name="data[FILE_SIZE]" value="{$data['FILE_SIZE']}" style="width:300px;" />Kb
+							<!--<div class="onShow">{lang('a-cfg-ex-2')}：{php echo '{';}FILE_SIZE}</div>-->
+						</td>
+					</tr>
+					<tr>
+						<th>SMS Api authorized account password： </th>
+						<td>
+							<input class="input-text" type="text" name="data[SMS_USERNAME]" value="{$data['SMS_USERNAME']}" style="width:300px;" />
+							<input class="input-text" type="text" name="data[SMS_PASSWORD]" value="{$data['SMS_PASSWORD']}" style="width:300px;" />
+						</td>
+					</tr>
+					<tr>
+						<th>Logistics Api account password： </th>
+						<td>
+							<input class="input-text" type="text" name="data[ROADBUL_USERNAME]" value="{$data['ROADBUL_USERNAME']}" style="width:300px;" />
+							<input class="input-text" type="text" name="data[ROADBUL_PASSWORD]" value="{$data['ROADBUL_PASSWORD']}" style="width:300px;" />
+						</td>
+					</tr>
+					<tr>
+						<th>Logistics / recipient information： </th>
+						<td>
+							<input class="input-text" type="text" name="data[DELIVERY_NAME]" value="{$data['DELIVERY_NAME']}" style="width:200px;" placeholder="{$string['DELIVERY_NAME']}" />
+							<input class="input-text" type="text" name="data[DELIVERY_CODE]" value="{$data['DELIVERY_CODE']}" style="width:120px;" placeholder="{$string['DELIVERY_CODE']}" />
+							<input class="input-text" type="text" name="data[DELIVERY_ADDRESS]" value="{$data['DELIVERY_ADDRESS']}" style="width:220px;" placeholder="{$string['DELIVERY_ADDRESS']}" />
+							<input class="input-text" type="text" name="data[DELIVERY_PHONE]" value="{$data['DELIVERY_PHONE']}" style="width:200px;" placeholder="{$string['DELIVERY_PHONE']}" />
+						</td>
+					</tr>
+					<!--<tr>-->
+						<!--<th>阿里云OSS_ENDPOINT： </th>-->
+						<!--<td><input class="input-text" type="text" name="data[OSS_ENDPOINT]" value="{$data['OSS_ENDPOINT']}" style="width:300px;" />-->
+						<!--</td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<th>阿里云OSS_TEST_BUCKET： </th>-->
+						<!--<td><input class="input-text" type="text" name="data[OSS_TEST_BUCKET]" value="{$data['OSS_TEST_BUCKET']}" style="width:300px;" />-->
+						<!--</td>-->
+					<!--</tr>-->
+				</table>
+				</div>
+				<div class="contentList pad-10 hidden" id="div_setting_2" style="display: none;">
+				<table width="100%" class="table_form">
+				<tr>
+					<th width="200">{lang('a-mod-204')}： </th>
+					<td><input name="data[SITE_THUMB_TYPE]" type="radio" value="1" {if $data['SITE_THUMB_TYPE']==1}checked{/if} /> {lang('a-mod-205')}
+					&nbsp;&nbsp;&nbsp;<input name="data[SITE_THUMB_TYPE]" type="radio" value="0" {if empty($data['SITE_THUMB_TYPE'])}checked{/if} /> {lang('a-mod-206')}
+					<div class="onShow">{lang('a-mod-207')}</div>
+					</td>
+				</tr>
+				<tr>
+					<th>{lang('a-ind-49')}： </th>
+					<td><input name="data[SITE_WATERMARK]" type="radio" value="1" {if $data['SITE_WATERMARK']==1}checked{/if} onClick="setSateType(1)"> {lang('a-ind-50')}
+					&nbsp;&nbsp;&nbsp;<input name="data[SITE_WATERMARK]" type="radio" value="2" {if $data['SITE_WATERMARK']==2}checked{/if} onClick="setSateType(2)" /> {lang('a-ind-51')}
+					&nbsp;&nbsp;&nbsp;<input name="data[SITE_WATERMARK]" type="radio" value="0" {if $data['SITE_WATERMARK']==0}checked{/if} onClick="setSateType(0)" /> {lang('a-close')}</td>
+				</tr>
+				<tbody id="w_0">
+				<tr class="w_1">
+					<th>{lang('a-ind-52')}： </th>
+					<td><input class="input-text" type="text" name="data[SITE_WATERMARK_ALPHA]" value="{$data['SITE_WATERMARK_ALPHA']}" size="25" />
+					<div class="onShow">{lang('a-ind-53')}</div></td>
+				</tr>
+				<tr class="w_1">
+					<th>{lang('a-sit-1')}： </th>
+					<td><select name="data[SITE_WATERMARK_IMAGE]">
+						<option value=""> -- </option>
+						{loop $images $t}
+						{if strpos($t, '.png') !== false}
+						<option value="{$t}" {if $data['SITE_WATERMARK_IMAGE']==$t}selected{/if}>{$t}</option>
+						{/if}
+						{/loop}
+						</select>
+					<div class="onShow">{lang('a-sit-0')}</div></td>
+				</tr>
+				<tr class="w_2">
+					<th>{lang('a-ind-54')}： </th>
+					<td><input class="input-text" type="text" name="data[SITE_WATERMARK_TEXT]" value="{$data['SITE_WATERMARK_TEXT']}" size="25" />
+					<div class="onShow">{lang('a-ind-55')}</div></td>
+				</tr>
+				<tr class="w_2">
+					<th>{lang('a-cfg-69')}： </th>
+					<td><input class="input-text" type="text" name="data[SITE_WATERMARK_SIZE]" value="{$data['SITE_WATERMARK_SIZE']}" size="25" />
+					<div class="onShow">{lang('a-cfg-70')}</div></td>
+				</tr>
+				<tr>
+					<th>{lang('a-cfg-67')}： </th>
+					<td>
+					<table width="400">
+					<tr>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==1}checked=""{/if} value="1" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-58')}</td>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==2}checked=""{/if} value="2" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-59')}</td>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==3}checked=""{/if} value="3" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-60')}</td>
+					</tr>
+					<tr>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==4}checked=""{/if} value="4" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-61')}</td>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==5}checked=""{/if} value="5" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-62')}</td>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==6}checked=""{/if} value="6" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-63')}</td>
+					</tr>
+					<tr>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==7}checked=""{/if} value="7" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-64')}</td>
+						<td><input type="radio" {if $data['SITE_WATERMARK_POS']==8}checked=""{/if} value="8" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-65')}</td>
+						<td><input type="radio" {if empty($data['SITE_WATERMARK_POS'])}checked=""{/if} value="" name="data[SITE_WATERMARK_POS]" /> {lang('a-cfg-66')}</td>
+					</tr>
+					</table>
+					</td>
+				</tr>
+				</tbody>
+				<tr>
+					<th>{lang('a-ind-56')}： </th>
+					<td>
+					<input class="input-text" type="text" name="data[SITE_THUMB_WIDTH]" value="{$data['SITE_THUMB_WIDTH']}" size="6" />
+					x&nbsp;
+					<input class="input-text" type="text" name="data[SITE_THUMB_HEIGHT]" value="{$data['SITE_THUMB_HEIGHT']}" size="6" />
+					&nbsp;px
+					</td>
+				</tr>
+				</table>
+				<script type="text/javascript">
+				function setSateType(id) {
+					if (id == 0) {
+						$('.w_1').hide();
+						$('.w_2').hide();
+						$('#w_0').hide();
+					} else if(id == 1) {
+						$('.w_2').hide();
+						$('.w_1').show();
+						$('#w_0').show();
+					} else if(id == 2) {
+						$('.w_1').hide();
+						$('.w_2').show();
+						$('#w_0').show();
+					}
+				}
+				setSateType({php echo (int)$data['SITE_WATERMARK']});
+				</script>
+				</div>
+
+                <div class="contentList pad-10 hidden" id="div_setting_3" style="display: none;">
+                    <table width="100%" class="table_form">
+                        <tr>
+                            <th width="200">{lang('a-cfg-74')}： </th>
+                            <td><input name="data[SITE_MOBILE]" type="radio" value="true" {if $data['SITE_MOBILE']=='true'}checked{/if} /> {lang('a-open')}
+                                &nbsp;&nbsp;&nbsp;<input name="data[SITE_MOBILE]" type="radio" value="false" {if empty($data['SITE_MOBILE']) || $data['SITE_MOBILE'] == 'false'}checked{/if} /> {lang('a-close')}
+                                <div class="onShow">{lang('a-cfg-72')}</div>
+                            </td>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<th>{lang('dr012')}： </th>-->
+                            <!--<td><input class="input-text" type="text" name="data[SITE_MURL]" value="{$data['SITE_MURL']}" size="40" /><div class="onShow">{$string['SITE_MURL']}</div></td>-->
+                        <!--</tr>-->
+                    </table>
+                </div>
+				<div class="bk15"></div>
+				<input type="submit" class="btn btn-success btn-sm" value="{lang('a-submit')}" name="submit" />
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+$('#div_setting_{$typeid}').show();
+function SwapTab(name,cls_show,cls_hide,cnt,cur){
+	for(i=1;i<=cnt;i++){
+		if(i==cur){
+			$('#div_'+name+'_'+i).show();
+			$('#tab_'+name+'_'+i).attr('class',cls_show);
+			$('#typeid').val(i);
+		}else{
+			$('#div_'+name+'_'+i).hide();
+			$('#tab_'+name+'_'+i).attr('class',cls_hide);
+		}
+	}
+}
+</script>

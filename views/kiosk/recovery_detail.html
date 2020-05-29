@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Device Appraisal</title>
+		{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+	</head>
+
+	<body>
+
+
+        <div class="kiosk_hide">
+
+		  {template header}
+
+        </div>
+
+		<div class="recircle_detail">
+
+			<div class="header">
+
+				<div class="container">
+
+					<div class="process1">
+
+						<div class="col on">
+
+							<b>1</b>{$recovery_step['recovery_step_title1']}
+
+						</div>
+
+						<div class="col">
+
+							<b>2</b>{$recovery_step['recovery_step_title2']}
+
+						</div>
+
+						<div class="col">
+
+							<b>3</b>{$recovery_step['recovery_step_title3']}
+
+						</div>
+
+						<div class="col">
+
+							<b>4</b>{$recovery_step['recovery_step_title4']}
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="container">
+
+				<div class="releft">
+
+					<div class="pro">
+
+						<img src="{$data['recovery_img']}">
+
+						<p>{$data['recovery_title']}</p>
+
+						<div class="clear">
+
+							<div class="col">
+
+								<h3>{$data['recovery_cold_num']}</h3>
+
+								<h4>Devices Sold</h4>
+
+							</div>
+
+							<div class="col">
+
+								<h3>${$data['recovery_high_price']}</h3>
+
+								<h4>Highest Price</h4>
+
+							</div>
+
+						</div>
+
+						<a href="index.php">Reselect Model ></a>
+
+					</div>
+
+					<div class="guide">
+
+						<div class="gt">{$recovery_tips['recovery_tips_title']}</div>
+
+						<div class="p">{php echo htmlspecialchars_decode($recovery_tips['recovery_tips_content']);}</div>
+
+					</div>
+
+				</div>
+
+				<div class="reright">
+
+                    <!-- add selection reminder starts-->
+                    <!-- <h3 style = "text-align: center; color: #ffcc00; font-size: 24px; font-weight: bold; border-bottom: 1px solid #e5e5e5;padding-bottom: 8px;">Device Appraisal<br></h3> -->
+                    <h5 style = "color: #fff; font-size: 16px; font-weight: normal; line-height: 24px; margin-top: 8px; background-color: #bbb; padding: 10px 20px;">Actual condition of your device will be verified with reference to the selections below upon receipt by Rebox. Express payment will be made within 1 hour for accurate selections upon verification.<br></h5>
+                    <!-- add selection reminder ends-->                  
+
+                    <form action="" method="post">
+
+                        {loop $data['parameter'] $k=>$o}
+
+					    <div class="sele">
+
+						<div class="st">
+
+							{$o['parameter_name']}
+
+						</div>
+
+						{loop $o['parameter'] $kk=>$item}
+
+                            <div class="seli {if $priceValue}op{else}{if $k==0 && $kk==0}op{/if}{/if}  ">
+
+                            <div class="lit">
+
+                                <label>{$item['parameter_name']}</label>
+
+                                <span {if $price_arr}style="display:block;"{/if}>
+
+                                    {if $price_arr}
+
+                                    {loop $price_arr $pitem}
+
+                                    {if $pitem['parent_id']==$item['id']}
+
+                                    <font class="data-id" data-id="{if $pitem['parent_id']==$item['id']}{$pitem['id']}{/if}" parent-data-id="{$item['id']}">{if $pitem['parent_id']==$item['id']}{$pitem['name']}{/if}</font>
+
+                                    {/if}
+
+                                    {/loop}
+
+                                    {else}
+
+									<font class="data-id" data-id="" parent-data-id="{$item['id']}"></font>
+
+                                    {/if}
+
+									<em>Modify</em>
+
+								</span>
+
+                            </div>
+
+                            <div class="selibox" {if $priceValue}style="display:none;"{/if}>
+
+                                {loop $item['parameter'] $t}
+
+								<span>
+
+									<b data-id="{$t['id']}">{$t['parameter_name']}</b>
+
+									{if $t['parameter_description'] || $t['parameter_img']}
+
+                                    <img src="{SITE_THEME}img/icon34.png"  src1="{SITE_THEME}img/icon35.png" src2="{SITE_THEME}img/icon34.png" class="icon">
+
+									{/if}
+
+									<div class="hover">
+
+                                        {if $t['parameter_img']}
+
+										<img src="{$t['parameter_img']}">
+
+                                        {/if}
+
+                                        {if $t['parameter_description']}
+
+										<div class="posp">
+
+											{$t['parameter_description']}
+
+										</div>
+
+                                        {/if}
+
+									</div>
+
+								</span>
+
+                                {/loop}
+
+                                <div class="clear"></div>
+
+                            </div>
+
+                        </div>
+
+                        {/loop}
+
+						</div>
+
+                        {/loop}
+
+                    
+                   	{if $data['recovery_type_id'] != 68}
+
+					<div class="sele issue" {if $chpriceValue || $priceValue}style="opacity:1;"{/if}>
+
+						<div class="st">
+
+							Functional lssues
+
+						</div>
+
+						<div class="islist ch_parameter">
+
+							<ul>
+
+								{loop $data['ch_parameter'] $item}
+
+								<li {if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}class="on"{/if}>
+
+								<img src="{if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}{$item['parameter_img1']}{else}{$item['parameter_img']}{/if}" src1="{$item['parameter_img']}" src2="{$item['parameter_img1']}">
+
+								<p style="max-height:40px;">{$item['parameter_name']}</p>
+
+								<input class="parameter_name" name="parameter_name[]" type="checkbox" value="{$item['id']}" {if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}checked{/if}>
+
+								</li>
+
+								{/loop}
+
+							</ul>
+
+						</div>
+
+					</div>
+
+					{/if}
+
+					<!-- check if agent, do not display accessroies section -->
+					{if $agent_check != 1}
+
+					<div class="sele issue" {if $chpriceValue || $priceValue}style="opacity:1;"{/if}>
+
+						<div class="st">
+
+							Missing or Damaged Accessories
+
+						</div>
+
+						<div class="islist ch_parameter">
+
+							<ul>
+
+								{loop $data['ch_parameter2'] $item}
+
+								<li {if in_array($item['id'],array_filter(explode(',',$chpriceValue2)))}class="on"{/if}>
+
+								<img src="{if in_array($item['id'],array_filter(explode(',',$chpriceValue2)))}{$item['parameter_img1']}{else}{$item['parameter_img']}{/if}" src1="{$item['parameter_img']}" src2="{$item['parameter_img1']}">
+
+								<p style="max-height:40px;">{$item['parameter_name']}</p>
+
+								<input class="parameter_name2" name="parameter_name[]" type="checkbox" value="{$item['id']}" {if in_array($item['id'],array_filter(explode(',',$chpriceValue)))}checked{/if}>
+
+								</li>
+
+								{/loop}
+
+							</ul>
+
+						</div>
+
+					</div>
+
+					{/if}
+
+					
+					<div class="quote">
+					
+						<!-- <p style = "font-size: 14px; color: #FF5400; display: block; float: right;">A nominal fee of $3 will be applied for return if the above selection is materially different from the actual condition.</p><br><br> -->
+						<input style="display:inline;" type="button" value="Get Quote" disabled="disabled"  class="btn" onclick="submit_recovery_info();">
+
+					</div>
+
+                    </form>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="tan" >
+
+			<div class="tips">
+
+				<img src="{SITE_THEME}img/tips.png">
+
+				<p>Apologies,we are currently unable to accept any non-functioning device.</p>
+
+				<a href="javascript:;" onclick="hide_tan()">OK</a>
+
+			</div>
+
+		</div>
+
+		<script>
+
+
+			function submit_recovery_info(){
+
+                var data_arr = [];
+
+                var data_arr_value = [];
+
+                var data_ch_arr = [];//多选项
+
+                var data_ch_arr2 = [];//多选附件项
+
+                for(var i = 0 ; i < $('.data-id').length ; i++){
+
+                    data_arr.push($('.data-id').eq(i).attr('data-id'));
+
+                    data_arr_value.push($('.data-id').eq(i).text());
+
+                }
+
+                for(var i = 0 ; i < $('.ch_parameter li.on .parameter_name').length ; i++){
+
+                    data_ch_arr.push($('.ch_parameter li.on .parameter_name').eq(i).val());
+
+                }
+
+                for(var i = 0 ; i < $('.ch_parameter li.on .parameter_name2').length ; i++){
+
+                    data_ch_arr2.push($('.ch_parameter li.on .parameter_name2').eq(i).val());
+
+                }
+
+                location.href="index.php?c=flowerhua&a=recovery_instant_quote&recovery_id={$recovery_id}&priceValue="+escape(data_arr)+"&chpriceValue="+escape(data_ch_arr)+"&chpriceValue2="+escape(data_ch_arr2);
+
+            }
+
+			function show_tan(){
+
+				$(".tan").show();
+
+				$("body").addClass("hidden");
+
+			}
+
+			function hide_tan(){
+
+				$(".tan").hide();
+
+				$("body").removeClass("hidden");
+
+			}
+
+			$(".tan").click(function(){
+
+				hide_tan()
+
+			})
+
+		</script>
+
+	<!-- Load Facebook SDK for JavaScript -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+	<!-- Your customer chat code -->
+	<div class="fb-customerchat"
+	  attribution=install_email
+	  page_id="201403270461097"
+	  theme_color="#ffcc00">
+	</div>
+
+
+    <div class="kiosk_hide">
+
+        {template footer}
+
+    </div>
+
+    <!-- if kiosk mode - screen height > width, hide the component -->
+
+    <script type="text/javascript">
+        if ($(window).height() > $(window).width()) {
+            $(".kiosk_hide").css("display", "none");
+        }
+    </script>	
+
+
+	</body>
+
+	<style>.issue{opacity: 0.3;}</style>
+
+	<script>
+
+		var num = 1;
+
+		$(".seli .selibox span").click(function() {
+
+			var cl = $(this).parents(".seli").hasClass("op");
+
+			if(cl){
+
+				$(this).parents(".selibox").siblings(".lit").find("span").show();
+
+				var txt = $(this).find("b").text();
+
+				var data_id = $(this).find("b").attr('data-id');
+
+                $(this).parents(".selibox").siblings(".lit").find("font").text(txt);
+
+                $(this).parents(".selibox").siblings(".lit").find("font").attr('data-id',data_id);
+
+				$(this).parents(".selibox").hide();
+
+				check_lens();
+
+				var tag = $(this).parents(".seli").next("");
+
+				var height = $(this).parents(".seli").outerHeight(true);
+
+				var scrollT = $(window).scrollTop();
+
+				
+
+				if($(tag)[0]){
+
+					$(this).parents(".seli").next(".seli").addClass("op");
+
+					$("body,html").stop(true).animate({"scrollTop": scrollT + height +"px"},500)
+
+				}else{
+
+					
+
+					var box = $(this).parents(".sele").next(".sele").hasClass("issue");
+
+						$("body,html").stop(true).animate({"scrollTop": scrollT + height + 58 +"px"},500)
+
+					
+
+					if(box){
+
+						$(this).parents(".sele").siblings(".issue").css({"opacity":1})
+
+					}
+
+					$(this).parents(".sele").siblings(".sele").find(".seli").eq(0).addClass("op");
+
+				}
+
+				
+
+			}
+
+
+
+		})
+
+		$(".seli .lit  em").click(function() {
+
+			$(this).parents("span").hide();
+
+			$(this).parents(".lit").siblings(".selibox").show()
+
+		})
+
+		$(".islist ul li").click(function() {
+
+			var bool = $(this).find("input").prop("checked");
+
+			if(bool) {
+
+				var src2 = $(this).find("img").attr("src2");
+
+				$(this).find("img").attr({
+
+					"src": src2
+
+				});
+
+				$(this).addClass("on")
+
+			} else {
+
+				var src1 = $(this).find("img").attr("src1");
+
+				$(this).find("img").attr({
+
+					"src": src1
+
+				});
+
+				$(this).removeClass("on")
+
+			}
+
+		})
+
+		
+
+
+
+		function check_lens() {
+
+			var lens = 0;
+
+			var length = $(".reright .sele .seli").length;
+
+			for(var i = 0; i < $(".reright .sele .seli").length; i++) {
+
+				var txt = $(".reright .sele .seli").eq(i).find("font").html();
+
+				if(txt == null || txt == '' || txt == undefined) {
+
+					
+
+				}else{
+
+					lens++
+
+				}
+
+			}
+
+			if(lens == $(".reright .sele .seli").length) {
+
+				$(".reright .quote input").addClass("active");
+
+				$(".reright .quote input").removeAttr("disabled")
+
+			} else {
+
+				$(".reright .quote input").removeClass("active");
+
+				$(".reright .quote input").attr({
+
+					"disable": "disable"
+
+				})
+
+			}
+
+		}
+
+	</script>
+
+    {if $priceValue}
+
+    <script>
+
+        $(".reright .quote input").addClass("active");
+
+        $(".reright .quote input").removeAttr("disabled")
+
+    </script>
+
+    {/if}
+
+</html>

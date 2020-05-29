@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<title>admin</title>
+	{template admin/top}
+</head>
+<!--图片上传-->
+<script type="text/javascript">
+    var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+    var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form action="" method="post">
+			<input name="shelve_id" type="hidden" value="{$id}">
+			<table width="100%" class="table table-striped">
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>Name of the sender</td>
+                    <td><input class="input-text" type="text" name="data[FromName]" value="{$DELIVERY_NAME}" size="40" required readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>Sender phone</td>
+                    <td><input class="input-text" type="text" name="data[FromMobilePhone]" value="{$DELIVERY_PHONE}" size="40" required readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>Postcode of the sender</td>
+                    <td><input class="input-text" type="text" name="data[FromZipCode]" value="{$DELIVERY_CODE}" size="40" required readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>sender address</td>
+                    <td><input class="input-text" type="text" name="data[FromAddress]" value="{$DELIVERY_ADDRESS}" size="40" required readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>The name of the addressee</td>
+                    <td><input class="input-text" type="text" name="data[ToName]" value="{$data['person']}" size="40" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>Addressee phone</td>
+                    <td><input class="input-text" type="text" name="data[ToMobilePhone]" value="{$data['phone']}" size="40" required />
+                    </td>
+                </tr>
+                <tr>
+                   <td width="200" align="right"><font color="red">*</font>Addressee zip code</td>
+                   <td><input class="input-text" type="text" name="data[ToZipCode]" value="" size="40" required />
+                   </td>
+               </tr>
+                <tr>
+                    <td width="200" align="right"><font color="red">*</font>Addressee address</td>
+                    <td><input class="input-text" type="text" name="data[ToAddress]" value="{$data['address']}" size="40" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Logistics interface attributes</td>
+                    <td>
+                        <label>
+                            <select class="form-control" id="ProductTypeId" onchange="ProductTypeId2Sizes(this)" name="data[ProductTypeId]">
+                                <option value="">Please choose ProductType</option>
+                                {loop $roadbul_array $t}
+                                <option value="{$t['Id']}">{$t['ProductTypeName']}</option>
+                                {/loop}
+                            </select>
+                        </label>
+                        <label>
+                            <select class="form-control" id="SizeId" onchange="SizeId2Services(this)" name="data[SizeId]">
+                                <option value="">Please choose Size</option>
+                            </select>
+                        </label>
+                        <label>
+                            <select class="form-control" id="ServiceId" onchange="ServicesId2Time(this)" name="data[ServiceId]">
+                                <option value="">Please choose Services</option>
+                            </select>
+                        </label>
+                        <label>
+                            <select class="form-control" id="PickupId" name="data[PickupTimeSlotId]">
+                                <option value="">Please choose Pickup Time</option>
+                            </select>
+                        </label>
+                        <label>
+                            <select class="form-control" id="DeliveryId" name="data[DeliveryTimeSlotId]">
+                                <option value="">Please choose Delivery Time</option>
+                            </select>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">Collection Pickup Time</td>
+                    <td>
+                        <label>
+                            <select class="form-control" id="PickupDate" name="data[PickupDate]" onchange="Time2picktime(this);">
+                                <option value="">Please choose Pickup Time</option>
+                                {loop $pickup_time_start $t}
+                                <option value="{$t}">{date('d/m/Y',$t)}</option>
+                                {/loop}
+                            </select>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">&nbsp;</td>
+                    <td><input class="btn btn-success btn-sm" type="submit" name="submit" value="{lang('a-submit')}" /></td>
+                </tr>
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+<script>
+    function Time2picktime(a){
+        $.ajax({
+            url: "index.php?s=admin&c=flowerhua&a=ajax_Time2picktime",
+            type: "post",
+            data: {
+                time : $(a).val(),
+            },
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#PickupId').html(data.str);
+                }
+            }
+        });
+    }
+    function ProductTypeId2Sizes(a){
+        var laytip = layer.open({type:3,icon:2});
+        $.ajax({
+            url: "index.php?s=admin&c=roadbul&a=ajax_ProductTypeId2Sizes",
+            type: "post",
+            data: {ProductTypeId : $(a).val(),},
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#SizeId').html(data.result);
+                    layer.close(laytip);
+                }else{
+//                    layer.msg(data.result_err,{time:2000,anim:3,icon:0});
+                    alert(data.result_err);
+                }
+            }
+        });
+    }
+    function SizeId2Services(a){
+        var laytip = layer.open({type:3,icon:2});
+        $.ajax({
+            url: "index.php?s=admin&c=roadbul&a=ajax_SizeId2Services",
+            type: "post",
+            data: {SizeId : $(a).val(), ProductTypeId : $('#ProductTypeId').val(),},
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#ServiceId').html(data.result);
+                    layer.close(laytip);
+                }else{
+//                    layer.msg(data.result_err,{time:2000,anim:3,icon:0});
+                    alert(data.result_err);
+                }
+            }
+        });
+    }
+    function ServicesId2Time(a){
+        var laytip = layer.open({type:3,icon:2});
+        $.ajax({
+            url: "index.php?s=admin&c=roadbul&a=ajax_ServicesId2Time",
+            type: "post",
+            data: {ServiceId : $(a).val()},
+            dataType: 'json',
+            success: function (data) {
+                if(data.code==1){
+                    $('#PickupId').html(data.resultPickup);
+                    $('#DeliveryId').html(data.resultDelivery);
+                    layer.close(laytip);
+                }else{
+//                    layer.msg(data.result_err,{time:2000,anim:3,icon:0});
+                    alert(data.result_err);
+                }
+            }
+        });
+    }
+</script>
+</html>

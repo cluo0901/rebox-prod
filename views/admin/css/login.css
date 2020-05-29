@@ -1,0 +1,54 @@
+/*
+|---------------------------------------------------------------
+|	Login Style
+|---------------------------------------------------------------
+|	File:login.css
+|	Creation Date:2011-02-18
+|	Last Modified:2011-02-18
+|	Author:networker<networker@itwoo.org>
+|	From:DesDev	INC.
+|---------------------------------------------------------------
+*/
+
+body{background: url(../images/img/bg2.png) no-repeat; height: 100%; letter-spacing: 2px;}
+#login-box {position: absolute;width:670px;height:429px;left:50%;top:64%; margin-left:-324px;margin-top:-307px;} 
+#login-box .login-main .imgcod a{color: #FFF;}
+#login-box .login-main .textd{color:#818284;position: absolute;top:320px;left:40px;}
+#login-box .login-main .login-btn{font-size:14px;color:white;background:#373c41;}
+#login-box h2{color:white;margin-left:100px; font-size: 48px;}
+.header{padding: 10px 3%; width: 100%; line-height: 24px; background: url(../images/img/bg3.png) no-repeat; font-size: 18px; color: #ffffff;}
+.header img{height: 24px; float: left; margin-right: 8px;}
+#login-box h2{font-size: 36px; margin-left: 0px; text-align: center; margin-bottom: 40px;}
+#login-box h2 span{display: inline-block;}
+#login-box h2 img{margin-right: 18px;}
+#login-box .login-main{background: url(../images/img/bg4.png) no-repeat; border-radius: 8px; clear: both; overflow: hidden; height: 390px;}
+#login-box .login-main .logo_area{float: left; background: url(../images/img/bg.png) right center no-repeat; width: 35%; text-align: center; height:390px;  }
+#login-box .login-main .logo_area img{height: 111px; margin-bottom: 10px; margin-top: 100px;}
+#login-box .login-main .logo_area p{font-size: 26px; color: #ffffff; margin-top: 10px; letter-spacing: 2px;}
+#login-box .login-main .form{float: left;  width: 59%; padding: 20px 0px; padding-left: 3%;}
+#login-box .login-main .form h4{font-size: 20px; color: #ffffff; font-weight: normal; margin-bottom: 27px;}
+#login-box input{background: none;}
+#login-box .login-main .form .inp{background: white; border-radius: 6px; clear: both; overflow: hidden; margin-bottom: 20px; padding-top: 7px; padding-bottom: 3px;}
+#login-box .login-main .form .inp label{float: left; width: 48px; text-align: center; display: inline-block;}
+#login-box .login-main .form .inp label img{display: inline-block; height: 30px;}
+#login-box .login-main .form .inp input{width: 318px; border: 0px; padding-left: 5px; float: left; height: 30px; outline: none; font-size: 18px;}
+#login-box .login-main .form .inp.yan{width: 248px; float: left;}
+#login-box .login-main .form .inp.yan input{width:190px;}
+#login-box .login-main .form .imgcod{float: left; height:52px;  margin-left: 17px; overflow: hidden; border-radius: 6px; border-radius: 6px; height: 44px;}
+#login-box .login-main .form .imgcod img{height: 51px;}
+#login-box .login-main .form .clear{margin-bottom: 20px;}
+#login-box .login-main dd{margin-top: 20px; list-style: none; display: inline;}
+#login-box .login-main dd .login-btn{width: 248px; margin: 0px; display: inline; float: left; letter-spacing: 8px; height: 40px; background: #21a9ff; border: 0px; color: white; font-size: 18px; border-radius: 6px;}
+#login-box .login-main dd a{font-size: 18px; color: #ffffff; margin-left: 24px; line-height: 40px;}
+.zhi{font-size: 16px; color: white; margin-top: 20px; text-align: center;}
+.zhi img{float: left; margin-right: 6px;}
+.zhi span{display: inline-block;}
+#login-box .login-main input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+#login-box .login-main input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: #fff !important;
+    apparence: none !important;
+    -webkit-apparence: none !important;
+    -moz-apparence: none !important;
+}

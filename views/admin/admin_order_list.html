@@ -1,0 +1,310 @@
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+
+<title>admin</title>
+    <script src="{ADMIN_THEME}js/layer/layer.js"></script>
+    <style>
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            text-align: center;
+            border-right: 1px solid #f3e8e8;
+        }
+
+        .store-label {
+            width: 35px;
+            font-size: 12px;
+            text-align: left !important;
+            padding-left:5px !important;
+        }
+        
+    </style>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+            <a class="layui-btn" href="{url('admin/flowerhua/admin_order_list')}" class="on"><em>Order lists</em></a>
+            <a class="layui-btn" href="http://18.140.52.199:80/pickupp/download" class="on"><em>Download Pickupp Orders</em></a>
+		</div>
+		<form action="" method="post" style="float:left;">
+            <label>
+                <select class="form-control" name="recovery_type_id" id="recovery_type_id">
+                    <option value="">Please select device type</option>
+                    {loop $type_list $t}
+                    <option value="{$t[id]}" {if $recovery_type_id == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+                    {/loop}
+                </select>
+            </label>
+            <label>
+                <select class="form-control" id="recovery_parent_id" name="recovery_parent_id">
+                    <option value="">Please select brand</option>
+                    {loop $parent_list $t}
+                    <option value="{$t[id]}" {if $recovery_parent_id == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+                    {/loop}
+                </select>
+            </label>
+            <label>
+                <select class="form-control" id="order_status" name="order_status">
+                    <option value="">Please select order status</option>
+                    <option value="-1" {if $order_status == -1}selected="selected"{/if}>Expired</option>
+                    <option value="1" {if $order_status == 1}selected="selected"{/if}>Submitted/Pending confirmation</option>
+                    <option value="2" {if $order_status == 2}selected="selected"{/if}>Confirmed/Pending receipt</option>
+                    <option value="3" {if $order_status == 3}selected="selected"{/if}>Received/Pending test</option>
+                    <option value="4" {if $order_status == 4}selected="selected"{/if}>Tested/Pending quotation</option>
+                    <option value="5" {if $order_status == 5}selected="selected"{/if}>Accepted</option>
+                    <option value="-5" {if $order_status == -5}selected="selected"{/if}>Rejected</option>
+                    <option value="6" {if $order_status == 6}selected="selected"{/if}>Auctioning</option>
+                    <option value="7" {if $order_status == 7}selected="selected"{/if}>Sold</option>
+                </select>
+            </label>
+			<div class="cbtn" style="float: left;">
+				<input name="form" type="hidden" value="search" />
+				<input placeholder="Search order number" type="text" class="input-text" value="{$order_sn}" name="order_sn" size="40" />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			</div>
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="40" align="left">Order ID</th>
+            <!-- <th width="100" align="center">Model picture</th> -->
+            <th width="100" align="center">Model name</th>
+            <th width="120" align="center">Storage & RAM</th>
+            <th width="120" align="center">IMEI</th>
+            <th width="100" align="center">Mobile number</th>
+            <th width="120" align="center">Order number</th>
+            <th width="80" align="center">Initial quote</th>
+			<th width="80" align="center">Final quote</th>
+            <th width="100" align="center">Delivery method</th>
+            <!-- <th width="120" align="center">Shipping number</th> -->
+            <!-- <th width="100" align="center">Order time</th> -->
+            <th width="100" align="center">Order status</th>
+            <th width="100" align="left">Option</th>
+            <!-- <th width="30" align="left">Message</th>  -->
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+            <td align="center">
+                {$t['order_id']} <br>
+                {if $t['store']}<a class="layui-btn layui-btn layui-btn-small store-label" href="javascript:;">{$t['store']}</a>{else}{/if}
+            </td>
+            <!-- <td align="center"><img src="{$t['recovery_img']}" height="80"></td> -->
+            <td align="center">{$t['recovery_title']}<br>{$t['order_recovery_parentid'] == 68? 'NEW' : 'USED'}</td>
+            <!-- get member status
+            <td align="center">{$t['phone']}</td> -->
+            <td align="center">{$t['storage']}</td>
+            <td align="center">{$t['imei']}</td>
+            <td align="center"><a href="{url('admin/whizmomember/whizmomember_edit',array('id'=>$t['member_id']))}" style="cursor: pointer; color: blue; font-weight: bold;">{$t['phone']}</a><br>{$t['status'] == 2? 'Verified' : 'Unverified'} </td>
+            <td align="center">{$t['order_sn_number']}<br>{date('d/m/Y H:i',$t['order_addtime'])}</td>
+            <td align="center">{$t['order_totalprice']}</td>
+            <td align="center">{$t['order_final_price']}</td>
+            <!-- <td align="center">{$t['order_coupon_code_money']>0?$t['order_coupon_code_money']:''}</td> -->
+            <!-- <td align="center">{$t['order_delivery_method_type']==1?'Roadbul Api':'Send it by himself'}</td> -->
+            <!-- <td align="center">{$t['order_delivery_method_type']==1? $t['order_status']==1? '' : 'Roadbull' : 'POPStation'}</td> -->
+            <!-- <td align="center">{$t['order_delivery_method_type']==1? $t['order_status']!==1? $t['order_delivery_number']==''? 'Qoo10' : 'Roadbull' : '' : 'POPStation'}</td> -->
+
+            {if $t['agent']!=1}
+            <!-- <td align="center">{$t['order_delivery_method_type']!=3? $t['order_delivery_method_type']==1? $t['order_status']!==1? $t['order_delivery_number']==''? 'Pickupp' : 'Roadbull' : '' : 'POPStation' : 'Walk-in'}</td> -->
+
+            <td align="center">{$t['order_delivery_method_type']==4? 'Kiosk' : ($t['order_delivery_method_type']==3? 'Walk-in' : ($t['order_delivery_method_type']==2? 'POPStation' : $pickupp = ($t['order_delivery_number']==''? 'Pickupp' : 'Roadbull')))}<br>
+
+        
+            {if $t['order_delivery_method_type'] == 1 AND $t[order_delivery_number] =='' } <a class="layui-btn layui-btn layui-btn-small" href="javascript:;">RB{substr($t['order_sn_number'], -6)}</a> {else}{/if}
+
+            {if $t['order_delivery_number']}<a class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="get_roadbul_query('{$t[order_delivery_number]}');">{$t['order_delivery_number']}</a>{else}{/if}
+                
+            </td>
+            {else if $t['agent']==1}
+
+            <td align="center">Agent</td>            
+
+            <td align="center">Next Day</td>
+
+            {/if}
+            
+            <!-- <td align="center">{date('d/m/Y H:i',$t['order_addtime'])}</td> -->
+            <td align="center">
+                {if $t['order_status']==0}<a class="layui-btn layui-btn-disabled layui-btn-small" href="javascript:;" style="background-color: grey; color: white;">Cancelled</a>
+                {else if $t['order_status']==-1}<a class="layui-btn layui-btn-disabled layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',3,0);">Expired</a>
+                {else if $t['order_status']==1}
+                    {if $t['order_delivery_method_type']==3 && time() >= strtotime(str_replace("/", "-", $t['order_delivery_number']))+3600*24}
+                        {if time() < strtotime(str_replace("/", "-", $t['order_delivery_number']))+3600*24*2}
+                        <a class="layui-btn layui-btn-disabled layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',3,0);" style="background-color: grey; color: white;">Lapsed</a>
+                        {else} 
+                        <a class="layui-btn layui-btn-disabled layui-btn-small" href="javascript:;" style="background-color: grey; color: white;" disabled>Lapsed. Resubmit Order!</a>
+                        {/if}
+                    {else if $t['order_delivery_method_type']==3 && time() >= strtotime(str_replace("/", "-", $t['order_delivery_number'])) && time() < strtotime(str_replace("/", "-", $t['order_delivery_number'])) + 3600*24}
+                    <a class="layui-btn layui-btn-disabled layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',2,0);" style="background-color: orange; color: white;">Submitted/Pending confirmation</a>
+                    {else}
+                    <a class="layui-btn layui-btn-disabled layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',2,0);">Submitted/Pending confirmation</a>
+                    {/if}
+                {else if $t['order_status']==2}<a class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',3,0);">Confirmed/Pending receipt</a>
+                {else if $t['order_status']==3}<a style="background:red;" class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="change_price_status('{$t[order_id]}',4,'{$t[order_totalprice]}');">Received/Pending test</a>
+                {else if $t['order_status']==4}<a class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',5, '{$t[order_delivery_method_type]}');">Accept</a>
+                <a style="background:red;" class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',-5,0);">Reject</a>
+                {else if $t['order_status']==5}<a class="layui-btn layui-btn layui-btn-small" href="{url('admin/whizmoshelve/admin_shelve_add',array('id'=>$t['order_id']))}" style="background-color:#1E9FFF; margin-bottom: 5px;">Pending auction</a><br> {if $t['dateAccepted']} Received: {$t['dateAccepted']} {/if}
+                {else if $t['order_status']>6}<a style="background:#000;" class="layui-btn layui-btn layui-btn-small" href="javascript:;">Sold</a>
+                {else if $t['order_status']>5}<a style="background:#fbbf4c;" class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',7,0);">Auctioning</a> <br> {if $t['dateAccepted']} Received: {$t['dateAccepted']} {/if}
+                {else if $t['order_status']==-5}
+                <a class="layui-btn layui-btn-normal layui-btn-small" href="javascript:;" onclick="change_status('{$t[order_id]}',3,0);" style = "background-color:grey;">Rejected</a>
+                {/if}
+            </td>
+            <td align="center">
+			<div class="layui-btn-group">
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/admin_order_add',array('id'=>$t['order_id']))}">Detail</a>
+                {if $role_id == 1}
+				<a data-method="notice" id="{$t['order_id']}" class="layui-btn layui-btn-danger layui-btn-small" href="javascript:void(0);">Delete</a>
+                {/if}
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		<!--<tr height="25" class="cao">-->
+			<!--<td colspan="22" align="left">-->
+				<!--<a data-method="notice2" id="del_" class="layui-btn layui-btn-danger layui-btn-small">Delete all</a>-->
+			<!--</td>-->
+		<!--</tr>-->
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+    function get_roadbul_query(sn){
+        var url   = '{url("admin/flowerhua/get_roadbul_query")}&sn='+sn;
+        var winid = 'loadinfo';
+        window.top.art.dialog(
+            {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'Inquiry Logistics', width:'1200', height:'700', lock:true},
+            function(){
+                window.top.art.dialog({id:winid}).close();
+            }
+        );
+        void(0);
+    }
+    function change_price_status(order_id,status,price){
+        var msg = [];
+        msg[2] = 'Confirmed/Pending receipt';msg[3] = 'Received/Pending test';msg[4] = 'Tested/Pending quotation';msg[5] = 'Pending auction';msg[-5] = 'Rejected';msg[6] = 'Auctioning';msg[7] = 'Sold';
+        // layer.prompt({title:'Enter final price',value:price},function(value2){
+        layer.prompt({title:'Enter final price',value:null},function(value2){
+            // layer.prompt({title:'请输入备注内容',value:'无备注'},function(description){
+                if (value2 != null) {
+                layer.open({content:'Confirm final price: $'+value2+'?',yes:function(){
+                    layer.open({content:'Double confirm final price: $'+value2+' and change status to:'+msg[status]+'?',yes:function(){
+                        $.ajax({
+                            url: "index.php?s=admin&c=flowerhua&a=ajax_change_status",
+                            type: "post",
+                            data: {
+                                order_id : order_id,
+                                status : status,
+                                value : value2,
+                                // description : description,
+                            },
+                            async:false,
+                            dataType: 'json',
+                            success: function (data) {
+                                if(data.code==1){
+                                    layer.open({content:'success!',icon:1,end:function(){
+                                        location.reload();
+                                    }});
+                                }
+                            }
+                        });
+                    }});
+                }})
+                }
+            // });
+        })
+    }
+    function change_status(order_id,status,fang){
+        var msg = [];
+        msg[2] = 'Confirmed/Pending receipt';msg[3] = 'Received/Pending test';msg[4] = 'Tested/Pending quotation';msg[5] = 'Pending auction';msg[-5] = 'Rejected';msg[6] = 'Auctioning';msg[7] = 'Sold';
+
+        if (status == -5) {
+            alert("Remove SIM card before returning the phone to customer!");
+        }
+
+        layer.open({content:'Change status to: '+msg[status]+'?',yes:function(){
+            $.ajax({
+                url: "index.php?s=admin&c=flowerhua&a=ajax_change_status",
+                type: "post",
+                data: {
+                    order_id : order_id,status : status, fang : fang,
+                },
+                async:false,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code==1){
+                        layer.open({content:'success!',icon:1,end:function(){
+
+                            // kiosk accept - authoriser prepare to approve payment starts
+                            if (data.fang ==4 || data.fang ==3) {
+                                if (data.status == 5) {
+                                    var xmlhttp = new XMLHttpRequest();
+                                    xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/kiosk_payment.php?orderno="+data.order_sn+"&finalprice="+data.final_price+"&bank="+data.bank+"&accountname="+data.account_name+"&accountno="+data.account_no, true);    
+                                    xmlhttp.send();
+                                }
+                            }
+                            // kiosk accept - authoriser prepare to approve payment ends
+
+                            location.reload();
+                        }});
+                    }
+                }
+            });
+        }});
+    }
+    //触发事件
+    $('.layui-btn').on('click', function(){
+        delbtn = $(this).attr('id');
+        var othis = $(this), method = othis.data('method');
+        active[method] ? active[method].call(this, othis) : '';
+    });
+    var active = {
+        notice: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">Please operate carefully. Will you delete this information?</div>'
+                ,yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+					location.href="{url('admin/flowerhua/admin_order_del')}"+"&id="+delbtn;
+                }
+            })
+        }
+    };
+
+    function loadInfo(id) {
+        var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+        var winid = 'loadinfo';
+        window.top.art.dialog(
+            {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+            function(){
+                window.top.art.dialog({id:winid}).close();
+            }
+        );
+        void(0);
+    }
+</script>
+</body>
+</html>

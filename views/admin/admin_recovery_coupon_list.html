@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/flowerhua/admin_recovery_coupon_list')}" class="on"><em>Coupon list</em></a>
+			<a class="layui-btn" href="{url('admin/flowerhua/admin_recovery_coupon_add')}"><em>Add single coupon</em></a>
+			<a class="layui-btn" href="javascript:;" onclick="batch_coupons()"><em>Create batch coupons</em></a>
+		</div>
+        <form action="{url('admin/flowerhua/admin_recovery_coupon_list')}" method="post" style="float:left;">
+			<td>
+				<label>
+					<select class="form-control" name="coupon_status" id="coupon_status">
+						<option value="">Please select usage status</option>
+                        <option value="1" {if $coupon_status == 1}selected="selected"{/if}>Not used</option>
+                        <option value="2" {if $coupon_status == 2}selected="selected"{/if}>Used</option>
+					</select>
+				</label>
+			</td>
+			<div class="cbtn" style="float: left;">
+				<input name="form" type="hidden" value="search" />
+				<input placeholder="Search the coupon name/coupon number" type="text" class="input-text" value="{$search}" name="search" size="40" />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			</div>
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="20" align="right"><input name="deletec" id="deletec" type="checkbox" onClick="setC()" /></th>
+            <th width="40" align="left">ID</th>
+            <th width="120" align="left">Coupon name</th>
+			<th width="120" align="center">Coupon code</th>
+			<th width="120" align="center">Coupon amount</th>
+            <th width="120" align="center">Coupon status</th>
+            <th width="140" align="center">User</th>
+            <th width="180" align="center">Coupon creation time</th>
+			<th width="180" align="center">Coupon use timestamp</th>
+			<th width="120" align="left">Action</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+			<td align="right"><input name="del_{$t['id']}" type="checkbox" class="deletec"></td>
+            <td align="center">{$t['id']}</td>
+            <td align="center">{$t['coupon_title']}</td>
+			<td align="center">{$t['coupon_sn']}</td>
+			<td align="center">${$t['coupon_money']}</td>
+			<td align="center">{if $t['coupon_status']==1}not used{else if $t['coupon_status']==2}Already used{/if}</td>
+            <td align="center">{$t['coupon_member_phone']}</td>
+            <td align="center">{date('Y-m-d H:i:s',$t['coupon_addtime'])}</td>
+			<td align="center">{if $t['coupon_apply_time']}{date('Y-m-d H:i:s',$t['coupon_apply_time'])}{/if}</td>
+			<td align="center">
+			<div class="layui-btn-group">
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/admin_recovery_coupon_add',array('id'=>$t['id']))}">Edit</a>
+				<a data-method="notice" id="{$t['id']}" class="layui-btn layui-btn-danger layui-btn-small" href="javascript:void(0);">Delete</a>
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		<tr height="25" class="cao">
+			<td colspan="22" align="left">
+				<a data-method="notice2" id="del_" class="layui-btn layui-btn-danger layui-btn-small">Delete selected</a>
+			</td>
+		</tr>
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+    function batch_coupons(){
+        layer.open({
+            title:'Batch generation of coupons',content:'Title of coupons:<input class="batch_coupons_title" type="text"><br><br>Number of coupons:<input class="batch_coupons_number" type="text"><br><br>Coupon amount:<input class="batch_coupons_money" type="text">',btn:['generate','cancel'],
+            btn1:function(){
+                $.ajax({
+                    url: "index.php?s=admin&c=flowerhua&a=ajax_add_batch_coupons",
+                    type: "post",
+                    data: {
+                        batch_coupons_title : $('.batch_coupons_title').val(),
+                        batch_coupons_number : $('.batch_coupons_number').val(),
+                        batch_coupons_money : $('.batch_coupons_money').val(),
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code==-1){
+                            layer.open({content:'To ensure that the system is normal, please generate 100 coupons below!'});
+                        }else if(data.code==1){
+                            layer.open({content:'Coupons have been successful!',yes:function(){location.reload();}});
+                        }
+                    }
+                });
+            }
+        })
+    }
+    var delbtn;
+    //触发事件
+    $('.layui-btn').on('click', function(){
+        delbtn = $(this).attr('id');
+        var othis = $(this), method = othis.data('method');
+        active[method] ? active[method].call(this, othis) : '';
+    });
+    var active = {
+        notice: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">Will you delete this information? Make sure?</div>'
+                ,yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+					location.href="{url('admin/flowerhua/admin_recovery_coupon_del')}"+"&id="+delbtn;
+                }
+            })
+        }
+    };
+
+	//触发多个删除
+    $('#del_').on('click', function(){
+        var othis = $(this), method = othis.data('method');
+        active2[method] ? active2[method].call(this, othis) : '';
+    });
+    var active2 = {
+        notice2: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; font-size:16px;  text-align: center;  font-weight: normal;">Make sure that the information is deleted?</div>'
+            ,yes: function (index, layero) {
+                //按钮【按钮一】的回调
+                document.myform.submit()
+            }
+            });
+        }
+    };
+
+function setC() {
+	if($("#deletec").attr('checked')) {
+		$(".deletec").attr("checked",true);
+	} else {
+		$(".deletec").attr("checked",false);
+	}
+}
+function loadInfo(id) {
+    var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+    var winid = 'loadinfo';
+    window.top.art.dialog(
+        {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+        function(){
+            window.top.art.dialog({id:winid}).close();
+        }
+    );
+    void(0);
+}
+</script>
+</body>
+</html>

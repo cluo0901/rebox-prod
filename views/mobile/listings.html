@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+<html>
+
+		<head>
+
+	{template head}
+
+<style>
+.clock {background-color: #f0f0f0;}
+input::-webkit-input-placeholder {
+color: #ccc !important;
+font-size: 0.26rem !important;
+}
+</style>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+</head>
+
+
+
+		<style>
+
+			.layui-layer-title{background-color:#ffcc00;}
+            .head .label_search input[type="text"] {
+                display: inline-block;
+                height: 0.7rem;
+                padding-left: 0.2rem;
+                /*background: url(../img/icon-search.png) 0.2rem center no-repeat,#ffffff;*/
+                /*background-size: 0.31rem 0.32rem;*/
+                width: 4.3rem;
+                position: relative;
+                border-radius: 0.07rem;
+                margin-left: 1.9rem;
+            }
+            .head .label_search input[type="submit"] {
+                background: url(views/mobile/img/icon75.png) no-repeat;
+                width: 40px;
+                height: 34px;
+                border-radius: 2px;
+                border: 0px;
+            }
+		</style>
+
+	<body>
+        <!-- Countdown timer hidden on line 58 -->
+
+
+        <!-- countdown timer -->
+        <!-- <div id="countdown-2" style = "position: relative; width: 162px;left: 50%; transform: translateX(-50%); padding: 1rem 0 0 0; font-size: 40px; color: #ffcc00;"></div> -->
+
+
+		<div class="list_living" style = "padding-top:1rem;">
+
+			<div class="head">
+
+				<div class="label_search">
+
+					<div class="more" onclick="showside()">
+
+						<span></span>
+
+						<span></span>
+
+						<span></span>
+
+					</div>
+                    <img src="views/mobile/img/logo_brighter.png" style="position: absolute; left: 0.9rem; width:0.75rem;height:0.75rem;">
+                    <!-- search bar move up -->
+                    
+
+                    <input type="text" class="search" placeholder="Search the device you want">
+
+                    <input type="submit" value=" " onclick="search(this)">
+
+                    
+
+					<!-- <label style="opacity:0;"><input type="text" placeholder="Search for your device to sell"/></label> -->
+
+				</div>
+
+			</div>
+
+
+            <!-- banner starts -->
+            <div class="com_pic">
+
+
+                <div class="swiper-container">
+
+                    <div class="swiper-wrapper">
+
+                        {loop $banner $t}
+
+                        <div class="swiper-slide">
+
+                            <a href="{$t['link']}"><img src="{$t['guanggaotutupian']}"/></a>
+
+                        </div>
+
+                        {/loop}
+
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+
+                </div>
+
+
+            </div>
+            <!-- banner ends -->
+
+
+			<div class="nav_list">
+
+				<ul style = "font-weight:bold;">
+
+					<li class="on pai_nav" onclick="change_pai(this,1);"><p>Listings</p></li>
+
+					<li class="pai_nav" onclick="change_pai(this,2);"><p>My Offers</p></li>
+
+					<li class="pai_nav" onclick="change_pai(this,3);"><p>Not Interested</p></li>
+
+				</ul>
+
+			</div>
+
+
+
+
+			<div class="select_list">
+
+				<ul>
+
+					<li>Device：
+
+						<select class="field">
+
+							  <option value="" class="clear" >All</option>
+
+							  {loop $recycler_type $t}
+
+                    			<option value="{$t['id']}">{$t['name']}</option>
+
+                    		  {/loop}
+
+						</select>
+
+					</li>
+
+					<li>Brand：
+
+						<select class="field1">
+
+							  <option value="" >All</option>
+
+						</select>
+
+					</li>
+
+				</ul>
+
+                <!-- search bar move to header -->
+<!-- 				<div class="sou">
+
+					<input type="text" class="search" placeholder="Search mobile device">
+
+					<input type="submit" value=" " onclick="search(this)">
+
+				</div> -->
+
+			</div>
+
+			<div class="list_list list">
+
+                <!-- add scroll to load more sign -->
+                <img src="views/mobile/img/scroll_to_load.gif" style = "position: fixed; width: 0.5rem; left: 0.3rem; bottom: 0.7rem;">
+
+				<ul id="index_box">
+
+					<!---->
+
+				</ul>
+
+				  	<input type="hidden" id="page" value="0">
+
+				  	<input type="hidden" class="is_pai" value="1">
+
+					<input type="hidden" class="clear_parameter" value="1">
+
+					<input type="hidden" class="type" value="">
+
+					<input type="hidden" class="type1" value="">
+
+					<input type="hidden" class="listing1" value="">
+
+					<input type="hidden" class="listing2" value="">
+
+					<input type="hidden" class="listing3" value="">
+
+			</div>
+
+			
+
+			<!--sidebar-->
+
+			{template recycler_nav}
+
+			<!--sidebar end-->
+
+
+
+			<!--confirm-->
+
+			<div class="confirm_pop tan">
+
+				<div class="content">
+
+					<div class="content_info">
+
+						<div class="tit">Confirm Offer</div>
+
+						<div class="num_sku">#135323163523 | iPhone 8 64G Gold</div>
+
+						<div class="price">Offer Price: <span>$<em></em></span></div>
+
+						<select class="select">
+
+							<!--<option value="">phone</option>-->
+
+							{loop $less_phone $t}
+
+							<option>{$t['less_phone']}</option>
+
+							{/loop}
+
+						</select>
+
+						<script>
+
+                            var info = '{$info[personal_information3]}';
+
+						</script>
+
+						<div class="code"><input class="back_code" type="text" placeholder="Enter One-Time Passcode"/><button class="getcode" onclick="sendMessage()" id="back-getcode">Send OTP</button></div>
+
+						<div class="agree"><input class="Conditions" type="checkbox"/>I agree to <a href="javascript:;" onclick="layer.open({title:false,closeBtn:0, content:info,btn:['I Agree']});">Terms & Conditions</a></div>
+
+					</div>
+
+					<img src="{SITE_THEME}img/close.png" class="close" onclick="hideconfirm()"/>
+
+					<button class="confirm" onclick="confirm_one()">Confirm</button>
+
+				</div>
+
+			</div>
+
+			<!--confirm-->
+
+		</div>
+            <!-- countdown timer script starts -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="views/mobile/js/jquery.min.js"><\/script>')</script>
+            <script src="views/mobile/js/jquery.time-to.js"></script>
+            <script>
+                var date = new Date(2018, 9, 10, 10, 0, 0);
+                
+                /**
+                 * Set timer countdown to specyfied date
+                 */
+                $('#countdown-2').timeTo(date);
+
+                // date = getRelativeDate(7, 9);
+
+
+            </script>
+            <!-- countdown timer script ends -->
+
+	</body>
+
+</html>
+
+<script>
+
+    var swiper = new Swiper('.swiper-container',{
+
+        autoplay:{
+
+            disableOnInteraction: false,
+
+        },
+
+        loop:true,
+
+        disableOnInteraction:false,
+
+        pagination: {
+
+            el: '.swiper-pagination',
+
+            clickable:true
+
+        }
+
+    });
+
+
+
+        var lay;
+
+        function change_pai(a,num){
+
+            $('.pai_nav').removeClass('on');
+
+            $(a).addClass('on');
+
+            $('.is_pai').val(num);
+
+            $('.clear_parameter').val(2);
+
+            $('#page').val(0);
+
+            get_pagelist();
+
+        }
+
+        $('.field').change(function () {
+
+            lay = layer.open({type:3,icon:1});
+
+            $('.clear_parameter').val(2);
+
+            $('#page').val(0);
+
+            $('.type1').val('');
+
+            $('.type2').val('');
+
+            var id = $('.field option:selected').val();
+
+             if(id==0){
+
+                $('.field1').html('<option value="">All</option>');
+
+                return false;
+
+            }
+
+            $('.type').val(id);
+
+            $.ajax({
+
+                url: "index.php?c=recycler&a=recycler_listings",
+
+                type: "post",
+
+                data: {parentid: id},
+
+                dataType: 'json',
+
+                success: function (data) {
+
+                    get_pagelist();
+
+                    var arr = data.arr;
+
+                    if (arr == '') {
+
+                        $('.field1').html('<option value="">All</option>');
+
+                    } else {
+
+                        var content = '';
+
+                        for (var i = 0; i < arr.length; i++) {
+
+                            content += '<option value="' + arr[i].id + '">' + arr[i].name + '</option>';
+
+                            $('.field1').html('<option value="">All</option>' + content);
+
+                        }
+
+                    }
+
+
+
+                }
+
+            })
+
+        });
+
+
+
+        $('.field1').change(function () {
+
+            lay = layer.open({type:3,icon:1});
+
+            $('.clear_parameter').val(2);
+
+            $('#page').val(0);
+
+            var id = $('.field1 option:selected').val();
+
+            $('.type1').val(id);
+
+            get_pagelist();
+
+        });
+
+        function search(obj){
+
+            $('.clear_parameter').val(2);
+
+            $('#page').val(0);
+
+//            $('.search').val('');
+
+//            var str = $(obj).prev().val();
+
+//            $('.search').val(str);
+
+            get_pagelist();
+
+        }
+
+        function get_pagelist() {
+
+            lay = layer.open({type:3,icon:1});
+
+            var content = '';
+
+            var index_box = $('#index_box');
+
+            var page = $('#page').val();
+
+            var recovery_parent_id = $('.type').val();
+
+            var recovery_type_id = $('.type1').val();
+
+            var clear_parameter = $('.clear_parameter').val();
+
+            var is_pai = $('.is_pai').val();
+
+            var search = $('.search').val();
+
+            $.ajax({
+
+                url: "index.php?c=recycler&a=ajax_recycler",
+
+                type: "post",
+
+//                async:false,
+
+                data: {
+
+                    page: page, recovery_type_id: recovery_type_id, recovery_parent_id: recovery_parent_id, clear_parameter: clear_parameter,search:search,is_pai:is_pai
+
+                },
+
+                dataType: 'json',
+
+                success: function (data) {
+
+                    layer.close(lay);
+
+                    if (data.code == -2) {
+
+                        index_box.html('');
+
+                        //z$('.nomore p').text('OOPS! NOTHING HERE');
+
+                    }
+
+                    else if (data.code == -1) {
+
+                        //$('.nomore p').text('OOPS! NOTHING HERE');
+
+                    } else if (data.code > 0) {
+
+                        $('.nomore').css('display', 'none');
+
+                        var list = data.list;
+
+                        for (var i = 0; i < list.length; i++) {
+
+                            //rejected ant over 48 hours dont display
+                            var d = new Date();
+                            var t = d.getTime() / 1000 - list[i].ashelf_time;                         
+                            if(list[i].dstatus!=-6 || (t < 172800)){
+
+                            //find capacity
+                                
+                            var colpos = list[i].details.indexOf(":");
+                            var gbpos = list[i].details.indexOf("GB");
+                            var capa = list[i].details.substr(colpos+1,gbpos-colpos-1);
+                            // content += '<p>'+capa+'GB    </p>'; //add capacity
+
+                            //find color
+                            var colorpos = list[i].details.indexOf("Colour");
+                            var colorend = list[i].details.indexOf("<br>", colorpos);
+                            var color = list[i].details.substr(colorpos+7, colorend-colorpos-3);
+                            //add color
+
+							content += '<li>\n' +
+
+                                '\t\t\t\t\t\t<div class="name_detail"><p>' + list[i].recovery_title + '&nbsp;&nbsp;' + capa +'GB&nbsp;&nbsp;' + color +'</p> <span> ' + list[i].recovery_title2 + '</span><a href="javascript:;" onclick="getDetail(\''+list[i].description+'\',\''+list[i].multiples+'\',\''+list[i].img+'\');">Details</a></div>\n' + //add capacity and color
+
+                                '\t\t\t\t\t\t<div class="prod">\n' +
+
+                                //add grade img
+                                '\t\t\t\t\t\t\t<img src="views/mobile/img/grade_' + list[i].grade + '.png" style = "max-width: 20px; float: left;">\n' +
+
+                                '\t\t\t\t\t\t\t<a href="javascript:;" class="prodleft"><img src="'+ list[i].recovery_img+'"></a>\n' +
+
+                                '\t\t\t\t\t\t\t<div class="prodright">\n' +
+
+                                '\t\t\t\t\t\t\t\t<div class="sku_num"><div class="sku fl"></div><div class="num fl">#' + list[i].number + '</div></div>\n';
+
+                            if(list[i].dstatus==1){
+
+                                content += '<p style="font-size:13px;padding:5px 0 5px 0;">Your current offer: ' + '<em style="color:red;">$' +list[i].bidding_price+'</em>' + '</p>';
+
+                            }
+
+
+                            //add in wording for accepted and rejected offers starts
+                            if(list[i].dstatus==6){
+
+                                content += '<p style="font-size:13px;padding:5px 0 5px 0;">Congratulations! Your offer: ' + '<em style="color:red;">$' +list[i].bidding_price+'</em> is accepted. Please make payment ASAP' + '</p>';
+
+                            }
+                            if(list[i].dstatus==-6){
+
+                                content += '<p style="font-size:13px;padding:5px 0 5px 0;">Your offer: ' + '<em style="color:red;">$' +list[i].bidding_price+'</em> was unsuccessful.' + '</p>';
+
+                            }
+                            //add in wording for accepted and rejected offers ends
+
+
+                            if(list[i].dstatus==1){
+
+                                content +='\t\t\t\t\t\t\t\t<div class="bindinput" style="margin-bottom:0.15rem;"><input type="text" class="number" placeholder="" value="'+list[i].bidding_price1+'"/><div class="minus"><img src="{SITE_THEME}img/minus.png"/></div><div class="add"><img src="{SITE_THEME}img/add.png"/></div></div>\n';
+
+							}else if (list[i].dstatus!=6 && list[i].dstatus!=-6){  //check if already accepted or rejected offer, no need for input offer
+
+                                content +='\t\t\t\t\t\t\t\t<div class="bindinput"><input type="text" class="number" placeholder="Enter offer price" onfocus="this.placeholder="'+'" onblur="this.placeholder="'+ 'Enter offer price'+'" value=""/><div class="minus"><img src="{SITE_THEME}img/minus.png"/></div><div class="add"><img src="{SITE_THEME}img/add.png"/></div></div>\n';
+
+							}
+
+                            content += '<input type="hidden" value="' + list[i].bidding_price + '"class="bidding_price">';
+
+                            content += '<input type="hidden" value="' + list[i].order_final_price + '"class="low_price">';
+
+                            content += '<input type="hidden" value="' + list[i].recovery_high_price + '"class="high_price">';
+
+                            content += '<input type="hidden" value="' + list[i].order_id + '"class="order_id">';
+
+                            content += '<input type="hidden" value="' + list[i].id + '"class="shelve_id">';
+
+                            if(list[i].order_final_price>0 && list[i].dstatus!=1) {
+
+                                content += '\t\t\t\t\t\t\t\t<div class="minbid">Min Bid: $' + list[i].order_final_price + '</div>\n';
+
+                            }
+
+
+                            // accepted or rejected offer do not need to display and buttons
+                            if(list[i].dstatus!=-2 && list[i].dstatus!=1 && list[i].dstatus!=6 && list[i].dstatus!=-6) {
+
+                                content += '\t\t\t\t\t\t\t\t<div class="btns"><div class="not_inster nointerested">Not Interested</div>';
+
+                            }
+
+
+
+                            if(list[i].dstatus!=2 && list[i].dstatus!=6 && list[i].dstatus!=-6) {
+
+                                content += '<div class="btns"><div class="subbid sub_bid">Submit</div></div>\n';
+
+                            }
+
+							content +='\t\t\t\t\t\t\t</div>\n' +
+
+							'\t\t\t\t\t\t</div>\n' +
+
+							'\t\t\t\t\t</li>';
+
+                            }
+
+                        }
+
+                        if(data.code == 2){
+
+                            index_box.html('');
+
+                            $('.clear_parameter').val(1);
+
+                            page++;
+
+                            $('#page').val(page);
+
+                            index_box.append(content);
+
+                        }else if (data.code == 1) {
+
+                            $('.clear_parameter').val(1);
+
+                            page++;
+
+                            $('#page').val(page);
+
+                            index_box.append(content);
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+        setTimeout('get_pagelist();',200);
+
+
+
+        function getDetail(description,details,img){
+
+            if(description){
+
+                layer.open({title:'Details',btn:[],content:details+'<font style="font-weight:bold;text-decoration:underline;">Additional info: </font>'+description+'<br>'+img});
+
+			}else{
+
+                layer.open({title:'Details',btn:[],content:details+'<br>'+img});
+
+			}
+
+		}
+
+        function clear_filter() {
+
+            $('#page').val(' ');
+
+            $('.type').val(' ');
+
+            $('.type1').val(' ');
+
+            $('.clear_parameter').val(2);
+
+            $('.search').val(' ');
+
+            $('.clear').attr('selected','selected');
+
+            $('.field1').html('<option value="" >All</option>');
+
+            get_pagelist();
+
+        };
+
+        function hide_tan() {
+
+            $(".tan").hide()
+
+        }
+
+
+
+        function confirm_one() {
+
+            var bidding_price = $('.bidding_price').val();
+
+            var order_id = $('.order_id').val();
+
+            var phone = $('.content_info option:selected').text();
+
+            var code = $('.back_code').val();
+
+            var shelve_id = $('.shelve_id').val();
+
+            if (code == '') {
+
+                layer.msg('Please enter the verification code', {icon: 0});
+
+                return false;
+
+            }
+
+            if (!$('.Conditions').prop('checked')) {
+
+                layer.msg('Please agree with the terms and conditions', {icon: 0});
+
+                return false;
+
+            }
+
+            $.ajax({
+
+                url: "index.php?c=recycler&a=ajaxbackcode",
+
+                type: "post",
+
+                data: {code: code, phone: phone},
+
+                dataType: 'json',
+
+                success: function (data) {
+
+                    if (data == 0) {
+
+                        layer.msg('Verification code error', {icon: 0});
+
+                    }
+
+                    if (data == 1) {
+
+                        $.ajax({
+
+                            url: "index.php?c=recycler&a=ajax_tijiaochujia",
+
+                            type: "post",
+
+                            data: {order_id: order_id, bidding_price: bidding_price,shelve_id:shelve_id, phone: phone},
+
+                            dataType: 'json',
+
+                            success: function (data){
+
+                                if(data.code==2){
+
+                                    $(".tan").hide();
+
+                                    layer.msg('Offer Submitted!',{time:3000,title:'',icon: 1,
+
+                                        end:function(){
+
+
+
+                                            //email notification of the bids submitted
+                                            var xmlhttp = new XMLHttpRequest();
+                                            xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/bid_submitted.php?shelveid="+shelve_id, true);                 
+                                            xmlhttp.send();
+                                            //send bids email ends
+
+                                            location.reload();
+
+                                        }
+
+                                    });
+
+//                                    layer.open( {title:'',content:'You have bidding successfully, the order can be viewed at successful bids, to bid on other cell phones',
+
+//                                        icon: 1,
+
+//										end:function(){
+
+//											location.reload();
+
+//										}
+
+//                                    });
+
+                                }
+
+                            }
+
+                        })
+
+                    }
+
+                }
+
+            })
+
+        }
+
+        var InterValObj; //timer变量，控制时间
+
+        var count = 60; //间隔函数，1秒执行
+
+        var curCount;//当前剩余秒数
+
+        function sendMessage() {
+
+            curCount = count;
+
+            var phone = $('.content_info option:selected').text();
+
+            var preg = /^[89][0-9]{7,}$/;
+
+            if (!phone) {
+
+                layer.msg('Please enter the phone number', {icon: 0});
+
+                return false;
+
+            } else if (!preg.test(phone)) {
+
+                layer.msg('Mobile phone number format error', {icon: 0});
+
+                return false;
+
+            }
+
+            $.ajax({
+
+                type: 'post',
+
+                url: "{url('recycler/ajax_backsendcode1')}",
+
+                data: {phone: phone},
+
+                dataType: "json",
+
+                async: false,
+
+                success: function (data) {
+
+                    if (data) {
+
+                        if (data.code == 1) {
+
+                            $("#back-getcode").attr("href", "javascript:;");
+
+                            $('#back-getcode').css('background', '#e9ebed');
+
+                            $("#back-getcode").html('Send success');
+
+                            $("#back-phone").attr('readonly', 'readonly');
+
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                        } else if (data.code == 2) {
+
+                            layer.open({'title': 'Prompt', 'content': 'This user has not been found for the time being!',});
+
+                            return false;
+
+                        } else if (data.code == 3) {
+
+                            layer.open({'title': 'Prompt', 'content': 'Fail in send' + data.sms_err,});
+
+                            return false;
+
+                        }
+
+                    } else {
+
+                        $("#back-getcode").attr("href", "javascript:");
+
+                        $("#back-getcode").html(curCount + " after second");
+
+                        $("#back-phone").attr('readonly', 'readonly');
+
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                    }
+
+                }
+
+            });
+
+        }
+
+        //timer处理函数
+
+        function SetRemainTime() {
+
+            if (curCount == 0) {
+
+                window.clearInterval(InterValObj);//停止计时器
+
+                $("#back-getcode").attr("href", "javascript:sendMessage();");
+
+                $("#back-getcode").html("Resend");
+
+                $('#back-getcode').css('background', '#ffcc00');
+
+            }
+
+            else {
+
+                curCount--;
+
+                $("#back-getcode").html("Resend in "+curCount+'s');
+
+            }
+
+        }
+
+    </script>
+
+
+
+    <script>
+
+    var mySwiper = new Swiper('.swiper-container-2', {
+
+        //autoplay: 2000,//可选选项，自动滑动
+
+        prevButton: '.apprise-btn-pre',
+
+        nextButton: '.apprise-btn-next',
+
+        width: 300,
+
+        slidesPerView: 4
+
+    });
+
+    $('.appraise .swiper-button-prev').click(function () {
+
+        mySwiper.swipePrev();
+
+    });
+
+    $('.appraise .swiper-button-next').click(function () {
+
+        mySwiper.swipeNext();
+
+    });
+
+    var mySwiper1 = new Swiper('.swiper-container-3', {
+
+        autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+        width: 200,
+
+        slidesPerView: 2
+
+    });
+
+    $('.ahs-media-content .swiper-button-prev').click(function () {
+
+        mySwiper1.swipePrev();
+
+    });
+
+    $('.ahs-media-content .swiper-button-next').click(function () {
+
+        mySwiper1.swipeNext();
+
+    });
+
+
+
+    $('.list').on('click', '.add', function () {
+
+        var bidding_price = $(this).parents('.prodright').find('.bidding_price').val();
+
+        var number = $(this).parents('.prodright').find('.number').val();
+
+        var low_price = $(this).parents('.prodright').find('.low_price').val();
+
+        if(bidding_price){
+            var low_price = bidding_price;
+        }
+        low_price = parseInt(low_price) + 5;
+
+        console.log(number)
+
+        //if (number < low_price) {
+
+            //number = low_price;
+
+        //}else{
+        if (number) {
+            number = parseInt(number)+5;
+            if (number < low_price) {
+                number = low_price;
+            }   
+
+        //}
+
+//        var high_price = $(this).parents('.prodright').find('.high_price').val();
+
+//        if (number > high_price) {
+
+//            number = high_price;
+
+//        }
+
+            $(this).parents('.prodright').find('.number').val(number);
+        }
+
+    });
+
+    $('.list').on('click', '.minus', function () {
+
+        var bidding_price = $(this).parents('.prodright').find('.bidding_price').val();
+
+        var number = $(this).parents('.prodright').find('.number').val();
+
+        number = parseInt(number);
+
+        var low_price = $(this).parents('.prodright').find('.low_price').val();
+
+        if(bidding_price){
+
+            var low_price = bidding_price;
+
+        }
+
+        low_price = parseInt(low_price) + 5;
+
+        if (number >= 5) {
+            number = number -5;
+            if (number < low_price) {
+                number = low_price;
+            } 
+
+
+
+            $(this).parents('.prodright').find('.number').val(number);
+        }
+
+    });
+
+    $('.list').on('click', '.sub_bid', function () {
+
+        var high_price = $(this).parents('.prodright').find('.high_price').val();
+
+        var low_price = $(this).parents('.prodright').find('.low_price').val();
+
+        var number = $(this).parents('.prodright').find('.number').val();
+
+        if (number == '') {
+
+            layer.msg('Please enter offer price', {icon: 0});
+
+            return false;
+
+        }
+
+        //check - resubmission must be higher than current offer price
+
+        var your_bid = $('.bidding_price').val();
+
+        if (parseInt(number) < parseInt(your_bid)) {
+
+            layer.msg('New offer price must be higher than current offer price', {icon: 0});
+
+            return false;
+
+        }
+
+        //if (parseInt(number) < parseInt(low_price)) {
+
+            //layer.msg('The bidding price must not be lower than the lowest price', {icon: 0});
+
+            //return false;
+
+        //}
+
+//        if (parseInt(number) > parseInt(high_price)) {
+
+//            layer.msg('The bid price is higher than the highest price', {icon: 0});
+
+//            return false;
+
+//        }
+
+        var recovery_title = $(this).parents('li').children('.name_detail').find('p').html();
+
+        var recovery_title2 = $(this).parents('li').children('.name_detail').find('span').html();
+
+        var phone = $(this).parents('li').find('.num').html();
+
+        var order_id = $(this).parents('li').find('.order_id').val();
+
+        var shelve_id = $(this).parents('li').find('.shelve_id').val();
+
+        $('.confirm_pop .price span em').html(number);
+
+        $('.order_id').val(order_id);
+
+        $('.shelve_id').val(shelve_id);
+
+        $('.bidding_price').val(number);
+
+        $('.confirm_pop .num_sku').html(recovery_title + ' ' + recovery_title2 + '<br>' + phone  + '<br><br>');
+
+        $(".tan").show()
+
+    });
+
+
+
+
+
+    $('.list').on('click', '.nointerested', function (){
+
+        var order_id = $(this).parents('.prodright').find('.order_id').val();
+
+        var shelve_id = $(this).parents('.prodright').find('.shelve_id').val();
+
+        var a = $(this);
+
+        layer.open({title:'Not Interested',btn:['Confirm','Cancel'],content:'Move this device to Not Interested category?',yes:function(){
+
+            $.ajax({
+
+                url: "index.php?c=recycler&a=ajax_nointerested",
+
+                type: "post",
+
+                data: {order_id: order_id,shelve_id:shelve_id},
+
+                dataType: 'json',
+
+                success: function (data){
+
+                    $(a).parents('.parents_li').remove();
+
+                    if(data.code==2){
+
+                        layer.msg('success！',{icon:1});
+
+                    }
+
+                }
+
+            })
+
+        }})
+
+    });
+
+
+
+    var tur = true;
+
+    function scrollFn() {
+
+        //真实内容的高度
+
+        var pageHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+
+        //视窗的高度
+
+        var viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+
+        //隐藏的高度
+
+        var scrollHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+        tur = true;
+
+        if (pageHeight - viewportHeight - scrollHeight < 1) {    //如果满足触发条件，执行
+
+            $('.nomore').css('display', 'block');
+
+            get_pagelist();
+
+            return false;
+
+        }
+
+    }
+
+    $(window).scroll(function () {
+
+        if (tur) {
+
+            setTimeout(scrollFn, 1000);
+
+            tur = false;
+
+        } else {
+
+        }
+
+    });//绑定滚动事件
+
+</script>
+
+<script>
+
+	//显示侧边栏
+
+	function showside(){
+
+		$('.sidebar').show();
+
+	}
+
+	//隐藏侧边栏
+
+	function hdieside(){
+
+		$('.sidebar').hide();
+
+	}
+
+	//显示弹窗
+
+	function confirmInfo(){
+
+		$('.confirm_pop').show();
+
+	}
+
+	//隐藏弹窗
+
+	function hideconfirm(){
+
+		$('.confirm_pop').hide();
+
+	}
+
+	//.nav_list li点击切换
+
+	$('.nav_list ul li').on('click',function(){
+
+		$(this).addClass('on').siblings().removeClass('on');
+
+	})
+
+</script>
+

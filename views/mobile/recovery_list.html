@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="select_bg">
+
+	<head>
+
+	{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+</head>
+
+	<body class="select_bg">
+
+		<div class="select_model">
+
+			{template header}
+
+			
+
+			<!--list-->
+
+			<div class="list">
+
+				<div class="nav_list">
+
+					<ul id="recovery-box">
+
+						{loop $type_list $t}
+
+						
+
+						<li onclick="add_on(this,{$t['id']});" {if $recovery_type_id == $t['id']}class="on"{/if}>
+
+							{$t['name']}
+
+						</li>
+
+						
+
+						{/loop}
+
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="cate_content">
+
+					<div class="cateLeft">
+
+						<ul id="menu-box">
+
+							<!--<li>Nokia</li>-->
+
+						</ul>
+
+					</div>
+
+					<div class="cateRight">
+
+						<ul id="index-box">
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>1</span>iPhone 5s</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>2</span>iPhone 8 plus</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>3</span>iPhone 7 s</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>4</span>iPhone 6 plus</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>5</span>Template iPhone X</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>6</span>Test Apple model</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+							<!--<li>-->
+
+								<!--<a href="javascript:;">-->
+
+									<!--<p><span>7</span>Apple iPhone X</p>-->
+
+								<!--</a>-->
+
+							<!--</li>-->
+
+						</ul>
+
+					</div>
+
+				</div>
+
+			<!--list end-->
+
+		</div>
+
+	</body>
+
+	<input type="hidden" id="recovery_type_id" value="">
+
+	<input type="hidden" id="recovery_parent_id" value="">
+
+	<input type="hidden" id="page" value="">
+
+</html>
+
+{if count($type_list)>0}
+
+<script>
+
+    $(function(){
+
+        if($('#recovery-box').find('li.on').length == 0){
+
+        	$('#recovery-box li').eq(0).trigger('click');
+            
+    	} else {
+    		
+    		$('#recovery-box').find('li.on').trigger('click');
+    	}        
+
+    });
+
+</script>
+
+{/if}
+
+<script>
+
+    var lay ;
+
+    function add_on(a,id){
+
+        var str='';
+
+        $('#recovery_parent_id').val('');
+
+        lay = layer.open({type:3,icon:1});
+
+        $('.add_onn').removeClass('on');
+
+        $.ajax({
+
+            url: "index.php?c=ajax_formflowerhua&a=ajax_get_typelist",
+
+            type: "post",
+
+            data: {
+
+                id : id,
+
+            },
+
+            dataType: 'json',
+
+            success: function (data) {
+
+                $('#recovery_type_id').val(id);
+
+                str += '<li class="selection_brands" onclick="selection_brands(this,\'hits\');">Hot</li>';
+
+                if(data.code==1){
+
+                    for (var i = 0; i < data.result.length ; i++){
+
+                    	// hide huawei brand starts
+                        // if (data.result[i].id != 54 && data.result[i].id != 79) {
+                        
+                        str += '<li class="selection_brands" onclick="selection_brands(this,'+data.result[i].id+');">'+data.result[i].name+'</li>';
+
+                        // }
+                        //hide huawei ends
+
+                    }
+
+                    $('#menu-box').html('');
+
+                    $('#menu-box').append(str);
+
+                }
+
+                $(a).removeClass('on');
+
+                $(a).addClass('on');
+
+                $('#page').val(0);
+
+                $('#index-box').html('');
+
+                $('#menu-box li').eq(0).trigger('click');
+
+            }
+
+        });
+
+    }
+
+    function selection_brands(a,id){
+
+        $('.selection_brands').css('border-bottom','3px solid #e5e5e5');
+
+        $(a).css('border-bottom','3px solid #ffcc00');
+
+        lay = layer.open({type:3,icon:1});
+
+        $('#recovery_parent_id').val(id);
+
+        $('#page').val(0);
+
+        $('#index-box').html('');
+
+        ajax_index();
+
+    }
+
+    function ajax_index(){
+
+        var page = $('#page').val();
+
+        var recovery_type_id = $('#recovery_type_id').val();
+
+        var recovery_parent_id = $('#recovery_parent_id').val();
+
+        $.ajax({
+
+            url: "index.php?c=ajax_formflowerhua&a=ajax_index",
+
+            type: "post",
+
+            data: {
+
+                page:page,
+
+                recovery_type_id : recovery_type_id,
+
+                recovery_parent_id : recovery_parent_id,
+
+            },
+
+            dataType: 'json',
+
+            success: function (data) {
+
+                layer.close(lay);
+
+                var str = '';
+
+                if(data.code==1){
+
+                    if(data.result.length<8){
+
+                        $('.index-box-more').hide();
+
+                    }else{
+
+                        $('.index-box-more').show();
+
+                    }
+
+                    for (var i = 0; i < data.result.length ; i++) {
+
+                        if (data.result[i].show_hide == true) {
+
+		                        str += '<li>\n' +
+
+		                            '\t\t\t\t\t\t\t\t<a href="index.php?c=flowerhua&a=recovery_detail&recovery_id='+data.result[i].id+'">\n' +
+
+		                            // '\t\t\t\t\t\t\t\t\t<p><span>'+(i+1)+'</span>'+data.result[i].recovery_title+'</p>\n' +
+		                            // add 
+		                            '\t\t\t\t\t\t\t\t\t<p><span>'+(i+1)+'</span>'+data.result[i].recovery_title + '<font size ="2rem" color="#000080">&nbsp; (<font size="1rem">Up to</font>' + ' $' + data.result[i].recovery_high_price + ')</font></p>\n' +
+
+		                            '\t\t\t\t\t\t\t\t</a>\n' +
+
+		                            '\t\t\t\t\t\t\t</li>';
+	                        
+	                    } 
+
+                    }
+
+                    $('#index-box').append(str);
+
+                    page++;
+
+                    $('#page').val(page);
+
+                }else{
+
+                    $('.index-box-more').hide();
+
+//                    $('#index-box').append('<p align="center" style="padding:20px;font-size:14px;">No data has been found for the time being!</p>');
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+
+	window.onload = function(){
+
+		//自动设置.navList的宽度
+
+		var ulwidth = 10;
+
+		$('.list .nav_list ul li').each(function(){
+
+			var width = $(this).outerWidth(true);
+
+			ulwidth +=width;
+
+		});
+
+		$('.list .nav_list ul').width(ulwidth);
+
+		
+
+		//.navList li切换
+
+		$('.list .nav_list ul li').on('click',function(){
+
+			$(this).addClass('on').siblings().removeClass('on');
+
+		});
+
+		
+
+		$('.select_model .cateLeft ul li').on('click',function(){
+
+			$(this).addClass('on').siblings().removeClass('on');
+
+		})
+
+	}
+
+</script>
+

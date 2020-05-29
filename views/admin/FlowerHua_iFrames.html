@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+</head>
+<style>
+	.content-menu select{height:40px;}
+	.content-menu label{float:left;}
+</style>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<tr>
+			<td>
+				<label>
+					<select class="form-control" name="province_id" id="province_id">
+						<option value="">请选择省</option>
+						{loop $province $t}
+						<option value="{$t[id]}" {if $data[province_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+						{/loop}
+					</select>
+				</label>
+
+				<label>
+					<select class="form-control" id="city_id" name="city_id">
+						<option value="">请选择市</option>
+						{loop $citylist $t}
+						<option value="{$t[id]}" {if $data[city_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+						{/loop}
+					</select>
+				</label>
+				<script type="text/javascript">
+                    $("#province_id").change(function(){
+                        var id = $(this).val();
+                        $.ajax({
+                            type:"POST",
+                            url:"index.php?s=admin&a=city",
+                            data:"id="+id,
+                            dateType:"html",
+                            success:function(date){
+                                $("#city_id").html(date);
+                            }
+                        })
+                    })
+				</script>
+			</td>
+		</tr>
+		<form action="" method="post" style="float:left;">
+			<input name="form" type="hidden" value="search" />
+			<input placeholder="搜索" type="text" class="input-text" value="{$username}" name="username" style="height:40px;float:left;width:250px;margin:0;" />
+			<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit" style="height:40px;" />
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+		<input name="form" id="list_form" type="hidden" value="order">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="20" align="right"><input name="deletec" id="deletec" type="checkbox" onClick="setC()" /></th>
+			<th width="100" align="left">列数</th>
+			<th width="100" align="center">列数</th>
+			<th width="100" align="center">列数</th>
+			<th width="100" align="center">列数</th>
+			<th width="100" align="center">列数</th>
+			<th width="100" align="center">列数</th>
+			<th align="left">Option</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+			<td align="right"><input name="del_{$t['id']}" type="checkbox" class="deletec"></td>
+			<td align="left">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="left"><?php $del = url('admin/flowerhua/Hua',array('type'=>'delete','id'=>$t['id']));?>
+			<div class="layui-btn-group">
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/edit',array('id'=>$t['id']))}"> |
+				<a class="layui-btn layui-btn-danger layui-btn-small" href="javascript:;" onClick="if(confirm('{lang('a-confirm')}')){ window.location.href='{$del}'; }">{lang('a-del')}</a>
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		<tr height="25"  class="cao">
+			<td colspan="22" align="left">
+			<input type="submit" class="btn btn-success btn-sm" value="{lang('a-del')}" name="submit_del" onClick="$('#list_form').val('del');return confirm_del()" />
+			</td>
+		</tr>
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+function setC() {
+	if($("#deletec").attr('checked')) {
+		$(".deletec").attr("checked",true);
+	} else {
+		$(".deletec").attr("checked",false);
+	}
+}
+function confirm_del() {
+    if (confirm('{lang("a-confirm")}')) {
+	    document.myform.submit();
+		return true; 
+	} else {
+	    return false;
+	}
+}
+function loadInfo(id) {
+    var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+    var winid = 'loadinfo';
+    window.top.art.dialog(
+        {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+        function(){
+            window.top.art.dialog({id:winid}).close();
+        }
+    );
+    void(0);
+}
+</script>
+</body>
+</html>

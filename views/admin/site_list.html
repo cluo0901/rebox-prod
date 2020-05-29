@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+	{template admin/top.html}
+<script type="text/javascript">
+$(function(){
+	
+});
+
+function confirm_del() {
+    if (confirm('{lang('a-confirm')}')) {
+	    $('#load').show();
+		return true; 
+	} else {
+	    return false;
+	}
+}
+function setC() {
+	if($("#deletec").attr('checked')) {
+		$(".deletec").attr("checked",true);
+	} else {
+		$(".deletec").attr("checked",false);
+	}
+}
+</script>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a class="layui-btn" href="{url('admin/site/')}" class="on"><em>网站管理</em></a>
+		</div>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+		<table class="table table-striped" width="100%">
+		<thead>
+		<tr>
+			<th width="150" align="center">{lang('a-sit-5')}</th>
+			<th width="250"  align="center">{lang('a-sit-6')}</th>
+			<th align="left">{lang('a-option')}</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $id=>$t}
+		<tr>
+			<td align="center">{$t['SITE_NAME']}</td>
+			<td align="center"><a href="http://{$t['DOMAIN']}{SITE_PATH}" target="_blank">http://{$t['DOMAIN']}{SITE_PATH}</a></td>
+			<td align="left">
+			<div class="layui-btn-group">
+				{if admin_auth($userinfo['roleid'], 'site-edit')}<a class="layui-btn layui-btn-small layui-btn-normal" href="{url('admin/site/edit',array('id'=>$id))}">Edit</a> | {/if}
+				{if admin_auth($userinfo['roleid'], 'site-config')}<a class="layui-btn layui-btn-small layui-btn-normal" href="{url('admin/site/config',array('id'=>$id))}">{lang('a-sit-7')}</a> | {/if}
+				{if admin_auth($userinfo['roleid'], 'site-del')}<a class="layui-btn layui-btn-small layui-btn-danger" {if $id==1}href="javascript:;" style="color:#fff"{else}href="{url('admin/site/del',array('id'=>$id))}"{/if}>{lang('a-del')}</a>{/if}
+			</div>
+
+			</td>
+		</tr>
+		{/loop}
+		</tbody>
+		</table>
+		</form>
+    </div>
+</div>
+</body>
+</html>

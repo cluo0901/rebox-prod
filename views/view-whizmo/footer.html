@@ -1,0 +1,60 @@
+{php
+    $CI = & get_instance();
+    $follow = $CI->flowerhua->get_one('category',"catid = 205");
+    $follow['child'] = $CI->flowerhua->get_all_where('content_1_follow',"catid = 205");
+    foreach($follow['child'] as $key=>$value)
+        $follow['child'][$key]['title'] = $CI->flowerhua->get_field('content_1',"id = $value[id]",'title');
+    $list = $CI->flowerhua->get_all_where('category',"ismenu = 1 and child = 1 and parentid = 0 order by listorder asc");
+    foreach($list as $key=>$value)
+        $list[$key]['child'] = $CI->flowerhua->get_all_where('category',"ismenu = 1 and parentid = ".$value[catid]." order by listorder asc",'catid,catname,url,typeid');
+    $footertitle = $CI->flowerhua->get_all_list('whizmo_footer', 'sort desc', '0,4', 'status=1', $ifcount = false);
+}
+<div class="footer-service">
+        <div class="foot-1">
+            <ul class="clearfloat">
+            {loop $footertitle $t}
+                <li><div><img src="{$t['thumb']}"><span>{$t['title']}</span><div></div></div></li>
+            {/loop}
+            </ul>
+        </div>
+</div>
+<div class="footer">
+    <div class="container clear">
+        <div class="tel" style="margin-bottom: 200px; margin-left: 140px;">
+            <!-- <img src="{SITE_THEME}img/icon31.png">
+            <h3>{$SITE_TEL}</h3>
+            <p style="font-size: large">WhatsApp Us</p> -->
+        </div>
+        <div class="mid">
+            <ul>
+                {loop $list $item}
+                <li>
+                    <dl>
+                        <dt>{$item['catname']}</dt>
+                        {loop $item['child'] $t}
+                        <dd>
+                            {if $t['typeid']==2}
+                            <a href="{url('flowerhua/detail_and_help',array('category_id'=>$t['catid']))}">{$t['catname']}</a>
+                            {else if $t['typeid']==3}
+                            <a href="{$t['url']}" target="_blank">{$t['catname']}</a>
+                            {/if}
+                        </dd>
+                        {/loop}
+                    </dl>
+                </li>
+                {/loop}
+            </ul>
+        </div>
+        <div class="right">
+            <div class="rt">{$follow['catname']}</div>
+            {loop $follow['child'] $t}
+            <a href="{$t['lianjie']}" target="_blank">
+                <img src="{$t['tupian']}">{$t['title']}
+            </a>
+            {/loop}
+        </div>
+    </div>
+    <div class="bottom">
+        {$SITE_ICP}
+    </div>
+</div>

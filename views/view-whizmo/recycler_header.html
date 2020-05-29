@@ -1,0 +1,81 @@
+{php
+    $CI =& get_instance();
+    $id = get_cookie('recycler_id');
+    $data = $CI->fei->get_one('whizmo_recycler', "id = $id", '');
+   
+}
+<div class="header headers">
+    <div class="container">
+        <a href="index.php" class="logo">
+            <!-- <img src="{$SITE_LOGO}" width="100%" height="100%"> -->
+            <!-- <a href="https://rebox.com.sg/mobile_recircle/index.php?c=recycler&a=recycler_listings"><img src="views/view-whizmo/img/dealer_portal_logo.png" width="100%" height="100%"></a> -->
+            <img src="views/view-whizmo/img/dealer_portal_logo.png" width="100%" height="100%">
+        </a>
+        <!--<div class="search">-->
+        <!--<img src="{SITE_THEME}img/icon1.png">-->
+        <!--<input type="text" placeholder="Search your device to sell">-->
+        <!--</div>-->
+        <div class="navbar">
+            <ul>
+                <!--<li>-->
+                <!--<a href="javascript:;" onclick="sign_out();">-->
+                        <!--<span>-->
+                            <!--SIGN OUT-->
+                        <!--</span>-->
+                <!--</a>-->
+                <!--</li>-->
+                <li>
+                    <a href="{url('recycler/company_setting')}">
+                        <span>
+                            <img src="{SITE_THEME}img/icon62.png">{substr_replace($data['phone'],'****',1,strlen($data['phone'])-4)}
+                        </span>
+                    </a>
+                </li>
+                <li {if APP::$action=='recycler_listings'} class="on" {/if}>
+                <a href="{url('recycler/recycler_listings')}">
+                    CURRENT LISTINGS
+                </a>
+                </li>
+                <li {if APP::$action=='successful_bids'} class="on" {/if}>
+                <a href="{url('recycler/successful_bids')}">
+                    MY HISTORY
+                </a>
+                </li>
+                <li {if APP::$action=='company_information'} class="on" {/if}>
+                <a href="{url('recycler/company_information')}">
+                    COMPANY INFO
+                </a>
+                </li>
+                <!-- <li {if APP::$action=='company_setting' || APP::$action=='company_setting2'} class="on" {/if}> -->
+                <li {if APP::$action=='company_setting2'} class="on" {/if}>
+
+                <a href="{url('recycler/company_setting2')}">
+                    GRADING SYSTEM
+                </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        function sign_out(){
+            layer.open({title:false,
+                btn:['LOG OUT','CANCEL'],closeBtn:0,content:'Are you sure you want to log out?',icon:0,yes:function(){
+                $.ajax({
+                    url: "index.php?c=recycler&a=login_out",
+                    type: "post",
+                    async:false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.code==1){
+                            // layer.open({content:'Have been safely logout!',icon:1,end:function(){
+                                location.href="index.php?c=recycler_login&a=partner_login";
+                            // }});
+                        }
+                    }
+                });
+            }})
+        }
+    </script>
+</div>
+<div style="height:103px;"></div>

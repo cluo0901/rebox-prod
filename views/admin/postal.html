@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}js/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+
+<div class="subnav">
+
+	<div class="content-menu ib-a line-x">
+		<form enctype="multipart/form-data" method="post" action="./index.php?s=admin&c=flowerhua&a=upExecel">
+	    <table style="margin-left:30px;" >
+			 <div class="onShow">Please choose the excel file to import!</div>
+	　　　　<tr>
+				<td style="position: relative;"><span style="height:34px;display: block;background-color: rgb(0, 150, 136);position:absolute;left:0;text-align: center;line-height:34px;">Select the form</span><input type="file" name="myfile" style="width: 100%;height: 100%;opacity: 0;"></td>
+				<td><input type="submit" value="Importing the database" class="layui-btn layui-btn-small sub" /></td>
+			</tr>
+	    </table>
+		</form>
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/flowerhua/postal')}" class="on"><em>List</em></a>
+			<a class="layui-btn" href="{url('admin/flowerhua/postal_add')}" class="on"><em>Add</em></a>
+		</div>
+		<form action="{url('admin/flowerhua/postal')}" method="post" style="float:left;">
+			<div class="cbtn" style="float: left;">
+				<input name="form" type="hidden" value="search" />
+				<input placeholder="Search the zip code" type="text" class="input-text" value="{$postal_code}" name="postal_code" size="40" />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			</div>
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="10%" align="center">Zip code</th>
+			<th width="20%" align="center">Architectural name</th>
+			<th width="10%" align="center">Street number</th>
+			<th width="20%" align="center">Street name</th>
+			<th width="20%" align="center">Architectural type</th>
+			<th width="20%" align="left">Option</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+			<td align="center">{$t['postal_code']}</td>
+			<td align="center">{$t['building_name']}</td>
+			<td align="center">{$t['street_number']}</td>
+			<td align="center">{$t['street_name']}</td>
+			<td align="center">{$t['building_type']}</td>
+			<td align="center">
+			<div class="layui-btn-group">
+				 <a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/postal_add',array('id'=>$t['id']))}">Edit</a> 
+				<a class="layui-btn layui-btn-danger layui-btn-small" href="javascript:;" onclick="del({$t['id']})">Delete</a>
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		
+		</table>
+		<a class="layui-btn layui-btn-danger layui-btn-small" href="javascript:;" onclick="delall()">Emptying all data</a>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+    function del(id){
+   		layer.open({btn:['Determine','Cancel'],content:'Do you decide to delete it?',btn1:function(){
+   				$.ajax({
+   					dataType:'json',
+   					type:'post',
+   					url:"{url('admin/flowerhua/del_postal')}",
+   					data:{id:id},
+   					success:function(data){
+   						if(data.code==1){
+   							layer.alert('successfully deleted',{end:function(){
+   								location.reload();
+   							}})
+   						}
+   					}
+   				})
+   			}
+
+   		})
+   }
+   function delall(){
+   		layer.open({btn:['Determine','Cancel'],content:'Do you want to clear all the data?',btn1:function(){
+   				$.ajax({
+   					dataType:'json',
+   					type:'post',
+   					url:"{url('admin/flowerhua/del_allpostal')}",
+   					success:function(data){
+   						if(data.code==1){
+   							layer.alert('successfully deleted',{end:function(){
+   								location.reload();
+   							}})
+   						}
+   					}
+   				})
+   			}
+
+   		})
+   }
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript">var sitepath = "{SITE_PATH}{ENTRY_SCRIPT_NAME}";</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+	<style>
+		th{width:15%;}
+	</style>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="table-responsive mytable">
+		<form method="post" action="" id="myform" name="myform">
+		<table width="100%" class="table table-striped">
+		<tbody>
+		<tr>
+			<th>权限使用方法：</th>
+			<td>1.在config/admin.menu.ini.php里面先进行每个单模块的auth属性key=>value设置，设置value实例：'控制器-方法 -> content-index'</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>2.在config/auth.option.ini.php里面单个设置权限模块的数据，在当前config/auth.option.ini.php里面设置的权限是最基础的。可以扩展添加、删除、修改!</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>3.为管理员设置权限之后所有的权限都保存在config/auth.role.ini.php文件里面。</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>4.为管理员设置权限之后要刷新才能看到效果。</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td>5.若有不清晰处可咨询小花。</td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

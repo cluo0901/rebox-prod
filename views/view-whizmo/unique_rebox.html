@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Rebox - Sell your phone in 60s</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="device-mockups/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/new-age.min.css" rel="stylesheet">
+
+    <!-- Remove picture in how it works on mobile screen -->
+    <style>
+      .navbar-brand {
+        font-size: 50px;
+      }    
+
+      .col-lg-7 .mb-5 {
+        font-size: 50px;
+      }  
+
+      .col-md-8 .section-heading {
+        font-size: 50px;
+      }
+
+
+      section.cta {
+        padding: 50px 0;
+        background: none;
+      }
+
+      section.cta .container {
+        text-align: center;
+      }
+
+      .whyus ul {
+        list-style-type: none; display: flex; flex-basis: auto; justify-content: space-between; align-items: flex-start;
+      }
+
+      .whyus ul li {
+        width: 20%;
+      }
+
+      .whyus ul li img {
+        margin: 50px 0;
+      }
+
+      .whyus ul li h3{
+        margin: 50px 0 0 0;
+      }
+
+      .faq ul {
+        list-style-type: none; display: flex; flex-basis: auto; justify-content: space-between; align-items: flex-start;
+      }
+
+      .faq ul li {
+        width: 20%;
+      }
+
+      .faq ul li h4 {
+        margin: 30px 0;
+      }
+
+      .testimonial ul {
+        list-style-type: none; display: flex; flex-basis: auto; justify-content: space-between; align-items: flex-start;
+      }
+
+      .testimonial ul li {
+        width: 28%;
+      }
+
+      .testimonial ul li h4 {
+        margin: 30px 0;
+      }
+
+      .feature-item img {
+        margin-bottom: 15px;
+      }
+
+
+      #mainNav.navbar-shrink .navbar-brand {
+        color: #ffcc00;
+      }
+
+      #mainNav .navbar-brand {
+        margin-right: 2000px;
+      }
+
+      .text-muted {
+        color: #333!important;
+      }
+
+      @media only screen and (max-width: 991px) {
+
+        #mainNav .navbar-brand {
+          margin-right: 1rem;
+        }
+
+        header.masthead {
+          height: 100vh;
+        }
+
+        header.masthead .header-content h1 {
+          line-height: 50px;
+        }
+
+        .col-lg-4{
+          display: none;
+        }
+        .col-lg-5{
+          display: none;
+        }
+
+        .col-md-8 .section-heading {
+          font-size: 2rem;
+        }
+
+        .features .section-heading h2 {
+          font-size: 2rem;
+        }
+
+        /*.contact .section-heading h2 {
+          font-size: 2rem;
+        }*/
+
+        section.features .feature-item h3 {
+          font-size: 1.5rem;
+        }
+
+        .contact h2 {
+          font-size: 2rem;
+        }
+
+        .features .container .section-heading{
+          margin-bottom: 20px;
+        }
+
+        header.masthead .header-content {
+          margin-bottom: 0;
+        }
+
+        .navbar-brand {
+          font-size: 2rem;
+        }
+
+        .iframe-container {
+          overflow: hidden;
+          padding-top: 56.25%;
+          position: relative;
+        } 
+
+        .iframe-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          border: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .whyus ul {
+          all: unset;
+          /*list-style-type: none; */
+          
+        }
+
+        .whyus ul li {
+          all: unset;
+          display: block;
+          width: 80%;
+          margin-left:10%;
+        }
+
+        .whyus ul li img {
+          width: 80px;
+        }
+
+        .faq ul {
+          all: unset;
+          /*list-style-type: none; */
+          
+        }
+
+        .faq ul li {
+          all: unset;
+          display: block;
+          width: 80%;
+          margin-left:10%;
+        }
+
+        .faq ul li img {
+          width: 80px;
+        }
+
+        .testimonial ul {
+          all: unset;
+          /*list-style-type: none; */
+          
+        }
+
+        .testimonial ul li {
+          all: unset;
+          display: block;
+          width: 80%;
+          margin-left:10%;
+        }
+
+        .testimonial ul li img {
+          width: 80px;
+        }
+
+        section {
+          padding: 50px 0 35px 0;
+        }
+
+        section.features .feature-item {
+          padding-top: 25px;
+          padding-bottom: 0;
+        }
+      }
+
+    </style>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '637804786589286'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <img src="img/landing_logo.png" style="max-width: 55px; padding-bottom: 7px;">
+        <a class="navbar-brand js-scroll-trigger" style="font-weight: bold; margin-left: 5px;" href="#page-top">REBOX</a>
+        <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          
+          <i class="fas fa-bars"></i>
+        </button> -->
+        <!-- <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#testimonial">Testimonials</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#download">Why Rebox</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#features">How It Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">FAQ</a>
+            </li>
+
+          </ul>
+        </div> -->
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-lg-7 my-auto">
+            <div class="header-content mx-auto">
+              <h1 class="mb-5" style="font-weight: bold;">Get the highest offer for your old phone in 60 seconds</h1>
+              <a href="https://www.rebox.com.sg" target="_blank" class="btn btn-outline btn-xl" style="font-weight: bold; border: 2px solid;">Sell My Phone Now</a>
+              <br><br>
+              <!-- <a href="#download" class="js-scroll-trigger" style="width: 239.77px; font-family:sans-serif; font-size:14px; color: white; letter-spacing: 1.5px; font-weight: lighter; padding:0 20px;">Scroll to find how we do it</a> -->
+            </div>
+          </div>
+          <div class="col-lg-5 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                  <div class="screen">
+                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                    <img src="img/rebox_screen.png" class="img-fluid" alt="">                    
+                  </div>
+                  <div class="button">
+                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+<!--     <section class="download bg-primary text-center" id="download">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <h2 class="section-heading">Why Rebox can offer the highest buyback price?</h2>         
+          </div>
+          <div class="whyus">
+              <ul>
+                <li>   
+                  <h3>Best Offer</h3>
+                  <img src="img/high_price.png">  
+                  <p>We source the best offer for every phone model from a network of dealers island wide through bidding on daily basis.</p>
+                </li>
+                <li>  
+                  <h3>Supplier's Cost</h3>
+                  <img src="img/component.png">                
+                  <p>For any functional issue, we only deduct the component cost from our supplier – much lower than the repair cost.</p>
+                </li>
+                <li> 
+                  <h3>Small Margin</h3>
+                  <img src="img/small_margin.png">                 
+                  <p>We only keep a small profit on each phone that we buy so as to pass on the best offer to our customers.</p>
+                </li>
+                <li>
+                  <h3>Large Quantity</h3>
+                  <img src="img/large_volume.png">                  
+                  <p>The profit on each phone is slim, but we buy back at large volume so as to continue to serve our customers.</p>
+                </li>
+              </ul>
+              
+            </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Add testimonial section -->
+    <section class="contact" id="testimonial" style="background-color: #f8f9fa;">
+      <div class="container">
+        <h2>What Our Customers Say</h2>
+        <a href="https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target="_blank" style="color: #aaa; font-size: 22px; color: #3b5998;">Read more on <b>Facebook</b></a>
+        <div class="testimonial">
+          <ul style="padding: 0;">
+            <li>  
+              <h4>"Deal with Confidence"</h4>         
+              <p>Fantastic service by Rebox. Sold my used mate 10 to them without leaving my house! Fast deal and money was transferred. Legit and deal with confidence. Highly recommended!</p>
+              <h5 style="font-size: 16px;">WK Yong<br><a href="https://www.facebook.com/WK.YongWK/posts/10156631302860115" target="_blank" style="color: #3b5998;">via Facebook</a></h5>
+            </li>
+            <li>   
+              <h4>"Seamless, Convenient"</h4>
+              <p>. . .the whole process was digital (seamless and definitely convenient). Quoted price was upto market value and can even increase depending completeness / condition of your item.</p>
+              <h5 style="font-size: 16px;">Whilmer Gan<br><a href="https://www.facebook.com/wlsgan/posts/10157367472413836" target="_blank" style="color: #3b5998;">via Facebook</a></h5>
+            </li>
+            <li> 
+              <h4>"Fuss Free, Good Price"</h4>              
+              <p>Best decision as it was fuss free, convenient and was able to get a good price on my phone without having to go to multiple phone shops. 👍🏻👍🏻 would recommend to my friends!</p>
+              <h5 style="font-size: 16px;">Deborah Goh<br><a href="https://www.facebook.com/deborahgll/posts/10156094852217921" target="_blank" style="color: #3b5998;">via Facebook</a></h5>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </section>
+
+
+    <section class="features" id="features" style="background-color: #ffcc00b0;">
+      <div class="container">
+        <div class="section-heading text-center">
+          <h2>How It Works</h2>
+          <p class="text-muted">Sell your phone in 60 seconds without leaving your doorstep, hassle free!</p>
+          <br><br>
+          <div class="iframe-container">
+            <iframe width="640" height="360" src="https://www.youtube.com/embed/GbouzcIF_bk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <hr>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                  <div class="screen">
+                    <!-- Note: Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                    <img src="img/rebox_screen2_1.png" class="img-fluid"  id="screen2" alt="">
+                  </div>
+                  <div class="button">
+                    <!-- Note: You can hook the "home button" to some JavaScript events or just remove it -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 my-auto">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="feature-item" id="feature1">
+                    <img src="img/check1.png">
+                    <h3>1. Select Phone Condition</h3>
+                    <p class="text-muted">Answer a few questions about the condition of the phone.</p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="feature-item" id="feature2">
+                    <img src="img/quote.png">
+                    <h3>2. Get An Instant Offer</h3>
+                    <p class="text-muted">Receive and secure the highest offer instantly!</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="feature-item" id="feature3">
+                    <img src="img/pickup.png">
+                    <h3>3. Send For Check</h3>
+                    <p class="text-muted">Schedule a free pickup or walk in to our outlet <a href="https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=215" target="_blank" style="color: blue; text-decoration: underline;">(see promotion)</a>.</p>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="feature-item" id="feature4">
+                    <img src="img/payout.png">
+                    <h3>4. Receive Fast Payment</h3>
+                    <p class="text-muted">Get paid upon verification of your phone!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!--     <section class="contact bg-primary" id="contact">
+      <div class="container">
+        <h2>Have Questions?</h2>
+        <div class="faq">
+          <ul>
+            <li>  
+              <h4>Q1. Why do I need to provide NRIC or other ID?</h4>         
+              <p>We are licensed and regulated by Singapore Police Force as a secondhand goods dealer (click <a href="https://rebox.com.sg/Licence%20from%20police.jpg" target="_blank" style="color: blue;">here</a> to find out more). We are required to report sellers' NRIC information to SPF for each transaction.</p>
+            </li>
+            <li>   
+              <h4>Q2. When will I receive the payment?</h4>
+              <p>Your phone is delivered to us on the same day for Morning pickups and the next working day for Noon or Evening pickups. You will receive the payment on the same day of the phone being delivered and verified.</p>
+            </li>
+            <li>  
+              <h4>Q3. What if Rebox don't agree to the phone condition?</h4>         
+              <p>If our assessment of the phone differs from your selection, we will provide a revised quote based on our system. If you are not happy with the revised offer, we will courier the phone back to you for free.</p>
+            </li>
+            <li> 
+              <h4>Q4. How is selling on Rebox different from Carousell?</h4>              
+              <p>We offer instant liquidity and utmost convenience. You can sell you phone instantly on Rebox, skipping tidious process of listing creation, endless waiting, back and forth negotiation and physical meetup.</p>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </section> -->
+
+
+
+    <section class="cta">
+      <div class="cta-content">
+        <div class="container">
+          <a href="https://www.rebox.com.sg" target="_blank" class="btn btn-outline btn-xl js-scroll-trigger" style="color: white; background-color: #ffcc00; font-size: 15px;">Sell My Phone Now!</a>
+        </div>
+      </div>
+      <!-- <div class="overlay"></div> -->
+    </section>
+
+    <!-- <section class="contact bg-primary" id="contact">
+      <div class="container">
+        <h2>We
+          <i class="fas fa-heart"></i>
+          new friends!</h2>
+        <ul class="list-inline list-social">
+          <li class="list-inline-item social-twitter">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="list-inline-item social-facebook">
+            <a href="#">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="list-inline-item social-google-plus">
+            <a href="#">
+              <i class="fab fa-google-plus-g"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section> -->
+
+    <footer>
+      <div class="container">       
+
+        <p style="color: #ccc;">&copy; 2017-2019 Whizmo Tech Pte. Ltd. All Rights Reserved.</p>
+
+        <!-- <ul class="list-inline">
+          <li class="list-inline-item">
+            <a href="#">Privacy</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">Terms</a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#">FAQ</a>
+          </li>
+        </ul> -->
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/new-age.min.js"></script>
+
+  </body>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#feature1").mouseover(function() {
+        $("#screen2").attr('src','img/rebox_screen2_1.png');
+        $("#feature2").css("transform","scale(1)");
+        $("#feature3").css("transform","scale(1)");
+        $("#feature4").css("transform","scale(1)");
+        $(this).css("transform","scale(1.2)");
+      });
+      $("#feature2").mouseover(function() {
+        $("#screen2").attr('src','img/rebox_screen2_2.png');
+        $("#feature1").css("transform","scale(1)");
+        $("#feature3").css("transform","scale(1)");
+        $("#feature4").css("transform","scale(1)");
+        $(this).css("transform","scale(1.2)");
+      });
+      $("#feature3").mouseover(function() {
+        $("#screen2").attr('src','img/rebox_screen2_3.png');
+        $("#feature1").css("transform","scale(1)");
+        $("#feature2").css("transform","scale(1)");
+        $("#feature4").css("transform","scale(1)");
+        $(this).css("transform","scale(1.2)");
+      });
+      $("#feature4").mouseover(function() {
+        $("#screen2").attr('src','img/rebox_screen2_4.gif');
+        $("#feature1").css("transform","scale(1)");
+        $("#feature2").css("transform","scale(1)");
+        $("#feature3").css("transform","scale(1)");
+        $(this).css("transform","scale(1.2)");
+      });
+    });
+  </script>
+
+</html>

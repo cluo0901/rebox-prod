@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+    <script src="{ADMIN_THEME}js/layer/layer.js"></script>
+</head>
+{if $list}
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/whizmoshelve/admin_bidding_list',array('id'=>$shelve_id))}" class="on"><em>List</em></a>
+		</div>
+		<form action="" method="post" style="float:left;">
+			<div class="cbtn" style="float: left;">
+				<input name="form" type="hidden" value="search" />
+				<input placeholder="Search the phone number of the recycler" type="text" class="input-text" value="{$recycler_phone}" name="recycler_phone" size="40" />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			</div>
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+            <th width="100" align="center">Commodity picture</th>
+            <th width="100" align="center">Name</th>
+            <th width="100" align="left">Phone number of the recycler</th>
+            <th width="100" align="left">Name of the recycling company</th>
+            <th width="100" align="center">Bidding price</th>
+            <th width="120" align="center">Bidding time</th>
+            <th width="120" align="center">Status</th>
+            <th width="100" align="left">Option</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+           
+            <td align="center"><img src="{$t['recovery_img']}" height="80"></td>
+            <td align="center">{$t['title']}</td>
+            <td align="center">{$t['recycler_phone']}</td>
+            <td align="center">{$t['company_name']}</td>
+            <td align="center">{$t['bidding_price']}</td>
+            <td align="center">{if $t['bidding_time']}{date('d/m/Y H:i',$t['bidding_time'])}{/if}</td>
+            {if $t['status']==6}
+            <td align="center">Have been in</td>
+            {else if $t['status']==1}
+             <td align="center">Have cast</td>
+             {else if $t['status']==-6}
+             <td align="center">Not in</td>
+             {else if $t['status']==-2}
+             <td align="center">Uninterested</td>
+             {else if $t['status']==2}
+              <td align="center">Already paid</td>
+             {/if}
+            <td align="center">
+			<div class="layui-btn-group">
+				 <a class="layui-btn layui-btn-small" href="javascript:;" onclick="biddingOK({$t['id']})">Bid</a>
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+     function biddingOK(id){
+        layer.open({btn:['Determine','cancel'],content:'Have you decided to make a decision?',yes:function(){
+            $.ajax({
+                url: "index.php?s=admin&c=whizmoshelve&a=ajax_admin_biddingOK",
+                type: "post",
+                data: { id:id},
+                async:false,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code==1){
+                        layer.open({content:'success!',icon:1,end:function(){
+                            location.reload();
+                        }})
+                    }
+                }
+            });
+        }});
+    }
+    function change_status(order_id,status){
+        var msg = [];
+        msg[2] = 'Submission of orders / goods to be received';msg[3] = 'Received / pending inspection';msg[4] = 'Have been detected / passed';msg[5] = 'Detected / not passed';msg[6] = 'To be auctioned';
+        layer.open({content:'Determine to change the state to:'+msg[status]+'?',end:function(){
+            $.ajax({
+                url: "index.php?s=admin&c=flowerhua&a=ajax_change_status",
+                type: "post",
+                data: {
+                    order_id : order_id,status : status,
+                },
+                async:false,
+                dataType: 'json',
+                success: function (data) {
+                    if(data.code==1){
+                        layer.open({content:'success!',icon:1,end:function(){
+                            location.reload();
+                        }});
+                    }
+                }
+            });
+        }});
+    }
+    //触发事件
+    $('.layui-btn').on('click', function(){
+        delbtn = $(this).attr('id');
+        var othis = $(this), method = othis.data('method');
+        active[method] ? active[method].call(this, othis) : '';
+    });
+    var active = {
+        notice: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">Please operate carefully. Will you delete this information?</div>'
+                ,yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+					location.href="{url('admin/flowerhua/admin_order_del')}"+"&id="+delbtn;
+                }
+            })
+        }
+    };
+
+    function loadInfo(id) {
+        var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+        var winid = 'loadinfo';
+        window.top.art.dialog(
+            {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+            function(){
+                window.top.art.dialog({id:winid}).close();
+            }
+        );
+        void(0);
+    }
+</script>
+</body>
+{else}
+ <p style="text-align: center;font-size: 16px;padding:15px 0;">No bidding record！</p>
+{/if}
+</html>

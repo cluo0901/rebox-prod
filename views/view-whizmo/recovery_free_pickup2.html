@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		{template head}
+
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ITGtvwTZzt5AdD9oZvTpuPtKLZKV95eP"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+	</head>
+
+	<body>
+
+	<div class="header">
+
+		<div class="container">
+
+			<a href="index.php" class="logo">
+
+				<img src="{$SITE_LOGO}">
+
+			</a>
+
+			<div class="process1">
+
+				<div class="col">
+
+					<b>1</b>{$recovery_step['recovery_step_title1']}
+
+				</div>
+
+				<div class="col">
+
+					<b>2</b>{$recovery_step['recovery_step_title2']}
+
+				</div>
+
+				<div class="col on">
+
+					<b>3</b>{$recovery_step['recovery_step_title3']}
+
+				</div>
+
+				<div class="col">
+
+					<b>4</b>{$recovery_step['recovery_step_title4']}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+		<div class="recircle_detail">
+
+			<div class="container">
+
+				<div class="releft">
+
+					<div class="pro">
+
+						<img src="{$recovery['recovery_img']}">
+
+						<p>{$recovery['recovery_title']}</p>
+
+						<div class="price">
+
+							<h3>${$order['order_totalprice']}</h3>
+
+							<div class="device">
+
+								<span onclick="show_detail(this)">Device Details</span>
+
+								<div class="p">
+
+									{loop $order_parameter $item}
+
+                                        {if $item['parentid']!=2}
+
+                                        <br>
+
+                                        {$item['parent_parameter_name']}:{$item['parameter_name']}
+
+                                        {else}
+
+                                        <br>
+
+                                        {$item['parameter_name']}
+
+                                        {/if}
+
+                                    {/loop}
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="guide">
+
+						<div class="gt">{$recovery_tips['recovery_tips_title']}</div>
+
+						<div class="p">{php echo htmlspecialchars_decode($recovery_tips['recovery_tips_content']);}</div>
+
+					</div>
+
+				</div>
+
+				<form action="javascript:;">
+
+			<div class="reright sec sec2">
+
+                <div class="pickup">
+
+                    <div class="inp">
+
+                        <h3>Delivery Method</h3>
+
+                        <div class="clear" style="margin-top: 45px;">
+
+                        <div class="fang on" style="margin-right: 64px;" id="doorstep">
+
+                            <div class="ftop">
+
+                                <label><img src="{SITE_THEME}img/pic18.png"></label>
+
+                                <div class="txt">
+
+                                    <h3>Doorstep Pickup</h3>
+
+                                    <p><label>Pickup slot:</label> <span>12PM-4PM &nbsp; 4PM - 8PM</span></p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="fp">
+
+                                Schedule FREE pickup from your doorstep
+
+                            </div>
+
+                            <input type="radio" name="fang" value="1" checked="checked">
+
+                        </div>
+
+                        <div class="fang" id="postbox">
+
+                            <div class="ftop">
+
+                                <label><img src="{SITE_THEME}img/pic19.png"></label>
+
+                                <div class="txt">
+
+                                    <h3>Postbox Dropoff</h3>
+
+                                    <p>At your convenience</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="fp">
+
+                                A postage-paid envelope will be mailed to you.<br />
+
+                                Drop off your parcel at any bulk postbox<br />
+
+                                <a href="https://www.singpost.com/locate-us" target="_blank">Find the nearest bulk posting box</a>
+
+                            </div>
+
+                            <input type="radio" value="2" name="fang" >
+
+                        </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="doorstep">
+
+                        <div class="inp">
+
+                            <h3 class="doorstep_title">Pickup Address</h3>
+
+                            <input type="text" placeholder="Enter Postal Code" id="postal_code" style="width: 244px;" value="575704">
+
+                            <a href="javascript:;" onclick="get_location();">Retrieve Address</a>
+
+                            <div class="clear"></div>
+
+                            <div class="clear">
+
+                                <input type="text" placeholder="Enter Address" id="postal_address" value="广东省广州市海珠区" />
+
+                                <input type="text" placeholder="Enter Unit #" id="postal_unit" style="margin: 0;" value="琶洲商业广场B栋3座11002">
+
+                            </div>
+
+                        </div>
+
+                        <div class="inp doorstep_time">
+
+                            <h3>Collection Pickup Time</h3>
+
+							<select style="margin-right:46px;" id="resultPickup_date">
+
+								<option value="">Please select Pickup Date</option>
+
+								{loop $pickup_time_start $item}
+
+								<option value="{date('m/d/Y',$item)}">{date('d/m/Y',$item)}</option>
+
+								{/loop}
+
+							</select>
+
+                            <select id="resultPickup">
+
+                                {$resultPickup}
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="aa">
+
+                        <input type="button" value="Next" class="btn" onclick="submit_form1();">
+
+                    </div>
+
+                </div>
+
+			</div>
+
+			<div class="reright sec sec3" style="display: block;">
+
+                <div class="pickup">
+
+                    <div class="inp">
+
+                        <h3>Payment Details</h3>
+
+                        <select style="width: 180px; margin-right: 16px;" id="payment_id">
+
+                            <option value="46">Payment Details</option>
+
+                            {loop $payment_list $item}
+
+                            <option value="{$item['id']}">{$item['name']}</option>
+
+                            {/loop}
+
+                        </select>
+
+                        <div class="col">
+
+                            <input type="text" placeholder="Enter Name" id="payment_name" style="width: 255px; margin-right: 16px;" value="flowerhua">
+
+                            <p><font>*</font>As per bank record</p>
+
+                        </div>
+
+                        <input type="text" placeholder="Enter Account Number" id="payment_number" style="width: 320px; margin: 0;" value="6228480118349703333">
+
+                    </div>
+
+                    <div class="aa">
+
+                        <input type="button" value="Next" class="btn" onclick="submit_form2();">
+
+                    </div>
+
+                </div>
+
+			</div>
+
+			<div class="reright sec sec5" style="display: block;">
+
+				<div class="require" style="padding-top: 0;">
+
+					<div class="agree">
+
+							<span style="cursor: pointer;" onclick="get_information('{$clause[personal_information1]}');">{$clause['personal_information_title1']}</span>
+
+						</div>
+
+						<div class="agree border">
+
+							<span style="cursor: pointer;" onclick="get_information('{$clause[personal_information2]}');">{$clause['personal_information_title2']}</span>
+
+						</div>
+
+						<div class="aa">
+
+							<input type="submit" value="Submit" onclick="submit_form3()">
+
+							<span>
+
+								<input type="checkbox" checked name="clause"><em>I agree to<a href="javascript:;"> Terms & Conditions</a></em>
+
+							</span>
+
+						</div>
+
+				</div>
+
+			</div>
+
+				</form>
+
+			</div>
+
+		</div>
+
+		<div class="tan tan_1">
+
+			<div class="sure">
+
+				<div class="rtit">
+
+					<span>Confirm Order</span>
+
+					<img src="{SITE_THEME}img/cha.png" onclick="hide_tan()">
+
+				</div>
+
+				<div class="surep">
+
+					<div class="p">
+
+						<h3>Device</h3>
+
+						<p class="device_name">{$recovery['recovery_title']}</p>
+
+					</div>
+
+					<div class="p">
+
+						<h3>Pickup Address</h3>
+
+						<p class="pickup_address"></p>
+
+					</div>
+
+					<div class="p pickup_time_box">
+
+						<h3>Pickup Time</h3>
+
+						<p>
+
+							<span class="pickup_time"></span>
+
+						</p>
+
+					</div>
+
+					<div class="p">
+
+						<h3>Mobile No.</h3>
+
+						<p>{$member_phone}</p>
+
+					</div>
+
+					<a href="javascript:;" onclick="submit_order_info();">Confirm</a>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<script>
+
+            function submit_order_info(){
+
+                var lay = layer.open({type:3,icon:1});
+
+                $.ajax({
+
+                    url: 'index.php?c=ajax_formflowerhua&a=ajax_submit2orderinfo',
+
+                    type: "post",
+
+                    async:false,
+
+                    data: {
+
+                        order_id : '{$order[order_id]}',
+
+                        fang : $("input[name='fang']:checked").val(),
+
+                        postal_code : $('#postal_code').val(),
+
+                        postal_address : $('#postal_address').val(),
+
+                        postal_unit : $('#postal_unit').val(),
+
+                        resultPickup_date : $('#resultPickup_date').val(),
+
+                        resultPickup : $('#resultPickup').val(),
+
+                        payment_id : $('#payment_id').val(),
+
+                        payment_name : $('#payment_name').val(),
+
+                        payment_number : $('#payment_number').val(),
+
+                    },
+
+                    dataType: 'json',
+
+                    success: function (data) {
+
+                        layer.close(lay);
+
+                        if(data.code==-100){
+
+                            layer.open({content:data.result_err,icon:3});
+
+                        }if(data.code==-1){
+
+                            layer.open({content:data.msg,icon:3});
+
+                        }else if(data.code==1){
+
+                            layer.open({content:'Submission of order success!',icon:1,end:function(){
+
+                                location.href="index.php?c=flowerhua&a=order";
+
+                            }});
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+			function show_tan_1(){
+
+				$(".tan_1").show();
+
+				$("body").addClass("hidden")
+
+			}
+
+			function hide_tan(){
+
+				$(".tan").hide();
+
+				$("body").removeClass("hidden")
+
+			}
+
+		</script>
+
+	{template footer}
+
+	</div>
+
+	</body>
+
+	<script>
+
+		$(".seli .selibox span").click(function(){
+
+			$(this).parents(".selibox").siblings(".lit").find("span").show();
+
+			var txt = $(this).find("b").text()
+
+			$(this).parents(".selibox").siblings(".lit").find("font").text(txt);
+
+			$(this).parents(".selibox").hide()
+
+		})
+
+		$(".seli .lit  em").click(function(){
+
+			$(this).parents("span").hide();
+
+			$(this).parents(".lit").siblings(".selibox").show()
+
+		})
+
+		$(".islist ul li").click(function(){
+
+			var bool = $(this).find("input").prop("checked");
+
+			if(bool){
+
+				var src1 = $(this).find("img").attr("src1");
+
+				 $(this).find("img").attr({"src":src1});
+
+				 $(this).addClass("on")
+
+			}else{
+
+				var src2 = $(this).find("img").attr("src2");
+
+				 $(this).find("img").attr({"src":src2});
+
+				 $(this).removeClass("on")
+
+			}
+
+		})
+
+        function submit_form1(){
+
+            var fang = $("input[name='fang']:checked").val();
+
+            var postal_code = $('#postal_code').val();
+
+            var postal_address = $('#postal_address').val();
+
+            var resultPickup_date = $('#resultPickup_date').val();
+
+            var resultPickup = $('#resultPickup').val();
+
+            var postal_unit = $('#postal_unit').val();
+
+            if(postal_code == '' || postal_code == null){
+
+                layer.msg('Please fill in your postal code!',{icon:3});
+
+            }else if(postal_address == '' || postal_address == null){
+
+                layer.msg('Please fill in your postal address!',{icon:3});
+
+            }else if(postal_unit == '' || postal_unit == null){
+
+                layer.msg('Please fill in your postal unit!',{icon:3});
+
+            }else if(fang == 1 && resultPickup_date == '' || resultPickup_date == null){
+
+                layer.msg('Please select in your resultPickup Time!',{icon:3});
+
+            }else if(fang == 1 && resultPickup == '' || resultPickup == null){
+
+                layer.msg('Please select in your resultPickup Date!',{icon:3});
+
+            }else{
+
+                $(".sec3").show();
+
+
+
+            }
+
+        }
+
+
+
+        function submit_form2(){
+
+            var payment_id = $('#payment_id').val();
+
+            var payment_name = $('#payment_name').val();
+
+            var payment_number = $('#payment_number').val();
+
+            if(payment_id == '' || payment_id == null){
+
+                layer.msg('Please select in your payment details!',{icon:3});
+
+            }else if(payment_name == '' || payment_name == null){
+
+                layer.msg('Please fill in your payment name!',{icon:3});
+
+            }else if(payment_number == '' || payment_number == null){
+
+                layer.msg('Please fill in your payment number!',{icon:3});
+
+            }else{
+
+                $(".sec5").show();
+
+            }
+
+        }
+
+        function submit_form3(){
+
+            var fang = $("input[name='fang']:checked").val();
+
+            var clause = $("input[name='clause']").prop('checked');
+
+            if(clause==false){
+
+                layer.msg('Please agree to Terms & Conditions!',{icon:3});
+
+            }else{
+
+                if(fang==2){
+
+                    $('.pickup_time_box').hide();
+
+                }else{
+
+                    $('.pickup_time_box').show();
+
+                }
+
+                $('.pickup_address').text($('#postal_address').val()+$('#postal_unit').val());
+
+                $('.pickup_time').text($('#resultPickup_date').val());
+
+                setTimeout(function(){
+
+                    show_tan_1()
+
+                },200);
+
+            }
+
+        }
+
+        function get_information(text){
+
+            layer.open({title:'information',content:text,area:['80%','60%']});
+
+        }
+
+	</script>
+
+    <script>
+
+        function get_location(){
+
+            var lay = layer.open({type:3,icon:1});
+
+            var geolocation = new BMap.Geolocation();
+
+            var gc = new BMap.Geocoder();
+
+            geolocation.getCurrentPosition(function (r) {
+
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+
+                    var pt = r.point;
+
+                    gc.getLocation(pt, function (rs) {
+
+                        var address = rs.address;
+
+                        setTimeout(function(){
+
+                            layer.close(lay);
+
+                            $('#postal_address').val(address);
+
+                        },500);
+
+                    });
+
+                } else {
+
+                    layer.close(lay);
+
+                    layer.open({ content: "定位失败，请重试!", time: 2 });
+
+                }
+
+            }, { enableHighAccuracy: true });
+
+        }
+
+        function show_detail(a){
+
+            var display = $(a).siblings(".p").css("display");
+
+            if(display == "none"){
+
+                $(a).siblings(".p").show();
+
+                $(a).css({"background":"url({SITE_THEME}img/caret.png) right center no-repeat"})
+
+            }else if(display == "block"){
+
+                $(a).siblings(".p").hide();
+
+                $(a).css({"background":"url({SITE_THEME}img/caret5.png) right center no-repeat"})
+
+            }
+
+        }
+
+        $(".reright .pickup .inp .fang").click(function(){
+
+            var bool = $(this).find("input").prop("checked");
+
+            if(bool){
+
+                $(this).addClass("on").siblings(".fang").removeClass("on")
+
+            }
+
+        });
+
+        $("#doorstep").click(function(){
+
+            $('.doorstep_title').text('Pickup Address');
+
+            $(".doorstep_time").show();
+
+        });
+
+        $("#postbox").click(function(){
+
+            $('.doorstep_title').text('Envelope Mailing Address');
+
+            $(".doorstep_time").hide();
+
+        });
+
+    </script>
+
+</html>

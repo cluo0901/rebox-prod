@@ -1,0 +1,625 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+		<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet">
+		<link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+		<script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+		<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+		<!--<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>-->
+		<title>admin</title>
+		{template admin/top}
+	</head>
+	<!--图片上传-->
+	<script type="text/javascript">
+		var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+		var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+	</script>
+	<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+	<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+	<body style="font-weight: normal;">
+		<div class="subnav">
+			<div class="content-menu ib-a line-x">
+				<div class="layui-btn-group">
+					<a class="layui-btn" href="{url('admin/flowerhua/admin_recovery_list')}" class="on"><em>Back to product list</em></a>
+					<a class="layui-btn" href="javascript:history.go(-1);"><em>Previous page</em></a>
+				</div>
+			</div>
+			<div class="bk10"></div>
+			<div class="table-responsive mytable">
+				<input name="id" type="hidden" value="{$data['id']}">
+				<table width="100%" class="table table-striped">
+					<tr>
+						<td width="250" align="right">
+							<font color="red">*</font>Model name</td>
+						<td><input class="input-text" type="text" name="data[recovery_title]" id="recovery_title" value="{$data['recovery_title']}" size="50" required />
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Model name 2</td>
+						<td><input class="input-text" type="text" name="data[recovery_title2]" id="recovery_title2" value="{$data['recovery_title2']}" size="50" />
+						</td>
+					</tr>
+					<tr>
+						<td align="right">
+							<font color="red">*</font>Product type/brand</td>
+						<td>
+							<label>
+                        <select required class="form-control" name="data[recovery_type_id]" id="recovery_type_id" onchange="find_parent_list(this);">
+                            <option>Please select product type</option>
+                            {loop $type_list $t}
+                            <option value="{$t[id]}" {if $data[recovery_type_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+                            {/loop}
+                        </select>
+                    </label>
+							<label>
+                        <select required class="form-control" id="recovery_parent_id" name="recovery_parent_id">
+                            <option value="2">Please select brand</option>
+                            {loop $parent_list $t}
+                            <option value="{$t[id]}" {if $data[recovery_parent_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+                            {/loop}
+                        </select>
+                    </label>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Highest price</td>
+						<td><input class="input-text" type="text" name="data[recovery_high_price]" id="recovery_high_price" value="{$data['recovery_high_price']}" size="50" />
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Lowest price</td>
+						<td><input class="input-text" type="text" name="data[recovery_low_price]" id="recovery_low_price" value="{$data['recovery_low_price']}" size="50" />
+						</td>
+					</tr>
+					<tr>
+						<td align="right">No. of transactions</td>
+						<td><input class="input-text" type="text" name="data[recovery_cold_num]" id="recovery_cold_num" value="{$data['recovery_cold_num']}" size="50" />
+							<div class="onShow">Total no. of units recycled</div>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Model picture</td>
+						<td><input type="text" class="input-text" size="50" id="recovery_img" value="{$data['recovery_img']}" name="data[recovery_img]" id="recovery_img" />
+							<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('recovery_img')" value="{lang('a-mod-118')}" />
+							<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('recovery_img', '140', '148')" value="{lang('a-mod-119')}" />
+							<div class="onShow">{lang('a-pic')}</div>
+						</td>
+					</tr>
+					<!--<tr>-->
+					<!--<td align="right">规则</td>-->
+					<!--<td>-->
+					<!--<input name="data[postverify]" type="radio" {if $data['postverify']==1}checked{/if} /> {lang('a-open')}-->
+					<!--<input name="data[postverify]" type="radio" value="0" {if empty($data['postverify'])}checked{/if} /> {lang('a-close')}-->
+					<!--<div class="onShow">{lang('a-mod-212')}</div>-->
+					<!--</td>-->
+					<!--</tr>-->
+					<tr>
+						<td align="right">Sections</td>
+						<td>
+							<a href="javascript:;" class="layui-btn layui" onclick="add_tr0();">Add Level 1 section</a>
+							<!--<a href="javascript:;" class="layui-btn layui" onclick="add_tr();">添加基本回收规则</a>-->
+							<a href="javascript:;" class="layui-btn layui" onclick="add_tr_multiselect();">Add Functional Issue(s)</a>
+							<a href="javascript:;" class="layui-btn layui" onclick="add_tr_multiselect2();">Add Missing or Damaged Accessories</a>
+						</td>
+					</tr>
+                    <input type="hidden" name="" id="recovery_id" value="{$data['id']}">
+					<tr>
+						<td align="right"></td>
+						<td id="add_rule">
+                            {loop $list['parent'] $o}
+							<div id="add_big_fenlei" style="padding-bottom:15px;">
+                                <input type="text" class="input-text recovery_menu0" name="recovery_menu0[]" value="{$o['parameter_name']}" placeholder="Level 1 Section" size="80">
+								<a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents('div#add_big_fenlei').remove();">Delete</a>
+								<a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn" onclick="add_tr(this);">Add level 2 subsection</a><br>
+                                {loop $o['child'] $t}
+								<div id="add_fenlei" style="padding-bottom:15px;">
+                                <input type="text" class="input-text recovery_menu" name="recovery_menu[]" value="{$t['parameter_name']}" placeholder="Level 2 subsection" size="40">
+                                <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents('div#add_fenlei').remove();">Delete</a>
+                                <br /><br />
+                                {loop $t['child'] $k=>$item}
+                                <div id="add_td">
+                                    Is it optional<input type="checkbox" class="parameter_is_select" {if $item['parameter_is_select']==1}checked{/if} name="parameter_is_select[]">
+                                    <input type="text" class="input-text recovery_listorder" name="recovery_listorder[]" placeholder="Sort" value="{$item['parameter_listorder']}" size="10">
+                                    <input type="text" class="input-text recovery_name" name="recovery_name[]" placeholder="Selection" value="{$item['parameter_name']}" size="20">
+                                    <input type="text" class="input-text recovery_sale" name="recovery_sale[]" placeholder="Price deduction" value="{$item['parameter_sale_price']}" size="7">
+                                    <input type="text" class="input-text recovery_desc" name="recovery_desc[]" placeholder="Notes" value="{$item['parameter_description']}" size="40">
+									<input type="text" class="input-text thumb recovery_thumb" size="20" placeholder="Illustration" name="recovery_thumb[]" value="{$item['parameter_img']}" />
+									{if $item['parameter_img']}<img src="{$item['parameter_img']}" alt="" width="30" height="30">{/if}
+									<!--<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />-->
+									<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />
+
+									<!-- add booster for flawless conditions (actually only for capacity) starts-->
+									<input type="text" class="input-text recovery_boost" name="recovery_boost[]" placeholder="Price boost" value="{$item['parameter_boost']}" size="7">
+									<!-- add booster for flawless conditions (actually only for capacity) ends -->
+
+									<!-- add tag for dynamic pricing starts -->
+									<input type="text" class="input-text tag" name="tag[]" placeholder="Tag" value="{$item['parameter_tag']}" size="7">
+									<!-- add tag for dynamic pricing ends -->
+
+
+                                    {if $k==0}
+                                    <a href="javascript:;" style="height:34px;" onclick="add_fenlei(this);" class="layui-btn">Add selection</a>
+                                    {else}
+                                    <a href="JavaScript:;" class="layui-btn layui-btn-danger" onclick="$(this).parents('div#add_td').remove();">Delete</a>
+                                    {/if}
+                                </div>
+                                {/loop}
+								</div>
+                                {/loop}
+                            </div>
+                            {/loop}
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Functional Issue(s)</td>
+						<td id="add_rule_multiselect" style="background:#ccc;">
+							{loop $list['ch_parent'] $t}
+							<div id="add_fenlei_multiselect" style="height:37px;line-height:0px;">
+								<br />
+								Is it optional<input type="checkbox" class="ch_parameter_is_select" {if $item['parameter_is_select']==1}checked{/if} name="ch_parameter_is_select[]">
+								<input type="text" class="input-text ch_recovery_listorder" name="ch_recovery_listorder[]" placeholder="Sort" size="10" value="{$t['parameter_listorder']}">
+								<input type="text" class="input-text ch_recovery_name" name="ch_recovery_name[]" placeholder="Issue" size="20" value="{$t['parameter_name']}">
+								<input type="text" required class="input-text ch_recovery_sale" name="ch_recovery_sale[]" placeholder="Price deduction" size="7" value="{$t['parameter_sale_price']}">
+								<input type="text" class="input-text thumb ch_recovery_thumb" size="20" placeholder="Unselected icon" name="ch_recovery_thumb[]"  value="{$t['parameter_img']}">
+								{if $t['parameter_img']}<img src="{$t['parameter_img']}" alt="" width="30" height="30">{/if}
+								<!--<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />-->
+								<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />
+								<input type="text" class="input-text thumb1 ch_recovery_thumb1" size="20" placeholder="Selected icon" name="ch_recovery_thumb1[]"  value="{$t['parameter_img1']}">
+								{if $t['parameter_img1']}<img src="{$t['parameter_img1']}" alt="" width="30" height="30">{/if}
+								<!--<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview3(this)" value="预览" />-->
+								<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage3(this)" value="Upload" />
+								<a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents('div#add_fenlei_multiselect').remove();">Delete</a>
+							</div>
+							{/loop}
+						</td>
+					</tr>
+					<tr>
+						<td align="right">Missing or Damaged Accessories</td>
+						<td id="add_rule_multiselect2" style="background:#ccc;">
+							{loop $list['ch_parent2'] $t}
+							<div id="add_fenlei_multiselect2" style="height:37px;line-height:0px;">
+								<br />
+								Is it optional<input type="checkbox" class="ch_parameter_is_select2" {if $item['parameter_is_select']==1}checked{/if} name="ch_parameter_is_select[]">
+								<input type="text" class="input-text ch_recovery_listorder2" name="ch_recovery_listorder[]" placeholder="Sort" size="10" value="{$t['parameter_listorder']}">
+								<input type="text" class="input-text ch_recovery_name2" name="ch_recovery_name[]" placeholder="Accessory" size="20" value="{$t['parameter_name']}">
+								<input type="text" required class="input-text ch_recovery_sale2" name="ch_recovery_sale[]" placeholder="Price deduction" size="7" value="{$t['parameter_sale_price']}">
+								<input type="text" class="input-text thumb ch_recovery_thumb2" size="20" placeholder="Unselected icon" name="ch_recovery_thumb[]"  value="{$t['parameter_img']}">
+								{if $t['parameter_img']}<img src="{$t['parameter_img']}" alt="" width="30" height="30">{/if}
+								<!--<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />-->
+								<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />
+								<input type="text" class="input-text thumb1 ch_recovery_thumb12" size="20" placeholder="Selected icon" name="ch_recovery_thumb1[]"  value="{$t['parameter_img1']}">
+								{if $t['parameter_img1']}<img src="{$t['parameter_img1']}" alt="" width="30" height="30">{/if}
+								<!--<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview3(this)" value="预览" />-->
+								<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage3(this)" value="Upload" />
+								<a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents('div#add_fenlei_multiselect2').remove();">Delete</a>
+							</div>
+							{/loop}
+						</td>
+					</tr>
+					<div class="bk10"></div>
+					<tr>
+						<td align="right">&nbsp;</td>
+						<td><input class="btn btn-success btn-sm" type="button" name="submit" onclick="submit_data();" value="{lang('a-submit')}" /></td>
+					</tr>
+				</table>
+				<input type="hidden" name="optionArray" value="">
+			</div>
+		</div>
+	</body>
+	<script>
+        function add_tr_multiselect() {
+            var str = '<div id="add_fenlei_multiselect" style="height:37px;line-height:0px;">\n' +
+                '    <br />\n' +
+                '    Is it optional<input type="checkbox" class="ch_parameter_is_select" checked name="ch_parameter_is_select[]">' +
+                '    <input type="text" class="input-text ch_recovery_listorder" name="ch_recovery_listorder[]" placeholder="Sort" size="10">\n' +
+                '    <input type="text" class="input-text ch_recovery_name" name="ch_recovery_name[]" placeholder="回收项名称" size="20">\n' +
+                '    <input type="text" required class="input-text ch_recovery_sale" name="ch_recovery_sale[]" placeholder="回收项减价" size="7">\n' +
+                '    <input type="text" class="input-text thumb ch_recovery_thumb" size="20" placeholder="未选中时图片" name="ch_recovery_thumb[]" />\n' +
+//                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />\n' +
+                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />\n' +
+                '    <input type="text" class="input-text thumb1 ch_recovery_thumb1" size="20" placeholder="选中时图片" name="ch_recovery_thumb1[]" />\n' +
+//                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview3(this)" value="预览" />\n' +
+                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage3(this)" value="Upload" />\n' +
+                '    <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents(\'div#add_fenlei_multiselect\').remove();">Delete</a>' +
+                '</div>';
+            $('#add_rule_multiselect').append(str);
+        }
+
+        function add_tr_multiselect2() {
+            var str = '<div id="add_fenlei_multiselect2" style="height:37px;line-height:0px;">\n' +
+                '    <br />\n' +
+                '    Is it optional<input type="checkbox" class="ch_parameter_is_select2" checked name="ch_parameter_is_select[]">' +
+                '    <input type="text" class="input-text ch_recovery_listorder2" name="ch_recovery_listorder[]" placeholder="Sort" size="10">\n' +
+                '    <input type="text" class="input-text ch_recovery_name2" name="ch_recovery_name[]" placeholder="回收项名称" size="20">\n' +
+                '    <input type="text" required class="input-text ch_recovery_sale2" name="ch_recovery_sale[]" placeholder="回收项减价" size="7">\n' +
+                '    <input type="text" class="input-text thumb ch_recovery_thumb2" size="20" placeholder="未选中时图片" name="ch_recovery_thumb[]" />\n' +
+//                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />\n' +
+                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />\n' +
+                '    <input type="text" class="input-text thumb1 ch_recovery_thumb12" size="20" placeholder="选中时图片" name="ch_recovery_thumb1[]" />\n' +
+//                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview3(this)" value="预览" />\n' +
+                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage3(this)" value="Upload" />\n' +
+                '    <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents(\'div#add_fenlei_multiselect2\').remove();">Delete</a>' +
+                '</div>';
+            $('#add_rule_multiselect2').append(str);
+        }
+
+
+
+
+
+		function optionArray() {
+		    //表单内容
+            var recovery_title = $('#recovery_title').val();
+            var recovery_title2 = $('#recovery_title2').val();
+            var recovery_type_id = $('#recovery_type_id').val();
+            var recovery_parent_id = $('#recovery_parent_id').val();
+            var recovery_high_price = $('#recovery_high_price').val();
+            var recovery_low_price = $('#recovery_low_price').val();
+            var recovery_cold_num = $('#recovery_cold_num').val();
+            var recovery_img = $('#recovery_img').val();
+            var recovery_id = $('#recovery_id').val();
+			//多选项
+			var ch_parameter_is_select = [];
+			$('.ch_parameter_is_select').each(function (index,item) {
+				ch_parameter_is_select.push($(item).prop('checked'));
+			});
+			var ch_recovery_listorder = [];
+			$('.ch_recovery_listorder').each(function (index,item) {
+				ch_recovery_listorder.push($(item).val());
+			});
+			var ch_recovery_name = [];
+			$('.ch_recovery_name').each(function (index,item) {
+				ch_recovery_name.push($(item).val());
+			});
+			var ch_recovery_sale = [];
+			$('.ch_recovery_sale').each(function (index,item) {
+				ch_recovery_sale.push($(item).val());
+			});
+			var ch_recovery_thumb = [];
+			$('.ch_recovery_thumb').each(function (index,item) {
+				ch_recovery_thumb.push($(item).val());
+			});
+			var ch_recovery_thumb1 = [];
+			$('.ch_recovery_thumb1').each(function (index,item) {
+				ch_recovery_thumb1.push($(item).val());
+			});
+			//附件多选项
+            var ch_parameter_is_select2 = [];
+            $('.ch_parameter_is_select2').each(function (index,item) {
+                ch_parameter_is_select2.push($(item).prop('checked'));
+            });
+            var ch_recovery_listorder2 = [];
+            $('.ch_recovery_listorder2').each(function (index,item) {
+                ch_recovery_listorder2.push($(item).val());
+            });
+            var ch_recovery_name2 = [];
+            $('.ch_recovery_name2').each(function (index,item) {
+                ch_recovery_name2.push($(item).val());
+            });
+            var ch_recovery_sale2 = [];
+            $('.ch_recovery_sale2').each(function (index,item) {
+                ch_recovery_sale2.push($(item).val());
+            });
+            var ch_recovery_thumb2 = [];
+            $('.ch_recovery_thumb2').each(function (index,item) {
+                ch_recovery_thumb2.push($(item).val());
+            });
+            var ch_recovery_thumb12 = [];
+            $('.ch_recovery_thumb12').each(function (index,item) {
+                ch_recovery_thumb12.push($(item).val());
+            });
+
+			//单选项
+			var Array = [];
+			for(var o = 0; o < $('.recovery_menu0').length; o++) {
+				var menuVal0 = $('.recovery_menu0').eq(o).val();
+				var arr0 = [];
+                arr0.push(menuVal0);
+                for(var i = 0; i < $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').length; i++) {
+                    var menuVal = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).val();
+                    var arr = [];
+                    arr.push(menuVal);
+                    for(var num = 0; num < $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.parameter_is_select').length; num++) {
+                        var parameter_is_select = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.parameter_is_select').eq(num).prop('checked');
+                        var parameter_name = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.recovery_name').eq(num).val();
+                        var recovery_listorder = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.recovery_listorder').eq(num).val();
+                        var recovery_sale = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.recovery_sale').eq(num).val();
+                        var recovery_desc = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.recovery_desc').eq(num).val();
+                        var recovery_thumb = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.recovery_thumb').eq(num).val();
+
+                        //add price boost starts
+                        var recovery_boost = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.recovery_boost').eq(num).val();
+                        //add price boost ends
+
+                        //add tag starts
+                        var tag = $('.recovery_menu0').eq(o).parents('#add_big_fenlei').children('#add_fenlei').children('.recovery_menu').eq(i).parents('#add_fenlei').find('.tag').eq(num).val();
+                        //add tag ends
+
+                        var obj = {
+                            "parameter_is_select": parameter_is_select,
+                            "parameter_name": parameter_name,
+                            "recovery_listorder": recovery_listorder,
+                            "recovery_sale": recovery_sale,
+                            "recovery_desc": recovery_desc,
+                            "recovery_thumb": recovery_thumb,
+                            //add price boost starts
+                        	"recovery_boost": recovery_boost,
+                        	//add price boost ends
+
+                            //add tag starts
+                        	"tag": tag
+                        	//add tag ends
+                        };
+                        arr.push(obj);
+                    }
+                    arr0.push(arr);
+                }
+				Array.push(arr0);
+			}
+//			alert('开始发送数据');
+			var data = {
+                recovery_id: recovery_id,
+                recovery_title: recovery_title,
+                recovery_title2: recovery_title2,
+                recovery_type_id: recovery_type_id,
+                recovery_parent_id: recovery_parent_id,
+                recovery_high_price: recovery_high_price,
+                recovery_low_price: recovery_low_price,
+                recovery_cold_num: recovery_cold_num,
+                recovery_img: recovery_img,
+
+            };
+			$.ajax({
+			    url: "index.php?s=admin&c=flowerhua&a=ajax_add_activity",
+			    type: "POST",
+                data: data,
+                async: false,    // 使用同步操作
+                dataType: 'json',
+			    success: function (data) {
+			        if(data.code==1){
+                        $.ajax({
+                            url: "index.php?s=admin&c=flowerhua&a=ajax_addArray",
+                            type: "POST",
+                            data: {recovery_id:data.recovery_id,one_Array : JSON.stringify(Array),
+								ch_parameter_is_select : ch_parameter_is_select,
+                                ch_recovery_listorder : ch_recovery_listorder,
+                                ch_recovery_name : ch_recovery_name,
+                                ch_recovery_sale : ch_recovery_sale,
+                                ch_recovery_thumb : ch_recovery_thumb,
+                                ch_recovery_thumb1 : ch_recovery_thumb1,
+                                ch_parameter_is_select2 : ch_parameter_is_select2,
+                                ch_recovery_listorder2 : ch_recovery_listorder2,
+                                ch_recovery_name2 : ch_recovery_name2,
+                                ch_recovery_sale2 : ch_recovery_sale2,
+                                ch_recovery_thumb2 : ch_recovery_thumb2,
+                                ch_recovery_thumb12 : ch_recovery_thumb12,},
+                            dataType: 'json',
+                            success: function (data) {
+                                if(data.code==1){
+                                    layer.open({content:'Product operation success!',icon:1,end:function(){
+                                        location.href="index.php?s=admin&c=flowerhua&a=admin_recovery_list";
+                                    }});
+                                }
+                            },
+                            error: function(error) {
+                                console.log(error);
+                            },
+                        });
+			        }
+			    }
+			});
+        }
+
+        function submit_data() {
+            optionArray();
+        }
+
+
+
+        function add_tr0() {
+            var str = '<div id="add_big_fenlei" style="padding-bottom:15px;">\n' +
+                '    <input type="text" class="input-text recovery_menu0" name="recovery_menu0[]" placeholder="大分类菜单" size="80">' +
+				'    <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents(\'div#add_big_fenlei\').remove();">Delete</a>' +
+				'    <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn" onclick="add_tr(this);">Add the basic rules</a><br>\n' +
+                '    <div id="add_fenlei" style="padding-bottom:15px;">\n' +
+                '    <input type="text" class="input-text recovery_menu" name="recovery_menu[]" placeholder="回收菜单" size="40">\n' +
+                '    <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents(\'div#add_fenlei\').remove();">Delete</a>\n' +
+                '    <br /><br />\n' +
+                '    Is it optional<input type="checkbox" class="parameter_is_select" checked name="parameter_is_select[]">' +
+                '    <input type="text" class="input-text recovery_listorder" name="recovery_listorder[]" placeholder="Sort" size="10">\n' +
+                '    <input type="text" class="input-text recovery_name" name="recovery_name[]" placeholder="回收项名称" size="20">\n' +
+                '    <input type="text" class="input-text recovery_sale" name="recovery_sale[]" placeholder="回收项减价" size="7">\n' +
+                '    <input type="text" class="input-text recovery_desc" name="recovery_desc[]" placeholder="回收项说明" size="40">\n' +
+                '    <input type="text" class="input-text thumb recovery_thumb" size="20" placeholder="上传缩略图" name="recovery_thumb[]" />\n' +
+//                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />\n' +
+                '    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />\n' +
+
+                //add price boost starts
+                '    <input type="text" class="input-text recovery_boost" name="recovery_boost[]" placeholder="Recovery boost" size="7">\n' +
+                //add price boost ends
+
+                //add tag starts
+                '    <input type="text" class="input-text tag" name="tag[]" placeholder="Tag" size="7">\n' +
+                //add tag ends
+
+                '    <a href="javascript:;" style="height:34px;" onclick="add_fenlei(this);" class="layui-btn">Add s </a>\n' +
+                '    </div>'+
+                '    </div>';
+            $('#add_rule').append(str);
+        }
+		function add_tr(a) {
+			var str = '<div id="add_fenlei" style="padding-bottom:15px;">\n' +
+                '    <input type="text" class="input-text recovery_menu" name="recovery_menu[]" placeholder="回收菜单" size="40">\n' +
+				'    <a href="JavaScript:;" style="height:34px;" class="layui-btn layui-btn-danger" onclick="$(this).parents(\'div#add_fenlei\').remove();">Delete</a>\n' +
+				'    <br /><br />\n' +
+				'    Is it optional<input type="checkbox" class="parameter_is_select" checked name="parameter_is_select[]">' +
+				'    <input type="text" class="input-text recovery_listorder" name="recovery_listorder[]" placeholder="Sort" size="10">\n' +
+				'    <input type="text" class="input-text recovery_name" name="recovery_name[]" placeholder="回收项名称" size="20">\n' +
+				'    <input type="text" class="input-text recovery_sale" name="recovery_sale[]" placeholder="回收项减价" size="7">\n' +
+				'    <input type="text" class="input-text recovery_desc" name="recovery_desc[]" placeholder="回收项说明" size="40">\n' +
+				'    <input type="text" class="input-text thumb recovery_thumb" size="20" placeholder="上传缩略图" name="recovery_thumb[]" />\n' +
+//				'    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />\n' +
+				'    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />\n' +
+
+				//add price boost starts
+				'    <input type="text" class="input-text recovery_boost" name="recovery_boost[]" placeholder="Recovery boost" size="7">\n' +
+				//add price boost ends
+
+				//add tag starts
+				'    <input type="text" class="input-text tag" name="tag[]" placeholder="TAG" size="7">\n' +
+				//add tag ends
+
+				'    <a href="javascript:;" style="height:34px;" onclick="add_fenlei(this);" class="layui-btn">Add s </a>\n' +
+				'</div>';
+			$(a).parents('#add_big_fenlei').append(str);
+		}
+
+		function add_fenlei(a) {
+			var str = '<div id="add_td">\n' +
+				'    Is it optional<input type="checkbox" class="parameter_is_select" checked name="parameter_is_select[]">' +
+				'    <input type="text" class="input-text recovery_listorder" name="recovery_listorder[]" placeholder="Sort" size="10">\n' +
+				'    <input type="text" class="input-text recovery_name" name="recovery_name[]" placeholder="回收项名称" size="20">\n' +
+				'    <input type="text" class="input-text recovery_sale" name="recovery_sale[]" placeholder="回收项减价" size="7">\n' +
+				'    <input type="text" class="input-text recovery_desc" name="recovery_desc[]" placeholder="回收项说明" size="40">\n' +
+				'    <input type="text" class="input-text thumb recovery_thumb" size="20" placeholder="上传缩略图" name="recovery_thumb[]" />\n' +
+//				'    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview2(this)" value="预览" />\n' +
+				'    <input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage2(this)" value="Upload" />\n' +
+
+				//add price boost starts
+				'    <input type="text" class="input-text recovery_boost" name="recovery_boost[]" placeholder="Recovery boost" size="7">\n' +
+				//add price boost ends
+
+				//add tag starts
+				'    <input type="text" class="input-text tag" name="tag[]" placeholder="Tag" size="7">\n' +
+				//add tag ends
+
+				'<a href="JavaScript:;" class="layui-btn layui-btn-danger" onclick="$(this).parents(\'div#add_td\').remove();">Delete</a></div>';
+			$(a).parents('#add_fenlei').append(str);
+		}
+
+		function preview2(obj) {
+			var filepath = $(obj).siblings('.thumb').val();
+			if(filepath) {
+				var content = '<img src="' + filepath + '?' + Math.random() + '" onload="if(this.width>$(window).width()/2)this.width=$(window).width()/2;" />';
+			} else {
+				var content = fc_lang[0];
+			}
+			window.top.art.dialog({
+				title: fc_lang[1],
+				fixed: true,
+				content: content
+			});
+		}
+
+		function uploadImage2(obj, w, h, size) {
+			var url = sitepath + '?c=attachment&a=image&w=' + w + '&h=' + h + '&size=' + size + '&file=' + $(obj).siblings('.thumb').val() + '&document=' + finecms_admin_document;
+			var winid = 'win_1';
+			window.top.art.dialog({
+					id: winid,
+					okVal: fc_lang[6],
+					cancelVal: fc_lang[7],
+					iframe: url,
+					title: fc_lang[3],
+					width: '470',
+					height: '210',
+					lock: true
+				},
+				function() {
+					var d = window.top.art.dialog({
+						id: winid
+					}).data.iframe;
+					var filename = d.document.getElementById('filename').value;
+					if(filename) {
+						$(obj).siblings('.thumb').val(filename);
+					} else {
+						alert(fc_lang[24]);
+						return false;
+					}
+				},
+				function() {
+					window.top.art.dialog({
+						id: winid
+					}).close();
+				}
+			);
+			void(0);
+		}
+
+
+
+		function preview3(obj) {
+			var filepath = $(obj).siblings('.thumb1').val();
+			if(filepath) {
+				var content = '<img src="' + filepath + '?' + Math.random() + '" onload="if(this.width>$(window).width()/2)this.width=$(window).width()/2;" />';
+			} else {
+				var content = fc_lang[0];
+			}
+			window.top.art.dialog({
+				title: fc_lang[1],
+				fixed: true,
+				content: content
+			});
+		}
+
+		function uploadImage3(obj, w, h, size) {
+			var url = sitepath + '?c=attachment&a=image&w=' + w + '&h=' + h + '&size=' + size + '&file=' + $(obj).siblings('.thumb1').val() + '&document=' + finecms_admin_document;
+			var winid = 'win_1';
+			window.top.art.dialog({
+					id: winid,
+					okVal: fc_lang[6],
+					cancelVal: fc_lang[7],
+					iframe: url,
+					title: fc_lang[3],
+					width: '470',
+					height: '210',
+					lock: true
+				},
+				function() {
+					var d = window.top.art.dialog({
+						id: winid
+					}).data.iframe;
+					var filename = d.document.getElementById('filename').value;
+					if(filename) {
+						$(obj).siblings('.thumb1').val(filename);
+					} else {
+						alert(fc_lang[24]);
+						return false;
+					}
+				},
+				function() {
+					window.top.art.dialog({
+						id: winid
+					}).close();
+				}
+			);
+			void(0);
+		}
+
+
+
+		function find_parent_list(a) {
+			$.ajax({
+				url: "index.php?s=admin&c=flowerhua&a=find_parent_list",
+				type: "post",
+				data: {
+					parentid: $(a).val(),
+				},
+				dataType: 'json',
+				success: function(data) {
+					if(data.code == 1) {
+						$('#recovery_parent_id').html(data.str);
+					} else {
+						$('#recovery_parent_id').html('<option value="">No options are available for the time being</option>');
+					}
+				}
+			});
+		}
+	</script>
+
+</html>

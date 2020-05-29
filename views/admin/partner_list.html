@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}js/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/Cooperative/list')}" class="on"><em>Partner list</em></a>
+			<a class="layui-btn" href="{url('admin/Cooperative/edit')}"><em>Add partners</em></a>
+		</div>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="5%"  align="right">Sort</th>
+			<th width="20%" align="center">LOGO</th>
+			<th width="20%" align="center">URL</th>
+			<th width="20%" align="center">Add time</th>
+			<th width="20%" align="left">Option</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+			<td align="center"><input style="width: 50px" type="text" class="input-text" name="data_{$t['id']}" value="{$t['sort']}"></td>
+			<td align="center"><img src="{$t['partner_thumb']}"></td>
+			<td align="center">{$t['partner_url']}</td>
+			<td align="center">{date('Y-m-d H:i:s',$t['addtime'])}</td>
+			<td align="center">
+			<div class="layui-btn-group">
+			{if $t['status']==2}
+				<a class="layui-btn" href="javascript:;" onclick="show({$t['id']},1)">display</a>
+			{/if}
+			{if $t['status']==1}	
+				<a class="layui-btn layui-btn-danger layui-btn-small" href="javascript:;"  onclick="show({$t['id']},2)">none</a>
+			{/if}
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/cooperative/edit',array('id'=>$t['id']))}">Edit</a>
+				<a class="layui-btn layui-btn-danger layui-btn-small" href="javascript:;" onclick="del({$t['id']})">Delete</a>
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		
+		</table>
+		{$pagelist}
+		<input type="submit" value="Sort" name="submit" class="layui-btn layui-btn-small">
+		<div class="onShow">The big numbers are in front！</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+   function show(id,str){
+      var msg = [];
+       msg[1]='display'; 
+       msg[2]='do not display';
+   		layer.open({btn:['Determine','Cancel'],content:'Do you want to '+msg[str]+'?',btn1:function(){
+   				$.ajax({
+   					dataType:'json',
+   					type:'post',
+   					url:"{url('admin/cooperative/show')}",
+   					data:{id:id,str:str},
+   					success:function(data){
+   						if(data.code==1){
+   							layer.alert(data.info,{end:function(){
+   								location.reload();
+   							}})
+   						}
+   					}
+   				})
+   			}
+
+   		})
+   }
+    
+    function del(id){
+   		layer.open({btn:['Determine','Cancel'],content:'Do you decide to delete it?',btn1:function(){
+   				$.ajax({
+   					dataType:'json',
+   					type:'post',
+   					url:"{url('admin/cooperative/delpartner')}",
+   					data:{id:id},
+   					success:function(data){
+   						if(data.code==1){
+   							layer.alert(data.info,{end:function(){
+   								location.reload();
+   							}})
+   						}
+   					}
+   				})
+   			}
+
+   		})
+   }
+</script>
+</body>
+</html>

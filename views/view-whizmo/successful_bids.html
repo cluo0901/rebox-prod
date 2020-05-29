@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+<body>
+{template recycler_header}
+<div class="banner top_slide_wrap">
+    <ul class="bxslider">
+        {loop $banner $t}
+        <li>
+            <!-- <a href="{$t['link']}" target="_blank"> -->
+            <img src="{$t['guanggaotutupian']}" alt="banner">
+            <!-- </a> -->
+        </li>
+        {/loop}
+    </ul>
+    <script type="text/javascript">
+        $(function() {
+            $(".banner .bxslider").bxSlider({
+                auto: true,
+                prevSelector: $(".top_slide_wrap .op_prev")[0],
+                nextSelector: $(".top_slide_wrap .op_next")[0],
+                pause: 6e3
+            });
+        });
+    </script>
+</div>
+<div class="recircle_detail">
+    <div class="container">
+        <div class="pronav bidnav">
+            <ul>
+                <!--<li class="on">-->
+                    <!--<a href="javascript:;" onclick="classify(this,1)">On-Going Bids</a>-->
+                <!--</li>-->
+                <li class="on">
+                    <a href="javascript:;" onclick="classify(this,6)">Pending Payment</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick="classify(this,2)">Pending Delivery</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick="classify(this,3)">Past Record</a>
+                </li>
+            </ul>
+            <input type="hidden" class="status" value="">
+        </div>
+        <div class="bidlist">
+            <ul id="index_box">
+                <!-- {loop $list $t}
+                <li>
+                    <div class="lit">
+                        <span>Order #：{$t['order_sn_number']}</span>  <em>| </em>   <span>Date：{$t['bidding_time']}</span>
+                        <b>State: Have cast</b>
+                    </div>
+                    <div class="lib">
+                        <div class="img">
+                            <img src="{$t['recovery_img']}">
+                        </div>
+                        <div class="txt">
+                            <h3>{$t['title']}</h3>
+                            <h4>{$t['title2']}</h4>
+                            <p>#{$t['number']}</p>
+                            <h2>S$ {$t['bidding_price']}</h2>
+                            <b>Bid By: {$t['recycler_phone']}</b>
+                        </div>
+                        <div class="p">
+                            {$t['details']}
+                        </div>
+
+                    </div>
+                    <div class="all">
+                        Total Amount: <font>S${$t['bidding_price']}</font>
+                    </div>
+                </li>
+                {/loop} -->
+            </ul>
+        </div>
+       
+        <input type="hidden" id="page" value="0">
+    </div>
+</div>
+<div class="tan tan1">
+    <div class="forgot">
+        <div class="rtit">
+            <span>Confirm Payment</span>
+            <img src="{SITE_THEME}img/cha.png" onclick="hide_tan()">
+        </div>
+        <div class="reg">
+            <h5>Are you sure payment has been completed?</h5>
+            <div class="aa">
+                <input type="hidden" class="bidding" value="">
+                <a href="javascript:;" onclick="hide_tans()">Sure</a>
+                <a href="javascript:;" class="border" onclick="hide_tan()">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tan tan2">
+    <div class="forgot">
+        <div class="rtit">
+            <img src="{SITE_THEME}img/cha.png" onclick="hide_tan()">
+        </div>
+        <div class="reg">
+            <div id="pdf">
+                <h5></h5>
+                <span class="bidding_price"></span>
+                <span class="bided_time"></span>
+                <p></p>
+                <div class="images"></div>
+            </div>
+            <div class="aa">
+                <a href="javascript:;" onclick="xiazaipdf()">Download</a>
+                <a href="javascript:;" class="border" onclick="hide_tan()">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function hide_tan(){
+        $(".tan").hide();
+        $("body").removeClass("hidden");
+    }
+    function hide_tans(){
+        var id = $('.bidding').val();
+        $.ajax({
+            type:'post',
+            dataType:'json',
+            url:"{url('recycler/notify_payment')}",
+            data:{id:id},
+            success:function(data){
+                if(data.code==1){
+
+                    //send email to check bank account 
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/payment_notice.php?shelveid="+data.shelve_id, true);                 
+                    xmlhttp.send();
+                    //send payment notice email ends
+
+                    layer.open({content:'success！',icon:1,yes:function(){
+                        $(".tan1").hide();
+                        $("body").removeClass("hidden");
+
+                        location.reload()
+                    }});
+                }
+            }
+        })
+    }
+
+    function xiazaipdf(){
+        var img = $('.tan2 .reg h5').html();
+        var details = $('.tan2 .reg p').html();
+        var bidding_price = $('.tan2 .reg .bidding_price').html();
+        var bided_time = $('.tan2 .reg .bided_time').html();
+        var images = $('.tan2 .reg .images').html();
+//        $.post('./index.php?c=recycler&a=pdf'+'&img='+img+'&images='+images,{details:details,bidding_price:bidding_price,bided_time:bided_time},function(res){
+
+//        });
+        location.href="./index.php?c=recycler&a=pdf"+'&img='+img+'&details='+details+'&bidding_price='+bidding_price+'&bided_time='+bided_time+'&images='+images;
+    }
+
+</script>
+
+{template footer}
+</body>
+<script type="text/javascript">
+    var lay;
+    function classify(obj,num){
+        $('#index_box').html('');
+        $('.status').val(0);
+        $('#page').val(0);
+        $('.bidnav ul li').removeClass('on');
+        $(obj).parent('li').addClass('on');
+        $('.status').val(num);
+        get_pagelist();
+    }
+    $('.bidlist').on('click','.notify_payment',function(){
+        $('.bidding').val(0);
+        var bidding_id = $(this).parents('.lib').find('.bidding_id').val();
+        $('.bidding').val(bidding_id);
+        $(".tan1").show();
+        $("body").addClass("hidden");
+    })
+    $('.bidlist').on('click','.view_receipt',function(){
+        var content = $(this).parents('.lib').find('.img').html();
+        var details = $(this).parents('.lib').find('.p').html();
+        var bidding_price = $(this).parents('.lib').find('h2').html();
+        var images = $(this).parents('.lib').find('.images').val();
+        var bided_time = $(this).parents('.lib').find('.bided_time').val();
+        $('.tan2 .reg h5').html(content);
+        $('.tan2 .reg p').html(details);
+        $('.tan2 .reg .bidding_price').html('Bidding price:'+bidding_price);
+        $('.tan2 .reg .bided_time').html('Bidding time:'+bided_time);
+        $('.tan2 .reg .images').html(images);
+        xiazaipdf();
+//        $(".tan2").show();
+//        $("body").addClass("hidden");
+    })
+    function get_pagelist(){
+        lay = layer.open({type:3,icon:1});
+        $('.nomore').css('display', 'block');
+        var content = '';
+        var index_box = $('#index_box');
+        var page = $('#page').val();
+        var status = $('.status').val();
+        $.ajax({
+            type:'post',
+            dataType:'json',
+            // async:false,
+            url:"{url('recycler/ajax_successful_bids')}",
+            data:{status:status,page:page},
+            success:function(data){
+                layer.close(lay);
+                if (data.code == -1){
+                    $('.nomore p').text('OOPS! NOTHING HERE!');
+                }else if(data.code==1){
+                    $('.nomore').css('display', 'none');
+                    var list = data.list;
+                    for(var i=0;i<list.length;i++){
+                        content += '<li>';
+                        content += '<div class="lit">';
+                        content += '<span>Order #：'+list[i].order_sn_number+'</span>  <em>| </em>';
+                        if(list[i].bidding_time){
+                            content += '<span>Date：'+list[i].bidding_time+'</span>';
+                        }
+                        if(list[i].status==1){
+                            content += '<b>State: Bidding</b>';
+                        }else if(list[i].status==6){
+//                            content += '<b>State: Have been in</b>';
+                        }else if(list[i].status==3){
+                            content += '<b>Successful</b>';
+                        }else if(list[i].status==2){
+//                            content += '<b>State: Pending delivery</b>';
+                        }else if(list[i].status==-6){
+                            content += '<b>State: Not in</b>';
+                        }else if(list[i].status==-2){
+                            content += '<b>State: Uninterested</b>';
+                        }
+                        content += '</div>';
+                        content += '<div class="lib">';
+
+                        content += '<img src="views/view-whizmo/img/grade_' + list[i].grade + '.png" style = "max-width: 30px; position: absolute;">';  //add grading icon
+
+                        content += '<div class="img"><img src="'+list[i].recovery_img+'"></div>';
+                        content += '<div class="txt">';
+                        content += '<h3>'+list[i].title+'</h3>';
+                        content += '<h4>'+list[i].title2+'</h4>';
+
+                        //find capacity
+                                
+                        var colpos = list[i].details.indexOf(":");
+                        var gbpos = list[i].details.indexOf("GB");
+                        var capa = list[i].details.substr(colpos+1,gbpos-colpos-1);
+                        // content += '<p>'+capa+'GB    </p>'; //add capacity
+
+                        //find color
+                        var colorpos = list[i].details.indexOf("Colour");
+                        var colorend = list[i].details.indexOf("<br>", colorpos);
+                        var color = list[i].details.substr(colorpos+7, colorend-colorpos-3);
+                        content += '<h4>'+capa+'GB&nbsp;&nbsp;'+color+'</h4>'; //add color
+
+                        content += '<p>#'+list[i].number+'</p>';
+                        if(list[i].bidding_price>0){
+                            content += '<h2>S$ '+list[i].bidding_price+'</h2>';
+                        }
+                        content += '<b>Offered By '+list[i].recycler_phone+'</b>';
+                        content += '</div>';
+                        // content += '<div class="p">'+list[i].details;
+                        content += '<div class="p">'+list[i].multiples;
+                        if(list[i].description){
+                            content += 'Additional Info: '+list[i].description;
+                        }
+                        // content += '</div>';
+                        // content += '<input type="hidden" class="images" value="'+list[i].img+'">';
+                        content += '<br>'+list[i].img;                        
+                        content += '<input type="hidden" class="bided_time" value="'+list[i].bided_time+'">';
+                        content += '<input type="hidden" class="bidding_id" value="'+list[i].id+'">';
+                        content += '</div>';
+                        if(list[i].status==6){
+                            content += '<div class="cao"><a href="javascript:;" class="notify_payment">Notify Payment</a></div>'
+                        }else if(list[i].status==2){
+//                            content += '<div class="cao"><a href="javascript:;" class="view_receipt">Down Receipt</a></div>'
+                        }
+                        // content += '</div>';
+
+                        // no need to display total amount again
+                        // if (list[i].bidding_price){
+                        //     content += '<div class="all">Total Amount: <font>S$'+list[i].bidding_price+'</font></div>';
+                        // }
+                        content += '</li>';
+
+                    }
+                    page++;
+                    $('#page').val(page);
+                    index_box.append(content);
+                }
+            }
+        })
+    }
+    setTimeout('get_pagelist();',200);
+    var tur = true;
+    function scrollFn() {
+        //真实内容的高度
+        var pageHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+        //视窗的高度
+        var viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+        //隐藏的高度
+        var scrollHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        tur = true;
+        if (pageHeight - viewportHeight - scrollHeight < 1) {
+            $('.nomore').css('display', 'block');   //如果满足触发条件，执行
+            get_pagelist();
+            return false;
+        }
+    }
+    $(window).scroll(function () {
+        if (tur) {
+            setTimeout(scrollFn, 500);
+            tur = false;
+        } else {
+        }
+    });//绑定滚动事件
+</script>
+<script>
+    var mySwiper = new Swiper('.swiper-container-2', {
+        //autoplay: 2000,//可选选项，自动滑动
+        prevButton: '.apprise-btn-pre',
+        nextButton: '.apprise-btn-next',
+        width: 300,
+        slidesPerView: 4
+    });
+
+    $('.appraise .swiper-button-prev').click(function() {
+        mySwiper.swipePrev();
+    })
+
+    $('.appraise .swiper-button-next').click(function() {
+        mySwiper.swipeNext();
+    })
+    var mySwiper1 = new Swiper('.swiper-container-3', {
+        autoplay: 2000,//可选选项，自动滑动
+//			prevButton: '.apprise-btn-pre',
+//			nextButton: '.apprise-btn-next',
+        width: 200,
+        slidesPerView: 2
+    });
+
+    $('.ahs-media-content .swiper-button-prev').click(function() {
+        mySwiper1.swipePrev();
+    })
+
+    $('.ahs-media-content .swiper-button-next').click(function() {
+        mySwiper1.swipeNext();
+    })
+</script>
+
+</html>

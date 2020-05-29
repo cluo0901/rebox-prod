@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+	{template admin/top.html}
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>
+<script type="text/javascript">
+var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a blue line-x">
+		<a href="{url('admin/shopcategory/')}"><em>{lang('商城分类管理')}</em></a><span>|</span>
+		<a href="{url('admin/shopcategory/add/')}" class="on"><em>{lang('a-add')}</em></a><span>|</span>
+		
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form method="post" action="" id="myform" name="myform">
+		<table width="100%" class="table table-striped">
+		<tbody>
+
+		<tr>
+			<th><font color="red">*</font>{lang('<em>Previous page</em>')}：</th>
+			<td><input type="text" class="input-text" size="40" id="name" value="{$data['name']}" name="data[name]" required /></td>
+		</tr>
+					<tr>
+						<th>{lang('a-cat-37')}：</th>
+						<td><input type="text" class="input-text" size="50" value="{$data['image']}" name="data[image]" id="image" />
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('image')" value="{lang('a-image')}" />
+						<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('image')" value="{lang('a-upload')}" />
+						<div class="onShow">{lang('a-pic')}</div>
+						</td>
+					</tr>
+		<tr>
+						<th>{lang('栏目描述')}：</th>
+						<td><textarea style="width:90%;height:50px" id="description" name="data[description]">{$data['meta_description']}</textarea></td>
+		</tr>
+		<tr>
+			<th>{lang('分类排序')}：</th>
+			<td><input type="text" class="input-text" size="40" id="name" value="{$data['listorder']}" name="data[listorder]"  /></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><input type="submit" class="btn btn-success btn-sm" value="{lang('a-submit')}" name="submit"></td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

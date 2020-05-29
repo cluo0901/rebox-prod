@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript">
+	var sitepath = "{SITE_PATH}{ENTRY_SCRIPT_NAME}";
+	var finecms_admin_document = "{$setting['document']}";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+	{template admin/top.html}
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a class="layui-btn" href="{url('admin/user/')}" class="on"><em>{lang('a-use-5')}</em></a>
+		</div>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post">
+		<input name="userid" type="hidden" value="{$data['userid']}">
+		<table width="100%" class="table table-striped">
+		<tr>
+			<th width="200">{lang('a-user')}： </th>
+			<td><input class="input-text" type="text" name="username" {if $data}readonly{/if} value="{$data['username']}" size="30"/></td>
+		</tr>
+		<tr>
+			<th>{lang('a-pass')}： </th>
+			<td><input class="input-text" type="password" name="password" value="" size="30"/><div class="onShow">{lang('a-use-10')}</div></td>
+		</tr>
+		<tr>
+			<th>{lang('a-use-11')}： </th>
+			<td><input class="input-text" type="text" name="realname" value="{$data['realname']}" size="30"/></td>
+		</tr>
+		<tr>
+			<th>Email： </th>
+			<td><input class="input-text" type="text" name="email" value="{$data['email']}" size="30"/></td>
+		</tr>
+			<tr>
+				<th>Administrator's head：</th>
+				<td><input type="text" class="input-text" size="50" value="{$data['logo']}" name="logo" id="image" />
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('image')" value="{lang('a-image')}" />
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('image','200','200')" value="{lang('a-upload')}" />
+					<div class="onShow">{lang('a-pic')}</div>
+				</td>
+			</tr>
+			<!--<tr>-->
+				<!--<th>{lang('a-sit-20')}： </th>-->
+				<!--<td><select name="site">-->
+					<!--<option value=""> &#45;&#45; </option>-->
+					<!--{loop $sites $sid=>$t}-->
+					<!--<option value="{$sid}" {if $data['site']== $sid}selected{/if}>{$t['SITE_NAME']}</option>-->
+					<!--{/loop}-->
+				<!--</select>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<th>{lang('a-use-7')}： </th>-->
+				<!--<td><select name="roleid">-->
+					<!--{loop $role $t}-->
+					<!--<option value="{$t['roleid']}" {if $data['roleid']== $t['roleid']}selected{/if}>{$t['rolename']}</option>-->
+					<!--{/loop}-->
+				<!--</select>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<th>所管理的地区(市级)： </th>-->
+				<!--<td>-->
+					<!--<label>-->
+						<!--<select class="form-control" name="province_id" id="province_id">-->
+							<!--<option value="">请选择省</option>-->
+							<!--{loop $province $t}-->
+							<!--<option value="{$t[id]}" {if $data[province_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>-->
+							<!--{/loop}-->
+						<!--</select>-->
+					<!--</label>-->
+
+					<!--<label>-->
+						<!--<select class="form-control" id="city_id" name="city_id">-->
+							<!--<option value="">请选择市</option>-->
+							<!--{loop $citylist $t}-->
+							<!--<option value="{$t[id]}" {if $data[city_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>-->
+							<!--{/loop}-->
+						<!--</select>-->
+					<!--</label>-->
+					<!--<div class="onShow">不选择地区表示默认为全部地区</div>-->
+					<!--<script type="text/javascript">-->
+                        <!--$("#province_id").change(function(){-->
+                            <!--var id = $(this).val();-->
+                            <!--$.ajax({-->
+                                <!--type:"POST",-->
+                                <!--url:"index.php?s=admin&a=city",-->
+                                <!--data:"id="+id,-->
+                                <!--dateType:"html",-->
+                                <!--success:function(date){-->
+                                    <!--$("#city_id").html(date);-->
+                                <!--}-->
+                            <!--})-->
+                        <!--})-->
+					<!--</script>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<tr>
+				<th>&nbsp;</th>
+				<td><input class="btn btn-success btn-sm" type="submit" name="submit" value="{lang('a-submit')}" /></td>
+			</tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+function add_menu() {
+    var data = '<tr><td width="140">{lang('a-name')}：<input class="input-text" type="text" name="menu[name][]" value="" size="10"/></td><td>{lang('a-address')}：<input class="input-text" type="text" name="menu[url][]" size="50"/></td><td>&nbsp;</td></tr>';
+	$('#menu_body').append(data);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet">
+<link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+    <script src="{ADMIN_THEME}js/layer/layer.js"></script>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/whizmoshelve/admin_shelveok_list')}" class="on"><em>List</em></a>
+		</div>
+		<form action="{url('admin/whizmoshelve/admin_shelveok_list')}" method="post" style="float:left;">
+            <div class="cbtn" style="float: left;">
+                <input name="form" type="hidden" value="search" />
+                <input placeholder="Search the number" type="text" class="input-text" value="{$number}" name="number" size="40" />
+                <label>
+                    <select class="form-control" name="status">
+                        <option value=" ">Selected state</option>
+                        <option {if $status==3} selected {/if} value="3">Already auctioned</option>
+                        <option {if $status==4} selected {/if} value="4" >Already shipped</option>
+                    </select>
+                </label>
+                <input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+            </div>
+        </form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+            <th width="100" align="center">picture</th>
+            <th width="100" align="center">Name</th>
+            <!-- add shelve_id -->
+            <th width="100" align="center">Shelf ID</th> 
+            <th width="100" align="center">number</th>
+            <th width="100" align="center">Order Number</th>
+            <th width="100" align="center">Recycler</th>
+            <th width="100" align="center">Recycler Company</th>
+            <th width="100" align="center">Transaction price</th>
+            <th width="100" align="center">Beat time</th>
+            <th width="100" align="center">OrderNumber</th>
+            <th width="100" align="left">option</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr height="25">
+            <td align="center"><img src="{$t['recovery_img']}" height="80"></td>
+            <td align="center">{$t['title']}</td>
+            <!-- add shelve_i -->
+            <td align="center">{$t['shelve_id']}</td>
+            <td align="center">{$t['number']}</td>
+            <td align="center">{$t['order_sn_number']}</td>
+            <td align="center">{$t['recycler_phone']}</td>
+            <td align="center">{$t['company_name']}</td>
+            <td align="center">{$t['now_price']}</td>
+            <td align="center">{if $t['bided_time']}{date('d/m/Y H:i',$t['bided_time'])}{/if}</td>
+            <td align="center">
+            {if $t['ordernumber']}
+                <a class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="get_roadbul_query('{$t[ordernumber]}')">{$t['ordernumber']}</a>
+            {/if} 
+            </td>
+            <td align="center">
+			<div class="layui-btn-group">
+                <!--3 已中-->
+                {if $t['status']==3}
+                    <a class="layui-btn layui-btn-small layui-btn-normal" href="javascript:;" onclick="payment({$t['bided_id']})";><em>Pending Payment</em></a>
+                {/if}
+                {if $t['status']==4}
+                    <!--<a class="layui-btn layui-btn-small" href="{url('admin/flowerhua/admin_roadblu_fahuo',array('id'=>$t['id']))}"><em>Pending delivery</em></a>-->
+                    <a class="layui-btn layui-btn-small" href="javascript:;" onclick="delivery({$t['id']});"><em>Pending delivery</em></a>
+                {/if}
+                <a class="layui-btn layui-btn-small layui-btn-normal" href="javascript:;" onclick="addordernumber({$t['id']})";><em>Write order number</em></a>
+                {if $t['status'] ==5}
+                <a class="layui-btn  layui-btn-small" href="javascript:;" onclick="confirme({$t['bided_id']});"><em>Delivery confirme</em></a>
+                {/if}
+                {if $t['status'] ==6}
+                <a style="background:orangered;" class="layui-btn layui-btn-small" href="javascript:;"><em>Complete</em></a>
+                {/if}
+			</div>
+			</td>
+		</tr>
+		{/loop}
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+    function confirme(id){
+        layer.open({content:'sure Pending delivery has been completed?',btn:['sure','cancel'],btn1:function(){
+            $.ajax({
+                type:'post',
+                dataType:'json',
+                url:"{url('admin/whizmoshelve/shellChange')}",
+                data:{id:id,type:'confirme'},
+                success:function(data){
+                    if(data.code==1){
+                        layer.open({content:'success！',icon:1,yes:function(){
+                            location.reload();
+                        }});
+                    }
+                }
+            })
+        }})
+    }
+    function delivery(id){
+        layer.open({content:'sure Pending delivery has been completed?',btn:['sure','cancel'],btn1:function(){
+            $.ajax({
+                type:'post',
+                dataType:'json',
+                url:"{url('admin/whizmoshelve/shellChange')}",
+                data:{id:id,type:'delivery'},
+                success:function(data){
+                    if(data.code==1){
+                        layer.open({content:'success！',icon:1,yes:function(){
+                            location.reload();
+                        }});
+                    }
+                }
+            })
+        }})
+    }
+    function payment(id){
+        layer.open({content:'sure payment has been completed?',btn:['sure','cancel'],btn1:function(){
+            $.ajax({
+                type:'post',
+                dataType:'json',
+                url:"{url('recycler/notify_payment')}",
+                data:{id:id},
+                success:function(data){
+                    if(data.code==1){
+                        layer.open({content:'success！',icon:1,yes:function(){
+                            location.reload()
+                        }});
+                    }
+                }
+            })
+        }})
+    }
+ function get_roadbul_query(sn){
+        var url   = '/index.php?s=admin&c=flowerhua&a=get_roadbul_query&sn='+sn;
+        var winid = 'loadinfo';
+        window.top.art.dialog(
+            {id:'winid', okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'Inquiry Logistics', width:'1200', height:'700', lock:true},
+            function(){
+                window.top.art.dialog({id:winid}).close();
+            }
+        );
+        void(0);
+    }
+
+function addordernumber(id){
+      layer.prompt({title:'请输入订单号'},function(value){
+            $.ajax({
+                url: "index.php?s=admin&c=whizmoshelve&a=ajax_addordernumber",
+                type: "post",
+                data: {value:value,id:id},
+                async:false,
+                dataType: 'json',
+                success: function (data){
+                    if(data.code==1){
+                       layer.open({content:'success!',icon:1,end:function(){
+                            location.reload();
+                       }})
+                    }
+                }
+            })
+      })
+}
+    function loadInfo(id) {
+        var url   = '{url("admin/flowerhua/admin_roadblu_fahuo")}&id='+id;
+        var winid = 'loadinfo';
+        window.top.art.dialog(
+            {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'600', height:'200', lock:true},
+            function(){
+                window.top.art.dialog({id:winid}).close();
+            }
+        );
+        void(0);
+    }
+</script>
+</body>
+</html>

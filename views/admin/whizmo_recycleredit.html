@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<title>admin</title>
+	{template admin/top}
+</head>
+<!--图片上传-->
+<script type="text/javascript">
+    var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+    var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a class="layui-btn" href="{url('admin/recycler/recycler_list')}" class="on"><em>List</em></a>
+			<a class="layui-btn" href="javascript:history.go(-1);"><em>Previous page</em></a>
+		</div>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form action="" method="post">
+			<input name="id" type="hidden" value="{$data['id']}">
+			<table width="100%" class="table table-striped">
+			<tr>
+				<td width="200" align="right">Liaison</td>
+				<td><input class="input-text" type="text"  value="{$data['person']}" size="50" />
+				</td>
+			</tr>
+		
+			<tr>
+				<td align="right">Phone number</td>
+				<td><input class="input-text" type="text"  value="{$data['phone']}" size="50" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Corporate name</td>
+				<td><input class="input-text" type="text"  value="{$data['company_name']}" size="50" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Company address</td>
+				<td><input class="input-text" type="text"  value="{$data['address']}" size="50" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">ued</td>
+				<td>
+				<input  type="text" value="{$data['ued']}" size="50" />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Audit status</td>
+				<td>
+				<input  type="text" value="{if $data['status']==1}Unaudited{else}Review and pass through{/if}" size="50" disabled="disabled"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Add time</td>
+				<td>
+				<input type="text" value="{date('Y-m-d H:i:s',$data['addtime'])}" size="50"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Attached cell phone number</td>
+				<td>
+				{loop $lessphone_list $t} 
+				{$t['linkman']}：<input type="text" value="{$t['less_phone']}" size="10"/><br>
+				{/loop}
+				</td>
+			</tr>
+			{if $data['company_file']}
+			<tr>
+				<td align="right">Company documents</td>
+				<td>
+				<input type="button" value="Click downloads" size="50" onclick="download(this)" data-file="{$data['company_file']}"/>
+				</td>
+			</tr>
+			{/if}
+			<tr>
+				<td align="right">Username</td>
+				<td>
+				<input type="text" class="username" value="{$data['username']}" size="15"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Login password</td>
+				<td>
+				<input type="text" class="pwd" value="" size="15"/>
+				</td>
+			</tr>
+			{if $data['status']==1}
+			<tr>
+				<td>
+					<input type="button" style="cursor:pointer;" class="btn btn-success que" onclick="shenhe(this)" data-id="{$data['id']}" value="Confirm through"/>
+				</td>
+			</tr>
+			{/if}
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+function download(obj){
+	var file = $(obj).attr('data-file');
+	location.href="./index.php?s=admin&c=recycler&a=download"+'&file='+file;
+}
+
+
+function shenhe(obj){
+	var id = $(obj).attr('data-id');
+	var pwd = $('.pwd').val();
+	var username = $('.username').val();
+	$.ajax({
+		type:'post',
+		dataType:'json',
+		url:"{url('admin/recycler/recycler_shenhe')}",
+		data:{id:id,username:username,pwd:pwd},
+		success:function(data){
+			if(data.code==1){
+				layer.alert(data.info,{end:function(){
+					location.reload();
+				}})
+			}else if(data.code==2){
+				layer.alert(data.info);
+			}
+		}
+	})
+}
+</script>
+</html>

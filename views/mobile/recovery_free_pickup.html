@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	{template head}
+
+	   <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ITGtvwTZzt5AdD9oZvTpuPtKLZKV95eP"></script> -->
+
+	   <link rel="stylesheet" href="views/mobile/css/ppopup.css">
+
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+		<!-- End Google Tag Manager -->
+
+		<!-- Facebook Pixel Code -->
+		<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window,document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		 fbq('init', '637804786589286'); 
+		fbq('track', 'PageView');
+		fbq('track', 'AddToWishlist');
+		
+		</script>
+		<noscript>
+		 <img height="1" width="1" 
+		src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+		&noscript=1"/>
+		</noscript>
+		<!-- End Facebook Pixel Code -->
+
+		<!-- hide walk in option -->
+		<style type="text/css">
+			.freepick .deliver_method {
+				width: 29.3%;
+			}
+		</style>
+
+</head>
+
+	<body>
+
+		<!-- add popstation popup guide -->
+		<div id="phover" style="display: none;"></div>
+
+            <div id="ppopup" style="display: none;">    
+                     
+                <img src="views/mobile/img/popguide.png" alt="POPStation Guide">   
+                              
+                <button id="pclose" style="color: white;">X</button>        
+                     
+        </div>
+
+
+		<div class="freepick">
+
+			{template header}
+
+			<div class="nav_list">
+
+				<ul>
+
+					<li>
+
+						<i>1</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title1']}</p>
+
+					</li>
+
+					<li>
+
+						<i>2</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title2']}</p>
+
+					</li>
+
+					<li class="on">
+
+						<i>3</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title3']}</p>
+
+					</li>
+
+					<li>
+
+						<i>4</i>
+
+						<p>{$recovery_step['recovery_step_title4']}</p>
+
+					</li>
+
+				</ul>
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			<!-- if agent, change to confirmation -->
+			{if $agent_check != 1}
+			<!-- add license info starts -->
+
+			<a href = "https://rebox.com.sg/Licence from police.jpg" target = "_blank"><img class = "license" src ="views/mobile/img/license_mobile.png" style = "width: 100%;"></a>
+
+			<!-- <div class="spec-5"></div> -->
+			<!-- add license info ends -->
+
+			<!-- add facebook review and link -->
+
+<!-- 			<img src="views/mobile/img/facebook-review.png" style="max-width: 60%; margin-left:20%; margin-top: 0.2rem;">
+			<a href="https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target="_blank" style="font-size: 0.23rem; color: blue; display: block; text-align: center; text-decoration: underline; padding:0.2rem 0;">Click here to read reviews</a> -->
+
+			<a href = "https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target = "_blank"><img class = "license" src ="views/mobile/img/read_reviews.jpeg" style = "width: 100%;"></a>
+
+			<div class="spec-5"></div>
+
+			<!-- add facebook review and link ends -->
+
+
+			<div class="tit" style="font-weight: bold;font-size:0.3rem;padding:0.3rem;">Delivery Option <font style="font-size:0.26rem;font-weight: normal;"> (Full insurance coverage)</font></div>
+
+			<!-- <div class="tit" style="font-size:0.3rem;padding:0.3rem;">Delivery Method</div> -->
+
+
+
+			<!--<div class="deliver_method">-->
+
+
+
+				<!--<div class="deliver_content on" data-id="2" style="margin-bottom:5px;">-->
+
+					<!--<div class="content">-->
+
+						<!--<img src="{SITE_THEME}img/pic19.jpg"/>-->
+
+						<!--<div class="fl">-->
+
+							<!--<h1>POPStation Dropoff</h1>-->
+
+							<!--<p>At your convenience</p>-->
+
+							<!--<p style="margin-left: -60%;line-height: 30px;margin-top:25%;">Drop off your phone at any POPStation <br> within 3 days. <br></p>-->
+
+						<!--</div>-->
+
+					<!--</div>-->
+
+				<!--</div>-->
+
+			<!--</div>-->
+
+
+
+			<!--<div class="deliver_method">-->
+
+				<!--<div class="deliver_content" data-id="1">-->
+
+					<!--<div class="content">-->
+
+						<!--<img src="{SITE_THEME}img/pic188.png"/>-->
+
+						<!--<div class="fl">-->
+
+							<!--<h1>Doorstep Pickup</h1>-->
+
+							<!--<p>Mon - Fri:  11AM - 13PM</p>-->
+
+							<!--<p style="text-align:right;"> 16AM - 18PM &nbsp;</p>-->
+
+							<!--<p>Sat:  10:30AM - 12:30PM</p>-->
+
+							<!--<p class="mt20">(excluding Public Hoilday)</p>-->
+
+						<!--</div>-->
+
+					<!--</div>-->
+
+					<!--<div class="tips">FREE pickup from your doorstep</div>-->
+
+				<!--</div>-->
+
+			<!--</div>-->
+
+
+			
+			<!-- pickup start -->
+
+			<div class="deliver_method">
+
+				<div class="deliver_content on" data-id="1">
+
+					<div class="content">
+
+						<img src="{SITE_THEME}img/post2.png"/>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- pickup ends -->
+
+			<!-- walkin start -->
+
+			<!-- <div class="deliver_method">
+
+				<div class="deliver_content" data-id="3">
+
+					<div class="content">
+
+						<img src="{SITE_THEME}img/post3.png"/>
+
+					</div>
+
+				</div>
+
+			</div> -->
+
+			<!-- walkin ends -->
+
+
+			<!-- POPStation start -->
+
+			{if $recovery['recovery_type_id'] != 68}
+
+			<!-- <div class="deliver_method">
+
+
+
+				<div class="deliver_content" data-id="2">
+
+					<div class="content">
+
+						<img src="{SITE_THEME}img/post1.png"/>
+
+					</div>
+
+				</div>
+
+			</div> -->
+
+			{/if}
+	
+			<!-- POPStation end -->
+
+			<div style="clear:both;"></div>
+			
+
+
+			<!-- courier pickup tips and date / time select start -->
+			<div class="pick_date">
+									
+				<!-- <p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: blue; font-size: 14px; display: block; line-height: 35px;">Shipping label will be provided via WhatsApp.<br><strong>Print</strong> and <strong>Paste</strong> the label on your parcel.</p> -->
+
+				<!-- <p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;">Shipping label will be provided via WhatsApp.<br><strong>Print</strong> and <strong>Paste</strong> the label on your parcel.<br><font style = "font-size:0.23rem; text-align: center; text-decoration: underline; font-weight: normal; color: blue;">See delivery time</font></p> -->
+
+				<!-- <p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;">Arrange <strong>free pickup</strong> to send us the phone.<br>Receive <strong>payment</strong> on the <strong>same day</strong> of delivery.<br><strong>Free return</strong> if you don't agree to our assessment.<br><font style = "font-size:0.23rem; text-align: center; text-decoration: underline; font-weight: normal; color: blue;">See delivery time</font></p> -->
+
+				<p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;"> <strong>Next-Day Delivery & Payment <br> Free pickup from your home or work place.</strong</p>
+				
+				<div class="pickeraddr">
+
+					<div class="tit">Pickup Address</div>
+
+					<div class="short">
+
+						<label>
+
+							<input type="text" placeholder="Enter Postal Code" id="postal_code" value="{$address['postal']}"/>
+
+						</label>
+
+						<button class="retri" onclick="get_location();">Retrieve Address</button>
+
+					</div>
+
+					<label><input type="text" placeholder="Enter Address" id="postal_address" value="{$address['address']}" /></label>
+
+					<label><input type="text" placeholder="Enter Unit #" id="postal_unit" value="{$address['unit']}"/></label>
+
+				</div>
+
+				<div class="collectdate">
+
+					<div class="tit">Pickup Date & Time <font style = "font-size:0.23rem;">(Proper packaging is required by courier service provider.)</font></div>
+
+					<div class="sellist">
+
+						<select id="resultPickup_date" onchange="select_picktime(this);">
+
+							<option value=""> Select Pickup Date</option>
+
+							{loop $pickup_time_start $item}
+
+							<option value="{date('m/d/Y',$item)}" onclick="change()">{date('d/m/Y',$item)}</option>
+
+							{/loop}
+
+						</select>
+
+						<select id="resultPickup">
+
+							<option value=""></option>
+
+						</select>
+
+						<style>
+							#customerNote {
+								display: block;
+								height: 0.6rem;
+								background: #f0f0f0;
+								position: relative;
+								margin-bottom: 0.22rem;
+								border: 1px solid #e1e1e1;
+								border-radius: 0.04rem;
+								width: 98%;
+								padding-left: 5px;
+							}
+						</style>
+
+					</div>
+
+					<label><input type="text" placeholder="Note to courier" id="customerNote" value="" /></label>
+					
+
+				</div>
+
+				<!--<button class="next btn btn1" disabled  onclick="submit_form1();">Next</button>-->
+
+			</div>
+
+			<script type="text/javascript">
+				$('.pick_date p').on('click',function(){
+					layer.msg('Morning pickup: within 4 hours<br>Noon/evening pickup: next working day',{icon:1});
+				})
+
+			</script>
+
+			<!-- courier pickup date time select end -->
+
+			<!-- walkin tips and date time select start -->
+
+			<div class="walkin" style = "display: none;">
+				<p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;">
+					Visit our outlet and get paid on the spot<br>
+					<font style="font-weight:bold; font-size: 12px;">Jurong Point Shopping Centre(outside Starhub #B1-12)</font>
+					<br>
+					<!--  <font style="font-weight:bold; font-size: 12px;"> City Square Mall #B1-K17(near taxi pickup)</font> -->
+					<!--<br>-->
+					<font style="color: blue;">12:00PM - 9:00PM</font><br>
+					<font style="color: green; font-weight: bold;">Promotion: We Pay For Your Commute</font><br>
+					<a href="https://www.rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=215" target="_blank"><font style="text-decoration: underline; color: blue; font-size: 0.2rem;">Click to see details</font></a>
+				</p>
+				{if $recovery['recovery_type_id'] != 68}
+				<div class="tit">Schedule A Visit Date (up to 3 days in advance)</div>
+				{else}
+				<div class="tit">Schedule A Visit Date (up to 1 day in advance)</div>	
+				{/if}			
+
+				<!-- select date : next 3 days-->
+                <select id="walkin_date" style="color: #333333;">
+                    <option value=""> Select Visit Date</option>
+                    {loop $walkin_date $item}
+                    <option value = "{$item}" onclick="change()">{$item}</option>
+                    {/loop}
+                </select>
+
+
+
+			</div>
+			<!-- walkin tips and date time select end -->
+
+			<!-- POPStation tips start -->
+			<!-- <p id="tip" class = "popguide" style="font-weight:normal;display:none;text-align:center;padding-top: 15px;color:#ff7200;font-size:0.3rem; line-height: 0.58rem;">
+				Prepaid shipping number will be provided via SMS.<br>
+				Drop off at any <font style="font-weight: bold;">POPStation</font> within <font style="font-weight: bold;">2 days</font>. <br>
+				<font style = "font-size:0.23rem; text-decoration: underline; font-weight: normal; color: blue;">How to drop off at POPStation?</font>
+			</p> -->
+
+			<p id="tip" class = "popguide" style="font-weight:normal;display:none;text-align:center;padding-top: 15px;color:#ff7200;font-size:0.3rem; line-height: 0.58rem;">				
+				Drop off the phone at any <strong>POPStation</strong>.<br>Receive <strong>payment</strong> on the <strong>same day</strong> of delivery.<br><strong>Free return</strong> if you don't agree to our assessment.<br>
+				<font style = "font-size:0.23rem; text-decoration: underline; font-weight: normal; color: blue;">How to drop off at POPStation?</font>
+			</p>
+			<!-- POPStation tips end -->
+			
+
+
+			<script type="text/javascript">
+
+				 var unitsign = document.getElementById('postal_unit');
+					unitsign.addEventListener('click', function () {
+			   		    if (unitsign.value == "") {
+			   		    	unitsign.value = "#";
+			   		    }
+					});
+
+				 // var d = new Date();
+				 // var n = d.getDay();
+
+				 $('.deliver_content').on('click',function(){
+
+                     // $('.deliver_content').removeClass('on');
+
+                     // $(this).addClass('on');
+
+				     if($(this).attr('data-id') == 2){
+				     	if({$recovery['recovery_type_id']} == 68){
+				     		layer.msg('POPStation option is not available for new devices.',{icon:0});
+				     		$('.warning').show();
+					 	} else {
+					     	$('.deliver_content').removeClass('on');
+
+	                     	$(this).addClass('on');
+
+							$('.pick_date').hide();
+							$('.walkin').hide();
+							$('#tip').show(100);
+							$('.warning').show();
+						}
+
+					 } else if($(this).attr('data-id') == 3) {
+					 	// if(n == 3 || n == 4 || n == 5){ 						 	
+					  //   	layer.msg('Coming Soon!',{icon:0});
+					  //   } else {
+					  		// layer.msg('Walk-in sessions&nbsp;<font style = "font-weight: bold;">ONLY</font>&nbsp;on:<br><strong>Wednesday & Saturday: 9:30 - 11:30</strong>',{icon:1});
+					    	$('.deliver_content').removeClass('on');
+
+                     		$(this).addClass('on');
+					    	$('#tip').hide();
+					        $('.pick_date').hide();
+					        $('.walkin').show(100);
+					        $('.warning').hide();
+					    // }
+
+					 }else{						
+							
+							$('.deliver_content').removeClass('on');
+
+	                     	$(this).addClass('on');
+							$('.walkin').hide();
+	                        $('#tip').hide();
+					        $('.pick_date').show(100);
+					        $('.warning').show();
+					    	         
+
+					 }
+
+				 });
+
+				function select_picktime(a){
+
+					$.ajax({
+
+						url: "index.php?c=ajax_formflowerhua&a=ajax_select_picktime",
+
+						type: "post",
+
+						data:{time:$(a).val(), recovery_type_id : {$recovery[recovery_type_id]}},
+
+						dataType: 'json',
+
+						success: function (data) {
+
+							if(data.code==1){
+
+								$('#resultPickup').html(data.str);
+
+							}
+
+						}
+
+					});
+
+				}
+
+				$('#resultPickup_date').change(function(){
+
+					 change1();
+
+				});
+
+				$('#resultPickup').change(function(){
+
+					 change1();
+
+				});
+
+
+
+				function change1(){
+
+					var postal_code = $('#postal_code').val();
+
+					var resultPickup_date = $('#resultPickup_date').val();
+
+					var resultPickup = $('#resultPickup').val();
+
+					var postal_address = $('#postal_address').val();
+
+					if(postal_code!='' && resultPickup_date!='' && resultPickup!='' && postal_address!='')
+
+					{
+
+						 $('.btn1').css('background','#ffcc00');
+
+						 $('.btn1').removeAttr('disabled');
+
+					}else{
+
+						 $('.btn1').css('background','#3333');
+
+						 $('.btn1').attr('disabled','true');
+
+					}
+
+				}
+
+
+				//record walkin start
+
+				$('#walkin_date').change(function(){
+
+					 change2();
+
+				});
+
+
+
+				function change2(){
+
+					var walkin_date = $('#walkin_date').val();
+
+					if(walkin_date!='')
+
+					{
+
+						 $('.btn1').css('background','#ffcc00');
+
+						 $('.btn1').removeAttr('disabled');
+
+					}else{
+
+						 $('.btn1').css('background','#3333');
+
+						 $('.btn1').attr('disabled','true');
+
+					}
+
+				}
+
+				//record walkin end
+
+
+
+			</script>
+
+
+
+			<div class="payment_detail">
+
+				<div class="tit" style = "font-weight: bold; color: #1d1d1d;">Receiving Account <font style="font-size:0.23rem; font-weight:normal;">(Same day payment upon delivery)</font></div>
+
+				<select id="payment_id" onchange = "placehold();">
+
+					<option value="">Choose Your Bank</option>
+
+					{loop $payment_list $item}
+
+						<option value="{$item['id']}">{$item['name']}</option>
+
+					{/loop}
+
+				</select>
+
+				<div class="short"><label><input type="text" placeholder="Enter Account Holder Name" id="payment_name"/></label><span><i>*</i>As per bank records</span></div>
+
+				<label><input type="text" placeholder='Enter Account Number (Please omit "-")' id="payment_number"/></label>
+
+			</div>
+
+			<!-- change placeholder -->
+			<script type="text/javascript">
+				function placehold() {
+					if ($('#payment_id').val() == 46) {
+						$('#payment_number').attr('placeholder', "Enter Mobile or NRIC No.");
+					} else {
+						$('#payment_number').attr('placeholder', "Enter Account Number");
+						console.log($('#payment_id').val());
+					}
+				}
+			</script>
+
+			<div class="payment_detail">
+
+					<div class="tit" style = "font-weight: bold; color: #1d1d1d;">How did you hear about us?</font></div>
+
+				<select id="customerSurvey" name="customerSurvey">
+					<option value="" selected> Please select from the list below...</option>
+					{loop $surveyOptions $item}
+						<option value="{$item['id']}">{$item['name']}</option>
+					{/loop}
+				</select>
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			<div class="agreement">
+
+				<h3 class = "warning" style="color:red;margin-top:10px;font-weight:bold;">PLEASE READ CAREFULLY</h3>
+
+				{if $recovery['recovery_type_id'] == 68}
+				<p class = "warning"><span style="color: #ff7200;">I confirm the original receipt with IMEI No. will be provided. Otherwise, $25 will be charged before returning the device.</span></p>
+				{else}
+				<p class = "warning"><span style="cursor: pointer; color: #ff7200;" onclick="get_information('{$clause[personal_information1]}');">{$clause['personal_information_title1']}</span></p>
+
+				<p class = "warning"><span style="cursor: pointer; color: #ff7200;" onclick="get_information('{$clause[personal_information2]}');">{$clause['personal_information_title2']}</span></p>
+				{/if}
+
+			</div>
+
+			<div class="keep">
+
+				<input type="checkbox" name="clause" onclick="checkboxOnclick(this)">
+
+                    <em>
+
+                        I agree to<a href="javascript:;" onclick="layer.open({title:false, closeBtn:0, area:['100%','500px'],content:info,btn:['I Agree']});"> {$clause['personal_information_title3']}</a>
+
+                    </em>
+
+            </div>
+
+            {else}
+
+            <!-- if agent, just show confirmation of order -->
+            <img src="views/mobile/img/thank-you-agent.png" style="width: 40%; margin-left:30%; padding-top: 1rem;">
+            <h4 style="text-align: center; padding-top: 0.5rem; max-width: 80%; margin-left: 10%; color: #ff9b00;">Thank you for your order!<br><br>We will come and collect the device on the next working day between 3PM-5PM.</h4>
+
+			<!-- <div class="spec-5"></div> -->
+
+            {/if}
+
+	 		<script>
+
+                var info = '{$clause[personal_information3]}';
+
+                function checkboxOnclick(checkbox){
+
+                     if (checkbox.checked == true){ 
+
+                         $('#submit3').css('background',"#ffcc00");
+
+                         document.getElementById("submit3").disabled=false;
+
+                     }else{
+
+                         $('#submit3').css('background',"#3333");
+
+                         $('#submit3').attr('disabled','disabled');
+
+                     }
+
+                  }       
+
+            </script>
+
+            {if $agent_check != 1}
+			<input  class="submit" type="submit" id="submit3" value="Submit" onclick="submit_form3()"/>
+
+			<!--confirm-->
+
+			<div class="confirm_pop">
+
+				<div class="content">
+
+					<div class="content_info">
+
+						<div class="tit">Confirm Order</div>
+
+						<div class="ordermsg">
+
+							<ul>
+
+								<li>
+
+									<h1>Device</h1>
+
+									<p>{$recovery['recovery_title']}</p>
+
+								</li>
+
+								<li>
+
+									<h1>Pickup Address</h1>
+
+									<p class="pickup_address"></p>
+
+								</li>
+
+								<li>
+
+									<h1>Pickup Time</h1>
+
+									<span class="pickup_time"></span><span class="pickup_time1"></span>
+
+								</li>
+
+								<!-- <li>
+
+									<h1>Mobile No.</h1>
+
+									<p>{$member_phone}</p>
+
+								</li> -->
+
+							</ul>
+
+						</div>
+
+					</div>
+
+					<img src="{SITE_THEME}img/close.png" class="close" onclick="hideconfirm()"/>
+
+					<button class="confirm" onclick="twoinone();">Confirm</button>
+
+				</div>
+
+			</div>
+
+			{else}
+
+			<input  class="submit" type="submit" id="submit3" value="Confirm" onclick="submit_order_info()"/>
+
+			{/if}
+			<!--confirm-->
+
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+   	 	<script type="text/javascript" src="views/mobile/js/ppopup.js"></script>
+
+
+	</body>
+
+</html>
+
+<script type="text/javascript"> //idle 20 mins go back to home page
+
+    (function() {
+
+        const idleDurationSecs = 1200;    // X number of seconds
+        // const redirectUrl = 'http://127.0.0.1/kiosk/kiosk_home.html';  // Redirect idle users to this URL
+        const redirectUrl = 'https://www.rebox.com.sg'; 
+        
+        let idleTimeout; // variable to hold the timeout, do not modify
+
+        const resetIdleTimeout = function() {
+
+            // Clears the existing timeout
+            if(idleTimeout) clearTimeout(idleTimeout);
+
+            // Set a new idle timeout to load the redirectUrl after idleDurationSecs
+            idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+        };
+
+        // Init on page load
+        resetIdleTimeout();
+
+        // Reset the idle timeout on any of the events listed below
+        ['click', 'touchstart', 'mousemove'].forEach(evt => 
+            document.addEventListener(evt, resetIdleTimeout, false)
+        );
+
+    })();      
+
+</script>
+
+<script>
+
+	//显示弹窗
+
+	function confirmInfo(){
+
+		$('.confirm_pop').show();
+
+	}
+
+	//隐藏弹窗
+
+	function hideconfirm(){
+
+		$('.confirm_pop').hide();
+
+	}
+
+</script>
+
+<script type="text/javascript">
+
+	 function get_location(){
+
+           var postal_code = $('#postal_code').val();
+
+           if(postal_code==''){
+
+            layer.msg('Please enter the zip code!',{icon:0});
+
+            return false;
+
+           }
+
+           $.ajax({
+
+                dataType:'json',
+
+                type:'post',
+
+                url:"{url('flowerhua/search_postalcode')}",
+
+                data:{postal_code:postal_code},
+
+                success:function(data){
+
+                    if(data.code==1){
+
+                        $('#postal_address').val(data.arr['street_number']+' '+data.arr['street_name']);
+
+                        change1();
+
+                    }else if(data.code==2){
+
+                        layer.msg('Oops,we are unable to retrieve the postal address information. Please enter address manually!',{icon:0});
+
+                    }
+
+                }
+
+           })
+
+        }
+
+
+
+       
+
+        $(".reright .pickup .inp .fang").click(function(){
+
+            var bool = $(this).find("input").prop("checked");
+
+            if(bool){
+
+                $(this).addClass("on").siblings(".fang").removeClass("on")
+
+            }
+
+        });
+
+        $("#doorstep").click(function(){
+
+            $('.doorstep_title').text('Pickup Address');
+
+            $(".doorstep_time").show();
+
+        });
+
+        $("#postbox").click(function(){
+
+            $('.doorstep_title').text('Envelope Mailing Address');
+
+            $(".doorstep_time").hide();
+
+        });
+
+
+
+        $(".sec2 .pickup .doorstep  .inp input").blur(function(){
+
+            var inplens = 0;
+
+            for(var i = 0; i<$(".sec2 .pickup .doorstep  .inp input").length; i++){
+
+                var text = $(".sec2 .pickup .doorstep  .inp input").eq(i).val();
+
+                if(text == null || text == ""){
+
+
+
+                }else{
+
+                    inplens++
+
+                }
+
+                if(inplens == $(".sec2 .pickup .doorstep  .inp input").length){
+
+                    $(".sec2 .pickup .btn").addClass("on");
+
+                    $(".sec2 .pickup .btn").removeAttr("disabled")
+
+                }
+
+            }
+
+        });
+
+        $(".sec3 .pickup   .inp input").blur(function(){
+
+            var inplens = 0;
+
+            for(var i = 0; i<$(".sec3 .pickup   .inp input").length; i++){
+
+                var text = $(".sec3 .pickup   .inp input").eq(i).val();
+
+                if(text == null || text == ""){
+
+
+
+                }else{
+
+                    inplens++
+
+                }
+
+                if(inplens == $(".sec3 .pickup .inp input").length){
+
+                    $(".sec3 .pickup .btn").addClass("on");
+
+                    $(".sec3 .pickup .btn").removeAttr("disabled")
+
+                }
+
+            }
+
+
+
+        });
+
+
+
+
+
+        $(".seli .selibox span").click(function(){
+
+			$(this).parents(".selibox").siblings(".lit").find("span").show();
+
+			var txt = $(this).find("b").text()
+
+			$(this).parents(".selibox").siblings(".lit").find("font").text(txt);
+
+			$(this).parents(".selibox").hide()
+
+		})
+
+		$(".seli .lit  em").click(function(){
+
+			$(this).parents("span").hide();
+
+			$(this).parents(".lit").siblings(".selibox").show()
+
+		})
+
+		$(".islist ul li").click(function(){
+
+			var bool = $(this).find("input").prop("checked");
+
+			if(bool){
+
+				var src1 = $(this).find("img").attr("src1");
+
+				 $(this).find("img").attr({"src":src1});
+
+				 $(this).addClass("on")
+
+			}else{
+
+				var src2 = $(this).find("img").attr("src2");
+
+				 $(this).find("img").attr({"src":src2});
+
+				 $(this).removeClass("on")
+
+			}
+
+		})
+
+
+
+
+
+     function submit_form3(){
+
+         var fang = $(".deliver_content.on").attr('data-id');
+
+         var postal_code = $('#postal_code').val();
+
+         var postal_address = $('#postal_address').val();
+
+         var resultPickup_date = $('#resultPickup_date').val();
+
+         var resultPickup = $('#resultPickup').val();
+
+         var clause = $("input[name='clause']").prop('checked');
+
+         var payment_id = $('#payment_id').val();
+
+         var payment_name = $('#payment_name').val();
+
+         var payment_number = $('#payment_number').val();
+
+         if(fang == 1 && postal_code == '' || postal_code == null){
+
+             layer.msg('Please fill in your postal code!',{icon:3});
+
+         }else if(fang == 1 && postal_address == '' || postal_address == null){
+
+             layer.msg('Please fill in your postal address!',{icon:3});
+
+         }else if(fang == 1 && resultPickup_date == '' || resultPickup_date == null){
+
+             layer.msg('Please select in your resultPickup Time!',{icon:3});
+
+         }else if(fang == 1 && resultPickup == '' || resultPickup == null){
+
+             layer.msg('Please select in your resultPickup Date!',{icon:3});
+
+         }else if(payment_id == '' || payment_id == null){
+
+             layer.msg('Please select in your payment details!',{icon:3});
+
+         }else if(payment_name == '' || payment_name == null){
+
+             layer.msg('Please fill in your payment name!',{icon:3});
+
+         }else if(payment_number == '' || payment_number == null){
+
+             layer.msg('Please fill in your payment number!',{icon:3});
+
+         }else if(clause==false){
+
+             layer.msg('Please agree to Terms & Conditions!',{icon:3});
+
+         }else{
+
+             if(fang==2 || fang==3){
+
+                 $('.pickup_time_box').hide();
+
+                 submit_order_info();
+
+             }else {
+
+                 $('.pickup_time_box').show();
+
+                 $('.pickup_address').text($('#postal_address').val()+', '+$('#postal_unit').val()+' (S) '+$('#postal_code').val());
+
+                 $('.pickup_time').text($('#resultPickup_date option:selected').text());
+
+                 $('.pickup_time1').text($('#resultPickup').find("option:selected").text());
+
+                 setTimeout(function(){
+
+                     show_tan_1()
+
+                 },200);
+
+             }
+
+         }
+
+     }
+
+     function twoinone(){
+                hideconfirm();
+                submit_order_info();
+            }
+
+     function submit_order_info(){
+
+     //transfer from instant_quote
+     $.ajax({
+
+			url: "index.php?c=ajax_formflowerhua&a=ajax_is_login_system",
+
+			type: "post",
+
+			dataType: 'json',
+
+			success: function (data) {
+
+                layer.close(lay);
+
+				if (data.code == -1) {
+
+					var ind = layer.open({
+
+						title: '<span style="font-size:20px;">Sign in/up to submit order</span>',
+
+						content: '<div class="regbox" style="margin-top:0;padding:0;width:auto;">\n' +
+
+						'\t\t\t<div class="reg" >\n' +
+
+						'\t\t\t\t<div class="clear">\n' +
+
+						'\t\t\t\t</div>\n' +
+
+						'\t\t\t\t<div class="inp oth">\n' +
+
+						'\t\t\t\t\t<label><img src="{SITE_THEME}img/icon77.png"></label>\n' +
+
+						'\t\t\t\t\t<input type="text" id="phone" placeholder="Mobile No.">\n' +
+
+						'\t\t\t\t</div>\n' +
+
+						'\t\t\t\t<div class="inp oth">\n' +
+
+						'\t\t\t\t\t<label><img src="{SITE_THEME}img/icon78.png"></label>\n' +
+
+						'\t\t\t\t\t<input type="password" id="password" placeholder="Password">\n' +
+
+						'\t\t\t\t</div>\n' +
+
+						'\t\t\t\t<div class="agree">\n' +
+
+//						 '\t\t\t\t\t<input type="checkbox" checked="checked" class="keep">\n'+
+
+//						 '\t\t\t\t\t<span style="float:left;">Keep me logged in</span>\n'+
+
+						'\t\t\t\t</div>\n' +
+
+						'\t\t\t</div>\n' +
+
+						'\t\t</div>\n',
+
+						btn: ['Sign in','Sign up'],
+
+						btn1: function () {
+
+							if ($('#phone').val() == '') {
+
+								alert('Please enter the Mobile No');
+
+							} else if ($('#password').val() == '') {
+
+								alert('Please input a Password');
+
+							} else {
+
+								$.ajax({
+
+									url: "index.php?c=login&a=ajax_login_system",
+
+									type: "post",
+
+									data: {
+
+										phone: $('#phone').val(),
+
+										password: $('#password').val(),
+
+										check: $('.keep').prop('checked'),
+
+									},
+
+									dataType: 'json',
+
+									success: function (data) {
+
+										if (data.code == -1) {
+
+											alert('This user has not been found for the time being!');
+
+										} else if (data.code == -2) {
+
+											alert('The password is wrong, please reenter it!');
+
+										} else {
+
+										   /* layer.close(ind);
+
+											// alert('Log on successfully!');
+
+											location.reload();*/
+
+											submit_order_info();
+
+										}
+
+									}
+
+								});
+
+							}
+
+						}
+
+						,btn2: function () {
+
+							var myData = ['{$order[order_id]}',$(".deliver_content.on").attr('data-id'),$('#postal_code').val(),$('#postal_address').val(),$('#postal_unit').val(),$('#resultPickup_date').val(),$('#resultPickup').val(),$('#payment_id').val(),$('#payment_name').val(),$('#payment_number').val(), $('#walkin_date').val(),$('#customerNote').val(),$('#customerSurvey').val()];
+
+							localStorage.setItem('objectToPass', JSON.stringify(myData));
+
+
+							location.href = "index.php?c=login&a=register&recovery_parameters=" + escape(window.location.search);
+
+						}
+
+					})
+
+				}
+
+				else if (data.code == 1) {
+
+		         var lay = layer.open({type:3,icon:1});
+
+		         $.ajax({
+
+		             url: 'index.php?c=ajax_formflowerhua&a=ajax_submit2orderinfo',
+
+		             type: "post",
+
+		//                    async:false,
+
+		             data: {
+
+		                 order_id : '{$order[order_id]}',
+
+		                 fang : $(".deliver_content.on").attr('data-id'),
+
+		                 postal_code : $('#postal_code').val(),
+
+		                 postal_address : $('#postal_address').val(),
+
+		                 postal_unit : $('#postal_unit').val(),
+
+		                 resultPickup_date : $('#resultPickup_date').val(),
+
+		                 resultPickup : $('#resultPickup').val(),
+
+		                 payment_id : $('#payment_id').val(),
+
+		                 payment_name : $('#payment_name').val(),
+
+		                 payment_number : $('#payment_number').val(),
+
+		                 walkin_date : $('#walkin_date').val(),  // add walkin_date
+
+						 agent_check: '{$agent_check}',
+						 
+						 customerNote: $('#customerNote').val(),
+
+						 customerSurvey: $('#customerSurvey').val()
+		             },
+
+		             dataType: 'json',
+
+		             success: function (data) {
+
+		                 if(data.code==-100){
+
+		                     layer.open({content:data.result_err,icon:3});
+
+		                 }if(data.code==-1){
+
+		                     layer.open({content:data.msg,icon:3});
+
+		                 }else if(data.code==1){
+
+                                    //send order email
+                                    var xmlhttp = new XMLHttpRequest();
+                                    console.log(data.order_delivery_number);
+
+                                    if (data.agent_check ==1) {
+                                    	xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail_agent.php?orderno="+data.order_sn, true);    //agent
+                                    } else if (data.order_delivery_method_type==2) {
+                                        xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail.php?orderno="+data.order_sn, true);    //popstation             
+                                    } else if (data.order_delivery_method_type==3) {
+                                    	xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail4.php?orderno="+data.order_sn, true);    //walkin
+                                    } else if (data.order_delivery_number == null) {
+                                        xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail3.php?orderno="+data.order_sn, true); //qoo10
+
+                                    } else {
+                                        xmlhttp.open("GET", "https://rebox.com.sg/mobile_recircle/sendmail2.php?orderno="+data.order_sn, true); //roadbull
+
+                                    }
+                                    xmlhttp.send();
+                                    //send order email ends
+
+
+
+		                     location.href="index.php?c=flowerhua&a=order_submit_ok&order_id="+data.order_id;
+
+		                 }
+
+		                 layer.close(lay);
+
+		             }
+
+         		 });
+
+     			}
+
+     		}
+
+		});
+
+		}
+
+     function show_tan_1(){
+
+         $(".confirm_pop").show();
+
+         $("body").addClass("hidden")
+
+     }
+
+     function hide_tan(){
+
+         $(".confirm_pop").hide();
+
+         $("body").removeClass("hidden")
+
+     }
+
+	function get_information(text){
+
+		layer.open({title:false, closeBtn:0,btn:['I Agree'],content:text,area:['80%','60%']});
+
+	}
+
+	
+
+	/**修改下拉框颜色**/
+
+	$('#resultPickup_date').change(function(){
+
+		$(this).css("color","#666");
+
+	})
+
+	$('#resultPickup').change(function(){
+
+		$(this).css("color","#666");
+
+	})
+
+	$("#payment_id").change(function(){
+
+		$(this).css("color","#666");
+
+	})
+
+     $(function(){
+
+         $('.deliver_content').eq(0).trigger('click');
+
+     })
+
+</script>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/layer/layer.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+</head>
+<style>
+    .content-menu select{height:40px;}
+    .content-menu label{float:left;}
+</style>
+<body style="font-weight: normal;">
+<div class="subnav">
+    <div class="bk10"></div><div class="table-responsive mytable">
+        <form action="" method="post" name="myform">
+        <input name="form" id="list_form" type="hidden" value="order">
+        <table width="100%" class="table table-striped">
+        <thead>
+        <tr>
+        </tr>
+        </thead>
+        <tbody>
+        <tr height="25">
+            <td align="left">物流公司</td>
+            <td align="center">
+            <select  name="data[order_express_number]" class="form-control" id="number">
+                            <option   value="sf">顺丰</option>
+                            <option   value="sto">申通</option>
+                            <option   value="yd">韵达</option>
+                            <option   value="tt">天天</option>
+                            <option   value="yt">圆通</option>
+                            <option   value="zto">中通</option>
+                            <option   value="ems">EMS</option>
+                            <option   value="ht">汇通</option>
+                            <option   value="qf">全峰</option>
+                            <option   value="db">德邦</option>
+                            <option   value="gt">国通</option>
+                            <option   value="rfd">如风达</option>
+                            <option   value="jd">京东快递</option>
+                            <option   value="zjs">宅急送</option>
+                            <option   value="emsg">EMS国际</option>
+                            <option   value="fedex">Fedex国际</option>
+                            <option   value="yzgn">邮政国内(挂号信)</option>
+                            <option   value="ups">UPS国际快递</option>
+                            <option   value="ztky">中铁快运</option>
+                            <option   value="jiaji">佳吉快运</option>
+                            <option   value="suer">速尔快递</option>
+                            <option   value="xfwl">信丰物流</option>
+                            <option   value="yousu">优速快递</option>
+                            <option   value="zhongyou">中邮物流</option>
+                            <option   value="tdhy">天地华宇</option>
+                            <option   value="axd">安信达快递</option>
+                            <option   value="kuaijie">快捷速递</option>
+                        </select>
+            </td>
+        </tr>
+        <tr height="25">
+            <td>物流单号：</td>
+            <td align="center">
+            <input type="text" style="width: 100%" class="input-text" name="data[order_express_odd]" value="" id="">
+            </td>
+        </tr>
+        <tr height="25"  class="cao">
+            <td colspan="22" align="left">
+                <input type="hidden"  value="{$id}" class="shelve_id">
+            <input type="submit" value="提交" class="layui-btn layui-btn-danger layui-btn-small">
+            </td>
+        </tr>
+        </table>
+    </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+function submit(express,odd){
+    var shelve_id  =$('.shelve_id').val()
+     $.ajax({
+        url:"./index.php?s=admin&c=whizmoshelve&a=admin_deliver_goods",
+        type:"post",
+        data:{express:express,odd:odd,shelve_id:shelve_id},
+        dataType:'json',
+        success:function(data){
+            var index = parent.layer.getFrameIndex(window.name);
+            if (data.code==1) {
+                  layer.alert('发货成功',{end:function(){
+                  parent.layer.close(index);
+                  location.reload();
+                }})
+            }else{
+                layer.alert('发货失败');
+            }
+          
+        }
+
+    })
+}
+$(function(){
+    $('input[name="data[order_express_odd]"]').blur(function(){
+        var odd = $(this).val()
+        if (odd == '') {
+            layer.msg('请填写物流单号',{icon:0})
+        }
+    })
+    $('form').submit(function(){
+        var odd = $('input[name="data[order_express_odd]"]').val()
+        if (odd == '') {
+            layer.msg('请填写物流单号',{icon:0})
+            return false
+        }
+        var express = $('#number').val()
+        submit(express,odd)
+        return false       
+    })
+})
+</script>
+</body>
+</html>

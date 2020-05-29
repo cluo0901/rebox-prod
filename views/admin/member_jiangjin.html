@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/my97/WdatePicker.js"></script>
+{template admin/top.html}
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav" style="padding-top:10px">
+	<div class="content-menu ib-a blue line-x">
+		<a href="{url('admin/member')}"><em>{lang('会员列表')}</em></a><span>|</span>
+		<a onClick="window.history.go(-1);" href="javascript:void(0);"><em>{lang('上一页')}</em></a><span>|</span>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+	<form method="post" action="">
+	<label style="margin-right:20px;"><span>用户：{$member[name]},累计奖励：￥{$member[jiangjin]}</span></label>
+	<input type="hidden" value="search" name="form">
+	<label>
+	<input class="Wdate form-control " type="text" name="addtime" size="20" placeholder="奖励月份" value="{$addtime}" onFocus="WdatePicker({startDate:'%y-%M',dateFmt:'yyyy-MM'})" id="addtime">
+	</label>
+	<label>
+	<input class="btn btn-success" type="submit" name="submit" value="搜索">
+	</label>
+	
+	</form>
+	
+	
+
+		<table width="100%" class="table table-striped">	
+		<tbody>
+		<tr>
+			<td width="2%" align="left"><em>序号 ：</em></td>
+			<td width="10%" align="left"><em>年份 ：</em></td>
+			<td width="5%" align="left"><em>奖励金额 ：</em></td>
+		</tr>
+		{loop $list $key=>$item}
+		<tr>
+			<td align="left"><em>{$key+1}</em></td>
+			<td align="left"><em>{date('Y-m',$item['addtime'])}</em></td>
+			<td align="left"><em>{$item['jine']}</em></td>
+		</tr>
+		{/loop}
+		</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

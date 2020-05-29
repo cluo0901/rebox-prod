@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<title>admin</title>
+	{template admin/top}
+</head>
+<!--图片上传-->
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a class="layui-btn" href="{url('admin/flowerhua/admin_order_list')}" class="on"><em>Order list</em></a>
+			<a class="layui-btn" href="javascript:history.go(-1);"><em>Previous page</em></a>
+		</div>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form action="" method="post">
+			<table width="100%" class="table table-striped">
+				<tr>
+					<td width="200" align="right">Mobile No.</td>
+					<td><input class="input-text" type="text" name="data[member_phone]" value="{$order['member_phone']}" disabled size="50" required />
+					</td>
+				</tr>
+
+				<tr>
+					<td width="200" align="right">Model</td>
+					<td><input class="input-text phone_model" type="text" name="data[name]" value="{$order['recovery_title']}" disabled size="50" required />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Order No.</td>
+					<td><input class="input-text" type="text" name="data[order_sn_number]" value="{$order['order_sn_number']}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Initial Price</td>
+					<td><input class="input-text" type="text" name="data[order_totalprice]" value="{$order['order_totalprice']}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Final Price</td>
+					<td><input class="input-text" type="text" name="data[order_final_price]" value="{$order['order_final_price']}" disabled size="50" />
+					</td>
+					<!-- add bank reference -->
+					<!-- <td align="right">Bank Reference</td>
+					<td><input class="input-text" type="text" name="data[bank_ref]" value="{$order['bank_ref']}" size="50" />
+					</td> -->
+
+				</tr>
+				<tr>
+					<td align="right">Delivery Method</td>
+					<!-- <td><input class="input-text" type="text" name="data[order_delivery_method_type]" value="{$order['order_delivery_method_type']==1?'Courier pickup':'Walk-in or POPStation'}" disabled size="50" />
+					</td> -->
+					<td><input class="input-text" type="text" name="data[order_delivery_method_type]" value="{$order['order_delivery_method_type']==1?'Courier pickup': ($order['order_delivery_method_type']==2? 'POPStation' : ($order['order_delivery_method_type']==3?'Walk-in' : 'Kiosk'))}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Tracking No.</td>
+					<td><input class="input-text" type="text" name="data[order_delivery_number]" value="{$order['order_delivery_number']}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Pickup Address</td>
+					<td><input class="input-text" type="text" name="data[order_pickup_address]" value="{$order['order_pickup_address']}{$order['order_pickup_unit']}" disabled size="50" />
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Postal Code</td>
+					<td><input class="input-text" type="text" name="data[order_pickup_code]" value="{$order['order_pickup_code']}" disabled size="50" />
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Beneficiay Bank</td>
+					<td><input class="input-text" type="text" name="data[order_payment_type]" value="{$order['order_payment_type']}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Account Name</td>
+					<td><input class="input-text" type="text" name="data[order_payment_name]" value="{$order['order_payment_name']}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Account No.</td>
+					<td><input class="input-text" type="text" name="data[order_payment_number]" value="{$order['order_payment_number']}" disabled size="50" />
+					</td>
+				</tr>
+				<!--<tr>-->
+					<!--<td align="right">(备用) 物流单号</td>-->
+					<!--<td><input class="input-text" type="text" name="data[order_wuliu_number]" value="{$order['order_wuliu_number']}" disabled size="50" />-->
+					<!--</td>-->
+				<!--</tr>-->
+
+
+				<tr>
+					<td align="right">Order Placement Time</td>
+					<td><input class="input-text" type="text" name="data[order_addtime]" value="{date('d/m/Y H:i',$order['order_addtime'])}" disabled size="50" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Order Completion Time</td>
+					<td><input class="input-text" type="text" name="data[order_finishtime]" value="{if $order['order_finishtime']}{date('d/m/Y H:i',$order['order_finishtime'])}{/if}" disabled size="50"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right">Customer Survey</td>
+					<td> {$surveyOption['name']} </td>
+				</tr>
+
+                <tr>
+                    <td align="right">Comments</td>
+                    <td>
+                        <textarea name=data[order_description]"" class="input-textarea" cols="42" rows="6">{$order['order_description']}</textarea>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td align="right">Self-Appraisal</td>
+                    <td>
+                        {loop $order['recovery_parameter'] $item}
+                        {if $item['recovery_parameter_type']==1}
+                        <li><span>{$item['recovery_parameter_parent_title']}</span> : <span>{$item['recovery_parameter_title']}</span></li>
+                        {else}
+                        <li> {$item['recovery_parameter_title']}</li>
+                        {/if}
+                        {/loop}
+                    </td>
+
+                    <!-- select test results -->
+                    <td align="right">Check Results</td>
+                    <td>
+						<li>
+							Store Location: 
+							<select id="storeId" name="storeName" required>	
+								<option value="" selected>Select store location</option>                  		
+								{loop $stores $storeData}
+									{if $storeData['id'] == $selectedStore}
+										<option value="{$storeData['id']}" selected>{$storeData['name']}</option>	
+									{else}					
+										<option value="{$storeData['id']}" >{$storeData['name']}</option>
+									{/if}							
+								{/loop}
+							</select>
+						</li>
+                    	<li><span>IMEI No. :</span><input type="text" name="data[imei]" value = "{if (!is_null($order['imei']))}{$order['imei']}{/if}" /></li>
+	                    {loop $order['recovery_parameter'] $key=>$item}
+		                    {if $item['recovery_parameter_type']==1}
+		                    <li><span>{$item['recovery_parameter_parent_title']}</span> : 
+		                    	<select name="data2[{$key}][evaluation_parameter]">		                    		
+		                    		{loop $item['child'] $item2}
+			                    		{if $data2[$key][evaluation_parameter] ==  $item2['parameter_name']}
+											<option value="{$item2['parameter_name']}" selected>{$item2['parameter_name']}</option>
+										{else}
+											<option value="{$item2['parameter_name']}">{$item2['parameter_name']}</option>
+										{/if}									
+									{/loop}
+								</select>
+		                    </li>
+		                    {/if}
+		                {/loop} 
+
+		                <!-- add functional or missing accessories selection starts -->
+		                {if $order['recovery_type_id'] != 68}
+	                  	<li>
+	                		<span>Option 1</span> :
+	                		<select name="data3[0]">
+	                			<option value="Nil">-</option>	
+	                    		{loop $optional $key=>$item}
+	                    			{if (strpos($assessment, '0') !== false && substr($assessment, 0, strpos($assessment, '0')) == $item['parameter_name'])}
+										<option value="{$item['parameter_name']}" selected>{$item['parameter_name']}</option>
+									{else}
+										<option value="{$item['parameter_name']}">{$item['parameter_name']}</option>
+									{/if}							
+								{/loop}
+							</select>	                		
+	                	</li>
+
+	                  	<li>
+	                		<span>Option 2</span> :
+	                		<select name="data3[1]">
+	                			<option value="Nil">-</option>	
+	                    		{loop $optional $key=>$item}
+	                    			{if (strpos($assessment, '1') !== false && substr($assessment, strpos($assessment, '0')+1, strpos($assessment, '1') - strpos($assessment, '0') - 1) == $item['parameter_name'])}
+										<option value="{$item['parameter_name']}" selected>{$item['parameter_name']}</option>
+									{else}
+										<option value="{$item['parameter_name']}">{$item['parameter_name']}</option>
+									{/if}							
+								{/loop}
+							</select>	                		
+	                	</li>
+
+	                  	<li>
+	                		<span>Option 3</span> :
+	                		<select name="data3[2]">
+	                			<option value="Nil">-</option>	
+	                    		{loop $optional $key=>$item}
+	                    			{if (strpos($assessment, '2') !== false && substr($assessment, strpos($assessment, '1')+1, strpos($assessment, '2') - strpos($assessment, '1') - 1) == $item['parameter_name'])}
+										<option value="{$item['parameter_name']}" selected>{$item['parameter_name']}</option>
+									{else}
+										<option value="{$item['parameter_name']}">{$item['parameter_name']}</option>
+									{/if}							
+								{/loop}
+							</select>	                		
+	                	</li>
+
+	                  	<li>
+	                		<span>Option 4</span> :
+	                		<select name="data3[3]">
+	                			<option value="Nil">-</option>	
+	                    		{loop $optional $key=>$item}
+	                    			{if (strpos($assessment, '3') !== false && substr($assessment, strpos($assessment, '2')+1, strpos($assessment, '3') - strpos($assessment, '2') - 1) == $item['parameter_name'])}
+										<option value="{$item['parameter_name']}" selected>{$item['parameter_name']}</option>
+									{else}
+										<option value="{$item['parameter_name']}">{$item['parameter_name']}</option>
+									{/if}					
+								{/loop}
+							</select>	                		
+	                	</li>
+
+	                  	<li>
+	                		<span>Option 5</span> :
+	                		<select name="data3[4]">
+	                			<option value="Nil">-</option>	
+	                    		{loop $optional $key=>$item}
+	                    			{if (strpos($assessment, '4') !== false && substr($assessment, strpos($assessment, '3')+1, strpos($assessment, '4') - strpos($assessment, '3') - 1) == $item['parameter_name'])}
+										<option value="{$item['parameter_name']}" selected>{$item['parameter_name']}</option>
+									{else}
+										<option value="{$item['parameter_name']}">{$item['parameter_name']}</option>
+									{/if}							
+								{/loop}
+							</select>	                		
+	                	</li>
+
+	                  	<li>
+	                		<span>Option 6</span> :
+	                		<select name="data3[5]">
+	                			<option value="Nil">-</option>	
+	                    		{loop $optional $key=>$item}
+	                    			{if (strpos($assessment, '5') !== false && substr($assessment, strpos($assessment, '4')+1, strpos($assessment, '5') - strpos($assessment, '4') - 1) == $item['parameter_name'])}
+										<option value="{$item['parameter_name']}" selected>{$item['parameter_name']}</option>
+									{else}
+										<option value="{$item['parameter_name']}">{$item['parameter_name']}</option>
+									{/if}						
+								{/loop}
+							</select>	                		
+	                	</li>
+	                	{/if}	                		                		                		                	            
+		                <!-- add functional or missing accessories selection ends -->
+
+		                <li><span>Indicative final price: </span><span style="color: red; font-size: 20px; font-weight: bold;">${$order[indicative_final_price]}</span></li>
+
+		                <li><span>SPEX No. :</span><input type="text" name="data[spex]" value = "{if (!is_null($order['spex']))}{$order['spex']}{/if}" /></li>
+
+		            </td>
+
+                </tr>
+
+				<tr>
+					{if $order['order_recovery_parentid'] != 68}
+					<td align="right">&nbsp;</td>
+					<td><input class="btn btn-success btn-sm" type="submit" name="print" value="Print Checklist"/></td>
+					{else}
+					<td align="right">&nbsp;</td>
+					<td></td>
+					{/if}
+					<td align="right">&nbsp;</td>
+					<td><input id="formSubmit" class="btn btn-success btn-sm" type="submit" name="submit" value="{lang('a-submit')}" /></td>
+
+				</tr>
+
+				<!-- download payment file -->
+				<tr>
+					<td align="right">Order ID: <font style="color:red;font-weight: bold;">{$order[order_id]}</font></td>
+					<td>
+						{if $order['order_status'] >= 5}
+							{if $order['payment_file_status'] == 0}
+								<input class="btn btn-success btn-sm" type="submit" name="payment_file" value="Print Payment File"/>
+							{else}
+								<input class="btn btn-success btn-sm" type="submit" name="payment_file" value="Print Payment File" disabled/>
+							{/if}
+						{/if}
+					</td>
+				</tr>
+
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var phone_model	= $('.phone_model').val()
+			if (phone_model.includes("Note 9") || phone_model.includes("S9")) {
+				alert("Check if phone vibrates when back camera is in 10X zoom!");
+			}
+		});
+
+
+	</script>
+
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		{template head}
+
+		<script type="text/javascript" src="{SITE_THEME}js/jquery.form.js" ></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+
+	<body>
+
+		{template recycler_header}
+
+		<div class="banner top_slide_wrap">
+
+			<ul class="bxslider">
+
+				{loop $banner $t}
+
+			        <li>
+
+			            <a href="{$t['link']}" target="_blank">
+
+			                <img src="{$t['guanggaotutupian']}" alt="banner">
+
+			            </a>
+
+			        </li>
+
+				{/loop}
+
+			</ul>
+
+
+
+			<script type="text/javascript">
+
+				$(function() {
+
+					$(".banner .bxslider").bxSlider({
+
+						auto: true,
+
+						prevSelector: $(".top_slide_wrap .op_prev")[0],
+
+						nextSelector: $(".top_slide_wrap .op_next")[0],
+
+						pause: 6e3
+
+					});
+
+				});
+
+			</script>
+
+
+
+		</div>
+
+		<div class="recircle_detail">
+
+			<div class="container">
+
+				<div class="information">
+
+					<h2>COMPANY INFORMATION</h2>
+
+					<div class="inpbox">
+
+						<div class="clear">
+
+						<div class="inp">
+
+							<h3>Company Name</h3>
+
+							<input type="text" value="{$data['company_name']}" class="company_name">
+
+						</div>
+
+						<div class="inp">
+
+							<h3>UEN / Entity ID</h3>
+
+							<input type="text" value="{$data['ued']}" class="ued">
+
+						</div>
+
+						</div>
+
+						<div class="clear">
+
+						<div class="inp big">
+
+							<h3>Address</h3>
+
+							<input type="text" value="{$data['address']}" class="address">
+
+						</div>
+
+						</div>
+
+						<div class="clear">
+
+						
+
+						<div class="inp">
+
+							<h3>Primary Contact Person</h3>
+
+							<input type="text" value="{$data['person']}" class="person">
+
+						</div>
+
+						</div>
+
+						<div class="clear">
+
+							
+
+						
+
+						<div class="inp">
+
+							<h3>
+
+								Supporting Documents
+
+								<span>
+
+									Add
+
+									<input type="file" id="file" name="addlogo">
+
+									<input type="hidden" class="file">
+
+								</span>
+
+							</h3>
+
+							
+
+						</div>
+
+						<script type="text/javascript">
+
+								$(function () {
+
+									$("#file").wrap("<form class='myupload' action='index.php?c=ajax_upload&a=ajax_set_img' method='post' enctype='multipart/form-data'></form>");
+
+									$("#file").change(function () {
+
+										var flower=$(this);
+
+										$(".myupload").ajaxSubmit({
+
+											dataType:'json',
+
+											success:function(data) {
+
+												console.log(data);
+
+												$('.file').val(data.access_url)
+
+											}
+
+										});
+
+
+
+									});
+
+								})
+
+						</script>
+
+						</div>
+
+						<input type="submit" value="Update" onclick="show_tan()">
+
+						
+
+					</div>
+
+					
+
+				</div>
+
+				
+
+			</div>
+
+			
+
+			
+
+		</div>
+
+		
+
+		<div class="tan">
+
+			
+
+			<div class="forgot">
+
+				<div class="rtit">
+
+					<span>Confirm Company Information</span>
+
+					<img src="{SITE_THEME}img/cha.png" onclick="hide_tan1()">
+
+				</div>
+
+				<div class="reg">
+
+					<h5>OTP has been sent to Primary Mobile No.</h5>
+
+					<div class="inp">
+
+						<input type="text" placeholder="Enter One-Time Password" id="back_code">
+
+						<a href="javascript:;" style="font-size: 12px;" onclick="sendMessage({$data['phone']})" id="back-getcode">Send OTP</a>
+
+					</div>
+
+					<input type="submit" value="Confirm" onclick="hide_tan({$data['phone']})">
+
+				</div>
+
+			</div>
+
+		</div>
+
+<script>
+
+		function hide_tan1(){
+
+			$(".tan").hide();
+
+			$("body").removeClass("hidden");
+
+		}
+
+		function hide_tan(phone) {
+
+		    var code = $('#back_code').val();
+
+		    var company_name = $('.company_name').val();
+
+			var ued = $('.ued').val();
+
+			var address = $('.address').val();
+
+			var person = $('.person').val();
+
+			var file = $('.file').val();
+
+		    if (code == '') {
+
+		        layer.msg('Please enter the verification code', {icon: 0});
+
+		        return false;
+
+		    }
+
+		    $.ajax({
+
+		        url: "index.php?c=recycler&a=ajaxbackcode",
+
+		        type: "post",
+
+		        data: {code: code, phone: phone},
+
+		        dataType: 'json',
+
+		        success: function (data) {
+
+		            if (data == 0) {
+
+		                layer.msg('Verification code error', {icon: 0});
+
+		            }
+
+		            if (data == 1) {
+
+						$.ajax({
+
+			                type: 'post',
+
+			                url: "{url('recycler/change_information')}",
+
+			                data: {phone:phone,company_name:company_name,ued:ued,address:address,person:person,file:file},
+
+			                dataType: "json",
+
+			                async: false,
+
+			                success: function(data){
+
+			                	layer.open({content:'Update success',icon:1,end:function(){
+
+			                		$(".tan").hide();
+
+									$("body").removeClass("hidden");
+
+									location.reload();
+
+			                	}})
+
+			                }
+
+			            })
+
+		               
+
+		            }
+
+		        }
+
+		    })
+
+		}
+
+
+
+        var InterValObj; //timer变量，控制时间
+
+        var count = 60; //间隔函数，1秒执行
+
+        var curCount;//当前剩余秒数
+
+        function sendMessage(phone) {
+
+            curCount = count;
+
+            $.ajax({
+
+                type: 'post',
+
+                url: "{url('recycler/ajax_backsendcode')}",
+
+                data: {phone: phone},
+
+                dataType: "json",
+
+                async: false,
+
+                success: function (data) {
+
+                    if (data) {
+
+                        if (data.code == 1) {
+
+                            $("#back-getcode").attr("href", "javascript:;");
+
+                            $('#back-getcode').css('background', '#e9ebed');
+
+                            $("#back-getcode").html('Send success');
+
+                            $("#back-phone").attr('readonly', 'readonly');
+
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                        } else if (data.code == 2) {
+
+                            layer.open({'title': 'Prompt', 'content': 'This user has not been found for the time being!',});
+
+                            return false;
+
+                        } else if (data.code == 3) {
+
+                            layer.open({'title': 'Prompt', 'content': 'Fail in send' + data.sms_err,});
+
+                            return false;
+
+                        }
+
+                    } else {
+
+                        $("#back-getcode").attr("href", "javascript:");
+
+                        $("#back-getcode").html(curCount + "Retransmission after second");
+
+                        $("#back-phone").attr('readonly', 'readonly');
+
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+
+        //timer处理函数
+
+        function SetRemainTime() {
+
+            if (curCount == 0) {
+
+                window.clearInterval(InterValObj);//停止计时器
+
+                $("#back-getcode").attr("href", "javascript:sendMessage();");
+
+                $("#back-getcode").html("Retransmission verification code");
+
+                $('#back-getcode').css('background', '#ffcc00');
+
+            }
+
+            else {
+
+                curCount--;
+
+                $("#back-getcode").html("Resend in "+curCount+'s');
+
+            }
+
+        }
+
+
+
+
+
+
+
+	function show_tan(){
+
+		var company_name = $('.company_name').val();
+
+		var ued = $('.ued').val();
+
+		var address = $('.address').val();
+
+		var person = $('.person').val();
+
+	    if (company_name == '') {
+
+            layer.msg('Do not fill in the name of the company', {icon: 0});
+
+            return false;
+
+        }
+
+        if (ued == '') {
+
+            layer.msg('Do not fill in UED', {icon: 0});
+
+            return false;
+
+        }
+
+        if (address == '') {
+
+            layer.msg('Do not fill in the company address', {icon: 0});
+
+            return false;
+
+        }
+
+        if (person == '') {
+
+            layer.msg('Unfilled liaison', {icon: 0});
+
+            return false;
+
+        }
+
+		$(".tan").show();
+
+		$("body").addClass("hidden");
+
+	}
+
+	
+
+</script>
+
+
+
+		{template footer}
+
+	</body>
+
+	<script>
+
+		var mySwiper = new Swiper('.swiper-container-2', {
+
+			//autoplay: 2000,//可选选项，自动滑动
+
+			prevButton: '.apprise-btn-pre',
+
+			nextButton: '.apprise-btn-next',
+
+			width: 300,
+
+			slidesPerView: 4
+
+		});
+
+
+
+		$('.appraise .swiper-button-prev').click(function() {
+
+			mySwiper.swipePrev();
+
+		})
+
+
+
+		$('.appraise .swiper-button-next').click(function() {
+
+			mySwiper.swipeNext();
+
+		})
+
+		var mySwiper1 = new Swiper('.swiper-container-3', {
+
+			autoplay: 2000,//可选选项，自动滑动
+
+//			prevButton: '.apprise-btn-pre',
+
+//			nextButton: '.apprise-btn-next',
+
+			width: 200,
+
+			slidesPerView: 2
+
+		});
+
+
+
+		$('.ahs-media-content .swiper-button-prev').click(function() {
+
+			mySwiper1.swipePrev();
+
+		})
+
+
+
+		$('.ahs-media-content .swiper-button-next').click(function() {
+
+			mySwiper1.swipeNext();
+
+		})
+
+	</script>
+
+
+
+</html>

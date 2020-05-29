@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		{template head}
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+
+    	<!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '637804786589286'); 
+        fbq('track', 'PageView');
+        </script>
+        <noscript>
+        <img height="1" width="1" 
+        src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+        &noscript=1"/>
+        </noscript>
+        <!-- End Facebook Pixel Code -->
+
+        <!-- Global site tag (gtag.js) - Google AdWords: 797292870 --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-797292870"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-797292870'); </script> 
+
+        <style>
+
+            body {
+                /*font-family: Verdana, Arial, Helvetica, sans-serif;*/
+                /*font-family: Dosis,sans-serif;*/
+                font-family: Roboto,Arial,Helvetica,sans-serif;
+            }            
+
+            .section1, .section2, .section3 {
+                max-width: 1200px;
+                position: relative;
+                margin: auto;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 50px;
+                font-weight: 500;
+                margin-bottom: 0;
+                color: #333;
+            }
+            h2 {
+                font-size: 35px;
+                font-weight: 400;
+                margin: 25px 0;
+                color: #333;
+            }
+
+            .section2 h2:after {
+                content: "";
+                display: block;
+                margin-top: 0 auto;
+                width: 10%;
+                border-bottom: 5px solid #ffcc00;
+                padding-top: 5px;
+                position: absolute;
+                left: 45%
+            }
+            .section3 h2:after {
+                content: "";
+                display: block;
+                margin-top: 0 auto;
+                width: 10%;
+                border-bottom: 5px solid #ffcc00;
+                padding-top: 5px;
+                position: absolute;
+                left: 45%
+            }
+            h3 {
+                font-size: 24px;
+                margin: 30px 0;
+                color: #333;
+            }
+            h4 {                
+                font-weight: 100;
+                font-size: 18px;
+                color: #333;
+            }
+
+            p {
+                color: #333;
+            }
+
+            .guided_banner {
+                background-image: url('img/guided_background.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: auto;
+            }
+
+            .top {
+                background: #f6f7fb;
+                /*background-image: url('img/home_background.jpg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% auto;*/
+            }
+
+            .section1 {
+                padding: 100px 0 50px 0;
+
+            }
+
+            .section1 h4 {
+                margin: 10px 0 20px 0;
+                padding-bottom: 20px;
+                line-height: 40px;
+                font-weight: 300;
+            }
+
+            .slogan span {
+                font-size: 45px;
+            }
+
+            .choose_type {
+                display: inline-block;
+                width: 130px;
+                text-align: left;
+            }
+
+            /*sliding types*/
+            .choose_type span{
+                animation: topToBottom 5s linear infinite 0s;
+                -ms-animation: topToBottom 5s linear infinite 0s;
+                -webkit-animation: topToBottom 5s linear infinite 0s;
+                color: #ffcc00;
+                opacity: 0;
+                overflow: hidden;
+                position: absolute;
+            }
+            .choose_type span:nth-child(2){
+                animation-delay: 2.5s;
+                -ms-animation-delay: 2.5s;
+                -webkit-animation-delay: 2.5s;
+            }
+            /*topToBottom Animation*/
+            @-moz-keyframes topToBottom{
+                0% { opacity: 0; }
+                5% { opacity: 0; -webkit-transform: translateY(-92px); }
+                10% { opacity: 1; -webkit-transform: translateY(-42px); }
+                50% { opacity: 1; -webkit-transform: translateY(-42px); }
+                55% { opacity: 0; -webkit-transform: translateY(8px); }
+                80% { opacity: 0; }
+                100% { opacity: 0; }
+            }
+            @-webkit-keyframes topToBottom{
+                0% { opacity: 0; }
+                5% { opacity: 0; -webkit-transform: translateY(-92px); }
+                10% { opacity: 1; -webkit-transform: translateY(-42px); }
+                50% { opacity: 1; -webkit-transform: translateY(-42px); }
+                55% { opacity: 0; -webkit-transform: translateY(8px); }
+                80% { opacity: 0; }
+                100% { opacity: 0; }
+            }
+            @-ms-keyframes topToBottom{
+                0% { opacity: 0; }
+                5% { opacity: 0; -webkit-transform: translateY(-92px); }
+                10% { opacity: 1; -webkit-transform: translateY(-42px); }
+                50% { opacity: 1; -webkit-transform: translateY(-42px); }
+                55% { opacity: 0; -webkit-transform: translateY(8px); }
+                80% { opacity: 0; }
+                100% { opacity: 0; }
+            }
+
+
+            .slogan h4 {
+                color: #555;
+                line-height: 10px;
+            }
+
+            .slogan hr {
+                width: 70%;
+            }
+
+            .search_bar {
+                height: 70px;
+                max-width: 600px;
+                position: relative;
+                margin: auto;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 6px;
+                border-color:  rgba(112,112,112,.2);
+                box-shadow: 0 3px 6px rgba(0,0,0,.29);
+                background: #ffffff;
+            }
+
+            .search_bar img {
+                float: left;
+                width: 30px;
+                margin-left: 5%;
+                margin-top: 3.5%;
+
+            }
+
+            .search_bar input {
+                border: 0;
+                float: right;
+                height: 98%;
+                width: 85%;
+                font-size: 25px;
+            }
+
+            .search_bar input:focus {
+                outline-width: 0;
+            }
+
+            .choose {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                padding: 30px 40px 20px 40px;
+                color: #333;
+            }
+
+            .choose h2 {
+                font-size: 30px;
+                font-weight: 400;
+                margin: 20px 20px;
+            }
+
+            .choose hr {
+                width: 20%;
+                border-color: #e5e5e57d;
+            }
+
+            .section1 ul, .section2 ul, .section3 ul {
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 40px;
+                margin: 10px 0;
+            }
+
+            .ser2 {
+                margin: 0;
+                width: 100%;
+                height: auto; 
+                position: absolute;
+                left: 0;top:72px;
+                z-index: 999999;
+                background: #fff;
+                border-width: 1px;
+                border-style: solid;
+                border-color: rgba(112,112,112,.2);
+                box-shadow: 0 3px 6px rgba(0,0,0,.29);
+
+            }
+            .ser2 ul {
+                all:unset;
+            }
+            .ser2 ul li {
+                padding: 0 0 0 90px;
+                text-align: left;
+                line-height: 40px;
+                font-size: 20px;
+                color: #444;
+            }
+            .ser2 ul li:hover {
+                background: #d2d2d2;
+            }
+
+            .category {
+                max-width: 800px;
+                position: relative;
+                margin: auto;
+                text-align: center;
+            }
+
+            .category li {
+                margin: 0 10px;
+                padding: 16px;
+                max-width: 150px;
+                height: 160px;
+                box-shadow: 0 0 16px 0 rgba(0,0,0,.16);
+                border-radius: 6px;
+                border-color: rgba(112,112,112,.2);
+                cursor: pointer;   
+                background: #f1f1f1; 
+                -webkit-transition: background-color 1s;
+                -moz-transition:    background-color 1s;
+                -ms-transition:     background-color 1s;
+                -o-transition:      background-color 1s;
+                transition:         background-color 1s;
+
+            }
+
+            .category li:hover {                
+                background: #f9d131; 
+            }
+
+            .category a {
+                text-decoration: none;
+            }
+
+            .category img {
+                height: 100px;
+                padding: 10px 0 20px 0;
+            }
+
+            .category span {                
+                font-size: 18px;
+                text-decoration: none;
+                color: #333;
+
+            }
+
+            .section2 {
+                padding-bottom: 40px;                
+            }
+
+            .title {
+                padding: 20px 0;
+            }
+
+            .left {
+                width: 48%;
+                float: left;
+                margin-top: 20px;
+            }
+
+
+            .right ul {
+                flex-direction: column;
+                text-align: left;
+                padding: 0 0 0 60px;
+            }
+
+            .right li {
+                display: flex;
+                margin: 16px 10px;
+
+            }
+
+            .numbers {
+                max-width: 30px;
+                max-height: 30px;
+            }
+
+            .steps {
+                max-width: 70px;
+                max-height: 80px;
+                margin-left: 30px;
+                margin-right: 40px;
+            }
+
+            .explain {
+                display: inline;
+            }
+
+            .right h3 {
+                display: inline;
+                font-weight: 400;
+                color: #333;
+            }
+
+            .right p {
+                margin-top: 5px;
+                font-weight: 300;
+                line-height: 25px;
+            }
+
+            .mode {
+                padding: 10px 0;
+                margin-top: 20px;
+            }
+
+            .mode ul {
+                padding: 0;
+            }
+
+            .mode ul li {
+                width: 30%;
+                height: 250px;
+                /*box-shadow: 0 0 16px 0 rgba(0,0,0,.16);*/
+                /*border-radius: 6px;*/
+                border-color: rgba(112,112,112,.2);
+                cursor: pointer;   
+                background: #ffffff; 
+            }
+
+            .mode h3 {
+                font-weight: 500;
+            }
+            .mode img {
+                max-width: 80px;
+            }
+
+            .mode p {
+                margin: 15px 0;
+                line-height: 25px;
+            }
+
+            #mousein1 ul, #mousein2 ul, #mousein3 ul {
+                flex-direction: column;
+                padding: 0 30px;
+            }
+
+            #mousein1 li, #mousein2 li, #mousein3 li {
+                width: 100%;
+                height: auto;
+                padding: 10px 0;
+                background: none;
+            }
+
+            #mousein1 h4, #mousein1 p, #mousein2 h4, #mousein2 p, #mousein3 h4, #mousein3 p{
+                text-align: left;
+                font-size: 14px;
+                line-height: 22px;
+                margin: 0;
+            }
+
+            #mousein1 h4, #mousein2 h4, #mousein3 h4 {
+                font-weight: bold;
+            }
+
+            .section3 h2 {
+                margin-bottom: 0;
+            }
+
+            .section3 h4 {
+                margin-top: 10px;
+                margin-bottom: 0;
+                cursor: pointer;
+                color: #475899;
+                font-weight: 400;
+            }
+
+            .reviews ul {
+                padding: 0;
+                margin: 30px 0 50px 0;
+            }
+
+            .reviews li {
+                margin: 0 50px;
+            }
+
+            .reviews h4 {
+                font-weight: 500;
+            }
+
+            .reviews h5 {
+                font-size: 14px;
+                color: #475899;
+                line-height: 22px;
+            }
+
+            .reviews p {
+                font-size: 14px;
+                line-height: 25px;
+                margin: 15px 0 25px 0;
+            }
+
+            .section3 a {
+                text-decoration: none;
+            }
+
+        </style>
+
+    </head>
+
+	<body>
+
+		{template header}
+
+        <!-- top banner starts -->
+
+        <div class="guided_banner">
+            <div class="section1">
+
+                <h1 class="slogan">Sell your 
+                    <div class="choose_type">
+                        <span>Phone</span>
+                        <span>Tablet</span>
+                    </div>
+                 in 60 seconds
+                </h1>
+
+                <h4>Instant Quote | Competitive Price | At Your Choice</h4>
+
+                <div class="search_bar">
+
+                    <img src="img/guided_magnifier.png">
+                
+                    <input type="text" placeholder="Type here to search your device">
+
+                    <div class="ser2" style="display: none;">
+                        <ul>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- search action -->
+                <script type="text/javascript">
+                    $('.search_bar input').keyup(function(){
+                        var str = $(this).val();
+                        if (str == '') {
+                            $('.ser2').css('display','none');
+                            return false;
+                        }
+                        $.ajax({
+                            type:'post',
+                            dataType:'json',
+                            url: "index.php?c=index&a=search",
+                            data:{str:str},
+                            success:function(data){
+                               var list = data.list;
+                               if(list.length>0){
+                                 $('.ser2').css('display','block');
+                               }
+                               var content='';
+                               for (var i = 0; i < list.length; i++){
+                                   if (list[i].recovery_type_id == 68) {
+                                       content+=' <li>'+list[i].recovery_title+' (New)<input type="hidden" value="'+list[i]['id']+'"></li>';
+                                   } else {
+                                       content+=' <li>'+list[i].recovery_title+'<input type="hidden" value="'+list[i]['id']+'"></li>';
+                                   }
+                                }
+                               $('.ser2 ul').html(content);
+                            }
+                        })
+                    })
+
+                    $('.ser2').on('click','li',function(){
+                        var id = $(this).find('input').val();
+                        var content = $(this).text();
+                        $('.search_bar input').val(content);
+                        $('.ser2').hide();
+                         location.href="./index.php?c=flowerhua&a=recovery_detail"+'&recovery_id='+id
+                       
+                    })
+
+                    $('body:not(".ser2")').click(function(e){
+                        $('.ser2').hide()
+                    });
+
+                </script>
+
+
+                <div class="choose">
+                    <hr>
+                    <h2>Or choose a category to SELL</h2>
+                    <hr>
+                </div>
+
+                <div class="category">
+
+                    <ul>
+                        <li>
+                            <a href="https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=recovery_list&recovery_type_id=29&recovery_parent_id=hits">
+                                <img src="img/guided_used_phone.png" alt="Sell Used Phone">
+                                <br>
+                                <span>USED PHONE</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=recovery_list&recovery_type_id=32&recovery_parent_id=hits">
+                                <img src="img/guided_used_tablet.png" alt="Sell Used Tablet">
+                                <br>
+                                <span>USED TABLET</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=recovery_list&recovery_type_id=68&recovery_parent_id=hits">
+                                <img src="img/guided_new_phone.png" alt="Sell New Phone">
+                                <br>
+                                <span>NEW PHONE</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- top banner ends -->  
+
+        <!-- how it works starts-->
+        <div class="top">
+        <div class="section2">
+
+            <div class="title">
+                <h2>How it works</h2>
+            </div>
+
+            <div class="left">
+                <iframe id = "video" width="576" height="324" src="https://www.youtube.com/embed/GbouzcIF_bk" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+                <!-- <h4>Watch the video to learn how Rebox works</h4> -->
+            </div>
+
+            <div class="right">
+                <ul>
+
+                    <li>
+                        <img class ="numbers" src="img/guided_1.png">
+
+                        <img class ="steps" src="img/guided_quote.png">
+
+                        <div class = "explain">
+
+                            <h3>Get Quote</h3>
+
+                            <p>Select the condition of your phone, receive the best selling price for your phone.</p>
+
+                        </div>
+
+                    </li>
+
+                    <li>
+                        <img class ="numbers" src="img/guided_2.jpg">
+
+                        <img class ="steps" src="img/guided_order.png">
+
+                        <div class = "explain">
+
+                            <h3>Submit Order</h3>
+
+                            <p>Choose your preferred way of selling, submit an order to secure the offer.</p>
+
+                        </div>
+
+                    </li>
+
+                    <li>
+
+                        <img class ="numbers" src="img/guided_3.jpg">
+
+                        <img class ="steps" src="img/guided_cash.png">
+
+                        <div class = "explain">
+
+                            <h3>Get Paid</h3>
+
+                            <p>Upon verification of your phone, get paid via instant bank transfer.</p>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="mode">
+                
+                <ul>
+                    <li id="doorstep">
+                        <!-- hover to turn over the page to show steps -->
+                        <div id="mouseout1">
+                            <h3>Doorstep Collection</h3>
+                            <img src="img/guided_technician.png">
+                            <p>We visit your home.<br>Check & payment on the spot.</p>
+                        </div>
+
+                        <div id="mousein1" style="display: none;">
+                            <ul>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/1.png"> -->
+                                    <h4>1. Submit an Order</h4>
+                                    <p>Select the correct phone condition to get an accurate quote</p>
+                                </li>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/2.png"> -->
+                                    <h4>2. Schedule a Doorstep Collection</h4>
+                                    <p>Our staff will visit you to collect the phone</p>
+                                </li>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/3.png"> -->
+                                    <h4>3. Get Paid Instantly</h4>
+                                    <p>Receive instant bank transfer at your doorstep</p>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </li>
+                    <li id="walk-in">
+                        <div id="mouseout2">
+                            <h3>Walk-In</h3>
+                            <img src="img/guided_shop.png">
+                            <p>Walk in to our outlet.<br>Check & payment on the spot.</p>
+                        </div>
+
+                        <div id="mousein2" style="display: none;">
+                            <ul>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/1.png"> -->
+                                    <h4>1. Visit Our Outlet</h4>
+                                    <p>Visit our outlet at Jurong Point (outside Starhub #B1-12)</p>
+                                </li>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/2.png"> -->
+                                    <h4>2. Handover the Phone</h4>
+                                    <p>Pass the phone to our staff for checking</p>
+                                </li>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/3.png"> -->
+                                    <h4>3. Get Paid Instantly</h4>
+                                    <p>Receive instant bank transfer on the spot</p>
+                                </li>
+                            </ul>
+                        </div>           
+
+
+                    </li>
+                    <li id="pickup">
+                        <div id="mouseout3">
+                            <h3>Courier Pickup</h3>
+                            <img src="img/guided_delivery.png">
+                            <p>Free courier pickup.<br>No waiting for diagnostic & fast payment.</p>
+                        </div>
+
+                        <div id="mousein3" style="display: none;">
+                            <ul>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/1.png"> -->
+                                    <h4>1. Submit an Order</h4>
+                                    <p>Select the correct phone condition to get an accurate quote</p>
+                                </li>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/2.png"> -->
+                                    <h4>2. Schedule a Free Pickup</h4>
+                                    <p>Courier will pick up the phone from you</p>
+                                </li>
+                                <li>
+                                    <!-- <img class ="numbers" src="img/3.png"> -->
+                                    <h4>3. Get Paid Quickly</h4>
+                                    <p>Receive instant bank transfer upon delivery</p>
+                                </li>
+                            </ul>
+                        </div>  
+
+                    </li>
+                </ul>
+            </div>
+
+            <script type="text/javascript">
+                $('#doorstep').mouseover(function(){
+                    $('#mouseout1').hide();
+                    $('#mousein1').show();
+                    $('#doorstep').css('background', '#ffcc00');
+                });
+                $('#doorstep').mouseout(function(){
+                    $('#mousein1').hide();
+                    $('#mouseout1').show();
+                    $('#doorstep').css('background', '#ffffff');
+                });
+
+                $('#walk-in').mouseover(function(){
+                    $('#mouseout2').hide();
+                    $('#mousein2').show();
+                    $('#walk-in').css('background', '#ffcc00');
+                });
+                $('#walk-in').mouseout(function(){
+                    $('#mousein2').hide();
+                    $('#mouseout2').show();
+                    $('#walk-in').css('background', '#ffffff');
+                });
+                $('#pickup').mouseover(function(){
+                    $('#mouseout3').hide();
+                    $('#mousein3').show();
+                    $('#pickup').css('background', '#ffcc00');
+                });
+                $('#pickup').mouseout(function(){
+                    $('#mousein3').hide();
+                    $('#mouseout3').show();
+                    $('#pickup').css('background', '#ffffff');
+                });
+            </script>
+
+        </div>
+
+        </div>
+
+        <!-- how it works ends -->
+
+        <!-- testimonials starts -->
+
+		<div class="section3">
+
+			<h2 class="title">Testimonials</h2>
+
+            <a href="https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target="_blank"><h4>Read more reviews on Facebook</h4></a>
+
+			<div class="reviews">
+
+                <ul>
+                    <li>  
+                      <h4>"Deal with Confidence"</h4>         
+                      <p>Fantastic service by Rebox. Sold my used mate 10 to them without leaving my house! Fast deal and money was transferred. Legit and deal with confidence. Highly recommended!</p>
+                      <h5>WK Yong<br><a href="https://www.facebook.com/WK.YongWK/posts/10156631302860115" target="_blank">via Facebook</a></h5>
+                    </li>
+                    <li>   
+                      <h4>"Seamless, Convenient"</h4>
+                      <p>. . .the whole process was digital (seamless and definitely convenient). Quoted price was upto market value and can even increase depending completeness / condition of your item.</p>
+                      <h5>Whilmer Gan<br><a href="https://www.facebook.com/wlsgan/posts/10157367472413836" target="_blank">via Facebook</a></h5>
+                    </li>
+                    <li> 
+                      <h4>"Fuss Free, Good Price"</h4>              
+                      <p>Best decision as it was fuss free, convenient and was able to get a good price on my phone without having to go to multiple phone shops. Would recommend to my friends!</p>
+                      <h5>Deborah Goh<br><a href="https://www.facebook.com/deborahgll/posts/10156094852217921" target="_blank">via Facebook</a></h5>
+                    </li>
+                </ul>
+				
+			</div>
+
+		</div>
+
+        <!-- testimonials ends -->		
+
+        {template footer}
+
+        <input type="hidden" id="recovery_type_id" value="">
+
+        <input type="hidden" id="recovery_parent_id" value="">
+
+        <input type="hidden" id="page" value="">
+
+    	<!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <!-- Your customer chat code -->
+        <div class="fb-customerchat"
+          attribution=setup_tool
+          page_id="201403270461097"
+          theme_color="#ffcc00">
+        </div>
+
+    </body>
+
+	<script>
+
+        function location_href(){
+
+            location.href="index.php?c=flowerhua&a=recovery_list&recovery_type_id="+$('#recovery_type_id').val()+'&recovery_parent_id='+$('#recovery_parent_id').val();
+
+        }
+
+	</script>
+
+</html>

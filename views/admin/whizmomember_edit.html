@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+	<link rel="stylesheet" href="{ADMIN_THEME}plugins/datepicker/jquery-ui.css">
+
+ <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}plugins/datepicker/jquery.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}plugins/datepicker/jquery-ui.js"></script>
+
+<title>admin</title>
+
+	{template admin/top}
+
+</head>
+
+<!--图片上传-->
+
+<script type="text/javascript">
+
+    var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+
+    var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+
+</script>
+
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+
+
+<body style="font-weight: normal;">
+
+<div class="subnav">
+
+	<div class="content-menu ib-a line-x">
+
+		<div class="layui-btn-group">
+
+			<a class="layui-btn" href="{url('admin/whizmomember/whizmomember_list')}" class="on"><em>List</em></a>
+
+			<a class="layui-btn" href="javascript:history.go(-1);"><em>Previous page</em></a>
+
+		</div>
+
+	</div>
+
+	<div class="bk10"></div>
+
+	<div class="table-responsive mytable">
+
+		<form action="" method="post">
+
+			<input name="id" type="hidden" value="{$data['id']}">
+
+			<table width="100%" class="table table-striped">
+
+			<tr>
+
+				<td align="right">Full Name</td>
+
+				<td><input class="input-text fullname" type="text" name="data[fullname]"  value="{$data['fullname']}" size="20"/>
+
+				</td>
+
+			</tr>
+
+<!-- 			<tr>
+
+				<td align="right">Mobile No.</td>
+
+				<td><input class="input-text phonenumber" type="text" name="data[phone]" value="{$data['phone']}" size="20" />
+
+				</td>
+
+			</tr> -->
+
+			<tr>
+
+				<td align="right">Gender</td>
+
+				<td>
+
+					<label>
+
+                        <select  class="form-control gender" name="data[sex]">
+
+                            <option value="0">Gender</option>
+
+                            <option {if $data['sex']==1 } selected="selected"
+
+                            {/if} value="1" >Male</option>
+
+                          	<option {if $data['sex']==2 } selected="selected"
+
+                            {/if} value="2" >Female</option>
+
+                        </select>
+
+                    </label>
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Nationality</td>
+
+				<td>
+
+					<label>
+
+                        <select class="form-control country" name="data[country]">
+
+                            <option value="0">Country</option>
+
+                            {loop $country_list $t}
+
+                            <option {if $data['country']==$t['id']} selected="selected"
+
+                            {/if} value="{$t['id']}">{$t['country']}</option>
+
+                            {/loop}
+
+                        </select>
+
+                    </label>
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Document Type</td>
+
+				<td>
+
+					<label>
+
+                        <select  class="form-control documenttype" name="data[sftype]">
+
+                            <option value="0">Document Type</option>
+
+                            {loop $sftype_list $t}
+
+                            <option {if $data['sftype'] == $t['id']} selected="selected" {/if} value="{$t['id']}">{$t['idtype']}</option>
+
+                            {/loop}
+
+                        </select>
+
+                    </label>
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Date of Birth</td>
+
+				<td>
+				<!-- <input class="date_of_birth" type="date" name="data[date_of_birth]" value="{$data['date_of_birth']}" size="200"/>  -->
+				<input type="text" class="date_of_birth" id="datepicker" name="data[date_of_birth]" value="{$data['date_of_birth']}">
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Identification Number</td>
+
+				<td>
+
+				<input class="sftype" type="text" name="data[nric]" value="{$data['nric']}" size="200"/> 
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Home Address</td>
+
+				<td>
+
+				<input class="address" type="text" name="data[address]" value="{$data['address']}" size="200" /> 
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Unit No.</td>
+
+				<td>
+
+				<input class="unit"  type="text" name="data[unit]" value="{$data['unit']}" size="200" /> 
+
+				</td>
+
+			</tr>
+
+			<!-- add postal code -->
+			<tr>
+
+				<td align="right">Postal Code</td>
+
+				<td>
+
+				<input class="postal"  type="text" name="data[postal]" value="{$data['postal']}" size="200" /> 
+
+				</td>
+
+			</tr>
+
+
+
+
+			<tr>
+
+				<td align="right">Pickup Address</td>
+
+				<td>
+
+				<input type="text" value="{$address['address']}" size="200" /> 
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Unit No.</td>
+
+				<td>
+
+				<input type="text" value="{$address['unit']}" size="200" /> 
+
+				</td>
+
+			</tr>
+
+
+
+
+
+
+
+			<tr>
+
+				<td align="right">Front of ID Card</td>
+
+				<td>
+
+					<input type="text" class="input-text zhaopian1" size="50" name="data[zhaopian1]" value="{$data['zhaopian1']}" id="thumb" />
+
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('thumb')" value="{lang('a-mod-118')}" />
+
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('thumb', '{$SITE_THUMB_WIDTH}', '{$SITE_THUMB_HEIGHT}')" value="{lang('a-mod-119')}" />
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<td align="right">Back of ID Card</td>
+
+				<td>
+
+					<input type="text" class="input-text zhaopian2" size="50" name="data[zhaopian2]" value="{$data['zhaopian2']}" id="img"/>
+
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('img')" value="{lang('a-mod-118')}" />
+
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('img', '{$SITE_THUMB_WIDTH}', '{$SITE_THUMB_HEIGHT}')" value="{lang('a-mod-119')}" />
+
+				</td>
+
+			</tr>
+
+			
+
+			<tr>
+
+				{if $data['status']==1 && ($data['nric'] != null || $data['zhaopian1'] != null)}
+
+				<td>
+
+					<a class="queding" href="javascript:;"><input type="button" style="width:150px;cursor:pointer;" class="btn btn-success que" onclick="tongguo(this)" data-id="{$data['id']}" value="Verify"/></a>
+
+				</td>
+
+				{/if}	
+
+				<td>
+
+					<input type="submit" name="submit" style="width:150px;cursor:pointer;" class="btn btn-success que"  value="Modify"/>
+
+				</td>
+
+			</tr>
+
+			</table>
+
+		</form>
+
+	</div>
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+$( "#datepicker" ).datepicker({
+	dateFormat: "MM dd, yy",
+	changeMonth: true,
+	changeYear: true,
+	yearRange: "-100:+0"
+});
+// $( "#datepicker" ).datepicker( "option", "dateFormat","MM dd, yy");
+
+function tongguo(obj){
+
+	var num = 0;
+
+	var sum = 0;
+
+	var id = $(obj).attr('data-id');
+
+	var fullname = $('.fullname').val();
+
+	if(fullname){
+
+		num++;
+
+	}
+
+	// var phonenumber = $('.phonenumber').val();
+
+	// if(phonenumber){
+
+	// 	num++;
+
+	// }
+
+	var gender = $('.gender').val();
+
+	if(gender>0){
+
+		num++;
+
+	}
+
+	var country = $('.country').val();
+
+	if(country>0){
+
+		num++;
+
+	}
+
+	var documenttype = $('.documenttype').val();
+
+	if(documenttype>0){
+
+		num++;
+
+	}
+
+	var sftype = $('.sftype').val();
+
+	if(sftype){
+
+		num++;
+
+	}
+
+	var address = $('.address').val();
+
+	if(address){
+
+		num++;
+
+	}
+
+	var unit = $('.unit').val();
+
+	// if(unit){
+
+	// 	num++;
+
+	// }
+
+	var zhaopian1 = $('.zhaopian1').val();
+
+	if(zhaopian1){
+
+		sum++;
+
+	}
+
+	var zhaopian2 = $('.zhaopian2').val();
+
+	if(zhaopian2){
+
+		sum++;
+
+	}
+
+
+	if(num < 5 && sum!=2){
+
+		layer.alert('Incompleteness of identity information');
+
+		return false;
+
+	}else{
+
+		var sex = $('.gender').children("option:selected").val();
+
+		$('.queding').attr('href',"./index.php?s=admin&c=whizmomember&a=shenhe"+'&id='+id+'&sex='+sex);
+
+	}
+
+	
+
+}
+
+</script>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+	{template head}
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '637804786589286'); 
+fbq('track', 'PageView');
+fbq('track', 'AddToCart');
+</script>
+<noscript>
+<img height="1" width="1" 
+src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+</head>
+
+	<body>
+
+		{template header}
+
+		<div class="order_confirm">
+
+			<div class="msg">
+
+				<div class="ordertit">
+
+					<div class="order_btn">
+
+						<h1>Order Confirmed！</h1>
+
+						{if $agent_check != 1}
+						<a href="{url('/members/center')}">ID Verification</a>		
+
+						<a href="{url('flowerhua/order')}" style="position:absolute;right:0.3rem;top:2.1rem;">Go to Dashboard</a>
+
+						{else}
+
+						<a href="{url('flowerhua/order')}" style="position:absolute;right:0.3rem;">Go to Dashboard</a>
+
+						{/if}
+
+					</div>
+
+					<div class="num_btn"><span>Order number : {$order_sn}</span></div>
+
+				</div>
+
+				{if $agent_check !=1}
+
+				{if $order_delivery_method_type == 2}
+
+					<div class="tips">
+
+						POPStation shipping lable is <font color="#ffcc00" font-weight="bold">{$order_delivery_number}</font>. You can find it in order details from your Dashboard later.<br><br> 
+
+						Drop off your phone at any POPStation within 2 days. Please refer <a href="https://rebox.com.sg/mobile_recircle/index.php?c=flowerhua&a=detail_and_help&category_id=212" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> to see how to drop off <br><br>
+
+						We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline;">here</a> for details.<br>
+
+						To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline;">upload</a> your NRIC (front and back) now.
+
+					</div>
+
+				{/if}
+
+				{if $order_delivery_method_type == 1}
+
+					{if $order_delivery_number != NULL}		
+
+					<div class="tips">
+
+						Please click <a href="https://rebox.com.sg/shipping_label/{$order_delivery_number}.pdf" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> to print the shipping label, and paste it on to your parcel.<br><br> 
+
+						Our courier partner will collect the device from you at the scheduled pickup time slot, and the parcel will be delivered to us the next working day.<br><br> 
+
+						To enjoy FULL INSURANCE COVERAGE, please sign off during pickup or make sure the courier scans the QR code on the label. Kindly note that proper packaging is required by the courier service provider. Refer <a href="https://bit.ly/2nR7S9g" target="_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for packaging tips.<br><br>
+
+						We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br>
+
+						To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">upload</a> your NRIC (front and back) now.
+
+					</div>
+
+					{else}
+
+					<div class="tips">
+
+						<span style="font-weight: normal;"><b>Pickup Time: </b>{$pickupTime} - {$pickupDateRange}</span><br>
+
+						Please provide Pickup Code <b style="color:RED; font-size: 12px; font-weight: bold;">{$merchantDefinedCode}</b> during collection.<br><br>
+
+						We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline;">here</a> for details.<br>
+
+						To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline;">upload</a> your NRIC (front and back) now.
+
+
+					</div>
+
+					{/if}
+
+				{/if}
+
+				{if $order_delivery_method_type == 3}
+
+				<div class="tips">
+
+					<font style="font-weight: bold; color: orange; line-height: 0.4rem;">Scheduled Visit Date:<br>{$order_delivery_number}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12:00PM - 9:00PM<br><br>
+					
+						Jurong Point Shopping Centre (outside Starhub #B1-12)<br> 1 Jurong West Central 2, Singapore 648886 
+						<br><br>
+						City Square Mall <br>
+						#B1-K17 180 Kitchener Rd, Singapore 208539
+				
+					</font>
+					
+					<br><br>
+
+					<!-- <button onclick="window.location='https://calendars.icloud.com/published/2/9OKOTcfIYD22ycOGtdqWAJrRNiH2-oM3DIcxH5_737QSekFXx7KNkrrKnG6jAUXg';" style = "background-color: #ffcc00; border-radius: 0.04rem; padding: 0.1rem; color:white;font-size: 0.26rem;">Add to Calendar</button>
+					<br><br> -->
+
+					We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline; cursor: pointer;">here</a> for details.<br>
+
+					To speed up the payment process, <a href="{url('/members/center')}" target = "_blank" style = "all: unset;color: blue; text-decoration: underline;">upload</a> your NRIC (front and back) now.<br><br>
+
+					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7271300404195!2d103.70391561525581!3d1.340050661978909!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0fecdb0cd66b%3A0x2d89b202b512e598!2sJurong+Point!5e0!3m2!1sen!2ssg!4v1553756966625" width="350" height="300" frameborder="0" style="border:0;left:10%;" allowfullscreen></iframe>
+
+
+				</div>			
+
+				
+				{/if}
+
+				{else}
+
+				<div class="tips">We will come and collect the phone the next working day between 3pm-5pm.
+
+				</div>	
+
+				{/if}			
+
+			</div>
+
+			<!-- if walk-in, no need to packaging -->
+			{if $order_delivery_method_type != 3 && $agent_check != 1 }
+
+			<div class="spec-5"></div>
+
+			<div class="list">
+
+				<div class="tit">Get prepared before {if $order_delivery_method_type == 2}dropoff{else}pickup{/if}</div>
+
+				<ul>
+
+					{loop $list $t}
+
+					<li>
+
+						<img src="{$t['thumb']}"/>
+
+						<div class="fl_box">
+
+							<p>{$t['title']}</p>
+
+							{if $t['subtitle']}
+
+							<div class="introd">
+
+								（{$t['subtitle']}）
+
+							</div>
+
+							{/if}
+
+							{if $t['url_title']}
+
+							<a onclick="ttttt('{$t[id]}');">{$t['url_title']}</a>
+
+							{/if}
+
+						</div>
+
+					</li>
+
+					{/loop}
+
+				</ul>
+
+			</div>
+			{/if}
+
+		</div>
+
+
+</body>
+
+</html>
+
+<script>
+
+	// window.onload = function() { 
+
+	// 	document.getElementById('qrcode').src = 'https://www.rebox.com.sg/mobile_recircle/qrimg/QR'+ '{$order_sn}' + '.png';
+
+	// }
+
+    function ttttt(id){
+
+        $.ajax({type:'post',url:"index.php?c=flowerhua&a=getContent",data:{id : id},dataType:'json',
+
+            success:function (res) {
+
+                layer.open({title:'',btn:[],area:['90%','95%'],content:res.des});
+
+            }
+
+        })
+
+    }
+
+</script>
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<title>admin</title>
+	{template admin/top}
+</head>
+<!--图片上传-->
+<script type="text/javascript">
+    var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+    var finecms_admin_document = "{$cats[$roadbul_order['catid']]['setting']['document']}";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="table-responsive mytable">
+		<form action="" method="post">
+			<table width="100%" class="table table-striped">
+				<tr>
+					<td width="200" align="right"><font color="red">*</font>物流订单编号</td>
+					<td><input class="input-text" type="text" value="{$sn}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">寄件人姓名</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_FromName']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">寄件人邮编</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_FromZipCode']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">寄件人电话</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_FromMobilePhone']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">寄件人地址</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_FromAddress']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">收件人姓名</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_ToName']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">收件人邮编</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_ToZipCode']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">收件人电话</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_ToMobilePhone']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">收件人地址</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_ToAddress']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">取件时间</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_PickupDate']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">派件时间</td>
+					<td><input class="input-text" type="text" value="{$roadbul_order['roadbul_DeliveryDate']}" size="50" readonly />
+					</td>
+				</tr>
+				<tr><td></td><td></td></tr>
+				<tr>
+					<td align="right">当前状态</td>
+					<td><input class="input-text" type="text" value="{$order_status}" size="50" readonly style="color:red;" />
+					</td>
+				</tr>
+				<tr><td></td><td></td></tr>
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

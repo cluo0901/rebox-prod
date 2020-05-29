@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{ADMIN_THEME}js/layui/css/layui.css">
+    <script src="{ADMIN_THEME}js/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<title>admin</title>
+	{template admin/top}
+</head>
+<!--图片上传-->
+<script type="text/javascript">
+    var sitepath = '{SITE_PATH}{ENTRY_SCRIPT_NAME}';
+    var finecms_admin_document = "{$cats[$data['catid']]['setting']['document']}";
+</script>
+<script type="text/javascript" src="{LANG_PATH}lang.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/core.js"></script>
+
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group">
+			<a class="layui-btn" href="{url('admin/flowerhua/test')}" class="on"><em>flowerhua列表</em></a>
+			<a class="layui-btn" href="{url('admin/flowerhua/edit', array('type'=>'add'))}"><em>Add</em></a>
+			<a class="layui-btn" href="javascript:history.go(-1);"><em>Previous page</em></a>
+		</div>
+	</div>
+	<div class="bk10"></div>
+	<div class="table-responsive mytable">
+		<form action="" method="post">
+			<input name="id" type="hidden" value="{$data['id']}">
+			<table width="100%" class="table table-striped">
+			<tr>
+				<td width="200" align="right"><font color="red">*</font>列表</td>
+				<td><input class="input-text" type="text" name="data[name]" value="{$data['name']}" size="20" required />
+				</td>
+			</tr>
+			<tr>
+				<td align="right">列表</td>
+				<td><input class="input-text" type="text" name="data[credits]" value="{$data['credits']}" size="20" />
+				<div class="onShow">{lang('a-mod-209')}</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">列表</td>
+				<td><input class="input-text" type="text" name="data[allowpost]" value="{$data['allowpost']}" size="20" />
+				<div class="onShow">{lang('a-mem-85')}</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">列表</td>
+				<td><input class="input-text" type="text" name="data[allowpms]" value="{$data['allowpms']}" size="20" />
+				<div class="onShow">{lang('a-mem-86')}</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">列表</td>
+				<td><input class="input-text" type="text" name="data[filesize]" value="{$data['filesize']}" size="20" />
+				<div class="onShow">{lang('a-mem-87')}</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">列表</td>
+				<td>
+				<input name="data[postverify]" type="radio" value="1" {if $data['postverify']==1}checked{/if} /> {lang('a-open')}
+				<input name="data[postverify]" type="radio" value="0" {if empty($data['postverify'])}checked{/if} /> {lang('a-close')}
+				<div class="onShow">{lang('a-mod-212')}</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">下拉</td>
+				<td>
+					<label>
+						<select class="form-control" name="province_id" id="province_id">
+							<option value="">请选择省</option>
+							{loop $province $t}
+							<option value="{$t[id]}" {if $data[province_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+							{/loop}
+						</select>
+					</label>
+
+					<label>
+						<select class="form-control" id="city_id" name="city_id">
+							<option value="">请选择市</option>
+							{loop $citylist $t}
+							<option value="{$t[id]}" {if $data[city_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+							{/loop}
+						</select>
+					</label>
+					<div class="onShow">不选择地区表示默认为全部地区</div>
+					<script type="text/javascript">
+						$("#province_id").change(function(){
+							var id = $(this).val();
+							$.ajax({
+								type:"POST",
+								url:"index.php?s=admin&a=city",
+								data:"id="+id,
+								dateType:"html",
+								success:function(date){
+									$("#city_id").html(date);
+								}
+							})
+						})
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">上传</td>
+				<td><input type="text" class="input-text" size="50" value="{$data['thumb']}" name="data[thumb]" id="thumb" />
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="preview('thumb')" value="{lang('a-mod-118')}" />
+					<input type="button" style="width:66px;cursor:pointer;" class="btn btn-success btn-sm" onClick="uploadImage('thumb', '{$SITE_THUMB_WIDTH}', '{$SITE_THUMB_HEIGHT}')" value="{lang('a-mod-119')}" />
+					<div class="onShow">{lang('a-pic')}</div></td>
+			</tr>
+			<tr>
+				<td align="right">编辑</td>
+				<td>{php App::auto_load('fields');echo content_editor('content', array(0=>$list['content']), array('system'=>1,'pagebreak'=>1));}</td>
+			</tr>
+			<tr>
+				<td align="right">&nbsp;</td>
+				<td><input class="btn btn-success btn-sm" type="submit" name="submit" value="{lang('a-submit')}" /></td>
+			</tr>
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

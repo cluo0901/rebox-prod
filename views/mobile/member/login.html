@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	{template head}
+	<body>
+		<div class="header">
+			<a href="javascript:history.back();" class="back vertCenter"><img src="{SITE_THEME}img/arrow.png"></a>
+			<h1>Sign In</h1>
+		</div>
+		<div class="partner_login user_login">
+			<div class="logo"><img src="{$SITE_LOGO}"></div>
+			<div class="sign_login">
+				<a href="{url('login/register')}" class="">Sign Up</a>
+				<a href="{url('login/login_system')}" class="on">Sign In</a>
+			</div>
+			<form>
+				<label class="user"><input id="phone" type="text" placeholder="Mobile No." value="{$phone}"></label>
+				<label class="pwd"><input id="password" type="password" placeholder="Password" value="{$password}"></label>
+				<button class="login" type="button" onclick="login_system();">Sign In</button>
+				<div class="keep_forget">
+					<div class="keep"><input type="checkbox" checked="checked" class="checkbox"/>Keep me logged in</div>
+					<div class="forget fr" onclick="show_tan()">Forgot password?</div>
+				</div>
+			</form>
+			
+			<!--confirm-->
+			<div class="confirm_pop">
+				<div class="content">
+					<div class="content_info">
+						<div class="tit">Forgot Password</div>
+						<label><input type="text" placeholder="Enter Mobile No."  id="back-phone"/></label>
+						<div class="code">
+							<input type="text" placeholder="One-Time Passcode" id="back-code"/>
+							<!-- <a class="getcode disable" href="javascript:sendMessage();" id="back-getcode">Send OTP</a> -->
+							<button class="getcode disable" onclick="sendMessage()" id="back-getcode">Send OTP</button>
+
+						</div>
+						<label><input type="password" placeholder="Create Password" id="back-password"/></label>
+						<label><input type="password" placeholder="Repeat Password" id="back-trypassword"/></label>
+					</div>
+					<img src="{SITE_THEME}img/close.png" class="close" onclick="hide_tan()"/>
+					<input type="submit" class="confirm" value="Reset Password" onclick="reset_password();">
+				</div>
+			</div>
+			<!--confirm-->
+		</div>
+	</body>
+</html>
+<script>
+	//显示弹窗
+	function show_tan(){
+		$('.confirm_pop').show();
+	}
+	//隐藏弹窗
+	function hide_tan(){
+		$('.confirm_pop').hide();
+	}
+</script>
+
+
+	<script>
+        function reset_password(){
+
+            var n;
+            var phone = $('#back-phone').val();
+            var code = $('#back-code').val();
+            var password = $('#back-password').val();
+            var try_password = $('#back-trypassword').val();
+            if(phone == '' || phone == null){
+                layer.msg('Please fill in your mobile phone number',{icon:0});return false;
+            }else if(phone.length < 8){
+                layer.msg('Please enter the correct phone number',{icon:0});return false;
+            }else if(code == '' || code == null){
+                layer.msg('Please fill in your verification code',{icon:0});return false;
+            }else if(password == '' || password == null){
+                layer.msg('Please fill in your password',{icon:0});return false;
+            }else if(try_password == '' || try_password == null){
+                layer.msg('Please fill in your password again',{icon:0});return false;
+            }else if(try_password != password){
+                layer.msg('The two passwords are not the same',{icon:0});return false;
+            }
+            n = false;
+            $.ajax({
+                url: "index.php?c=login&a=ajaxbackcode",
+                type: "post",
+                async: false,
+                data: {"code":code,"phone":phone},
+                success: function (data) {
+                    if(data==0){
+                        layer.msg('Verification code error',{icon:0});return false;
+                    }else{
+                        n = true;
+                        //开始传值修改会员密码
+                        $.ajax({
+                            url: "index.php?c=login&a=ajax_edit_member_password",
+                            type: "post",
+                            async:false,
+                            data: {
+                                phone : phone,
+                                password : password,
+                            },
+                            dataType: 'json',
+                            success: function (data) {
+                                if(data.code==1){
+                                    layer.open({icon:1,content:'Revise the password successfully!',end:function(){
+                                        hide_tan();
+                                    }});
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+		function login_system(){
+            var phone = $('#phone').val();
+            var password = $('#password').val();
+            var check = $('.checkbox').prop('checked');
+            if(phone == '' || phone == null){
+                layer.msg('Please fill in your mobile phone number',{icon:0});return false;
+            }else if(phone.length < 8){
+                layer.msg('Please enter the correct phone number',{icon:0});return false;
+            }else if(password == '' || password == null){
+                layer.msg('Please fill in your password',{icon:0});return false;
+            }else{
+                $.ajax({
+                    url: "index.php?c=login&a=ajax_login_system",
+                    type: "post",
+                    async:false,
+                    data: {
+                        phone : phone,
+                        password : password,
+                        check:check,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == -1) {
+                            layer.msg('This user has not been found for the time being!',{icon:0});
+                        }else if(data.code == -2){
+                            layer.msg('Password error, please retype!',{icon:0});
+						}else{
+                            // layer.open({content:'Log on successfully!',icon:1,end:function(){
+                                location.href="index.php";
+                            // }});
+                        }
+                    }
+                });
+            }
+		}
+
+        var InterValObj; //timer变量，控制时间
+        var count = 60; //间隔函数，1秒执行
+        var curCount;//当前剩余秒数
+        function sendMessage() {
+            curCount = count;
+            var phone = $.trim($("#back-phone").val());
+            if (!phone) {
+                layer.msg('Please enter the phone number',{icon:0});return false;
+            } else if (phone.length < 8) {
+                layer.msg('Mobile phone number format error',{icon:0});return false;
+            }
+            $.ajax({
+                type: 'post',
+                url: "index.php?c=login&a=ajax_backsendcode",
+                data: {phone: phone},
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    if (data) {
+                        if (data.code == 1) {
+                            $("#back-getcode").attr("href", "javascript:;");
+                            $('#back-getcode').css('background','#e9ebed');
+                            $("#back-getcode").html('Send success');
+                            $("#back-phone").attr('readonly', 'readonly');
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        } else if (data.code == 2) {
+                            layer.open({'title': 'Form hints', 'content': 'This user has not been found for the time being!',});
+                            return false;
+                        } else if (data.code == 3) {
+                            layer.open({'title': 'Form hints', 'content': 'Fail in send'+data.sms_err,});
+                            return false;
+                        }
+                    } else {
+                        $("#back-getcode").attr("href", "javascript:");
+                        $("#back-getcode").html(curCount + "Retransmission after second");
+                        $("#back-phone").attr('readonly', 'readonly');
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }
+                }
+            });
+        }
+        //timer处理函数
+        function SetRemainTime() {
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#back-getcode").attr("href", "javascript:sendMessage();");
+                $("#back-getcode").html("Resend");
+                $('#back-getcode').css('background','#ffcc00');
+            }
+            else {
+                curCount--;
+                $("#back-getcode").html("Resend in "+curCount+'s');
+            }
+        }
+	
+	</script>

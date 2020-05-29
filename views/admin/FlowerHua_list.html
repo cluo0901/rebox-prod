@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="{ADMIN_THEME}images/reset.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/system.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/dialog.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/main.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}images/switchbox.css" rel="stylesheet" type="text/css" />
+<link href="{ADMIN_THEME}luos/css/style.min.css?v=4.1.0" rel="stylesheet"><link href="{ADMIN_THEME}images/table_form.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+<script type="text/javascript" src="{ADMIN_THEME}js/dialog.js"></script>{template admin/top.html}
+<title>admin</title>
+</head>
+<body style="font-weight: normal;">
+<div class="subnav">
+	<div class="content-menu ib-a line-x">
+		<div class="layui-btn-group" >
+			<a class="layui-btn" href="{url('admin/flowerhua/test')}" class="on"><em>flowerhua列表</em></a>
+			<a class="layui-btn" href="{url('admin/flowerhua/edit', array('type'=>'add'))}"><em>Add</em></a>
+			<a class="layui-btn" href="javascript:loadInfo({$t[id]})"><em>弹窗</em></a>
+		</div>
+		<tr>
+			<td>
+				<label>
+					<select class="form-control" name="province_id" id="province_id">
+						<option value="">请选择省</option>
+						{loop $province $t}
+						<option value="{$t[id]}" {if $data[province_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+						{/loop}
+					</select>
+				</label>
+
+				<label>
+					<select class="form-control" id="city_id" name="city_id">
+						<option value="">请选择市</option>
+						{loop $citylist $t}
+						<option value="{$t[id]}" {if $data[city_id] == $t[id]}selected="selected"{/if}>{$t[name]}</option>
+						{/loop}
+					</select>
+				</label>
+				<script type="text/javascript">
+                    $("#province_id").change(function(){
+                        var id = $(this).val();
+                        $.ajax({
+                            type:"POST",
+                            url:"index.php?s=admin&a=city",
+                            data:"id="+id,
+                            dateType:"html",
+                            success:function(date){
+                                $("#city_id").html(date);
+                            }
+                        })
+                    })
+				</script>
+			</td>
+		</tr>
+		<form action="" method="post" style="float:left;">
+			<div class="cbtn" style="float: left;">
+				<input name="form" type="hidden" value="search" />
+				<input placeholder="搜索" type="text" class="input-text" value="{$username}" name="username"  />
+				<input type="submit" class="btn btn-success btn-sm" value="Search" name="submit"  />
+			
+			</div>
+			<span class="exp">
+				按钮统一样式: <font style="padding:8px;color:#fff;background:#009688;">绿色</font>作为跳转/点击按钮-- <font style="padding:8px;color:#fff;background:#1E9FFF;">蓝色</font>作为修改/搜索按钮-- <font style="padding:8px;color:#fff;background:#FF5722;">红色</font>作为删除/隐藏按钮.
+				
+			</span>
+
+
+		</form>
+	</div>
+	<div class="bk10"></div><div class="table-responsive mytable">
+		<form action="" method="post" name="myform">
+			<input type="hidden" name="submit_del" value="1">
+		<table width="100%" class="table table-striped">
+		<thead>
+		<tr>
+			<th width="20" align="right"><input name="deletec" id="deletec" type="checkbox" onClick="setC()" /></th>
+			<th width="120" align="left">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th width="120" align="center">列数</th>
+			<th ali
+		</tr>
+		</thead>
+		<tbody>
+		<?php $p=1;?>
+		{loop $list $t}
+		<tr height="25">
+			<td align="right"><input name="del_{$t['id']}" type="checkbox" class="deletec"></td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">1</td>
+			<td align="center">
+			<div class="layui-btn-group">
+				<a class="layui-btn layui-btn-normal layui-btn-small" href="{url('admin/flowerhua/edit',array('id'=>$t['id']))}">Edit</a>
+				<a data-method="notice" id="{$p}" class="layui-btn layui-btn-danger layui-btn-small" href="javascript:void(0);">Delete</a>
+
+			</div>
+			</td>
+		</tr>
+		<?php $p++;?>
+		{/loop}
+		<tr height="25" class="cao">
+			<td colspan="22" align="left">
+				<a data-method="notice2" id="del_" class="layui-btn layui-btn-danger layui-btn-small">Delete all</a>
+			</td>
+		</tr>
+		</table>
+		{$pagelist}
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+    //触发事件
+    $('.layui-btn').on('click', function(){
+        delbtn = $(this).attr('id');
+        var othis = $(this), method = othis.data('method');
+        active[method] ? active[method].call(this, othis) : '';
+    });
+    var active = {
+        notice: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">Will you delete this information? Make sure?</div>'
+                ,yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+					location.href="{url('admin/flowerhua/del')}"+"&id="+delbtn;
+                }
+            })
+        }
+    };
+
+	//触发多个删除
+    $('#del_').on('click', function(){
+        var othis = $(this), method = othis.data('method');
+        active2[method] ? active2[method].call(this, othis) : '';
+    });
+    var active2 = {
+        notice2: function(){
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.4
+                ,id: 'LAY_layuipro2' //设定一个id，防止重复弹出
+                ,btn: ['confirm deletion', 'Think about it']
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; font-size:16px;  text-align: center;  font-weight: normal;">Make sure that the information is deleted?</div>'
+            ,yes: function (index, layero) {
+                //按钮【按钮一】的回调
+                document.myform.submit()
+            }
+            });
+        }
+    };
+
+function setC() {
+	if($("#deletec").attr('checked')) {
+		$(".deletec").attr("checked",true);
+	} else {
+		$(".deletec").attr("checked",false);
+	}
+}
+function loadInfo(id) {
+    var url   = '{url("admin/flowerhua/Hua")}&id='+id;
+    var winid = 'loadinfo';
+    window.top.art.dialog(
+        {id:winid, okVal:'Determine', cancelVal:'Cancle', iframe:url, title:'flowerhua', width:'960', height:'500', lock:true},
+        function(){
+            window.top.art.dialog({id:winid}).close();
+        }
+    );
+    void(0);
+}
+</script>
+</body>
+</html>

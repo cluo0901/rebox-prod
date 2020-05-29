@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>{$SITE_NAME}{lang('admin')}</title>
+
+    <link href="{ADMIN_THEME}luos/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{ADMIN_THEME}luos/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <link href="{ADMIN_THEME}luos/css/animate.min.css" rel="stylesheet">
+
+    <link href="{ADMIN_THEME}luos/css/style.min.css" rel="stylesheet">
+
+    <link href="{ADMIN_THEME}luos/css/login.min.css" rel="stylesheet">
+
+	<link href="{ADMIN_THEME}css/login.css" rel="stylesheet">
+
+	
+
+
+
+    <script>
+
+        if(window.top!==window.self){window.top.location=window.location};
+
+    </script>
+
+    <script type="text/javascript" src="{ADMIN_THEME}js/jquery.min.js"></script>
+
+     <script type="text/javascript" src="{ADMIN_THEME}js/ani.js"></script>
+
+    <script type="text/javascript">
+
+        $(function(){
+
+            $("#user").focus();
+
+        });
+
+    </script>
+
+    <style>
+
+    	.mpage {
+
+			width: 100%;
+
+			height: 100%;
+
+			overflow: hidden;
+
+			margin: 0 auto;
+
+			position: absolute;
+
+			top: 0;
+
+			z-index: -1;
+
+		}
+
+    </style>
+
+</head>
+
+<body>
+
+	<div class="header">
+
+		<img src="{ADMIN_THEME}images/img/hi.png">Rebox Management System
+
+	</div>
+
+<div id="login-box">
+
+    <!--<h2>
+
+    	<span>
+
+    		拓冠科技后台管理系统
+
+    	</span>
+
+    </h2>-->
+
+    <div class="login-main">
+
+    	<div class="logo_area">
+
+			<img class="logo" src="{$SITE_LOGIN}" alt="放置网站logo">
+
+			<p>{$SITE_NAME}</p>
+
+    	</div>
+
+    <form name="form1" method="post" action="" class="form">
+
+    	<h4>User Login</h4>
+
+    	<div class="inp">
+
+    		<label>
+
+    			<img src="{ADMIN_THEME}images/img/icon1.png">
+
+    		</label>
+
+    		<input type="text" class="user" name="username" placeholder="Username"/>
+
+    	</div>
+
+    	<div class="inp">
+
+    		<label>
+
+    			<img src="{ADMIN_THEME}images/img/icon2.png">
+
+    		</label>
+
+    		<input type="password" class="alltxt" name="password" placeholder="Password"/>
+
+    	</div>
+
+    	<div class="clear" style="clear: both; overflow: hidden;">
+
+    		  <div class="inp yan">
+
+		    		<label>
+
+		    			<img src="{ADMIN_THEME}images/img/icon3.png">
+
+		    		</label>
+
+		    		<input id="vdcode" type="text" name="code" class="vdcode" style="text-transform:uppercase;" placeholder="Verification Code"/>
+
+		    		
+
+		       
+
+				
+
+			               <!--<a onClick="changeAuthCode();">&lt;点击更换</a>-->
+
+		    	</div>
+
+		    	<div class="imgcod">
+
+		    			<img style="width:103px;" id="vdimgck" align="absmiddle" onclick="this.src=this.src+'?'+Math.random();" src="index.php?c=api&a=captcha&width=80&height=30" style="cursor: pointer;" alt="Click to change"/>
+
+		
+
+		    		</div>
+
+    	</div>
+
+     
+
+		<dd>
+
+			<button type="submit" name="submit" class="login-btn" onclick="this.form.submit();">登录</button>
+
+			<a href="javascript:;">Home</a>
+
+		</dd>
+
+		
+
+	</form>
+
+    </div>
+
+<!--    <p class="zhi">
+
+   	<span><img src="{ADMIN_THEME}images/img/icon4.png">拓冠科技提供技术支持</span>
+
+			
+
+		</p> -->
+
+</div>
+
+ <div id="container" class="mpage">
+
+        <div id="anitOut" class="anitOut"></div>
+
+	</div>
+
+</body>
+
+<script>
+
+function test(){
+
+if (window.addEventListener ){
+
+ console.log("not ie")
+
+}else if(window.attachEvent){
+
+	console.log("ie")
+
+}
+
+else{
+
+alert("not ie")
+
+}
+
+}
+
+test()
+
+</script>
+
+</html>
+

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	{template head}
+
+	<!-- promise style -->
+	<style type="text/css">
+		.promise {
+			display: flex;
+			justify-content: space-around;
+			margin: 10px 15px 0 15px;
+		}
+
+		.promises {			
+			flex-basis: 17%;
+			list-style: none;
+			
+			text-align: center;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.arrows {			
+			flex-basis: 17%;
+			list-style: none;
+			
+			text-align: center;
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 0;
+		}
+
+		.promises_word {			
+			flex-basis: 25%;
+			list-style: none;
+			font-size: 0.24rem;
+			color: #444;
+			text-align: center;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.promises img {
+			max-width: 80%;
+		}
+
+		.arrows img {
+			max-width: 25%;
+		}
+		
+	</style>
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-M3TQD6R');</script>
+	<!-- End Google Tag Manager -->
+
+	<!-- Facebook Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];
+	s.parentNode.insertBefore(t,s)}(window,document,'script',
+	'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '637804786589286'); 
+	fbq('track', 'PageView');
+	
+	</script>
+	<noscript>
+	<img height="1" width="1" 
+	src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
+	&noscript=1"/>
+	</noscript>
+	<!-- End Facebook Pixel Code -->
+
+</head>
+
+	<body>
+
+		<div class="quote">
+
+			{template header}
+
+			<div class="nav_list">
+
+				<ul>
+
+					<li>
+
+						<i>1</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title1']}</p>
+
+					</li>
+
+					<li class="on">
+
+						<i>2</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title2']}</p>
+
+					</li>
+
+					<li>
+
+						<i>3</i>
+
+						<div class="dots"><span></span><span></span><span></span></div>
+
+						<p>{$recovery_step['recovery_step_title3']}</p>
+
+					</li>
+
+					<li>
+
+						<i>4</i>
+
+						<p>{$recovery_step['recovery_step_title4']}</p>
+
+					</li>
+
+				</ul>
+
+			</div>
+
+			<div class="spec-5 "></div>
+
+			<div class="li quote">
+
+				<!-- add real time selling -->
+				<span class="real_time" style="display:block; text-align:center; font-size: 0.23rem; background-color: white; color: #666666; padding: 0.1rem 0.4rem; border-radius: 2rem; z-index: 99; margin-bottom: 0.2rem;">&nbsp;
+					
+						
+					<!-- 9***736 just sold an iPhone 7 for $360 -->
+
+					
+				</span>
+
+				<a href="javascript:;" class="fl"><img src="{$data['recovery_img']}"></a>
+
+				<div class="right">
+
+					<div class="name_quote"><div class="name">{$data['recovery_title']}</div><a href="{url('flowerhua/recovery_detail',array('recovery_id'=>$recovery_id,'priceValue'=>$priceValue,'chpriceValue'=>$chpriceValue,'chpriceValue2'=>$chpriceValue2))}" class="requote">Re-quote</a></div>
+
+					<div class="price">
+
+						{if $instant_quote_price>0}
+
+
+							<!-- check if have any price boost starts-->
+							{if $price_boost > 0}
+						
+							<span>$</span><span id="instant_quote_price">{$instant_quote_price}</span><span> + $</span><span id="price_boost">{$price_boost}</span><img src="{SITE_THEME}img/price_boost.png"/>
+
+
+							{else}
+
+							<span>$</span><span id="instant_quote_price">{$instant_quote_price}</span>
+
+							{/if}
+
+							<!-- check if have any price boost ends-->
+							
+							<img src="{SITE_THEME}img/freepick.png"/>
+						
+						{else}
+
+						<!-- <p style="color:red;line-height:20px; font-size: 12px">Sorry, we are unable to buy back this device.</p> -->
+						
+						{/if}
+
+					</div>
+
+					<!--<div class="sku"></div>
+
+					<div class="introd"></div>-->
+
+					<div class="details caret">More Details</div>
+
+				</div>
+
+				<div class="detailbg quote_pro">
+
+					<div class="content" data-hide="hide">
+
+						<div class="content2 span spanbox">
+
+							{loop $price_arr $item}
+
+                            <p>{$item['parameter']}: {$item['name']}</p>
+
+                            {/loop}
+
+                            <!-- {if $ch_price_arr}
+                            <p>Functional Issues:</p>
+                            {/if} -->
+                            {loop $ch_price_arr $item}
+
+                            <p>{$item['name']}</p>
+
+                            {/loop}
+
+                            <!-- {if $ch_price_arr2}
+                            <p>Missing or Damanged Accessories:</p>
+                            {/if} -->
+
+                            {loop $ch_price_arr2 $item}
+
+                            <p>{$item['name']} missing or damaged</p>
+
+                            {/loop}
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="spec-5"></div>
+
+			<div style="padding:5px;"></div>
+
+			
+
+			<!--freepick-->
+
+			<div class="freepick">
+
+				<!--<div class="price">
+
+					<span>$</span><span id="instant_quote_price">{$instant_quote_price}</span><img src="{SITE_THEME}img/freepick.png"/></div>-->
+
+				<div class="inp">
+					<input type="text" placeholder="Promo Code" id="apply_coupon_code"/>
+
+				 	<input type="hidden" name="" id="apply_coupon_code_sn">
+
+                 	<input type="hidden" name="" id="apply_coupon_code_id">
+
+					<input type="button" class="subbtn" value="Apply" onclick="apply_coupon()">
+
+				</div>
+			</div>
+
+
+			<!-- add our promise -->
+			<div style="padding:13px;"></div>
+			<div class="spec-5 "></div>
+			<div style = "margin : 0.1rem 0; padding : 3px 0;">
+				<!-- <h5 style = "text-align: center; font-weight: bold;">OUR PROMISES</h5> -->
+				<ul class="promise">
+					<li class = "promises" id ="promise1"><img src = "views/mobile/img/promise1.png"></li>
+					<li class = "promises" id ="promise2"><img src = "views/mobile/img/promise2.png"></li>
+					<li class = "promises" id ="promise3"><img src = "views/mobile/img/promise3.png"></li>
+					<li class = "promises" id ="promise4"><img src = "views/mobile/img/promise4.png"></li>
+				</ul>
+				<ul class="promise">
+					<li class = "promises_word" style = "text-align: center;">Price Guarantee</li>
+					<li class = "promises_word" style = "text-align: center;">Send In For Free</li>
+					<li class = "promises_word" style = "text-align: center;">Professional Test</li>
+					<li class = "promises_word" style = "text-align: center;">One-Hour Payment</li>
+				</ul>
+
+				<ul class="promise">
+					<li class = "arrows" id ="arrow1" style= "opacity: 1;"><img src = "views/mobile/img/arrow.png"></li>
+					<li class = "arrows" id ="arrow2" style= "opacity: 0;"><img src = "views/mobile/img/arrow.png"></li>
+					<li class = "arrows" id ="arrow3" style= "opacity: 0;"><img src = "views/mobile/img/arrow.png"></li>
+					<li class = "arrows" id ="arrow4" style= "opacity: 0;"><img src = "views/mobile/img/arrow.png"></li>
+				</ul>
+
+				<!-- add one line explanation -->
+				<ul style = "background-color: #eee; color: #666; font-size: 0.23rem; padding:0.1rem 0.3rem; margin: 0 0.3rem;">
+					<li id = "comment1" style = "display: block;">Price is guaranteed for accurate online self-appraisal.</li>
+					<li id = "comment2" style = "display: none;">We offer 3 options for your to send in the phone for free in the next step.</li>
+					<li id = "comment3" style = "display: none;">Our technicians will perform standard tests upon receipt of your phone. If you do not agree to our evaluation, we will return the phone back to you for free.</li>
+					<li id = "comment4" style = "display: none;">Once verified and confirmed, payment will be made with an hour.</li>
+				</ul>
+
+				<ul style="background-color: #eee;color: #666;font-size: 0.23rem;padding:0.1rem 0.3rem;margin: 0 0.3rem;margin-top: 15px;color: red;">
+					<!-- <li id="comment1" style="display: block;">We are suspending buy-back till further notice.</li> -->
+					<li id="comment2" style="display: none;">We offer 3 options for your to send in the phone for free in the next step.</li>
+					<li id="comment3" style="display: none;">Our technicians will perform standard tests upon receipt of your phone. If you do not agree to our evaluation, we will return the phone back to you for free.</li>
+					<li id="comment4" style="display: none;">Once verified and confirmed, payment will be made with an hour.</li>
+				</ul>
+
+			</div>
+
+
+			<!-- <div style="position: fixed; bottom: 1.1rem; color : #ff5400; text-align: center; font-size: 0.3rem;" class="txt">Payment within 24 hours if descriptions match.</div>		 -->
+
+			<!--freepick-->
+
+			
+			{if $agent_check !=1}
+				{if $instant_quote_price>0}
+				<!-- <input type="button" class="submit_btn" value="Cash Out Instantly" onclick="instantly_submit()"> -->
+				<!-- call confirm price boost warning first -->
+					
+
+					<input type="button"  class="submit_btn" value="Cash Out Instantly" onclick="check_price_boost()">
+
+				{else}
+
+					<input type="button" class="non_submit_btn" value="Cash Out Instantly">
+				
+				{/if}
+
+			{else}
+
+				{if $instant_quote_price>0}
+			
+				<input type="button" class="submit_btn" value="Submit Order" onclick="check_price_boost()">
+
+				{else}
+
+				<input type="button" class="non_submit_btn" value="Submit Order">
+				
+				{/if}
+
+			{/if}			
+
+
+			<!-- add pop-up warning for price_boost starts-->
+			<div class="confirm_pop">
+
+				<div class="content">
+
+					<div class="content_info">
+
+						<div class="tit" style = "color: red;">!IMPORTANT! PLEASE READ</div>
+
+						<div class="ordermsg">
+							<span>You have chosen flawless condition and $</span><span>{$price_boost}</span><span> price booster has been applied. If condition match, you will receive this booster, but if condition does not match and your do not agree to revised quote and requet for return later, you will need to pay $10 return cost.</span>
+						</div>
+
+					</div>
+
+					<img src="{SITE_THEME}img/close.png" class="close" onclick="hideconfirm()"/>
+
+					<button class="confirm" onclick="instantly_submit();">I Understand and Agree</button>
+
+					<!-- add requote button -->
+					<a href="{url('flowerhua/recovery_detail',array('recovery_id'=>$recovery_id,'priceValue'=>$priceValue,'chpriceValue'=>$chpriceValue,'chpriceValue2'=>$chpriceValue2))}" class="requote">Get Re-quote</a>
+
+				</div>
+
+			</div>
+
+			<!-- add pop-up warning for price_boost ends-->
+
+
+
+		</div>
+
+
+		
+
+		<!-- real time random wording number and model random time 3s to 10s rolling basis -->
+		
+		<script type="text/javascript">
+
+
+
+			function real_time() {
+				var no1 = Math.floor(Math.random() * (9 - 8 + 1)) + 8;
+				var no5 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				var no6 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				var no7 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				// var no8 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				var phone_number = no1.toString() + no5.toString() + no6.toString() + no7.toString() + "****";
+				
+
+				var model_id = Math.floor(Math.random() * (279 - 165 + 1)) + 165;
+
+				$.ajax({
+
+						url: "index.php?c=ajax_formflowerhua&a=ajax_random_model",
+
+						type: "post",
+
+						data: {
+
+							model_id: model_id,
+
+						},
+
+						// async: false,
+
+						dataType: 'json',
+
+						success: function (data) {
+
+							if (data.code == 1) {
+								var actual_price = Math.round((Math.floor(Math.random() * (100 - 70 + 1)) + 70) * data.model_price / 100);
+								$('.real_time').html(phone_number + " just sold "+ data.model_name + " for $"+ actual_price);	
+								$('.real_time').css("background-color", "#eeeeee");			
+
+							}
+
+						}
+
+					}); 
+			}
+
+			// (function loop() {
+			//     var rand = Math.round(Math.random() * (10000 - 2000 + 1)) + 2000;
+			//     setTimeout(function() {
+			//             real_time();
+			//             loop();  
+			//     }, rand);
+			// }());
+
+			//initial start with random number as well
+
+			function loop() {
+			    var rand = Math.round(Math.random() * (10000 - 2000 + 1)) + 20000;
+			    setTimeout(function() {
+			            real_time();
+			            loop();  
+			    }, rand);
+			}
+			
+			$(document).ready(function() {
+				var no1 = Math.floor(Math.random() * (9 - 8 + 1)) + 8;
+				var no5 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				var no6 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				var no7 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				// var no8 = Math.floor(Math.random() * (9- 0 + 1)) + 0;
+				var phone_number = no1.toString() + no5.toString() + no6.toString() + no7.toString() + "****";
+				
+
+				var model_id = Math.floor(Math.random() * (190 - 176 + 1)) + 176;
+
+				$.ajax({
+
+						url: "index.php?c=ajax_formflowerhua&a=ajax_random_model",
+
+						type: "post",
+
+						data: {
+
+							model_id: model_id,
+
+						},
+
+						// async: false,
+
+						dataType: 'json',
+
+						success: function (data) {
+
+							if (data.code == 1) {
+								var actual_price = Math.round((Math.floor(Math.random() * (100 - 70 + 1)) + 70) * data.model_price / 100);
+								$('.real_time').html(phone_number + " just sold "+ data.model_name + " for $"+ actual_price);
+								$('.real_time').css("background-color", "#eeeeee");			
+
+							}
+
+						}
+
+					});  	
+
+				loop();		
+				
+
+			});
+
+
+
+		</script>
+
+	</body>
+
+</html>
+
+<script type="text/javascript"> //idle 20 mins go back to home page
+
+    (function() {
+
+        const idleDurationSecs = 1200;    // X number of seconds
+        // const redirectUrl = 'http://127.0.0.1/kiosk/kiosk_home.html';  // Redirect idle users to this URL
+        const redirectUrl = 'https://www.rebox.com.sg'; 
+        
+        let idleTimeout; // variable to hold the timeout, do not modify
+
+        const resetIdleTimeout = function() {
+
+            // Clears the existing timeout
+            if(idleTimeout) clearTimeout(idleTimeout);
+
+            // Set a new idle timeout to load the redirectUrl after idleDurationSecs
+            idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+        };
+
+        // Init on page load
+        resetIdleTimeout();
+
+        // Reset the idle timeout on any of the events listed below
+        ['click', 'touchstart', 'mousemove'].forEach(evt => 
+            document.addEventListener(evt, resetIdleTimeout, false)
+        );
+
+    })();      
+
+</script>
+
+<script>
+
+		//商品详细
+
+		$('.details').on('click',function(){
+		
+
+			$(this).toggleClass('on');
+
+			$(this).parents('.li').find('.detailbg').toggleClass('on')
+
+		})
+		
+       
+
+</script>
+
+<!-- toggle comments for icons -->
+<script>
+		$("#promise1").click(function(){
+			$("#comment1").css("display","block");
+			$("#comment2").css("display","none");
+			$("#comment3").css("display","none");
+			$("#comment4").css("display","none");
+
+			$("#arrow1").css("opacity","1");
+			$("#arrow2").css("opacity","0");
+			$("#arrow3").css("opacity","0");
+			$("#arrow4").css("opacity","0");			
+		})
+		$("#promise2").click(function(){
+			$("#comment2").css("display","block");
+			$("#comment1").css("display","none");
+			$("#comment3").css("display","none");
+			$("#comment4").css("display","none");
+
+			$("#arrow2").css("opacity","1");
+			$("#arrow1").css("opacity","0");
+			$("#arrow3").css("opacity","0");
+			$("#arrow4").css("opacity","0");	
+		})
+		$("#promise3").click(function(){
+			$("#comment3").css("display","block");
+			$("#comment1").css("display","none");
+			$("#comment2").css("display","none");
+			$("#comment4").css("display","none");
+
+			$("#arrow3").css("opacity","1");
+			$("#arrow1").css("opacity","0");
+			$("#arrow2").css("opacity","0");
+			$("#arrow4").css("opacity","0");	
+		})
+		$("#promise4").click(function(){
+			$("#comment4").css("display","block");
+			$("#comment1").css("display","none");
+			$("#comment2").css("display","none");
+			$("#comment3").css("display","none");
+
+			$("#arrow4").css("opacity","1");
+			$("#arrow1").css("opacity","0");
+			$("#arrow2").css("opacity","0");
+			$("#arrow3").css("opacity","0");	
+		})
+</script>
+
+<script>
+
+		$(".caret").click(function(){
+
+			var display = $(".quote .quote_pro .span").attr("data-hide");
+
+			if(display == "hide"){
+
+				$(".quote .quote_pro .span").css({"max-height":"none"});
+
+				$(".quote .quote_pro .span").attr({"data-hide":"show"});
+
+				$(this).find("img").attr({"src":"{SITE_THEME}img/icon79.png"})
+
+			}else if(display == "show"){
+
+				$(".quote .quote_pro .span").css({"max-height":"94px"});
+
+				$(".quote .quote_pro .span").attr({"data-hide":"hide"});
+
+				$(this).find("img").attr({"src":"{SITE_THEME}img/icon50.png"})
+
+			}
+
+		})
+
+        // 基于准备好的dom，初始化echarts实例
+
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+
+        var option = {
+
+			title : {  //标题('\n'指定换行)
+
+				text : 'Price Trend', //主标题
+
+				x : 'left',//标题的位置(还可选'left' | 'right' )
+
+				y :'top', //标题的位置(还可选'top' | 'bottom' | 'center'  )
+
+				textStyle : {//标题样式
+
+					fontSize : 20,  //字体大小
+
+					fontFamily : 'Arial',//字体系列
+
+					fontWeight : 100  //粗细，可选为：'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 |...
+
+				},
+
+			},
+
+            tooltip: {
+
+                trigger: 'axis',
+
+                axisPointer: {//鼠标滑过的线条样式
+
+                    type: 'line',
+
+                    lineStyle: {
+
+                        color: 'red',//颜色
+
+                        width: 1,//宽度
+
+                        type: 'solid'//实线
+
+                    }
+
+                },
+
+            },
+
+            calculable: true,
+
+			xAxis: {
+
+				type: 'category',
+
+				data: {$moths_arr}
+
+			},
+
+			yAxis: {
+
+				type: 'value',
+
+				min: {$instant_quote_price*0.8}
+
+            },
+
+            series:[{
+
+                name: 'Price',
+
+				data: {$prices_arr},
+
+				type: 'line',
+
+        	}]
+
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+
+        myChart.setOption(option);
+
+	</script>
+
+<script>
+	//显示弹窗
+
+	function confirmInfo(){
+
+		$('.confirm_pop').show();
+
+	}
+
+
+	//隐藏弹窗
+
+	function hideconfirm(){
+
+		$('.confirm_pop').hide();
+
+	}
+
+
+	function check_price_boost() {
+		if ($('#price_boost').length) {
+			confirmInfo();
+		} else {
+			instantly_submit();
+		}
+	}
+
+	var lay;
+
+	function instantly_submit() {
+
+		lay = layer.open({type:3,icon:1});
+
+		
+
+					var apply_coupon_code_sn = $('#apply_coupon_code_sn').val();
+
+					// var instant_quote_price = parseFloat($('#instant_quote_price').text());
+
+					//check if any price boost starts
+					if ($('#price_boost').length) {
+						var instant_quote_price = parseFloat($('#instant_quote_price').text()) + parseFloat($('#price_boost').text());
+					} else {
+						var instant_quote_price = parseFloat($('#instant_quote_price').text());
+					}
+					//check if any price boost ends		
+
+
+					$.ajax({
+
+						url: "index.php?c=ajax_formflowerhua&a=ajax_instantly_submit2order",
+
+						type: "post",
+
+						data: {
+
+							recovery_id: '{$recovery_id}',
+
+							priceValue: '{$priceValue}',
+
+							chpriceValue: '{$chpriceValue}',
+
+							chpriceValue2: '{$chpriceValue2}',
+
+							apply_coupon_code_sn: apply_coupon_code_sn,
+
+							instant_quote_price: instant_quote_price,
+
+						},
+
+						async: false,
+
+						dataType: 'json',
+
+						success: function (data) {
+
+                            layer.close(lay);
+
+							//if (data.code == 1) {
+
+								location.href = "index.php?c=flowerhua&a=recovery_free_pickup&recovery_id=" + data.recovery_id + "&order_id=" + data.order_id;
+
+							//} else {
+
+							//	layer.msg('Submission failure!', {anim: 0, icon: 0});
+
+							//}
+
+						}
+
+					});
+
+				}
+
+
+
+
+
+	function apply_coupon(){
+
+		var apply_coupon_code = $('#apply_coupon_code').val();
+
+		if(apply_coupon_code == '' || apply_coupon_code == null){
+
+			layer.msg('Please fill in the coupon number and submit!',{anim:0,icon:0});
+
+		}else{
+
+			$.ajax({
+
+				url: "index.php?c=ajax_formflowerhua&a=ajax_apply_coupon",
+
+				type: "post",
+
+				data: {
+
+					apply_coupon_code : apply_coupon_code,
+
+				},
+
+				dataType: 'json',
+
+				success: function (data) {
+
+					if (data.code == -1) {
+
+						layer.msg('No information on this coupon is found for the time being!',{anim:0,icon:0});
+
+					}else if(data.code == -2){
+
+						layer.msg('This coupon has been used! User:'+data.member_name,{anim:0,icon:0});
+
+					}else if(data.code==1){
+
+						var ind = layer.msg('Congratulations, extra $'+data.result.coupon_money+' added to our offer price! Quickly cash out below!',{time:3000,end:function(){
+
+							$('#apply_coupon_code_sn').val(apply_coupon_code);
+
+							$('#instant_quote_price').text({$instant_quote_price} + " + $" + parseInt(data.result.coupon_money));
+
+							$('#instant_quote_coupon_code').val({$instant_quote_price}+parseInt(data.result.coupon_money));
+
+							layer.close(ind);
+
+						}});
+
+					}
+
+				}
+
+			});
+
+		}
+
+	}
+
+	function show_intro(){
+
+		$(".intro").show();
+
+		$("body").animate({"scrollTop":"300px"})
+
+	}
+
+
+
+</script>
+
