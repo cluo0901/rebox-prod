@@ -19,13 +19,13 @@
             <a class="layui-btn" href="" class="on"><em>Shipping list</em></a>
         </div>
         <form action="" method="post" style="float:left;">
-            <!-- <label>
+            <label>
                 <select class="form-control" name="roadbul_whizmo_type" id="roadbul_whizmo_type">
                     <option value="">Please select delivery type</option>
                     <option value="100" {if $roadbul_whizmo_type == 100}selected="selected"{/if}>Pickup</option>
                     <option value="200" {if $roadbul_whizmo_type == 200}selected="selected"{/if}>Return</option>
                 </select>
-            </label> -->
+            </label>
             <div class="cbtn" style="float: left;">
                 <input name="form" type="hidden" value="search" />
                 <input placeholder="Search order number/sender/sender name/sender/sender phone" type="text" class="input-text" value="{$order_sn}" name="order_sn" size="60" />
@@ -39,14 +39,14 @@
 		<table width="100%" class="table table-striped">
 		<thead>
 		<tr>
-			<th width="20" align="left">Pickup ID</th>
-			<th width="120" align="left">Order ID</th>
+			<th width="20" align="left">ID</th>
+			<th width="120" align="left">Shipping Label</th>
 			<!--<th width="120" align="center">Logistics type</th>-->
 			<th width="120" align="center">Name</th>
 			<th width="120" align="center">Mobile phone</th>
 			<th width="80" align="center">Postal Code</th>
 			<th width="160" align="center">Address</th>
-			<!-- <th width="100" align="center">Pickup Date</th> -->
+			<th width="100" align="center">Pickup Date</th>
 			<th width="160" align="center">Pickup Slot</th>
 			<!--<th width="120" align="center">Logistics recipients</th>-->
 			<!--<th width="120" align="center">Logistics receiver telephone</th>-->
@@ -55,30 +55,16 @@
 		</thead>
 		<tbody>
 		{loop $list $t}
-<!-- 		<tr height="25">
+		<tr height="25">
 			<td align="center">{$t['id']}</td>
 			<td align="center">{if $t['roadbul_OrderNumber']}<a class="layui-btn layui-btn layui-btn-small" href="javascript:;" onclick="get_roadbul_query('{$t[roadbul_OrderNumber]}');">{$t['roadbul_OrderNumber']}</a>{else}{/if}</td>
-			<!~~<td align="center">{if $t['roadbul_whizmo_type']==100}Subscriber order{else if $t['roadbul_whizmo_type']==200}The platform is returned to the user{else if $t['roadbul_whizmo_type']==300}The platform is sent to the auctioneer{/if}</td>~~>
+			<!--<td align="center">{if $t['roadbul_whizmo_type']==100}Subscriber order{else if $t['roadbul_whizmo_type']==200}The platform is returned to the user{else if $t['roadbul_whizmo_type']==300}The platform is sent to the auctioneer{/if}</td>-->
 			<td align="center">{$t['roadbul_FromName']}</td>
 			<td align="center">{$t['roadbul_FromMobilePhone']}</td>
 			<td align="center">{$t['roadbul_FromZipCode']}</td>
 			<td align="center">{$t['roadbul_FromAddress']}</td>
 			<td align="center">{$t['roadbul_PickupDate']}</td>
 			<td align="center">{$time[$t['roadbul_PickupTimeSlotId']]}</td>
-			<!~~<td align="center">{$t['roadbul_ToName']}</td>~~>
-			<!~~<td align="center">{$t['roadbul_ToMobilePhone']}</td>~~>
-			<!~~<td align="center">{$t['']}</td>~~>
-        </tr> -->
-		<tr height="25">
-			<td align="center">{$t['id']}</td>
-			<td align="center">{$t['orderId']}</td>
-			<!--<td align="center">{if $t['roadbul_whizmo_type']==100}Subscriber order{else if $t['roadbul_whizmo_type']==200}The platform is returned to the user{else if $t['roadbul_whizmo_type']==300}The platform is sent to the auctioneer{/if}</td>-->
-			<td align="center">{$t['pickupCustomerName']}</td>
-			<td align="center">{$t['pickupCustomerNumber']}</td>
-			<td align="center">{$t['pickupCustomerPostal']}</td>
-			<td align="center">{$t['pickupCustomerAddress']}</td>
-			<!-- <td align="center">{$t['roadbul_PickupDate']}</td> -->
-			<td align="center">{$t['pickupDatetime']}</td>
 			<!--<td align="center">{$t['roadbul_ToName']}</td>-->
 			<!--<td align="center">{$t['roadbul_ToMobilePhone']}</td>-->
 			<!--<td align="center">{$t['']}</td>-->

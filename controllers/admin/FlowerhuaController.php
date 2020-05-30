@@ -1717,7 +1717,10 @@ header("Content-type:text/html;charset=utf-8");
 
             if($order_sn){
 
-                $where .= " and concat(roadbul_OrderNumber,roadbul_FromName,roadbul_ToName,roadbul_FromMobilePhone,roadbul_ToMobilePhone) like  '%$order_sn%'";
+                // $where .= " and concat(roadbul_OrderNumber,roadbul_FromName,roadbul_ToName,roadbul_FromMobilePhone,roadbul_ToMobilePhone) like  '%$order_sn%'";
+
+                $where .= " and concat(orderId,pickupCustomerName,pickupCustomerNumber,pickupCustomerPostal) like  '%$order_sn%'";
+
 
             }
 
@@ -1727,9 +1730,13 @@ header("Content-type:text/html;charset=utf-8");
 
             $urlparam = array('page' => '{page}','roadbul_whizmo_type'=>$roadbul_whizmo_type,'order_sn'=>$order_sn);
 
-            $list = $this->flowerhua->get_all_list('whizmo_order2roadbul',$order,$limit,$where);
+            // $list = $this->flowerhua->get_all_list('whizmo_order2roadbul',$order,$limit,$where);
 
-            $total = $this->flowerhua->get_all_list('whizmo_order2roadbul',$order,$limit,$where,true);
+            // $total = $this->flowerhua->get_all_list('whizmo_order2roadbul',$order,$limit,$where,true);
+
+            $list = $this->flowerhua->get_all_list('whizmo_pickupp_order',$order,$limit,$where);
+
+            $total = $this->flowerhua->get_all_list('whizmo_pickupp_order',$order,$limit,$where,true);
 
             $pagelist = $this->instance('pagelist');//加载分页类
 
