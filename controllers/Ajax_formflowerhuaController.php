@@ -266,7 +266,7 @@ class Ajax_formflowerhuaController extends Common
             $minutes = date('i');
             $day = date('w',strtotime($time));
 
-            switch ($recovery_type_id) {
+            /* switch ($recovery_type_id) {
 
                 case 68: 
 
@@ -373,8 +373,25 @@ class Ajax_formflowerhuaController extends Common
                     }
 
                     break;
+            } */
+
+
+            
+
+            if(strtotime(date('m/d/Y')) == strtotime($time)){
+
+                $resultPickup .='<option value="28">15:00PM - 18:00PM</option>';
+
+            } else {
+                        
+                $resultPickup .='<option value="29">09:00AM - 12:00PM</option>';
+                $resultPickup .='<option value="26">12:00PM - 15:00PM</option>';
+                $resultPickup .='<option value="28">15:00PM - 18:00PM</option>';
+
             }
 
+                
+            
             die(json_encode(array('code' => 1,'str'=>$resultPickup)));
 
             /*********************************************

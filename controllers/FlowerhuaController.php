@@ -503,7 +503,7 @@
 
             $phdays = array("25/12/2019","01/01/2020","24/01/2020","25/01/2020","26/01/2020","27/01/2020","28/01/2020");
             
-            switch ($recovery['recovery_type_id']) {
+/*             switch ($recovery['recovery_type_id']) {
 
                 case 68:
 
@@ -590,7 +590,19 @@
 
                     break;
 
+            } */
+
+            if($hour < 12) {
+
+                $pickup_time_start[0] = time();
+                $pickup_time_start[1] = time()+3600*24*1;
+                
+            } else {
+
+                $pickup_time_start[0] = time()+3600*24*1;
+
             }
+
 
 
             
