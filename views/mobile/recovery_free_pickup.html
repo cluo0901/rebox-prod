@@ -117,7 +117,7 @@
 			{if $agent_check != 1}
 			<!-- add license info starts -->
 
-			<a href = "https://rebox.com.sg/Licence from police.jpg" target = "_blank"><img class = "license" src ="views/mobile/img/license_mobile.png" style = "width: 100%;"></a>
+			<!-- <a href = "https://rebox.com.sg/Licence from police.jpg" target = "_blank"><img class = "license" src ="views/mobile/img/license_mobile.png" style = "width: 100%;"></a> -->
 
 			<!-- <div class="spec-5"></div> -->
 			<!-- add license info ends -->
@@ -127,14 +127,14 @@
 <!-- 			<img src="views/mobile/img/facebook-review.png" style="max-width: 60%; margin-left:20%; margin-top: 0.2rem;">
 			<a href="https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target="_blank" style="font-size: 0.23rem; color: blue; display: block; text-align: center; text-decoration: underline; padding:0.2rem 0;">Click here to read reviews</a> -->
 
-			<a href = "https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target = "_blank"><img class = "license" src ="views/mobile/img/read_reviews.jpeg" style = "width: 100%;"></a>
+			<!-- <a href = "https://www.facebook.com/pg/rebox.com.sg/reviews/?ref=page_internal" target = "_blank"><img class = "license" src ="views/mobile/img/read_reviews.jpeg" style = "width: 100%;"></a> -->
 
 			<div class="spec-5"></div>
 
 			<!-- add facebook review and link ends -->
 
 
-			<div class="tit" style="font-weight: bold;font-size:0.3rem;padding:0.3rem;">Delivery Option <font style="font-size:0.26rem;font-weight: normal;"> (Full insurance coverage)</font></div>
+			<!-- <div class="tit" style="font-weight: bold;font-size:0.3rem;padding:0.3rem;">Delivery Option <font style="font-size:0.26rem;font-weight: normal;"> (Full insurance coverage)</font></div> -->
 
 			<!-- <div class="tit" style="font-size:0.3rem;padding:0.3rem;">Delivery Method</div> -->
 
@@ -202,7 +202,7 @@
 			
 			<!-- pickup start -->
 
-			<div class="deliver_method">
+			<!-- <div class="deliver_method">
 
 				<div class="deliver_content on" data-id="1">
 
@@ -214,7 +214,7 @@
 
 				</div>
 
-			</div>
+			</div> -->
 
 			<!-- pickup ends -->
 
@@ -274,11 +274,13 @@
 
 				<!-- <p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;">Arrange <strong>free pickup</strong> to send us the phone.<br>Receive <strong>payment</strong> on the <strong>same day</strong> of delivery.<br><strong>Free return</strong> if you don't agree to our assessment.<br><font style = "font-size:0.23rem; text-align: center; text-decoration: underline; font-weight: normal; color: blue;">See delivery time</font></p> -->
 
-				<p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;"> <strong>Next-Day Delivery & Payment <br> Free pickup from your home or work place.</strong</p>
+				<!-- <p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.3rem; display: block; line-height: 0.58rem;"> <strong>Next-Day Delivery & Payment <br> Free pickup from your home or work place.</strong></p> -->
+				<p style="font-weight: normal; text-align: center; padding-bottom: 15px; color: #ff7200; font-size: 0.38rem; font-weight: 700; display: block; line-height: 0.58rem;">Free Doorstep Pickup<br>Payment On The Spot</p>
+
 				
 				<div class="pickeraddr">
 
-					<div class="tit">Pickup Address</div>
+					<div class="tit" style="font-weight: 700;">Pickup Address</div>
 
 					<div class="short">
 
@@ -300,7 +302,7 @@
 
 				<div class="collectdate">
 
-					<div class="tit">Pickup Date & Time <font style = "font-size:0.23rem;">(Proper packaging is required by courier service provider.)</font></div>
+					<div class="tit" style="font-weight: 700;">Pickup Date & Time <font style = "font-size:0.23rem; font-weight: 400; color: red;">(Please back up before pickup)</font></div>
 
 					<div class="sellist">
 
@@ -338,7 +340,7 @@
 
 					</div>
 
-					<label><input type="text" placeholder="Note to courier" id="customerNote" value="" /></label>
+					<label><input type="text" placeholder="Note to us (optional)" id="customerNote" value="" /></label>
 					
 
 				</div>
@@ -576,7 +578,8 @@
 
 			<div class="payment_detail">
 
-				<div class="tit" style = "font-weight: bold; color: #1d1d1d;">Receiving Account <font style="font-size:0.23rem; font-weight:normal;">(Same day payment upon delivery)</font></div>
+				<!-- <div class="tit" style = "font-weight: bold; ">Receiving Account <font style="font-size:0.23rem; font-weight:normal;">(Same day payment upon delivery)</font></div> -->
+				<div class="tit" style = "font-weight: bold; ">Receiving Account <font style="font-size:0.23rem; font-weight:normal; color: red;">(Instant bank transfer or PayNow on the spot)</font></div>
 
 				<select id="payment_id" onchange = "placehold();">
 
@@ -590,9 +593,9 @@
 
 				</select>
 
-				<div class="short"><label><input type="text" placeholder="Enter Account Holder Name" id="payment_name"/></label><span><i>*</i>As per bank records</span></div>
+				<div class="short"><label style=" margin-bottom: 0;"><input type="text" placeholder="Enter Full Name" id="payment_name"/></label><span style=" margin-bottom: 0.22rem;"><i>*</i>As per bank records</span></div>
 
-				<label><input type="text" placeholder='Enter Account Number (Please omit "-")' id="payment_number"/></label>
+				<label><input type="text" placeholder='Enter Account Number without "-"' id="payment_number"/></label>
 
 			</div>
 
@@ -602,7 +605,7 @@
 					if ($('#payment_id').val() == 46) {
 						$('#payment_number').attr('placeholder', "Enter Mobile or NRIC No.");
 					} else {
-						$('#payment_number').attr('placeholder', "Enter Account Number");
+						$('#payment_number').attr('placeholder', 'Enter Account Number without "-"');
 						console.log($('#payment_id').val());
 					}
 				}
@@ -623,7 +626,7 @@
 
 			<div class="spec-5"></div>
 
-			<div class="agreement">
+			<!-- <div class="agreement">
 
 				<h3 class = "warning" style="color:red;margin-top:10px;font-weight:bold;">PLEASE READ CAREFULLY</h3>
 
@@ -635,7 +638,7 @@
 				<p class = "warning"><span style="cursor: pointer; color: #ff7200;" onclick="get_information('{$clause[personal_information2]}');">{$clause['personal_information_title2']}</span></p>
 				{/if}
 
-			</div>
+			</div> -->
 
 			<div class="keep">
 
