@@ -110,7 +110,9 @@ src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
 
 						<span style="font-weight: normal;"><b>Pickup Time: </b>{$pickupTime} - {$pickupDateRange}</span><br>
 
-						Please provide Pickup Code <b style="color:RED; font-size: 12px; font-weight: bold;">{$merchantDefinedCode}</b> during collection.<br><br>
+						<!-- Please provide Pickup Code <b style="color:RED; font-size: 12px; font-weight: bold;">{$merchantDefinedCode}</b> during collection.<br><br> -->
+
+						Please back up and factory reset your device before collection.<br><br>
 
 						We are required by Law to collect NRIC information from customers. Refer <a href="https://www.pdpc.gov.sg/Legislation-and-Guidelines/NRIC-Extracts" target = "_blank" style = "all: unset;color: blue; text-decoration: underline;">here</a> for details.<br>
 
@@ -166,7 +168,7 @@ src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
 			<!-- if walk-in, no need to packaging -->
 			{if $order_delivery_method_type != 3 && $agent_check != 1 }
 
-			<div class="spec-5"></div>
+			<!-- <div class="spec-5"></div>
 
 			<div class="list">
 
@@ -208,7 +210,7 @@ src="https://www.facebook.com/tr?id=637804786589286&ev=PageView
 
 				</ul>
 
-			</div>
+			</div> -->
 			{/if}
 
 		</div>
