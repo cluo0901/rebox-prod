@@ -533,7 +533,7 @@ class Ajax_formflowerhuaController extends Common
                     if ($this->post('fang')==1 || $this->post('fang')==2) {                  
                         if (!empty($member['phone'])) {
                             // $result = $this->smsApi->sendSms('REBOX reminder: please put in the original receipt indicating purchase date and device IMEI number into the parcel. If you have any question, please WhatsApp +65 8836 2145.', $prefix . $member['phone']);
-                            $result = $this->smsApi->sendSms('REBOX reminder: please get ready the original receipt of the new phone indicating purchase date and IMEI number. If you have any question, please WhatsApp +65 8298 5526.', $prefix . $member['phone']);                             
+                            $result = $this->smsApi->sendSms('REBOX reminder: please get ready the original receipt of the new phone indicating purchase date and IMEI number. If you have any question, please WhatsApp +65 8836 2145.', $prefix . $member['phone']);                             
                         }
                     }
                 }
@@ -698,8 +698,8 @@ class Ajax_formflowerhuaController extends Common
                         $apiResponse = callAPI('POST', '/pickupp/createOrder', $pickuppFormat);
                         $json = json_decode($apiResponse->getBody());
                         if($apiResponse->getStatusCode() == '201' || $apiResponse->getStatusCode() == '200')  {
-                            // $this->smsApi->sendSms('Thank you for using Rebox. Pickup is confirmed on '.$json->pickupDatetime.'. Your pickup code is RB'.substr($order_sn, -6).'. Please provide during collection. Have a nice day!', '65' . $member['phone']);
-                            $this->smsApi->sendSms('Thank you for using Rebox. Pickup is confirmed on '.$json->pickupDatetime.' (3-hour window). If you have any question, please WhatsApp +65 8298 5526.', '65' . $member['phone']);
+                            $this->smsApi->sendSms('Thank you for using Rebox. Pickup is confirmed on '.$json->pickupDatetime.'. Your pickup code is RB'.substr($order_sn, -6).'. Please provide during collection. Have a nice day!', '65' . $member['phone']);
+                            // $this->smsApi->sendSms('Thank you for using Rebox. Pickup is confirmed on '.$json->pickupDatetime.' (3-hour window). If you have any question, please WhatsApp +65 8298 5526.', '65' . $member['phone']);
                             $return = 1;
                         } else{ 
                             die(json_encode(array('code' => -1,'msg'=>'Pickupp Endpoint issue')));
